@@ -5,16 +5,15 @@ define(
 		'backbone',
 		'text!app/header/template.html'
 	],
-	function($, _, Backbone, headerTemplate) {
+	function($, _, Backbone, template) {
 
 		return Backbone.View.extend({
 
 			el: $('#header'),
 
-			template: _.template(headerTemplate),
+			template: _.template(template),
 
 			render: function() {
-				console.log("Rendering app header view");
 				this.$el.html(this.template());
 			}
 

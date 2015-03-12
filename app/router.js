@@ -3,30 +3,41 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'app/header/view'
+		'app/header/view',
+		'pods/track/model',
+		'pods/track/collection',
+		'pods/track/views/list',
 	],
-	function($, _, Backbone, AppHeaderView) {
+	function($, _, Backbone, AppHeaderView, TrackModel, TrackCollection, TrackListView) {
 
 		var AppRouter = Backbone.Router.extend({
 
 			routes: {
-				"": "home",
-				"track": "trackList",
-				"track/:id": "trackDetail"
+				'': 'home',
+				'track': 'trackList',
+				'track/:id': 'trackDetail'
 			},
 
-			home: function () {
-				console.log("Accessing home");
+			renderHeader: function() {
 				var appHeaderView = new AppHeaderView();
 				appHeaderView.render();
 			},
 
+			home: function () {
+				this.renderHeader();
+			},
+
 			trackList: function() {
-				console.log("Accessing track list");
+				this.renderHeader();
+				var collection = new TrackCollection();
+				collection.fetch().done(function(c){
+					var trackListView = new TrackListView({collection: collection});
+					trackListView.render();
+				});
 			},
 
 			trackDetail: function(id) {
-				console.log("Accessing track " + id);
+				this.renderHeader();
 			},
 
 		});
