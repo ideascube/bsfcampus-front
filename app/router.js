@@ -8,16 +8,19 @@ define(
 		'pods/track/collection',
 		'pods/track/views/list',
 		'pods/track/views/detail',
+		'pods/skill/views/detail',
+		'pods/skill/model',
 	],
 	function($, _, Backbone, AppHeaderView, 
-		TrackModel, TrackCollection, TrackListView, TrackDetailView) {
+		TrackModel, TrackCollection, TrackListView, TrackDetailView, SkillDetailView, SkillModel) {
 
 		var AppRouter = Backbone.Router.extend({
 
 			routes: {
 				'': 'home',
 				'track': 'trackList',
-				'track/:id': 'trackDetail'
+				'track/:id': 'trackDetail',
+				'skill/:id': 'skillDetail'
 			},
 
 			renderHeader: function() {
@@ -46,6 +49,17 @@ define(
 					trackDetailView.render();
 				});
 			},
+
+			skillDetail: function(id) {
+				console.log("skillDetail");
+				this.renderHeader();
+				var model = new SkillModel({_id: id});
+				model.fetch().done(function(){
+					console.log("skill model fetched");
+					var skillDetailView = new SkillDetailView({model: model});
+					skillDetailView.render();
+				});
+			}
 
 		});
 

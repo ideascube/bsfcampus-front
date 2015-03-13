@@ -15,6 +15,7 @@ define(
 			template: _.template(listItemTemplate),
 
 			render: function() {
+				console.log(this.model.forTemplate());
 				var html = this.template({track: this.model.forTemplate()});
 				this.$el.html(html);
 				return this;
@@ -29,14 +30,17 @@ define(
 			template: _.template(listTemplate),
 
 			render: function() {
+				$("body").removeAttr("style");
 				this.$el.html(this.template());
 				_.each(this.collection.models, this.renderOne, this);
+				return this; // convenient for chained calls
 			},
 
 			renderOne: function(track) {
 				var listItemView = new ListItemView({model: track});
 				listItemView.render();
 				$('#track-list').append(listItemView.$el);
+				return this; // convenient for chained calls
 			},
 
 		});

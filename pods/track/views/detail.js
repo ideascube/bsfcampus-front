@@ -29,7 +29,12 @@ define(
 			template: _.template(detailTemplate),
 
 			render: function() {
-				var html = this.template({track: this.model.forTemplate()});
+				var son = this.model.forTemplate();
+				var html = this.template({track: son});
+				$("body").css("background", "#e9e9e9 url('" + son.bgImageUrl + "') no-repeat")
+					.css("background-size", "100%")
+					.css("background-position", "0% 100%")
+					.css("background-attachment", "fixed");
 				this.$el.html(html);
 
 				var self = this;

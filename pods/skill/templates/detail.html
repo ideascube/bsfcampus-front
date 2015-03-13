@@ -1,0 +1,62 @@
+<div class="col-md-5" id="skill-info">
+
+	<div class="panel panel-default">
+
+		<div class="panel-heading" id="track-title">
+
+			... loading track title
+
+		</div>
+		
+		<div class="panel-body" id="skill-description">
+			
+			<img {{bind-attr src=imageUrl}} class="img-responsive center-block img-circle" />
+			
+			<h2 class="text-center" id="skill-title">{{title}}</h2>
+			
+			<p id="skill-description">{{description}}</p>
+			
+			<a href="/" class="btn btn-default btn-validate-skill disabled">
+				Valider la compétence
+				<i class="fa fa-star"></i>
+			</a>
+
+		</div>
+	</div>
+
+</div>
+
+<div class="col-md-7" id="skill-lessons">
+
+		{<!-- {#each lesson in lessons}}
+
+			<div class="lesson row">
+			
+				<div class="col-md-4">
+					<h3 class="lesson-title">{{lesson.title}}</h3>
+
+					<p class="lesson-description">{{lesson.description}}</p>
+				</div>
+
+				<div class="col-md-8">
+
+					<div class="lesson-resources" class="media-list">
+						{{#each resource in lesson.resources}}
+							{{#link-to "resource.show" resource classNames="media"}}
+								<div class="media-left media-middle">
+									<img {{bind-attr src=imageUrl}} class="img-circle media-object" />
+								</div>
+								<div class="media-body">
+									<h4 class="media-heading">{{resource.title}}</h4>
+								</div>
+							{{/link-to}}
+						{{/each}}
+					</div>
+
+				</div>
+
+			</div>
+
+		{{/each}} -->
+
+</div>

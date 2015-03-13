@@ -3,11 +3,12 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'abstract-collection',
 		'pods/skill/model',
 	],
-	function($, _, Backbone, SkillModel) {
+	function($, _, Backbone, AbstractCollection, SkillModel) {
 
-		return Backbone.Collection.extend({
+		return AbstractCollection.extend({
 
 			model: SkillModel,
 
@@ -23,8 +24,12 @@ define(
 				}
 			},
 
+			urlRoot: function() {
+				return this.serverGateway + '/hierarchy/skills/track';
+			},
+
 			url: function() {
-				return 'http://localhost:5000/hierarchy/skills/track/' + this.meta('track_id');
+				return this.urlRoot() + '/' + this.meta('track_id');
 			},
 
 			parse: function(response) {

@@ -2,37 +2,25 @@ define(
 	[
 		'jquery',
 		'underscore',
-		'backbone'
+		'backbone',
+		'abstract-model'
 	],
-	function($, _, Backbone) {
+	function($, _, Backbone, AbstractModel) {
 
-		return Backbone.Model.extend({
-			urlRoot: 'http://localhost:5000/hierarchy/skills',
+		return AbstractModel.extend({
 
-			url: function() {
-				return this.urlRoot + '/' + this.id;
+			jsonKey: "skill",
+
+			urlRoot: function() {
+				return this.serverGateway + '/hierarchy/skills';
 			},
 
-			idAttribute: '_id',
-
-			parse: function(response, options) {
-				if (options.collection) { 
-					// Anything to do?
-				} else {
-					response = response.skill;
-				}
-				response._id = response._id['$oid'];
-				return response;
+			url: function() {
+				return this.urlRoot() + '/' + this.id;
 			},
 
 			route: function() {
 				return '#/skill/' + this.id;
-			},
-
-			forTemplate: function() {
-				var son = this.toJSON();
-				son.route = this.route();
-				return son;
 			}
 
 		});
