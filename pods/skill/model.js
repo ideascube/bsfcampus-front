@@ -26,7 +26,7 @@ define(
 			},
 
 			route: function() {
-				return '#skill/' + this.id;
+				return '#/skill/' + this.id;
 			},
 
 			forTemplate: function() {

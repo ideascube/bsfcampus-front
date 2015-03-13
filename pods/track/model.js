@@ -30,7 +30,7 @@ define(
 			},
 
 			route: function() {
-				return '#track/' + this.id;
+				return '#/track/' + this.id;
 			},
 
 			forTemplate: function() {
