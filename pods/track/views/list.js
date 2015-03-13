@@ -15,7 +15,6 @@ define(
 			template: _.template(listItemTemplate),
 
 			render: function() {
-				console.log(this.model);
 				var html = this.template({track: this.model.forTemplate()});
 				this.$el.html(html);
 				return this;

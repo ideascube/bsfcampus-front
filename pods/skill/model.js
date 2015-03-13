@@ -7,11 +7,7 @@ define(
 	function($, _, Backbone) {
 
 		return Backbone.Model.extend({
-			// NOTE: We should introduce an application-wide extension of Backbone.Model
-			// to take care of the BSON -> JSON parsing (id and dates mostly), maybe the forTemplate() method and some others.
-			// eg: http://stackoverflow.com/questions/12390553/how-to-make-backbones-and-mongodbs-ids-work-seamlessly
-
-			urlRoot: 'http://localhost:5000/hierarchy/tracks',
+			urlRoot: 'http://localhost:5000/hierarchy/skills',
 
 			url: function() {
 				return this.urlRoot + '/' + this.id;
@@ -23,14 +19,14 @@ define(
 				if (options.collection) { 
 					// Anything to do?
 				} else {
-					response = response.track;
+					response = response.skill;
 				}
 				response._id = response._id['$oid'];
 				return response;
 			},
 
 			route: function() {
-				return '#track/' + this.id;
+				return '#skill/' + this.id;
 			},
 
 			forTemplate: function() {
