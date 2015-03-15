@@ -1,0 +1,27 @@
+<div 
+	class="panel-heading"
+	role="tab"
+	id="heading-lesson-<%= lesson._id %>"
+>
+	<h4 class="panel-title">
+		<a 
+			data-toggle="collapse"
+			data-parent="#skill-outline"
+			data-target="#collapse-lesson-<%= lesson._id %>"
+			aria-expanded="<%= lesson.active ? 'true' : 'false' %>"
+			aria-controls="collapse-lesson-<%= lesson._id %>"
+			href="<%= lesson.route %>"
+		>
+			<%= lesson.title %>
+		</a>
+	</h4>
+</div>
+
+<div
+	id="collapse-lesson-<%= lesson._id %>"
+	class="panel-collapse collapse <%= lesson.active ? 'in' : '' %>"
+	role="tabpanel"
+	aria-labelledby="heading-lesson-<%= lesson._id %>"
+>
+	<div class="lesson-outline list-group"></div>
+</div>

@@ -5,24 +5,29 @@ define(
 		'backbone',
 		
 		'pods/resource/model',
-		'pods/resource/content/model',
-		'pods/skill/model',
-		'pods/lesson/model',
+		'pods/resource/collections/skill',
+		'pods/resource/collections/lesson',
+		'pods/resource/views/skillNav',
 
+		'pods/resource/content/model',
 		'pods/resource/content/view',
+
+		'pods/skill/model',
+
+		'pods/lesson/model',
+		'pods/lesson/collections/skill',
 		
 		'text!pods/resource/templates/detail.html',
 	],
 	function($, _, Backbone,
-		ResourceModel,
-		ResourceContentModel,
+		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, SkillNavView,
+		ResourceContentModel, ResourceContentView,
 		SkillModel,
-		LessonModel,
-		ResourceContentView,
+		LessonModel, LessonsSkillCollection,
 		detailTemplate
 		) {
 
-		var DetailView = Backbone.View.extend({
+		return Backbone.View.extend({
 
 			model: ResourceModel,
 
@@ -34,29 +39,57 @@ define(
 				var html = this.template({resource: this.model.forTemplate()});
 				this.$el.html(html);
 
-				// Skill hierarchy
+				this.renderHierarchy();
+				this.renderContent();
+			},
 
-				var hierarchy = $.get(this.model.hierarchyUrl())
-					.done(
-						function(data){
-							console.log("Resource hierarchy fetched", data);
-							var skillModel = new SkillModel(data.skill);
-							console.log(skillModel);
-						}
-					);
+			renderHierarchy: function() {
 
-				// Resource content
+				var self = this;
+
+				var hierarchy = $.get(this.model.hierarchyUrl()).done(function(data){
+					var parsedSkill = new SkillModel().parse(data);
+					var skillModel = new SkillModel(parsedSkill);
+
+					var resourcesModels = [];
+					_.each(data.cousins, function(resource) {
+						var parsedResource = new ResourceModel().parse({resource: resource});
+						var resourceModel = new ResourceModel(parsedResource);
+						resourcesModels.push(resourceModel);
+					});
+					var resourcesSkillCollection = new ResourcesSkillCollection(resourcesModels);
+
+					var lessonsModels = [];
+					_.each(data.aunts, function(lesson) {
+						var parsedLesson = new LessonModel().parse({lesson: lesson});
+						var lessonModel = new LessonModel(parsedLesson);
+						var resources = resourcesSkillCollection.where({'lesson': lessonModel.id});
+						var resourcesCollection = new ResourcesLessonCollection(resources);
+						lessonModel.set('resources', resourcesCollection);
+						lessonsModels.push(lessonModel);
+					});
+					var lessonsSkillCollection = new LessonsSkillCollection(lessonsModels);
+
+					skillModel.set('lessons', lessonsSkillCollection);
+
+					var skillNavView = new SkillNavView({model: skillModel});
+					skillNavView.currentResource = self.model;
+					skillNavView.render();
+					self.$el.find('#skill-nav').html(skillNavView.$el);
+				});
+
+			},
+
+			renderContent: function() {
 
 				var contentModel = new ResourceContentModel(this.model.get('resource_content'));
 				var contentView = new ResourceContentView({model: contentModel});
 				contentView.render();
-				$('#resource-content').html(contentView.$el);
+				this.$el.find('#resource-content').html(contentView.$el);
 
 			},
 
 		});
-
-		return DetailView;
 		
 	}
 );
