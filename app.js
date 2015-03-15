@@ -5,6 +5,7 @@ require.config({
 		underscore: 'lib/underscore',
 		backbone: 'lib/backbone',
 		text: 'lib/text',
+		bootstrap: 'lib/bootstrap',
 
 		collection: 'app/abstract-collection',
 		model: 'app/abstract-model',
@@ -17,14 +18,17 @@ require.config({
 		},
 		'underscore': {
 			exports: '_'
+		},
+		'bootstrap': {
+			deps: ['jquery']
 		}
 	}
 
 });
 
 require(
-	['app/main'],
-	function(App) {
+	['app/main', 'bootstrap'],
+	function(App, BS) {
 		App.initialize();
 	}
 );
