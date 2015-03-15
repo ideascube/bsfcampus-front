@@ -16,7 +16,8 @@ define(
 			render: function() {
 				var son = this.model.forTemplate();
 				var html = this.template({track: son});
-				this.$el.html(html);
+				// #FIXME: use this.$el instead, but it's not working, I don't know why
+				$('#track-title').html(html);
 			}
 
 		});

@@ -51,11 +51,9 @@ define(
 			},
 
 			skillDetail: function(id) {
-				console.log("skillDetail");
 				this.renderHeader();
 				var model = new SkillModel({_id: id});
 				model.fetch().done(function(){
-					console.log("skill model fetched");
 					var skillDetailView = new SkillDetailView({model: model});
 					skillDetailView.render();
 				});

@@ -17,7 +17,6 @@ define(
 			},
 
 			url: function() {
-				console.log("url", this.urlRoot());
 				return this.urlRoot();
 			},
 
