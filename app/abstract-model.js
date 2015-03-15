@@ -14,11 +14,18 @@ define(
 			idAttribute: '_id',
 
 			parse: function(response, options) {
+				if (!options) {
+					options = {};
+				}
+
 				if (options.collection) { 
 					// Anything to do?
+				} else if (options.jsonKey) {
+					response = response[options.jsonKey];
 				} else {
 					response = response[this.jsonKey];
 				}
+				
 				response = this.recursiveNormalize(response);
 				return response;
 			},
