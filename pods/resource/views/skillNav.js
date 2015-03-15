@@ -43,7 +43,7 @@ define(
 				var itemView = new SkillOutlineItemView({model: lesson});
 				itemView.currentResource = this.currentResource;
 				itemView.render();
-				this.$el.find('#skill-outline').append(itemView.$el);
+				this.$el.find('#resource-skill-outline').append(itemView.$el);
 			
 				return this;
 			},

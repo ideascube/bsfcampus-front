@@ -19,7 +19,7 @@ define(
 
 			tagName: 'a',
 
-			className: 'list-group-item',
+			className: 'list-group-item media',
 
 			attributes: function() {
 				return {
