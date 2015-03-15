@@ -3,25 +3,28 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'abstract-model'
+
+		'model',
 	],
-	function($, _, Backbone, AbstractModel) {
+	function($, _, Backbone,
+		AbstractModel
+		) {
 
 		return AbstractModel.extend({
-
+			
 			jsonKey: "resource",
-
+			
 			urlRoot: function() {
 				return this.serverGateway + '/resources';
 			},
 
-			url: function() {
-				return this.urlRoot() + '/' + this.id;
+			hierarchyUrl: function() {
+				return this.url() + '/hierarchy';
 			},
 
 			route: function() {
 				return '#/resource/' + this.id;
-			}
+			},
 
 		});
 

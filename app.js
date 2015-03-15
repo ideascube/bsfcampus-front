@@ -5,6 +5,9 @@ require.config({
 		underscore: 'lib/underscore',
 		backbone: 'lib/backbone',
 		text: 'lib/text',
+
+		collection: 'app/abstract-collection',
+		model: 'app/abstract-model',
 	},
 
 	shim: {

@@ -3,26 +3,21 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'abstract-collection',
+		
+		'collection',
+		
 		'pods/skill/model',
 	],
-	function($, _, Backbone, AbstractCollection, SkillModel) {
+	function($, _, Backbone, 
+		AbstractCollection,
+		SkillModel
+		) {
 
 		return AbstractCollection.extend({
 
 			model: SkillModel,
 
-			initialize: function() {
-				this._meta = {};
-			},
-
-			meta: function(prop, value) {
-				if (value === undefined) {
-					return this._meta[prop];
-				} else {
-					this._meta[prop] = value;
-				}
-			},
+			jsonKey: 'skills',
 
 			urlRoot: function() {
 				return this.serverGateway + '/hierarchy/skills/track';
@@ -31,10 +26,6 @@ define(
 			url: function() {
 				return this.urlRoot() + '/' + this.meta('track_id');
 			},
-
-			parse: function(response) {
-				return response.skills;
-			}
 
 		});
 

@@ -3,26 +3,17 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+
+		'pods/track/views/trackListItem',
+		
 		'text!pods/track/templates/list.html',
-		'text!pods/track/templates/list-item.html'
 	],
-	function($, _, Backbone, listTemplate, listItemTemplate) {
+	function($, _, Backbone,
+		ListItemView,
+		listTemplate
+		) {
 
-		var ListItemView = Backbone.View.extend({
-
-			tagName: 'div',
-
-			template: _.template(listItemTemplate),
-
-			render: function() {
-				var html = this.template({track: this.model.forTemplate()});
-				this.$el.html(html);
-				return this;
-			},
-
-		});
-
-		var ListView = Backbone.View.extend({
+		return Backbone.View.extend({
 
 			el: $('#container'),
 
@@ -31,20 +22,20 @@ define(
 			render: function() {
 				$("body").removeAttr("style");
 				this.$el.html(this.template());
-				_.each(this.collection.models, this.renderOne, this);
-				return this; // convenient for chained calls
+				_.each(this.collection.models, this.renderTrack, this);
+				
+				return this;
 			},
 
-			renderOne: function(track) {
+			renderTrack: function(track) {
 				var listItemView = new ListItemView({model: track});
 				listItemView.render();
 				$('#track-list').append(listItemView.$el);
-				return this; // convenient for chained calls
+				
+				return this;
 			},
 
 		});
-
-		return ListView;
 		
 	}
 );

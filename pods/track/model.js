@@ -3,9 +3,12 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'abstract-model'
+
+		'model',
 	],
-	function($, _, Backbone, AbstractModel) {
+	function($, _, Backbone, 
+		AbstractModel
+		) {
 
 		return AbstractModel.extend({
 
@@ -13,10 +16,6 @@ define(
 
 			urlRoot: function() {
 				return this.serverGateway + '/hierarchy/tracks';
-			},
-
-			url: function() {
-				return this.urlRoot() + '/' + this.id;
 			},
 
 			route: function() {

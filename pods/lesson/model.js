@@ -3,9 +3,12 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'abstract-model'
+
+		'model',
 	],
-	function($, _, Backbone, AbstractModel) {
+	function($, _, Backbone,
+		AbstractModel
+		) {
 
 		return AbstractModel.extend({
 
@@ -15,13 +18,9 @@ define(
 				return this.serverGateway + '/hierarchy/lessons';
 			},
 
-			url: function() {
-				return this.urlRoot() + '/' + this.id;
-			},
-
 			route: function() {
 				return '#/lesson/' + this.id;
-			}
+			},
 
 		});
 

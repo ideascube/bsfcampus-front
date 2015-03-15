@@ -101,12 +101,12 @@ i {
 	background-color: white;
 	border-color: #1caff6;
 }
-#track-skills {
+#track-outline {
 	background-color: white;
 	border-radius: 10px;
 	overflow: hidden;
 }
-#track-skills a.media {
+#track-outline a.media {
 	margin: 0;
 	padding: 25px 30px;
 	display: block;
@@ -115,28 +115,28 @@ i {
 	border-left-width: 0;
 	border-right-width: 0;
 }
-#track-skills a.media .media-body {
+#track-outline a.media .media-body {
 	padding: 10px;
 	vertical-align: middle;
 }
-#track-skills a.media .media-heading {
+#track-outline a.media .media-heading {
 	font-weight: 600;
 	margin-bottom: 15px;
 	color: #333333;
 }
-#track-skills a.media .media-text {
+#track-outline a.media .media-text {
 	font-size: .85em;
 	color: #AAAAAA;
 }
-#track-skills a.media:hover {
+#track-outline a.media:hover {
 	text-decoration: none;
 	background-color: #39637c;
 	color: white;
 }
-#track-skills a.media:hover .media-heading {
+#track-outline a.media:hover .media-heading {
 	color: #EEEEEE;
 }
-#track-skills a.media:hover .media-text {
+#track-outline a.media:hover .media-text {
 	color: #DDDDDD;
 }
 #skill-info .panel {
@@ -192,95 +192,95 @@ i {
 	background-color: white;
 	border-color: #1caff6;
 }
-#skill-lessons {
+#skill-outline {
 	background-color: white;
 	border-radius: 10px;
 	border: 1px #ececec solid;
 	padding-top: 0px;
-	padding-bottom: 50px;
+	padding-bottom: 0px;
 }
-#skill-lessons .lesson {
+#skill-outline .lesson {
 	border: 1px #ececec solid;
 	border-left-width: 0;
 	border-right-width: 0;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
-#skill-lessons .lesson .lesson-title {
+#skill-outline .lesson .lesson-title {
 	font-size: 1.3em;
 	font-weight: 600;
 	margin-bottom: 15px;
 	color: #333333;
 }
-#skill-lessons .lesson .lesson-description {
+#skill-outline .lesson .lesson-description {
 	font-size: .85em;
 	color: #AAAAAA;
 }
-#skill-lessons .lesson .lesson-resources a:hover {
+#skill-outline .lesson .lesson-outline a:hover {
 	text-decoration: none;
 	background-color: #ececec;
 }
-#skill-lessons .lesson .lesson-resources .media {
+#skill-outline .lesson .lesson-outline .media {
 	margin: 0;
 	padding: 15px 10px;
 	display: block;
 	position: relative;
 }
-#skill-lessons .lesson .lesson-resources .media .media-body {
+#skill-outline .lesson .lesson-outline .media .media-body {
 	padding: 0;
 	vertical-align: middle;
 }
-#skill-lessons .lesson .lesson-resources .media .media-heading {
+#skill-outline .lesson .lesson-outline .media .media-heading {
 	font-size: 1.2em;
 	color: #333333;
 }
-#resource-info #resource-info-panel {
+#resource-skill-accordion #resource-skill-accordion-panel {
 	border: none;
 	border-radius: 10px;
 }
-#resource-info #skill-title {
+#resource-skill-accordion #skill-title {
 	background-color: #39637c;
 	border: none;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
-#resource-info #skill-title .panel-title {
+#resource-skill-accordion #skill-title .panel-title {
 	color: white;
 	font-size: 1em;
 	font-weight: 600;
 	text-transform: uppercase;
 }
-#resource-info #resource-tree {
+#resource-skill-accordion #resource-tree {
 	background-color: #F7F7F7;
 	border-bottom-left-radius: 10px;
 	border-bottom-right-radius: 10px;
 	border: none;
 }
-#resource-info #resource-tree .lesson a:hover {
+#resource-skill-accordion #resource-tree .lesson a:hover {
 	text-decoration: none;
 	background-color: #ececec;
 }
-#resource-info #resource-tree .lesson .panel-collapse {
+#resource-skill-accordion #resource-tree .lesson .panel-collapse {
 	padding: 0;
 }
-#resource-info #resource-tree .lesson .panel-collapse .media {
+#resource-skill-accordion #resource-tree .lesson .panel-collapse .media {
 	padding: 10px 5px;
 	margin: 0;
 	display: block;
 	position: relative;
 }
-#resource-info #resource-tree .lesson .panel-collapse .media .media-body {
+#resource-skill-accordion #resource-tree .lesson .panel-collapse .media .media-body {
 	padding: 0;
 	vertical-align: middle;
 }
-#resource-info #resource-tree .lesson .panel-collapse .media .media-heading {
+#resource-skill-accordion #resource-tree .lesson .panel-collapse .media .media-heading {
 	font-size: 1em;
 	color: #333333;
 }
-#resource-info #resource-tree .lesson .panel-collapse .media.active {
+#resource-skill-accordion #resource-tree .lesson .panel-collapse .media.active {
 	background-color: #bce520;
 }
-#resource-info #resource-tree .lesson .panel-collapse .media.active a {
+#resource-skill-accordion #resource-tree .lesson .panel-collapse .media.active a {
 	text-decoration: none;
 }
 #resource {

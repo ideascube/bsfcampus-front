@@ -3,22 +3,30 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'text!pods/skill/templates/back-to-track.html',
+
+		'pods/track/model',
+		
+		'text!pods/track/templates/list-item.html'
 	],
-	function($, _, Backbone, backToTrackTemplate) {
+	function($, _, Backbone,
+		TrackModel,
+		listItemTemplate
+		) {
 
 		return Backbone.View.extend({
 
+			model: TrackModel,
+
 			tagName: 'div',
-			
-			template: _.template(backToTrackTemplate),
+
+			template: _.template(listItemTemplate),
 
 			render: function() {
 				var html = this.template({track: this.model.forTemplate()});
 				this.$el.html(html);
 				
 				return this;
-			}
+			},
 
 		});
 		

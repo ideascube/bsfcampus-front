@@ -3,14 +3,21 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'abstract-collection',
+		
+		'collection',
+		
 		'pods/track/model',
 	],
-	function($, _, Backbone, AbstractCollection, TrackModel) {
+	function($, _, Backbone,
+		AbstractCollection,
+		TrackModel
+		) {
 
 		return AbstractCollection.extend({
 
 			model: TrackModel,
+
+			jsonKey: 'tracks',
 
 			urlRoot: function() {
 				return this.serverGateway + '/hierarchy/tracks';
@@ -19,10 +26,6 @@ define(
 			url: function() {
 				return this.urlRoot();
 			},
-
-			parse: function(response) {
-				return response.tracks;
-			}
 
 		});
 
