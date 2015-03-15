@@ -4,40 +4,27 @@ define(
 		'underscore',
 		'backbone',
 
+		'pods/track/views/trackOutlineItem',
+		
 		'pods/skill/collections/track',
 
 		'text!pods/track/templates/detail.html',
-		'text!pods/track/templates/track-outline-item.html',
 	],
 	function($, _, Backbone,
+		TrackOutlineItem,
 		SkillTrackCollection,
-		detailTemplate, skillItemTemplate
+		detailTemplate
 		) {
 
-		var SkillItemView = Backbone.View.extend({
-			
-			tagName: 'div',
-
-			template: _.template(skillItemTemplate),
-
-			render: function() {
-				var html = this.template({skill: this.model.forTemplate()});
-				this.$el.html(html);
-				
-				return this;
-			}
-		});
-
-		var DetailView = Backbone.View.extend({
+		return Backbone.View.extend({
 
 			el: $('#container'),
 			
 			template: _.template(detailTemplate),
 
 			render: function() {
-				var son = this.model.forTemplate();
-				var html = this.template({track: son});
-				$("body").css("background", "#e9e9e9 url('" + son.bgImageUrl + "') no-repeat")
+				var html = this.template({track: this.model.forTemplate()});
+				$("body").css("background", "#e9e9e9 url('" + this.model.get('bgImageUrl') + "') no-repeat")
 					.css("background-size", "100%")
 					.css("background-position", "0% 100%")
 					.css("background-attachment", "fixed");
@@ -56,16 +43,14 @@ define(
 			},
 
 			renderOne: function(skill) {
-				var skillItemView = new SkillItemView({model: skill});
-				skillItemView.render();
-				$('#track-outline').append(skillItemView.$el);
+				var trackOutlineItem = new TrackOutlineItem({model: skill});
+				trackOutlineItem.render();
+				$('#track-outline').append(trackOutlineItem.$el);
 			
 				return this;
 			},
 
 		});
 
-		return DetailView;
-		
 	}
 );
