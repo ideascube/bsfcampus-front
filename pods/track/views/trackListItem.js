@@ -24,6 +24,8 @@ define(
 			render: function() {
 				var html = this.template({track: this.model.forTemplate()});
 				this.$el.html(html);
+				console.log("this.$el.find('.hierarchy-text a')", this.$el.find(".hierarchy-text a"));
+				this.$el.find(".hierarchy-text a").addClass("start");
 				
 				return this;
 			},

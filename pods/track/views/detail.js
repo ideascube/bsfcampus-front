@@ -24,7 +24,7 @@ define(
 
 			render: function() {
 				var html = this.template({track: this.model.forTemplate()});
-				$("body").css("background", "#e9e9e9 url('" + this.model.get('bgImageUrl') + "') no-repeat")
+				$("body").css("background", "#e9e9e9 url('" + this.model.get('bg_image_url') + "') no-repeat")
 					.css("background-size", "100%")
 					.css("background-position", "0% 100%")
 					.css("background-attachment", "fixed");
