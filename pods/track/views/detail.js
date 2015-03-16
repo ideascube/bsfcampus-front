@@ -23,7 +23,15 @@ define(
 			template: _.template(detailTemplate),
 
 			render: function() {
-				var html = this.template({track: this.model.forTemplate()});
+				var trackModel = this.model.forTemplate();
+				// #TODO: depending on the availability of the test, change the button text and class
+				// trackModel.validateButtonText = "Passer le test du parcours";
+				// trackModel.validateButtonStatus = "validate-disabled";
+				// trackModel.validateButtonText = "Passer le test du parcours";
+				// trackModel.validateButtonStatus = "validate-allowed";
+				trackModel.validateButtonText = "Test du parcours validé";
+				trackModel.validateButtonStatus = "validated";
+				var html = this.template({track: trackModel});
 				$("body").css("background", "#e9e9e9 url('" + this.model.get('bg_image_url') + "') no-repeat")
 					.css("background-size", "100%")
 					.css("background-position", "0% 100%")

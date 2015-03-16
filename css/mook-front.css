@@ -89,7 +89,7 @@ a, a:hover {
 #track-info #track-title {
 	color: #39637c;
 	text-transform: uppercase;
-	font-weight: bold;
+	font-weight: 700;
 	margin: 20px auto 30px;
 	padding: 0 10px;
 	font-size: 1.5em;
@@ -97,28 +97,83 @@ a, a:hover {
 #track-info #track-description {
 	color: #464646;
 	margin: 20px 50px;
-	font-size: 0.9em;
+	font-weight: 400;
+	font-size: 0.8em;
 }
-#track-info a.btn-validate-track {
-	width: 60%;
-	margin: 50px auto;
-	padding: 10px;
+/** PAGE: Track -> Track's validation button **/
+a.btn-validate-track {
+	padding: 20px;
 	display: block;
 	color: white;
-	background-color: #1caff6;
-	border-style: solid;
-	border-width: medium;
-	border-color: white;
-	border-radius: 25px;
+	background-color: #bce520;
+	border-radius: 5px;
+	margin-bottom: 5px;
 }
-#track-info a.btn-validate-track.disabled {
-	color: #1caff6;
-	background-color: white;
-	border-color: #1caff6;
+a.btn-validate-track img.certificate {
+	height:40px;
+	margin-right: 20px;
 }
+a.btn-validate-track img.lock {
+	height:20px;
+	margin-left: 20px;
+}
+a.btn-validate-track img.check {
+	height:20px;
+	margin-left: 20px;
+}
+a.btn-validate-track.validate-disabled {
+	color: #818181;
+	background-color: #cdcdcd;
+	font-size: 1.25em;
+}
+a.btn-validate-track.validate-disabled img {
+	filter: invert(1) brightness(50%);
+	-webkit-filter: invert(1) brightness(50%);
+	-moz-filter: invert(1) brightness(50%);
+	-ms-filter: invert(1) brightness(50%);
+	-o-filter: invert(1) brightness(50%);
+}
+a.btn-validate-track.validate-disabled img.check {
+	display: none;
+}
+a.btn-validate-track.validate-allowed {
+	color: #ffffff;
+	background-color: #bce520;
+	font-size: 1.25em;
+}
+a.btn-validate-track.validate-allowed img.lock {
+	display: none;
+}
+a.btn-validate-track.validate-allowed img.check {
+	display: none;
+}
+a.btn-validate-track.validate-allowed img {
+	filter: invert(1);
+	-webkit-filter: invert(1);
+	-moz-filter: invert(1);
+	-ms-filter: invert(1);
+	-o-filter: invert(1);
+}
+a.btn-validate-track.validated {
+	color: #ffffff;
+	background-color: #f8d041;
+	font-size: 1.25em;
+}
+a.btn-validate-track.validated img.lock {
+	display: none;
+}
+a.btn-validate-track.validated img {
+	filter: invert(1);
+	-webkit-filter: invert(1);
+	-moz-filter: invert(1);
+	-ms-filter: invert(1);
+	-o-filter: invert(1);
+}
+
+/** PAGE: Track -> Track's skill list **/
 #track-outline {
 	background-color: white;
-	border-radius: 10px;
+	border-radius: 5px;
 	overflow: hidden;
 }
 #track-outline a.media {
