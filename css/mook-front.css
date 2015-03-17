@@ -112,7 +112,11 @@ a.btn-validate-track {
 a.btn-validate-track.disabled {
 	opacity: 1.00;
 }
-a.btn-validate-track img.certificate {
+a.btn-validate-track img.certificate-validated {
+	height:40px;
+	margin-right: 20px;
+}
+a.btn-validate-track img.certificate-locked {
 	height:40px;
 	margin-right: 20px;
 }
@@ -129,12 +133,8 @@ a.btn-validate-track.validate-disabled {
 	background-color: #cdcdcd;
 	font-size: 1.25em;
 }
-a.btn-validate-track.validate-disabled img {
-	filter: invert(1) brightness(50%);
-	-webkit-filter: invert(1) brightness(50%);
-	-moz-filter: invert(1) brightness(50%);
-	-ms-filter: invert(1) brightness(50%);
-	-o-filter: invert(1) brightness(50%);
+a.btn-validate-track.validate-disabled img.certificate-validated {
+	display: none;
 }
 a.btn-validate-track.validate-disabled img.check {
 	display: none;
@@ -144,33 +144,25 @@ a.btn-validate-track.validate-allowed {
 	background-color: #bce520;
 	font-size: 1.25em;
 }
+a.btn-validate-track.validate-allowed img.certificate-locked {
+	display: none;
+}
 a.btn-validate-track.validate-allowed img.lock {
 	display: none;
 }
 a.btn-validate-track.validate-allowed img.check {
 	display: none;
 }
-a.btn-validate-track.validate-allowed img {
-	filter: invert(1);
-	-webkit-filter: invert(1);
-	-moz-filter: invert(1);
-	-ms-filter: invert(1);
-	-o-filter: invert(1);
-}
 a.btn-validate-track.validated {
 	color: #ffffff;
 	background-color: #f8d041;
 	font-size: 1.25em;
 }
-a.btn-validate-track.validated img.lock {
+a.btn-validate-track.validated img.certificate-locked {
 	display: none;
 }
-a.btn-validate-track.validated img {
-	filter: invert(1);
-	-webkit-filter: invert(1);
-	-moz-filter: invert(1);
-	-ms-filter: invert(1);
-	-o-filter: invert(1);
+a.btn-validate-track.validated img.lock {
+	display: none;
 }
 
 /** PAGE: Track -> Track's skill list **/

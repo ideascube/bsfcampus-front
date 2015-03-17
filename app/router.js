@@ -12,7 +12,7 @@ define(
 		'pods/skill/views/detail',
 		'pods/resource/model',
 		'pods/resource/views/detail',
-		'pods/breadcrumb/views/breadcrumb',
+		'pods/breadcrumb/views/breadcrumbContainer',
 	],
 	function($, _, Backbone, AppHeaderView, 
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
@@ -53,8 +53,9 @@ define(
 
 			trackDetail: function(id) {
 				var model = new TrackModel({_id: id});
+				self = this
 				model.fetch().done(function(){
-					updateResourceHierarchyBreadcrumb(model);
+					self.updateResourceHierarchyBreadcrumb(model);
 					var trackDetailView = new TrackDetailView({model: model});
 					trackDetailView.render();
 				});
@@ -62,8 +63,9 @@ define(
 
 			skillDetail: function(id) {
 				var model = new SkillModel({_id: id});
+				self = this
 				model.fetch().done(function(){
-					updateResourceHierarchyBreadcrumb(model);
+					self.updateResourceHierarchyBreadcrumb(model);
 					var skillDetailView = new SkillDetailView({model: model});
 					skillDetailView.render();
 				});
@@ -71,15 +73,16 @@ define(
 
 			resourceDetail: function(id) {
 				var model = new ResourceModel({_id: id});
+				self = this
 				model.fetch().done(function(){
-					updateResourceHierarchyBreadcrumb(model);
+					self.updateResourceHierarchyBreadcrumb(model);
 					var resourceDetailView = new ResourceDetailView({model: model});
 					resourceDetailView.render();
 				});
 			},
 
 			updateResourceHierarchyBreadcrumb: function(model) {
-				var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: model});
+				var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: model.get('breadcrumb')});
 				breadcrumbView.render();
 			}
 
