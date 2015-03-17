@@ -1,9 +1,14 @@
 <a href="<%= skill.route %>" class="skill media">
 	<div class="media-left media-middle">
-			<img src="<%= skill.imageUrl %>" class="img-circle media-object"/>
+			<img src="<%= skill.imageUrl %>" class="img-circle media-object <%= skill.validationClass %>"/>
 	</div>
 	<div class="media-body">
-		<h4 class="media-heading"><%= skill.title %></h4>
+		<h4 class="media-heading <%= skill.validationClass %>"><%= skill.title %><img src="assets/images/iconmonstr-check-mark-3-icon-256.png" class="circle check"></h4>
+		<div class="progress">
+		  <div class="progress-bar <%= skill.validationClass %>" role="progressbar" aria-valuenow="<%= skill.progress.current*100/skill.progress.max %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= skill.progress.current*100/skill.progress.max %>%;">
+		    <span class="sr-only"><%= skill.progress.current*100/skill.progress.max %>% Complete</span>
+		  </div>
+		</div>
 		<p class="media-text"><%= skill.description %></p>
 	</div>
 </a>

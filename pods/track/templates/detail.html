@@ -9,7 +9,8 @@
 
 <div class="col-md-6">
 
-	<a href="" class="btn btn-validate-track <%= track.validateButtonStatus %>">
+	<!-- #TODO: this button should have a href to redirect to the track validation screen. -->
+	<a href="" class="btn <%= track.validateButtonClass %> btn-validate-track <%= track.validateButtonStatus %>">
 		<img src="assets/images/iconmonstr-certificate-12-icon-256.png" class="certificate"><%= track.validateButtonText %><img src="assets/images/iconmonstr-lock-3-icon-256.png" class="lock"><img src="assets/images/iconmonstr-check-mark-4-icon-256.png" class="check">
 	</a>
 

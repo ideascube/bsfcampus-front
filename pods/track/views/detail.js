@@ -24,13 +24,23 @@ define(
 
 			render: function() {
 				var trackModel = this.model.forTemplate();
-				// #TODO: depending on the availability of the test, change the button text and class
-				// trackModel.validateButtonText = "Passer le test du parcours";
-				// trackModel.validateButtonStatus = "validate-disabled";
-				// trackModel.validateButtonText = "Passer le test du parcours";
-				// trackModel.validateButtonStatus = "validate-allowed";
-				trackModel.validateButtonText = "Test du parcours validé";
-				trackModel.validateButtonStatus = "validated";
+				if (trackModel.is_validated)
+				{
+					trackModel.validateButtonText = "Test du parcours validé";
+					trackModel.validateButtonStatus = "validated";
+					trackModel.validateButtonClass = "disabled";
+				}
+				else if (trackModel.progress.current >= trackModel.progress.max)
+				{
+					trackModel.validateButtonText = "Passer le test du parcours";
+					trackModel.validateButtonStatus = "validate-allowed";
+				}
+				else
+				{
+					trackModel.validateButtonText = "Passer le test du parcours";
+					trackModel.validateButtonStatus = "validate-disabled";
+					trackModel.validateButtonClass = "disabled";
+				}
 				var html = this.template({track: trackModel});
 				$("body").css("background", "#e9e9e9 url('" + this.model.get('bg_image_url') + "') no-repeat")
 					.css("background-size", "100%")

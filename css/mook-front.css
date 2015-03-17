@@ -109,6 +109,9 @@ a.btn-validate-track {
 	border-radius: 5px;
 	margin-bottom: 5px;
 }
+a.btn-validate-track.disabled {
+	opacity: 1.00;
+}
 a.btn-validate-track img.certificate {
 	height:40px;
 	margin-right: 20px;
@@ -192,11 +195,30 @@ a.btn-validate-track.validated img {
 #track-outline a.media .media-heading {
 	font-weight: 600;
 	margin-bottom: 15px;
-	color: #333333;
+	font-size: 1.0em;
+	font-weight: 600;
+	color: #252525;
+}
+#track-outline a.media .media-heading img.check {
+	display: none;
+	height: 20px;
+	margin-left: 20px;
+}
+#track-outline a.media .media-heading.validated img.check {
+	display: inline;
+}
+#track-outline a.media .progress {
+	background-color: #cdcdcd;
+}
+#track-outline a.media .progress .progress-bar {
+	background-color: #bce520;
+}
+#track-outline a.media .progress .progress-bar.validated {
+	background-color: #f8d041;
 }
 #track-outline a.media .media-text {
 	font-size: .85em;
-	color: #AAAAAA;
+	color: #737373;
 }
 #track-outline a.media:hover {
 	background-color: #39637c;

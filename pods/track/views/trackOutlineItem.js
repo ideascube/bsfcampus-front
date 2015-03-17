@@ -17,7 +17,10 @@ define(
 			template: _.template(trackOutlineItemTemplate),
 
 			render: function() {
-				var html = this.template({skill: this.model.forTemplate()});
+				var skillModel = this.model.forTemplate();
+				console.log("skillModel.is_validated", skillModel.is_validated);
+				skillModel.validationClass = (skillModel.is_validated) ? 'validated' : '';
+				var html = this.template({skill: skillModel});
 				this.$el.html(html);
 				
 				return this;
