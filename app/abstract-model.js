@@ -36,6 +36,10 @@ define(
 				// Go through the entire object recursively, 
 				// and transform special types (ObjectId, Date) to strings.
 
+				if (obj === null) {
+					return null;
+				}
+
 				if (obj.constructor === Array) {
 				// If this is an array, normalize each element
 				
