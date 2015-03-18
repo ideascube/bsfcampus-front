@@ -28,7 +28,7 @@ define(
 					element = this.renderElement(this.model[i]);
 					if (i == this.model.length-1)
 					{
-						element.$el.addClass('active');
+						element.$el.find('a').addClass('active');
 					}
 				}
 				// _.each(this.model, this.renderElement, this);

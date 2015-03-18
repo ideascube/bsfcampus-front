@@ -43,8 +43,8 @@ a, a:hover {
 }
 
 div[class^="col-md-"] {
-	padding-right:5px;
-  	padding-left:5px;
+	padding-right:3px;
+  	padding-left:3px;
 }
 
 .progress {
@@ -53,11 +53,12 @@ div[class^="col-md-"] {
 	height: 10px;
 }
 
+
 /** BREADCRUMB **/
 
 #breadcrumb-container ol {
 	background-color: rgba(255, 255, 255, 0);
-	margin-bottom: 10px;
+	margin-bottom: 0px;
 }
 
 .breadcrumb > li + li:before {
@@ -254,10 +255,30 @@ a.btn-validate-track.validated img.lock {
 /** PAGE: Skill **/
 
 #skill-info {
-	background-color: #39637c;
-	border: none;
 	border-radius: 5px;
-	padding: 30px;
+}
+#skill-info .panel {
+	min-height: 75vh;
+	border: none;
+	background-color: #39637c;
+}
+#skill-info .panel-heading .panel-title {
+	color: white;
+	font-size: 0.85em;
+	font-weight: 400;
+	border-bottom: 1px solid white;
+	padding: 10px;
+	text-align: left;
+}
+#skill-info .panel-heading .panel-title img {
+	height:12px;
+	padding-bottom: 2px;
+	margin: 0px 10px 0px 0px;
+}
+#skill-info .panel-body {
+	background-color: #39637c;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
 }
 #skill-info #skill-title {
 	color: white;
@@ -283,7 +304,7 @@ a.btn-validate-track.validated img.lock {
 	color: white;
 	font-size: 0.75em;
 }
-/** PAGE: Track -> Track's validation button **/
+/** PAGE: Skill -> Skill's validation button **/
 a.btn-validate-skill {
 	padding: 20px;
 	display: block;
@@ -320,34 +341,37 @@ a.btn-validate-skill.validated {
 /** PAGE: Skill -> skill's resources **/
 #skill-outline {
 	background-color: white;
-	border-radius: 10px;
-	border: 1px #ececec solid;
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-#skill-outline .lesson {
-	border: 1px #ececec solid;
-	border-left-width: 0;
-	border-right-width: 0;
+	border-radius: 5px;
+	border: none;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
+#skill-outline .lesson {
+	padding-left: 5%;
+}
+#skill-outline .lesson div[class^="col-md-"] {
+	padding-right:20px;
+  	padding-left:20px;
+}
 #skill-outline .lesson .lesson-title {
-	font-size: 1.3em;
+	font-size: 1em;
 	font-weight: 600;
-	margin-bottom: 15px;
-	color: #333333;
+	margin-bottom: 25px;
+	color: #252525;
 }
 #skill-outline .lesson .lesson-description {
-	font-size: .85em;
-	color: #AAAAAA;
+	font-size: .75em;
+	color: #737373;
+}
+#skill-outline .lesson div.lesson-outline[class^="col-md-"] {
+	padding-right:0px;
 }
 #skill-outline .lesson .lesson-outline a:hover {
 	background-color: #ececec;
 }
 #skill-outline .lesson .lesson-outline .media {
 	margin: 0;
-	padding: 15px 10px;
+	padding: 15px 10px 15px 25px;
 	display: block;
 	position: relative;
 }
@@ -356,8 +380,9 @@ a.btn-validate-skill.validated {
 	vertical-align: middle;
 }
 #skill-outline .lesson .lesson-outline .media .media-heading {
-	font-size: 1.2em;
-	color: #333333;
+	font-size: 1em;
+	font-weight: 600;
+	color: #252525;
 }
 
 /** PAGE: Resource **/

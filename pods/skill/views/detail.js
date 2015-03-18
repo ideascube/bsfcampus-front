@@ -62,7 +62,15 @@ define(
 				lessonsCollection.meta('skill_id', this.model.id);
 				lessonsCollection.fetch().then(function(){
 					$('#skill-outline').html('');
-					_.each(lessonsCollection.models, self.renderLesson, self);
+
+					for (var i=0; i < lessonsCollection.models.length; i++)
+					{
+						self.renderLesson(lessonsCollection.models[i]);
+						if (i < lessonsCollection.models.length-1)
+						{
+							$('#skill-outline').append('<hr>');
+						}
+					}
 				});
 			
 				return this;
