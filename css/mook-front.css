@@ -42,6 +42,25 @@ a, a:hover {
 	height: 100%;
 }
 
+/** BREADCRUMB **/
+
+#breadcrumb-container ol {
+	background-color: rgba(255, 255, 255, 0);
+}
+
+.breadcrumb > li + li:before {
+    color: #9a9a9a;
+    content: ">";
+	font-size: 0.85em;
+	font-weight: 600;
+}
+
+.breadcrumb a {
+	color: #9a9a9a;
+	font-size: 0.85em;
+	font-weight: 600;
+}
+
 /** PAGE: All tracks **/
 
 .track-thumbnail {
