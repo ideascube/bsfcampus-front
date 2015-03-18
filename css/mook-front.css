@@ -42,10 +42,22 @@ a, a:hover {
 	height: 100%;
 }
 
+div[class^="col-md-"] {
+	padding-right:5px;
+  	padding-left:5px;
+}
+
+.progress {
+	background-color: #cdcdcd;
+	border-radius: 5px;
+	height: 10px;
+}
+
 /** BREADCRUMB **/
 
 #breadcrumb-container ol {
 	background-color: rgba(255, 255, 255, 0);
+	margin-bottom: 10px;
 }
 
 .breadcrumb > li + li:before {
@@ -218,9 +230,6 @@ a.btn-validate-track.validated img.lock {
 #track-outline a.media .media-heading.validated img.check {
 	display: inline;
 }
-#track-outline a.media .progress {
-	background-color: #cdcdcd;
-}
 #track-outline a.media .progress .progress-bar {
 	background-color: #bce520;
 }
@@ -244,59 +253,71 @@ a.btn-validate-track.validated img.lock {
 
 /** PAGE: Skill **/
 
-#skill-info .panel {
-	border: none;
-	border-radius: 10px;
-}
-#skill-info .panel-heading {
+#skill-info {
 	background-color: #39637c;
 	border: none;
-	border-bottom: 1px solid #ececec;
-	border-top-left-radius: 10px;
-	border-top-right-radius: 10px;
-	padding: 15px;
-}
-#skill-info .panel-heading .panel-title {
-	color: white;
-	font-size: 1em;
-	font-weight: 600;
-	text-transform: uppercase;
-}
-#skill-info .panel-body {
-	background-color: #39637c;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
-	border: none;
+	border-radius: 5px;
+	padding: 30px;
 }
 #skill-info #skill-title {
 	color: white;
 	text-transform: uppercase;
-	font-weight: bold;
-	margin: 40px auto;
-	padding: 0 10px;
-	font-size: 1.5em;
+	font-weight: 600;
+	margin-bottom: 30px;
+	font-size: 1.12em;
+}
+#skill-info img {
+	margin: 30px auto 30px auto;
+}
+#skill-info .progress {
+	background-color: #cdcdcd;
+	margin-bottom: 30px;
+}
+#skill-info .progress .progress-bar {
+	background-color: #bce520;
+}
+#skill-info .progress .progress-bar.validated {
+	background-color: #f8d041;
 }
 #skill-info #skill-description {
-	color: #DDDDDD;
-	font-size: 0.9em;
+	color: white;
+	font-size: 0.75em;
 }
-#skill-info a.btn-validate-skill {
-	width: 60%;
-	margin: 50px auto;
-	padding: 10px;
+/** PAGE: Track -> Track's validation button **/
+a.btn-validate-skill {
+	padding: 20px;
 	display: block;
 	color: white;
-	background-color: #1caff6;
-	border-style: solid;
-	border-width: medium;
-	border-color: white;
-	border-radius: 25px;
+	background-color: #bce520;
+	border-radius: 5px;
+	margin-bottom: 5px;
 }
-#skill-info a.btn-validate-skill.disabled {
-	color: #1caff6;
-	background-color: white;
-	border-color: #1caff6;
+a.btn-validate-skill.disabled {
+	opacity: 1.00;
 }
+a.btn-validate-skill img.certificate {
+	height:40px;
+	margin-right: 40px;
+}
+a.btn-validate-skill img.check {
+	height:20px;
+	margin-left: 20px;
+}
+a.btn-validate-skill.validate-allowed {
+	color: #ffffff;
+	background-color: #bce520;
+	font-size: 1.25em;
+}
+a.btn-validate-skill.validate-allowed img.check {
+	display: none;
+}
+a.btn-validate-skill.validated {
+	color: #ffffff;
+	background-color: #f8d041;
+	font-size: 1.25em;
+}
+
+/** PAGE: Skill -> skill's resources **/
 #skill-outline {
 	background-color: white;
 	border-radius: 10px;

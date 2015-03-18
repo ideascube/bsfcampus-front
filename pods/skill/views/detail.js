@@ -28,7 +28,20 @@ define(
 
 			render: function() {
 				
-				var html = this.template({skill: this.model.forTemplate()});
+				var skillModel = this.model.forTemplate();
+				if (skillModel.is_validated)
+				{
+					skillModel.validateButtonText = "Test de compétence validé";
+					skillModel.validateButtonStatus = "validated";
+					skillModel.validateButtonClass = "disabled";
+				}
+				else
+				{
+					skillModel.validateButtonText = "Passer le test de compétence";
+					skillModel.validateButtonStatus = "validate-allowed";
+				}
+				
+				var html = this.template({skill: skillModel});
 				this.$el.html(html);
 
 				$("body").css("background", this.model.get('bg_color') + " url('" + this.model.get('bg_image_url') + "') no-repeat")

@@ -1,28 +1,25 @@
-<div class="col-md-5" id="skill-info">
+<div class="col-md-4" id="skill-info">
+			
+	<h2 class="text-center" id="skill-title"><%= skill.title %></h2>
+	
+	<img src="<%= skill.imageUrl %>" class="img-responsive center-block img-circle" />
 
-	<div class="panel panel-default">
-
-		<div class="panel-heading" id="track-title"></div>
-		
-		<div class="panel-body" id="skill-description">
-			
-			<img src="<%= skill.imageUrl %>" class="img-responsive center-block img-circle" />
-			
-			<h2 class="text-center" id="skill-title"><%= skill.title %></h2>
-			
-			<p id="skill-description"><%= skill.description %></p>
-			
-			<a href="/" class="btn btn-default btn-validate-skill disabled">
-				Valider la compétence
-				<i class="fa fa-star"></i>
-			</a>
-
-		</div>
+	<div class="progress">
+	  <div class="progress-bar <%= skill.validationClass %>" role="progressbar" aria-valuenow="<%= skill.progress.current*100/skill.progress.max %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= skill.progress.current*100/skill.progress.max %>%;">
+	    <span class="sr-only"><%= skill.progress.current*100/skill.progress.max %>% Complete</span>
+	  </div>
 	</div>
+	
+	<p id="skill-description"><%= skill.description %></p>
 
 </div>
 
-<div class="col-md-7">
+<div class="col-md-8">
+
+	<!-- #TODO: this button should have a href to redirect to the track validation screen. -->
+	<a href="" class="btn <%= skill.validateButtonClass %> btn-validate-skill <%= skill.validateButtonStatus %>">
+		<img src="assets/images/student-hat.png" class="certificate"><%= skill.validateButtonText %><img src="assets/images/iconmonstr-check-mark-4-icon-256.png" class="check">
+	</a>
 
 	<div id="skill-outline">
 	
