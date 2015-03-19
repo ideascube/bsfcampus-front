@@ -48,9 +48,15 @@ div[class^="col-md-"] {
 }
 
 .progress {
+	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
 	background-color: #cdcdcd;
 	border-radius: 5px;
 	height: 10px;
+}
+
+.btn-validate-track, .btn-validate-skill {
+	/*display: block;*/
+	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
 }
 
 
@@ -135,7 +141,6 @@ div[class^="col-md-"] {
 /** PAGE: Track -> Track's validation button **/
 a.btn-validate-track {
 	padding: 20px;
-	display: block;
 	color: white;
 	background-color: #bce520;
 	border-radius: 5px;
@@ -307,7 +312,6 @@ a.btn-validate-track.validated img.lock {
 /** PAGE: Skill -> Skill's validation button **/
 a.btn-validate-skill {
 	padding: 20px;
-	display: block;
 	color: white;
 	background-color: #bce520;
 	border-radius: 5px;
