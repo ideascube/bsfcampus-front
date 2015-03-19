@@ -7,10 +7,13 @@ define(
 		'pods/resource/model',
 		
 		'text!pods/resource/templates/lesson-outline-item.html',
+
+		'app/config'
 	],
 	function($, _, Backbone,
 		ResourceModel,
-		lessonOutlineItemTemplate
+		lessonOutlineItemTemplate,
+		Config
 		) {
 
 		return Backbone.View.extend({
@@ -30,7 +33,7 @@ define(
 			template: _.template(lessonOutlineItemTemplate),
 
 			render: function() {
-				var html = this.template({resource: this.model.forTemplate()});
+				var html = this.template({resource: this.model.forTemplate(), config:Config });
 				this.$el.html(html);
 				
 				return this;

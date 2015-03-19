@@ -13,11 +13,12 @@ define(
 		'pods/skill/views/backToTrack',
 
 		'text!pods/skill/templates/detail.html',
+		'app/config'
 	],
 	function($, _, Backbone,
 		TrackModel, LessonSkillCollection, ResourceLessonCollection,
 		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView,
-		detailTemplate
+		detailTemplate, Config
 		) {
 
 		return Backbone.View.extend({
@@ -41,7 +42,7 @@ define(
 					skillModel.validateButtonStatus = "validate-allowed";
 				}
 				
-				var html = this.template({skill: skillModel});
+				var html = this.template({skill: skillModel, config:Config});
 				this.$el.html(html);
 
 				$("body").css("background", this.model.get('bg_color') + " url('" + this.model.get('bg_image_url') + "') no-repeat")

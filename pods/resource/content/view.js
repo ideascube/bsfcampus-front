@@ -7,9 +7,10 @@ define(
 		'text!pods/resource/content/templates/rich-text.html',
 		'text!pods/resource/content/templates/youtube-video.html',
 		'text!pods/resource/content/templates/exercise.html',
+		'app/config'
 	],
 	function($, _, Backbone,
-		richTextTemplate, youtubeVideoTemplate, exerciseTemplate
+		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, Config
 		) {
 
 		return Backbone.View.extend({
@@ -33,12 +34,12 @@ define(
 			},
 
 			template: function(data){
-				var templateHTML = this.templateHTML();
+				var templateHTML = this.templateHTML({});
 				return _.template(templateHTML)(data);
 			},
 			
 			render: function() {
-				var html = this.template({content: this.model.forTemplate()});
+				var html = this.template({content: this.model.forTemplate({config: Config})});
 				this.$el.html(html);
 			},
 

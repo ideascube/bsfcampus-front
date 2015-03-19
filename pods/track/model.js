@@ -5,9 +5,10 @@ define(
 		'backbone',
 
 		'model',
+		'app/config'
 	],
 	function($, _, Backbone, 
-		AbstractModel
+		AbstractModel, Config
 		) {
 
 		return AbstractModel.extend({
@@ -15,7 +16,7 @@ define(
 			jsonKey: "track",
 
 			urlRoot: function() {
-				return this.serverGateway + '/hierarchy/tracks';
+				return Config.constants.serverGateway + '/hierarchy/tracks';
 			},
 
 			route: function() {

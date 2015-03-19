@@ -7,10 +7,11 @@ define(
 		'collection',
 		
 		'pods/lesson/model',
+		'app/config'
 	],
 	function($, _, Backbone,
 		AbstractCollection,
-		LessonModel
+		LessonModel, Config
 		) {
 
 		return AbstractCollection.extend({
@@ -20,7 +21,7 @@ define(
 			jsonKey: 'lessons',
 
 			urlRoot: function() {
-				return this.serverGateway + '/hierarchy/lessons/skill';
+				return Config.constants.serverGateway + '/hierarchy/lessons/skill';
 			},
 
 			url: function() {

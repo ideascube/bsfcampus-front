@@ -6,11 +6,13 @@ define(
 
 		'pods/track/model',
 		
-		'text!pods/track/templates/list-item.html'
+		'text!pods/track/templates/list-item.html',
+		'app/config'
 	],
 	function($, _, Backbone,
 		TrackModel,
-		listItemTemplate
+		listItemTemplate,
+		Config
 		) {
 
 		return Backbone.View.extend({
@@ -22,7 +24,7 @@ define(
 			template: _.template(listItemTemplate),
 
 			render: function() {
-				var html = this.template({track: this.model.forTemplate()});
+				var html = this.template({track: this.model.forTemplate(), config: Config});
 				this.$el.html(html);
 				console.log("this.$el.find('.hierarchy-text a')", this.$el.find(".hierarchy-text a"));
 				this.$el.find(".hierarchy-text a").addClass("start");

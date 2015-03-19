@@ -4,9 +4,9 @@
 			<h3><%= track.title %></h3>
 		</div>
 		<div class="hierarchy-text">
-			<p>0 % complété</p>
-			<p>0/<%= track.skills.length %> compétences acquises</p>
-			<a href="<%= track.route %>" class="btn btn-info">Commencer</a>
+			<p>0 % <%= config.stringsDict.COMPLETED %></p>
+			<p>0/<%= track.skills.length %> <%= config.stringsDict.SKILLS_ACQUIRED %></p>
+			<a href="<%= track.route %>" class="btn btn-info"><%= config.stringsDict.START_TRACK %></a>
 		</div>
 	</div>
 </div>

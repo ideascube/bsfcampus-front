@@ -7,10 +7,11 @@ define(
 		'collection',
 		
 		'pods/skill/model',
+		'app/config'
 	],
 	function($, _, Backbone, 
 		AbstractCollection,
-		SkillModel
+		SkillModel, Config
 		) {
 
 		return AbstractCollection.extend({
@@ -20,7 +21,7 @@ define(
 			jsonKey: 'skills',
 
 			urlRoot: function() {
-				return this.serverGateway + '/hierarchy/skills/track';
+				return Config.constants.serverGateway + '/hierarchy/skills/track';
 			},
 
 			url: function() {

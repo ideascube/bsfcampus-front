@@ -28,7 +28,7 @@
 
 	<!-- #TODO: this button should have a href to redirect to the track validation screen. -->
 	<a href="" class="btn <%= skill.validateButtonClass %> btn-validate-skill <%= skill.validateButtonStatus %>">
-		<img src="assets/images/student-hat.png" class="certificate"><%= skill.validateButtonText %><img src="assets/images/iconmonstr-check-mark-4-icon-256.png" class="check">
+		<img src="<%= config.imagesDict.studentHat %>" class="certificate"><%= skill.validateButtonText %><img src="<%= config.imagesDict.checkStroke %>" class="check">
 	</a>
 
 	<div id="skill-outline">

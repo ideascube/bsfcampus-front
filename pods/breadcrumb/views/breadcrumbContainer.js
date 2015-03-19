@@ -31,7 +31,6 @@ define(
 						element.$el.find('a').addClass('active');
 					}
 				}
-				// _.each(this.model, this.renderElement, this);
 
 				return this;
 			},

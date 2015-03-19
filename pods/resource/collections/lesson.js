@@ -7,10 +7,11 @@ define(
 		'collection',
 		
 		'pods/resource/model',
+		'app/config'
 	],
 	function($, _, Backbone, 
 		AbstractCollection,
-		ResourceModel
+		ResourceModel, Config
 		) {
 
 		return AbstractCollection.extend({
@@ -20,7 +21,7 @@ define(
 			jsonKey: 'resources',
 
 			urlRoot: function() {
-				return this.serverGateway + '/resources/lesson';
+				return Config.constants.serverGateway + '/resources/lesson';
 			},
 
 			url: function() {

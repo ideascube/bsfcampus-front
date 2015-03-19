@@ -2,14 +2,12 @@ define(
 	[
 		'jquery',
 		'underscore',
-		'backbone'
+		'backbone',
+		'app/config'
 	],
-	function($, _, Backbone) {
+	function($, _, Backbone, Config) {
 
 		return Backbone.Model.extend({
-
-			// #FIXME: This parameter should be externalized in a static config file
-			serverGateway: 'http://localhost:5000',
 
 			idAttribute: '_id',
 

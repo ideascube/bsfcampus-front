@@ -5,9 +5,11 @@ define(
 		'backbone',
 
 		'text!pods/track/templates/track-outline-item.html',
+		'app/config'
 	],
 	function($, _, Backbone,
-		trackOutlineItemTemplate
+		trackOutlineItemTemplate,
+		Config
 		) {
 
 		return Backbone.View.extend({
@@ -20,7 +22,7 @@ define(
 				var skillModel = this.model.forTemplate();
 				console.log("skillModel.is_validated", skillModel.is_validated);
 				skillModel.validationClass = (skillModel.is_validated) ? 'validated' : '';
-				var html = this.template({skill: skillModel});
+				var html = this.template({skill: skillModel, config: Config});
 				this.$el.html(html);
 				
 				return this;

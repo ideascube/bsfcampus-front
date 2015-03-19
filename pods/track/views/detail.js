@@ -9,11 +9,12 @@ define(
 		'pods/skill/collections/track',
 
 		'text!pods/track/templates/detail.html',
+		'app/config'
 	],
 	function($, _, Backbone,
 		TrackOutlineItem,
 		SkillTrackCollection,
-		detailTemplate
+		detailTemplate, Config
 		) {
 
 		return Backbone.View.extend({
@@ -41,7 +42,7 @@ define(
 					trackModel.validateButtonStatus = "validate-disabled";
 					trackModel.validateButtonClass = "disabled";
 				}
-				var html = this.template({track: trackModel});
+				var html = this.template({track: trackModel, config: Config});
 				$("body").css("background", "#e9e9e9 url('" + this.model.get('bg_image_url') + "') no-repeat")
 					.css("background-size", "100%")
 					.css("background-position", "0% 100%")
