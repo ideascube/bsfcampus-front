@@ -39,6 +39,11 @@ define(
 				var html = this.template({resource: this.model.forTemplate()});
 				this.$el.html(html);
 
+				$("body").css("background", this.model.get('bg_color') + " url('" + this.model.get('bg_image_url') + "') no-repeat")
+					.css("background-size", "100%")
+					.css("background-position", "0% 100%")
+					.css("background-attachment", "fixed");
+
 				this.renderHierarchy();
 				this.renderContent();
 			},

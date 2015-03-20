@@ -10,11 +10,13 @@ define(
 		'pods/lesson/model',
 
 		'text!pods/resource/templates/skill-outline-item.html',
+		'app/config'
 	],
 	function($, _, Backbone,
 		ResourceModel, LessonOutlineItemView,
 		LessonModel,
-		skillOutlineItemTemplate
+		skillOutlineItemTemplate,
+		Config
 		) {
 
 		return Backbone.View.extend({
@@ -34,7 +36,7 @@ define(
 			render: function() {
 				var son = this.model.forTemplate();
 				son.active = this.model.id === this.currentResource.get('lesson');
-				var html = this.template({lesson: son});
+				var html = this.template({lesson: son, config: Config});
 				this.$el.html(html);
 
 				_.each(this.model.get('resources').models, this.renderResource, this);

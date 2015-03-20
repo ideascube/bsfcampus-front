@@ -3,8 +3,7 @@
 	role="tab"
 	id="heading-lesson-<%= lesson._id %>"
 >
-	<h4 class="panel-title">
-		<a 
+	<a 
 			data-toggle="collapse"
 			data-parent="#resource-skill-outline"
 			data-target="#collapse-lesson-<%= lesson._id %>"
@@ -12,9 +11,8 @@
 			aria-controls="collapse-lesson-<%= lesson._id %>"
 			href="<%= lesson.route %>"
 		>
-			<%= lesson.title %>
-		</a>
-	</h4>
+		<img src="<%= config.imagesDict.arrowInCircle %>"> <h4 class="panel-title"><%= lesson.title %></h4>
+	</a>
 </div>
 
 <div

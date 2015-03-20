@@ -1,12 +1,18 @@
-<div class="panel-group" id="resource-skill-outline" role="tablist" aria-multiselectable="true">
+<div class="panel">
+
+	<div class="panel-heading" id="resource-skill-title"></div>
+
+	<div class="panel-group" id="resource-skill-outline" role="tablist" aria-multiselectable="true">
+
+	</div>
+
+	<script type="text/javascript">
+		$(function(){
+			// This prevents from going to the lesson page when clicking on a lesson title to open/close a panel.
+			$('a[data-toggle=collapse]').click(function(e){
+				e.preventDefault();
+			});
+		});
+	</script>
 
 </div>
-
-<script type="text/javascript">
-	$(function(){
-		// This prevents from going to the lesson page when clicking on a lesson title to open/close a panel.
-		$('a[data-toggle=collapse]').click(function(e){
-			e.preventDefault();
-		});
-	});
-</script>

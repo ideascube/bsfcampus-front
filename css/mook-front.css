@@ -59,6 +59,10 @@ div[class^="col-md-"] {
 	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
 }
 
+.panel {
+	border: 0;
+}
+
 
 /** BREADCRUMB **/
 
@@ -396,6 +400,22 @@ a.btn-validate-skill.validated {
 
 /** PAGE: Resource **/
 
+#resource-skill-title {
+	background-color: #39637c;
+	border-bottom: 1px solid white;
+}
+#resource-skill-title .panel-title {
+	color: white;
+	font-size: 0.85em;
+	font-weight: 600;
+	padding: 10px;
+	text-align: left;
+}
+#resource-skill-title .panel-title img {
+	height:12px;
+	padding-bottom: 2px;
+	margin: 0px 10px 0px 0px;
+}
 #resource-skill-outline {
 	background-color: white;
 	border-radius: 5px;
@@ -407,33 +427,62 @@ a.btn-validate-skill.validated {
 	border: none;
 	border-radius: 0;
 }
-#resource-skill-outline .panel .panel-heading {
-	background-color: transparent;
-}
-#resource-skill-outline .panel .panel-heading h4 {
+#resource-skill-outline .panel-heading {
+	background-color: white;
 	text-align: center;
+	padding: 10px 10px 15px 10px;
 }
-#resource-skill-outline .panel .panel-heading h4 a {
-	color: #39637c;
+#resource-skill-outline .panel-heading h4 {
+	color: #39627c;
+	font-size: 1.0em;
 	font-weight: 600;
+}
+#resource-skill-outline .panel-heading img {
+	height:24px;
+	padding-bottom: 2px;
+	margin: 0px 10px 0px 0px;
+	position: absolute;
+	left: 20px;
+}
+#resource-skill-outline .panel-heading a:focus {
+	outline:none;
+}
+#resource-skill-outline .panel-heading a[aria-expanded="true"] img {
+	-ms-transform: rotate(90deg); /* IE 9 */
+    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    transform: rotate(90deg);
+}
+#resource-skill-outline .panel-heading a[aria-expanded="false"] img {
+	-ms-transform: rotate(0deg); /* IE 9 */
+    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+    transform: rotate(0deg);
+}
+#resource-skill-outline .panel .lesson-outline.list-group {
+	border-bottom: 1px solid #DDD;
 }
 #resource-skill-outline .panel .lesson-outline a.media {
 	border: none;
 	border-radius: 0;
 	margin: 0;
-	padding-left: 50px;
+	padding: 10px 10px 10px 50px;
+}
+#resource-skill-outline .panel .lesson-outline a.media.active {
+	background-color: #e0e0e0;
+	color: inherit;
 }
 #resource-skill-outline .panel .lesson-outline a.media img {
-	width: 48px;
-	height: 48px;
+	width: 42px;
+	height: 42px;
+	margin-right: 5px;
 }
 #resource-skill-outline .panel .lesson-outline a.media .media-body {
 	padding: 10px;
 	vertical-align: middle;
 }
-#resource-skill-outline .panel .lesson-outline a.media.active {
-	background-color: #e0e0e0;
-	color: inherit;
+#resource-skill-outline .panel .lesson-outline a.media .media-body .media-heading {
+	font-size: 1.0em;
+	font-weight: 400;
+	color: #252525;
 }
 
 #resource {

@@ -9,6 +9,7 @@ define(
 			placeholder48: 'http://placehold.it/48x48/1caff6/ffffff',
 
 			arrow: Constants.imagesPath + 'arrow.png',
+			arrowInCircle: Constants.imagesPath + 'iconmonstr-arrow-28-icon-256.png',
 			studentHat: Constants.imagesPath + 'student-hat.png',
 			checkStroke: Constants.imagesPath + 'iconmonstr-check-mark-4-icon-256.png',
 			checkFull: Constants.imagesPath + 'iconmonstr-check-mark-3-icon-256.png',
