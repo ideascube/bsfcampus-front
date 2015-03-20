@@ -33,7 +33,23 @@ define(
 			template: _.template(lessonOutlineItemTemplate),
 
 			render: function() {
-				var html = this.template({resource: this.model.forTemplate(), config:Config });
+				var resourceModelJSON = this.model.forTemplate();
+				switch (resourceModelJSON.resource_content._cls) {
+					case Config.stringsDict.RICH_TEXT_RESOURCE_TYPE:
+						resourceModelJSON.iconUrl = Config.imagesDict.richTextIcon;
+						break;
+					case Config.stringsDict.EXTERNAL_VIDEO_RESOURCE_TYPE:
+					case Config.stringsDict.VIDEO_RESOURCE_TYPE:
+						resourceModelJSON.iconUrl = Config.imagesDict.videoIcon;
+						break;
+					case Config.stringsDict.EXERCISE_RESOURCE_TYPE:
+						resourceModelJSON.iconUrl = Config.imagesDict.exerciseIcon;
+						break;
+					case Config.stringsDict.AUDIO_RESOURCE_TYPE:
+						resourceModelJSON.iconUrl = Config.imagesDict.audioIcon;
+						break;
+				}
+				var html = this.template({resource: resourceModelJSON });
 				this.$el.html(html);
 				
 				return this;

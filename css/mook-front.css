@@ -423,6 +423,10 @@ a.btn-validate-skill.validated {
 	margin: 0;
 	padding-left: 50px;
 }
+#resource-skill-outline .panel .lesson-outline a.media img {
+	width: 48px;
+	height: 48px;
+}
 #resource-skill-outline .panel .lesson-outline a.media .media-body {
 	padding: 10px;
 	vertical-align: middle;
