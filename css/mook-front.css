@@ -380,7 +380,7 @@ a.btn-validate-skill.validated {
 	position: relative;
 }
 #skill-outline .lesson .lesson-outline .media .media-body {
-	padding: 0;
+	padding: 0px 0px 0px 10px;
 	vertical-align: middle;
 }
 #skill-outline .lesson .lesson-outline .media .media-heading {
@@ -388,6 +388,11 @@ a.btn-validate-skill.validated {
 	font-weight: 600;
 	color: #252525;
 }
+#skill-outline .lesson .lesson-outline .media img {
+	width: 48px;
+	height: 48px;
+}
+
 
 /** PAGE: Resource **/
 

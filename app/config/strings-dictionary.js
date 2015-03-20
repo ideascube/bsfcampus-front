@@ -10,7 +10,14 @@ define([],
 			START_EXERCISE: 'Démarrer',
 			COMPLETED: 'complété',
 			SKILLS_ACQUIRED: 'compétences acquises',
-			START_TRACK: 'Démarrer'
+			START_TRACK: 'Démarrer',
+
+			// Constants for Resources type
+			RICH_TEXT_RESOURCE_TYPE: 'RichTextResourceContent',
+			VIDEO_RESOURCE_TYPE: 'VideoResourceContent',
+			EXTERNAL_VIDEO_RESOURCE_TYPE: 'ExternalVideoResourceContent',
+			EXERCISE_RESOURCE_TYPE: 'ExerciseResourceContent',
+			AUDIO_RESOURCE_TYPE: 'AudioResourceContent',
 
 		};
 	}
