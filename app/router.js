@@ -3,18 +3,25 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
+
 		'app/header/view',
+
 		'pods/track/model',
 		'pods/track/collection',
 		'pods/track/views/list',
 		'pods/track/views/detail',
+
 		'pods/skill/model',
 		'pods/skill/views/detail',
+
 		'pods/resource/model',
 		'pods/resource/views/detail',
+
 		'pods/breadcrumb/views/breadcrumbContainer',
 	],
-	function($, _, Backbone, AppHeaderView, 
+	function($, _, Backbone, Config,
+		AppHeaderView, 
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
 		SkillModel, SkillDetailView,
 		ResourceModel, ResourceDetailView,

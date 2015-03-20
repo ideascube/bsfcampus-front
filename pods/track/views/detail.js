@@ -3,18 +3,16 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'pods/track/views/trackOutlineItem',
+		'text!pods/track/templates/detail.html',
 		
 		'pods/skill/collections/track',
-
-		'text!pods/track/templates/detail.html',
-		'app/config'
 	],
-	function($, _, Backbone,
-		TrackOutlineItem,
-		SkillTrackCollection,
-		detailTemplate, Config
+	function($, _, Backbone, Config,
+		TrackOutlineItem, detailTemplate,
+		SkillTrackCollection
 		) {
 
 		return Backbone.View.extend({

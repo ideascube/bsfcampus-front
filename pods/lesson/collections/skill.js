@@ -3,15 +3,15 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'collection',
 		
 		'pods/lesson/model',
-		'app/config'
 	],
-	function($, _, Backbone,
+	function($, _, Backbone, Config,
 		AbstractCollection,
-		LessonModel, Config
+		LessonModel
 		) {
 
 		return AbstractCollection.extend({

@@ -3,13 +3,12 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'text!pods/track/templates/track-outline-item.html',
-		'app/config'
 	],
-	function($, _, Backbone,
-		trackOutlineItemTemplate,
-		Config
+	function($, _, Backbone, Config,
+		trackOutlineItemTemplate
 		) {
 
 		return Backbone.View.extend({

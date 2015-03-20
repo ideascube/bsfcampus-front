@@ -3,16 +3,13 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'pods/track/model',
-		
 		'text!pods/track/templates/list-item.html',
-		'app/config'
 	],
-	function($, _, Backbone,
-		TrackModel,
-		listItemTemplate,
-		Config
+	function($, _, Backbone, Config,
+		TrackModel, listItemTemplate
 		) {
 
 		return Backbone.View.extend({

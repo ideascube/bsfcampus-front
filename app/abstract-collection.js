@@ -2,9 +2,10 @@ define(
 	[
 		'jquery',
 		'underscore',
-		'backbone'
+		'backbone',
+		'app/config',
 	],
-	function($, _, Backbone) {
+	function($, _, Backbone, Config) {
 
 		return Backbone.Collection.extend({
 

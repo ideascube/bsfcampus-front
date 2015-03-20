@@ -3,16 +3,19 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'pods/breadcrumb/model',
 		'text!pods/breadcrumb/templates/breadcrumb-element.html',
+
 		'pods/track/model',
+
 		'pods/skill/model',
-		'pods/resource/model'
+
+		'pods/resource/model',
 	],
-	function($, _, Backbone,
-		BreadcrumbModel,
-		breadcrumbElementTemplate,
+	function($, _, Backbone, Config,
+		BreadcrumbModel, breadcrumbElementTemplate,
 		TrackModel,
 		SkillModel,
 		ResourceModel

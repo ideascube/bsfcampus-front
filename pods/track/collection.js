@@ -3,15 +3,15 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 		
 		'collection',
 		
 		'pods/track/model',
-		'app/config'
 	],
-	function($, _, Backbone,
+	function($, _, Backbone, Config,
 		AbstractCollection,
-		TrackModel, Config
+		TrackModel
 		) {
 
 		return AbstractCollection.extend({

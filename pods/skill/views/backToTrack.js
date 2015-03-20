@@ -3,10 +3,13 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
+
 		'text!pods/skill/templates/back-to-track.html',
-		'app/config'
 	],
-	function($, _, Backbone, backToTrackTemplate, Config) {
+	function($, _, Backbone, Config,
+		backToTrackTemplate
+		) {
 
 		return Backbone.View.extend({
 

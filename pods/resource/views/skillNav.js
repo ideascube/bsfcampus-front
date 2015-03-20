@@ -3,24 +3,24 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 		
 		'pods/resource/model',
 		'pods/resource/collections/lesson',
 		'pods/resource/views/skillOutlineItem',
+		'pods/resource/views/back-to-skill',
+		'text!pods/resource/templates/skill-nav.html',
 
 		'pods/skill/model',
 
 		'pods/lesson/model',
 		'pods/lesson/collections/skill',
 		
-		'text!pods/resource/templates/skill-nav.html',
-		'pods/resource/views/back-to-skill'
 	],
-	function($, _, Backbone,
-		ResourceModel, ResourcesLessonCollection, SkillOutlineItemView,
+	function($, _, Backbone, Config,
+		ResourceModel, ResourcesLessonCollection, SkillOutlineItemView, BackToSkillView, skillNavTemplate,
 		SkillModel,
-		LessonModel, LessonsSkillCollection,
-		skillNavTemplate, BackToSkillView
+		LessonModel, LessonsSkillCollection
 		) {
 
 		return Backbone.View.extend({
@@ -37,8 +37,6 @@ define(
 					
 				var backToSkillView = new BackToSkillView({model: this.model});
 				backToSkillView.render();
-				console.log("backToSkillView.$el", backToSkillView.$el.html());
-				console.log("$('#resource-skill-title')", $('#resource-skill-title'));
 				this.$el.find('#resource-skill-title').html(backToSkillView.$el);
 
 				_.each(this.model.get('lessons').models, this.renderLesson, this);

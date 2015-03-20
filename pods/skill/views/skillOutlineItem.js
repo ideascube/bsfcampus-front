@@ -3,18 +3,19 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'pods/lesson/model',
+
 		'pods/resource/collections/lesson',
 
 		'pods/skill/views/lessonOutlineItem',
-		
 		'text!pods/skill/templates/skill-outline-item.html',
 	],
-	function($, _, Backbone,
-		LessonModel, ResourceLessonCollection,
-		LessonOutlineItemView,
-		skillOutlineItemTemplate
+	function($, _, Backbone, Config,
+		LessonModel, 
+		ResourceLessonCollection,
+		LessonOutlineItemView, skillOutlineItemTemplate
 		) {
 
 		return Backbone.View.extend({

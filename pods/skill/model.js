@@ -3,12 +3,12 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'model',
-		'app/config'
 	],
-	function($, _, Backbone,
-		AbstractModel, Config
+	function($, _, Backbone, Config,
+		AbstractModel
 		) {
 
 		return AbstractModel.extend({

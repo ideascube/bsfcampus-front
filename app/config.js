@@ -2,7 +2,7 @@ define(
 	[
 		'app/config/constants',
 		'app/config/strings-dictionary',
-		'app/config/images-dictionary'
+		'app/config/images-dictionary',
 	],
 	function(Constants, StringsDictionary, ImagesDictionary) {
 
@@ -12,7 +12,7 @@ define(
 
 			stringsDict: StringsDictionary,
 
-			imagesDict: ImagesDictionary
+			imagesDict: ImagesDictionary,
 
 		};
 	}

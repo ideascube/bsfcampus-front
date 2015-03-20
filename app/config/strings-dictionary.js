@@ -5,7 +5,7 @@ define([],
 			
 			SITE_TITLE: 'BSF Campus',
 			ALL_TRACKS: 'Parcours',
-			SUBMIT: 'Chercher',
+			SEARCH: 'Chercher',
 			SEARCH_HINT: 'Recherche',
 			START_EXERCISE: 'Démarrer',
 			COMPLETED: 'complété',
@@ -13,11 +13,13 @@ define([],
 			START_TRACK: 'Démarrer',
 
 			// Constants for Resources type
-			RICH_TEXT_RESOURCE_TYPE: 'RichTextResourceContent',
-			VIDEO_RESOURCE_TYPE: 'VideoResourceContent',
-			EXTERNAL_VIDEO_RESOURCE_TYPE: 'ExternalVideoResourceContent',
-			EXERCISE_RESOURCE_TYPE: 'ExerciseResourceContent',
-			AUDIO_RESOURCE_TYPE: 'AudioResourceContent',
+			RESOURCE_TYPE: {
+				RICH_TEXT: 'RichTextResourceContent',
+				VIDEO: 'VideoResourceContent',
+				EXTERNAL_VIDEO: 'ExternalVideoResourceContent',
+				EXERCISE: 'ExerciseResourceContent',
+				AUDIO: 'AudioResourceContent',				
+			},
 
 		};
 	}

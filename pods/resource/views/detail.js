@@ -3,11 +3,13 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 		
 		'pods/resource/model',
 		'pods/resource/collections/skill',
 		'pods/resource/collections/lesson',
 		'pods/resource/views/skillNav',
+		'text!pods/resource/templates/detail.html',
 
 		'pods/resource/content/model',
 		'pods/resource/content/view',
@@ -17,14 +19,12 @@ define(
 		'pods/lesson/model',
 		'pods/lesson/collections/skill',
 		
-		'text!pods/resource/templates/detail.html',
 	],
-	function($, _, Backbone,
-		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, SkillNavView,
+	function($, _, Backbone, Config,
+		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, SkillNavView, detailTemplate,
 		ResourceContentModel, ResourceContentView,
 		SkillModel,
-		LessonModel, LessonsSkillCollection,
-		detailTemplate
+		LessonModel, LessonsSkillCollection
 		) {
 
 		return Backbone.View.extend({

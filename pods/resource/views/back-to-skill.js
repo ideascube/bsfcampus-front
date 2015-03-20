@@ -3,10 +3,13 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
+
 		'text!pods/resource/templates/back-to-skill.html',
-		'app/config'
 	],
-	function($, _, Backbone, backToSkillTemplate, Config) {
+	function($, _, Backbone, Config,
+		backToSkillTemplate
+		) {
 
 		return Backbone.View.extend({
 

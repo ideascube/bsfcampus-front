@@ -3,15 +3,15 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 		
 		'collection',
 		
 		'pods/skill/model',
-		'app/config'
 	],
-	function($, _, Backbone, 
+	function($, _, Backbone, Config,
 		AbstractCollection,
-		SkillModel, Config
+		SkillModel
 		) {
 
 		return AbstractCollection.extend({

@@ -3,7 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'app/config'
+		'app/config',
 	],
 	function($, _, Backbone, Config) {
 

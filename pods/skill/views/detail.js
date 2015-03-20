@@ -3,22 +3,24 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'pods/track/model',
+
 		'pods/lesson/collections/skill',
+		
 		'pods/resource/collections/lesson',
 		
 		'pods/skill/views/skillOutlineItem',
 		'pods/skill/views/lessonOutlineItem',
 		'pods/skill/views/backToTrack',
-
 		'text!pods/skill/templates/detail.html',
-		'app/config'
 	],
-	function($, _, Backbone,
-		TrackModel, LessonSkillCollection, ResourceLessonCollection,
-		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView,
-		detailTemplate, Config
+	function($, _, Backbone, Config,
+		TrackModel, 
+		LessonSkillCollection,
+		ResourceLessonCollection,
+		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView, detailTemplate
 		) {
 
 		return Backbone.View.extend({

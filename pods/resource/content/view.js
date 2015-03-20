@@ -3,14 +3,14 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'text!pods/resource/content/templates/rich-text.html',
 		'text!pods/resource/content/templates/youtube-video.html',
 		'text!pods/resource/content/templates/exercise.html',
-		'app/config'
 	],
-	function($, _, Backbone,
-		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, Config
+	function($, _, Backbone, Config,
+		richTextTemplate, youtubeVideoTemplate, exerciseTemplate
 		) {
 
 		return Backbone.View.extend({
@@ -33,13 +33,13 @@ define(
 				}
 			},
 
-			template: function(data){
-				var templateHTML = this.templateHTML({});
-				return _.template(templateHTML)(data);
+			template: function(args) {
+				var templateHTML = this.templateHTML();
+				return _.template(templateHTML)(args);
 			},
 			
 			render: function() {
-				var html = this.template({content: this.model.forTemplate({config: Config})});
+				var html = this.template({content: this.model.forTemplate(), config: Config});
 				this.$el.html(html);
 			},
 

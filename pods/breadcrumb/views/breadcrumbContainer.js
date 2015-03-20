@@ -3,14 +3,23 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'app/config',
 
 		'pods/track/model',
+
 		'pods/skill/model',
+
 		'pods/resource/model',
+
+		'pods/breadcrumb/views/breadcrumbElement',
 		'text!pods/breadcrumb/templates/breadcrumb-container.html',
-		'pods/breadcrumb/views/breadcrumbElement'
 	],
-	function($, _, Backbone, TrackModel, SkillModel, ResourceModel, breadcrumbContainerTemplate, BreadcrumbElementView) {
+	function($, _, Backbone, Config,
+		TrackModel,
+		SkillModel,
+		ResourceModel,
+		BreadcrumbElementView, breadcrumbContainerTemplate
+		) {
 
 		return Backbone.View.extend({
 
