@@ -18,15 +18,17 @@ define(
 			tagName: 'div',
 
 			templateHTML: function() {
-				switch(this.model.get('_cls')) {
-					case 'RichTextResourceContent':
+				var content = this.model.get('resource_content');
+				console.log("content._cls", content._cls);
+				switch(content._cls) {
+					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
 						return richTextTemplate;
-					case 'ExternalVideoResourceContent':
-						switch(this.model.get('source')) {
+					case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
+						switch(content.source) {
 							case 'youtube':
 								return youtubeVideoTemplate;
 						}
-					case 'ExerciseResourceContent':
+					case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
 						return exerciseTemplate;
 					default:
 						return 'Unrecognized resource type.';
@@ -39,7 +41,7 @@ define(
 			},
 			
 			render: function() {
-				var html = this.template({content: this.model.forTemplate(), config: Config});
+				var html = this.template({resource: this.model.forTemplate(), config: Config});
 				this.$el.html(html);
 			},
 

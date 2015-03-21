@@ -87,8 +87,7 @@ define(
 
 			renderContent: function() {
 
-				var contentModel = new ResourceContentModel(this.model.get('resource_content'));
-				var contentView = new ResourceContentView({model: contentModel});
+				var contentView = new ResourceContentView({model: this.model});
 				contentView.render();
 				this.$el.find('#resource-content').html(contentView.$el);
 

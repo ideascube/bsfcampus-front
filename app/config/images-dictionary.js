@@ -11,6 +11,7 @@ define(
 			arrow: Constants.imagesPath + 'arrow.png',
 			arrowInCircle: Constants.imagesPath + 'iconmonstr-arrow-28-icon-256.png',
 			studentHat: Constants.imagesPath + 'student-hat.png',
+			quill: Constants.imagesPath + 'iconmonstr-pen-12-icon-256.png',
 			checkStroke: Constants.imagesPath + 'iconmonstr-check-mark-4-icon-256.png',
 			checkFull: Constants.imagesPath + 'iconmonstr-check-mark-3-icon-256.png',
 			certificateValidated: Constants.imagesPath + 'iconmonstr-certificate-validate.png',

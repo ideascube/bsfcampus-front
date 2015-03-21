@@ -489,6 +489,7 @@ a.btn-validate-skill.validated {
 	background-color: white;
 	border-radius: 5px;
 	overflow: hidden;
+	padding-top: 20px;
 	padding-bottom: 50px;
 	min-height: 80vh;
 }
@@ -496,4 +497,39 @@ a.btn-validate-skill.validated {
 	margin-left: auto;
 	margin-right: auto;
 	float: none;
+}
+#resource-inner-box h1 {
+	font-size: 1.25em;
+	font-weight: 700;
+	color: #1caff6;
+	margin-bottom: 30px;
+}
+#resource-content .responsive-embed {
+}
+#resource-inner-box p {
+	margin-bottom: 30px;
+	font-size: 0.85em;
+	font-weight: 400;
+	color: #252525;
+}
+#resource-exercise-button {
+	display: block;
+	margin: 50px 20px 50px 20px;
+	padding: 20px;
+	text-align: center;
+	color: white;
+	background-color: #bce520;
+	border-radius: 5px;
+	border: none;
+	color: #ffffff;
+	font-size: 1.25em;
+}
+
+#resource-exercise-button img.quill {
+	height:30px;
+	margin-right: 20px;
+}
+
+#resource-inner-box hr {
+	border-width: 2px;
 }
