@@ -8,9 +8,10 @@ define(
 		'text!pods/resource/content/templates/rich-text.html',
 		'text!pods/resource/content/templates/youtube-video.html',
 		'text!pods/resource/content/templates/exercise.html',
+		'text!pods/resource/content/templates/audio.html',
 	],
 	function($, _, Backbone, Config,
-		richTextTemplate, youtubeVideoTemplate, exerciseTemplate
+		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate
 		) {
 
 		return Backbone.View.extend({
@@ -30,6 +31,8 @@ define(
 						}
 					case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
 						return exerciseTemplate;
+					case Config.stringsDict.RESOURCE_TYPE.AUDIO:
+						return audioTemplate;
 					default:
 						return 'Unrecognized resource type.';
 				}
