@@ -1,0 +1,23 @@
+<div class="modal-dialog">
+	<div class="modal-content modal-content-exercise-attempt">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title"><%= resource.title %></h4>
+		</div>
+		<div class="modal-body">
+			<div class="exercise-attempt-progress progress">
+				<div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="<%= attempt.question_answers.length %>">
+					<span class="sr-only">
+						<span class="number-questions-answered"></span>/<%= attempt.question_answers.length %>
+					</span>
+				</div>
+			</div>
+			<div class="exercise-attempt-question"></div>
+		</div>
+		<div class="modal-footer">
+			<div class="pull-left exercise-attempt-question-answer-feedback"></div>
+			<button type="button" class="btn btn-success btn-validate">Valider</button>
+			<button type="button" class="btn btn-success btn-continue">Continuer</button>
+		</div>
+	</div>
+</div>

@@ -78,7 +78,10 @@ define(
 
 			forTemplate: function() {
 				var son = this.toJSON();
-				son.route = this.route();
+				son.id = son._id;
+				if (typeof this.route === "function") {
+					son.route = this.route();
+				}
 				return son;
 			}
 

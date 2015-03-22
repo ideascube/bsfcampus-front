@@ -9,9 +9,13 @@ define(
 		'text!pods/resource/content/templates/youtube-video.html',
 		'text!pods/resource/content/templates/exercise.html',
 		'text!pods/resource/content/templates/audio.html',
+
+		'pods/exercise-attempt/model',
+		'pods/exercise-attempt/view',
 	],
 	function($, _, Backbone, Config,
-		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate
+		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate,
+		ExerciseAttemptModel, ExerciseAttemptView
 		) {
 
 		return Backbone.View.extend({
@@ -46,6 +50,30 @@ define(
 				var html = this.template({resource: this.model.forTemplate(), config: Config});
 				this.$el.html(html);
 			},
+
+			events: {
+				'click .btn-start-exercise': 'startExercise',
+			},
+
+			startExercise: function(e) {
+				e.preventDefault();
+
+				var self = this;
+
+				var attempt = new ExerciseAttemptModel();
+				attempt.set('exercise', this.model.id);
+				attempt.save().done(function(result) {
+					console.log("Got response:", result);
+					console.log("Created exercise attempt", attempt);
+					var exerciseAttemptView = new ExerciseAttemptView({model: attempt});
+					exerciseAttemptView.resource = self.model;
+					exerciseAttemptView.render();
+					$('#modal-container').html(exerciseAttemptView.$el);
+					$('#modal-container').modal({show: true, backdrop: true});
+				}).fail(function(error) {
+
+				});
+			}
 
 		});
 		

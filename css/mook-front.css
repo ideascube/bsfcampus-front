@@ -51,12 +51,14 @@ a, a:hover {
 }
 
 .progress {
-	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
 	background-color: #cdcdcd;
 	border-radius: 5px;
 	height: 10px;
 }
-
+#skill-info .progress, #track-outline .progress {
+	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
+}
+	
 .btn-validate-track, .btn-validate-skill {
 	/*display: block;*/
 	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
