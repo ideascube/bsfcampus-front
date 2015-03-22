@@ -42,18 +42,23 @@ a, a:hover {
 	height: 100%;
 }
 
-div[class^="col-md-"] {
+.col-lg-1.thin-gutter, .col-lg-10.thin-gutter, .col-lg-11.thin-gutter, .col-lg-12.thin-gutter, .col-lg-2.thin-gutter, .col-lg-3.thin-gutter, .col-lg-4.thin-gutter, .col-lg-5.thin-gutter, .col-lg-6.thin-gutter, .col-lg-7.thin-gutter, .col-lg-8.thin-gutter, .col-lg-9.thin-gutter,
+.col-md-1.thin-gutter, .col-md-10.thin-gutter, .col-md-11.thin-gutter, .col-md-12.thin-gutter, .col-md-2.thin-gutter, .col-md-3.thin-gutter, .col-md-4.thin-gutter, .col-md-5.thin-gutter, .col-md-6.thin-gutter, .col-md-7.thin-gutter, .col-md-8.thin-gutter, .col-md-9.thin-gutter,
+.col-sm-1.thin-gutter, .col-sm-10.thin-gutter, .col-sm-11.thin-gutter, .col-sm-12.thin-gutter, .col-sm-2.thin-gutter, .col-sm-3.thin-gutter, .col-sm-4.thin-gutter, .col-sm-5.thin-gutter, .col-sm-6.thin-gutter, .col-sm-7.thin-gutter, .col-sm-8.thin-gutter, .col-sm-9.thin-gutter,
+.col-xs-1.thin-gutter, .col-xs-10.thin-gutter, .col-xs-11.thin-gutter, .col-xs-12.thin-gutter, .col-xs-2.thin-gutter, .col-xs-3.thin-gutter, .col-xs-4.thin-gutter, .col-xs-5.thin-gutter, .col-xs-6.thin-gutter, .col-xs-7.thin-gutter, .col-xs-8.thin-gutter, .col-xs-9.thin-gutter {
 	padding-right:3px;
   	padding-left:3px;
 }
 
 .progress {
-	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
 	background-color: #cdcdcd;
 	border-radius: 5px;
 	height: 10px;
 }
-
+#skill-info .progress, #track-outline .progress {
+	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
+}
+	
 .btn-validate-track, .btn-validate-skill {
 	/*display: block;*/
 	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
@@ -66,9 +71,9 @@ div[class^="col-md-"] {
 
 /** BREADCRUMB **/
 
-#breadcrumb-container ol {
-	background-color: rgba(255, 255, 255, 0);
-	margin-bottom: 0px;
+ol.breadcrumb {
+	background-color: transparent;
+	margin-bottom: 10px;
 }
 
 .breadcrumb > li + li:before {
@@ -78,7 +83,7 @@ div[class^="col-md-"] {
 	font-weight: 600;
 }
 
-.breadcrumb a {
+.breadcrumb li.active, .breadcrumb li a {
 	color: #9a9a9a;
 	font-size: 0.85em;
 	font-weight: 600;
@@ -271,11 +276,13 @@ a.btn-validate-track.validated img.lock {
 	border: none;
 	background-color: #39637c;
 }
+#skill-info .panel-heading {
+	border-bottom: 1px solid white;
+}
 #skill-info .panel-heading .panel-title {
 	color: white;
 	font-size: 0.85em;
 	font-weight: 600;
-	border-bottom: 1px solid white;
 	padding: 10px;
 	text-align: left;
 }
@@ -450,12 +457,16 @@ a.btn-validate-skill.validated {
 #resource-skill-outline .panel-heading a[aria-expanded="true"] img {
 	-ms-transform: rotate(90deg); /* IE 9 */
     -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+    -webkit-transition: webkit-transform 300ms;
     transform: rotate(90deg);
+    transition: transform 300ms;
 }
 #resource-skill-outline .panel-heading a[aria-expanded="false"] img {
 	-ms-transform: rotate(0deg); /* IE 9 */
     -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+    -webkit-transition: webkit-transform 300ms;
     transform: rotate(0deg);
+    transition: transform 300ms;
 }
 #resource-skill-outline .panel .lesson-outline.list-group {
 	border-bottom: 1px solid #DDD;

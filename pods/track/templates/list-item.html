@@ -1,5 +1,5 @@
 <div class="col-md-6">
-	<div class="text-center track-thumbnail" style=" background-color: <%= track.bg_color %>; background-image: url('<%= track.image_tn_url %>'); background-size:100%; background-repeat: no-repeat; background-position: bottom center;">
+	<div class="text-center track-thumbnail">
 		<div class="hierarchy-title">
 			<h3><%= track.title %></h3>
 		</div>
@@ -7,7 +7,7 @@
 			<!-- FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress -->
 			<!-- <p>0 % <%= config.stringsDict.COMPLETED %></p>
 			<p>0/<%= track.skills.length %> <%= config.stringsDict.SKILLS_ACQUIRED %></p> -->
-			<a href="<%= track.route %>" class="btn btn-info"><%= config.stringsDict.START_TRACK %></a>
+			<a href="<%= track.route %>" class="btn btn-info start"><%= config.stringsDict.START_TRACK %></a>
 		</div>
 	</div>
 </div>

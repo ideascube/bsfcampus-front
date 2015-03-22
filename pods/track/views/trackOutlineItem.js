@@ -19,7 +19,6 @@ define(
 
 			render: function() {
 				var skillModel = this.model.forTemplate();
-				console.log("skillModel.is_validated", skillModel.is_validated);
 				skillModel.validationClass = (skillModel.is_validated) ? 'validated' : '';
 				var html = this.template({skill: skillModel, config: Config});
 				this.$el.html(html);

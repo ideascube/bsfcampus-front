@@ -17,7 +17,7 @@ define(
 
 		return Backbone.View.extend({
 
-			el: $('#container'),
+			tagName: 'div',
 			
 			template: _.template(detailTemplate),
 
@@ -40,11 +40,16 @@ define(
 					trackModel.validateButtonStatus = "validate-disabled";
 					trackModel.validateButtonClass = "disabled";
 				}
+
 				var html = this.template({track: trackModel, config: Config});
-				$("body").css("background", this.model.get('bg_color') + " url('" + this.model.get('bg_image_url') + "') no-repeat")
-					.css("background-size", "100%")
-					.css("background-position", "0% 100%")
-					.css("background-attachment", "fixed");
+				var bgColor = '#e9e9e9';
+				$('body')
+					.css('background-color', bgColor)
+					.css('background-image', "url('" + this.model.get('bg_image_url') + "')")
+					.css('background-repeat', 'no-repeat')
+					.css('background-size', '100%')
+					.css('background-position', 'center bottom')
+					.css('background-attachment', 'fixed');
 				this.$el.html(html);
 
 				var self = this;

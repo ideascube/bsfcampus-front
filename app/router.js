@@ -37,6 +37,10 @@ define(
 				appHeaderView.render();
 			},
 
+			clearContainer: function() {
+				$('#container').html('');
+			},
+
 			// Routes handling
 
 			routes: {
@@ -52,45 +56,59 @@ define(
 
 			trackList: function() {
 				var collection = new TrackCollection();
+				var self = this;
 				collection.fetch().done(function(){
+					self.clearContainer();
+
 					var trackListView = new TrackListView({collection: collection});
 					trackListView.render();
+					$('#container').append(trackListView.$el);
 				});
 			},
 
 			trackDetail: function(id) {
 				var model = new TrackModel({_id: id});
-				self = this
+				var self = this;
 				model.fetch().done(function(){
-					self.updateResourceHierarchyBreadcrumb(model);
+					self.clearContainer();
+					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
+
 					var trackDetailView = new TrackDetailView({model: model});
 					trackDetailView.render();
+					$('#container').append(trackDetailView.$el);
 				});
 			},
 
 			skillDetail: function(id) {
 				var model = new SkillModel({_id: id});
-				self = this
+				var self = this;
 				model.fetch().done(function(){
-					self.updateResourceHierarchyBreadcrumb(model);
+					self.clearContainer();
+					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
+
 					var skillDetailView = new SkillDetailView({model: model});
 					skillDetailView.render();
+					$('#container').append(skillDetailView.$el);
 				});
 			},
 
 			resourceDetail: function(id) {
 				var model = new ResourceModel({_id: id});
-				self = this
+				var self = this;
 				model.fetch().done(function(){
-					self.updateResourceHierarchyBreadcrumb(model);
+					self.clearContainer();
+					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
+
 					var resourceDetailView = new ResourceDetailView({model: model});
 					resourceDetailView.render();
+					$('#container').append(resourceDetailView.$el);
 				});
 			},
 
-			updateResourceHierarchyBreadcrumb: function(model) {
-				var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: model.get('breadcrumb')});
+			renderResourceHierarchyBreadcrumb: function(breadcrumbModel) {
+				var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
 				breadcrumbView.render();
+				$('#container').append(breadcrumbView.$el);
 			}
 
 		});
