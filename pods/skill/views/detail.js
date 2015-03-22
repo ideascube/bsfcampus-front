@@ -25,7 +25,7 @@ define(
 
 		return Backbone.View.extend({
 
-			el: $('#container'),
+			tagName: 'div',
 			
 			template: _.template(detailTemplate),
 

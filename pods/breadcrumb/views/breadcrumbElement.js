@@ -30,7 +30,6 @@ define(
 			template: _.template(breadcrumbElementTemplate),
 
 			render: function() {
-				console.log('this.model', this.model);
 				if (this.model.track_id != undefined)
 				{
 					var track = new TrackModel({_id: this.model.track_id});

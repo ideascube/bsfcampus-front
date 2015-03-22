@@ -1,4 +1,4 @@
-<div class="col-md-6" id="track-info">
+<div class="col-md-6 thin-gutter" id="track-info">
 
 	<h2 class="text-center" id="track-title"><%= track.title %></h2>
 
@@ -7,11 +7,15 @@
 
 </div>
 
-<div class="col-md-6">
+<div class="col-md-6 thin-gutter">
 
 	<!-- #TODO: this button should have a href to redirect to the track validation screen. -->
 	<a href="" class="btn <%= track.validateButtonClass %> btn-validate-track <%= track.validateButtonStatus %>">
-		<img src="<%= config.imagesDict.certificateValidated %>" class="certificate-validated"><img src="<%= config.imagesDict.certificateLocked %>" class="certificate-locked"><%= track.validateButtonText %><img src="<%= config.imagesDict.lock %>" class="lock"><img src="<%= config.imagesDict.checkStroke %>" class="check">
+		<img src="<%= config.imagesDict.certificateValidated %>" class="certificate-validated" />
+		<img src="<%= config.imagesDict.certificateLocked %>" class="certificate-locked" />
+		<%= track.validateButtonText %>
+		<img src="<%= config.imagesDict.lock %>" class="lock" />
+		<img src="<%= config.imagesDict.checkStroke %>" class="check" />
 	</a>
 
 	<ul id="track-outline" class="media-list">
