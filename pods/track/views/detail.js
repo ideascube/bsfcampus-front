@@ -42,7 +42,7 @@ define(
 				}
 
 				var html = this.template({track: trackModel, config: Config});
-				var bgColor = '#e9e9e9';
+				var bgColor = this.model.get('bg_color');
 				$('body')
 					.css('background-color', bgColor)
 					.css('background-image', "url('" + this.model.get('bg_image_url') + "')")
