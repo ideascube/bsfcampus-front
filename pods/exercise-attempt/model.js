@@ -19,8 +19,8 @@ define(
 				return Config.constants.serverGateway + '/activity/exercise_attempts';
 			},
 
-			nextQuestionUrl: function() {
-				return this.url() + '/next_question';
+			postAnswerUrl: function() {
+				return this.url() + '/answer';
 			}
 
 		});
