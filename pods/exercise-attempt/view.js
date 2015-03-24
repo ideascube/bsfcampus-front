@@ -8,12 +8,15 @@ define(
 		'pods/exercise-attempt/model',
 		'text!pods/exercise-attempt/template.html',
 
-		'pods/exercise-attempt/question/model',
-		'pods/exercise-attempt/question/view',
+		'pods/exercise-attempt/question-answer/models/question',
+		'pods/exercise-attempt/question-answer/models/question-answer',
+		'pods/exercise-attempt/question-answer/views/form',
+		'pods/exercise-attempt/question-answer/views/feedback',
 	],
 	function($, _, Backbone, Config,
 		ExerciseAttemptModel, exerciseAttemptTemplate,
-		ExerciseAttemptQuestionModel, ExerciseAttemptQuestionView
+		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel, 
+			ExerciseAttemptQuestionAnswerFormView, ExerciseAttemptQuestionAnswerFeedbackView
 		) {
 
 		return Backbone.View.extend({
@@ -30,8 +33,12 @@ define(
 					resource: this.resource.forTemplate(),
 				});
 				this.$el.html(html);
-				this.findCurrentQuestion();
-				this.renderCurrentQuestion();
+				this.$el.find('.exercise-attempt-form').hide();
+				this.$el.find('.exercise-attempt-question-answer-feedback').hide();
+				this.$el.find('.exercise-attempt-footer').hide();
+
+				this.updateCurrentQuestionAnswer();
+				this.renderCurrentQuestionAnswerForm();
 
 				return this;
 			},
@@ -41,55 +48,55 @@ define(
 				'click .btn-continue': 'continueExercise',
 			},
 
-			findCurrentQuestion: function() {
-				var question_answers = this.model.get('question_answers');
-				for (var i = 0; i < question_answers.length; i++) {
-					if (question_answers[i].given_answer == null) {
-						this.currentQuestionModel = new ExerciseAttemptQuestionModel(question_answers[i].question);
-						return this.currentQuestionModel;
-					}
-				}
+			updateCurrentQuestionAnswer: function() {
+				this.currentQuestionAnswer = this.model.getCurrentQuestionAnswer();
 			},
 
-			renderCurrentQuestion: function() {
-				var questionView = new ExerciseAttemptQuestionView({model: this.currentQuestionModel});
-				questionView.render();
+			renderCurrentQuestionAnswerForm: function() {
+				var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
+				formView.render();
 
-				this.$el.find('#current_question_id_input').val(this.currentQuestionModel.id);
-				this.$el.find('.exercise-attempt-question').html(questionView.$el);
+				this.$el.find('#current_question_id_input').val(this.currentQuestionAnswer.get('question_id'));
+				this.$el.find('.exercise-attempt-question').html(formView.$el);
+				this.$el.find('.exercise-attempt-form').show();
 
-				this.$el.find('.exercise-attempt-question-answer-feedback').addClass('hidden');
-				this.$el.find('.exercise-attempt-footer').addClass('hidden');
-				this.$el.find('.exercise-attempt-form').removeClass('hidden');
+				this.$el.find('.exercise-attempt-question-answer-feedback').empty().hide();
+
+				this.$el.find('.exercise-attempt-question-answer-result').empty();
+				this.$el.find('.exercise-attempt-footer').hide();
 			
 				return this;
 			},
 
-			renderFeedback: function(questionId) {
-				console.log("looking for question", questionId);
-				var question_answers = this.model.get('question_answers');
-				for (var i = 0; i < question_answers.length; i++) {
-					if (question_answers[i].question_id == questionId) {
-						console.log("Found it!");
-						var answered_correctly = question_answers[i].is_answered_correctly;
-						console.log("Answer OK?", answered_correctly);
-					}
+			renderFeedbackAndResult: function(questionId) {
+				var currentQuestionAnswer = this.model.getQuestionAnswer(questionId);
+				
+				var feedbackView = ExerciseAttemptQuestionAnswerFeedbackView.initialize(currentQuestionAnswer);
+				feedbackView.render();
+				
+				var $result = $('<p></p>').html('?');
+				if (currentQuestionAnswer.get('is_answered_correctly') === true) {
+					$result.html('Good answer 😀');
+					$result.addClass('text-success');
 				}
-				var resultText = '?';
-				if (answered_correctly === true) { resultText = 'Good answer!'; }
-				else if (answered_correctly === false) { resultText = 'Wrong answer!'; }
-				this.$el.find('.exercise-attempt-question-answer-feedback').html("COUCOU"); // FIXME: Give actual feedback
-				this.$el.find('.exercise-attempt-question-answer-result').html(resultText);
-				this.$el.find('.exercise-attempt-question-answer-feedback').removeClass('hidden');
-				this.$el.find('.exercise-attempt-footer').removeClass('hidden');
-				this.$el.find('.exercise-attempt-form').addClass('hidden');
+				else if (currentQuestionAnswer.get('is_answered_correctly') === false) {
+					$result.html('Wrong answer 😟');
+					$result.addClass('text-danger');
+				}
+
+				this.$el.find('.exercise-attempt-form').hide();
+
+				this.$el.find('.exercise-attempt-question-answer-feedback').html(feedbackView.$el).show();
+
+				this.$el.find('.exercise-attempt-question-answer-result').html($result);
+				this.$el.find('.exercise-attempt-footer').show();
 			},
 
 			submitAnswer: function(e) {
 				e.preventDefault(); // Prevents from submitting the form
 				
-				var currentQuestionId = this.currentQuestionModel.id;
 				var formData = this.$el.find('form').serialize();
+				var questionId = this.currentQuestionAnswer.get('question_id');
 				var self = this;
 				$.ajax({
 						type: 'POST',
@@ -97,11 +104,10 @@ define(
 						data: formData,
 						dataType: 'json'
 					}).done(function(result){
-						var parsedModel = new ExerciseAttemptModel().parse(result);
-						self.model = new ExerciseAttemptModel(parsedModel);
-						self.renderFeedback(currentQuestionId);
+						self.model = new ExerciseAttemptModel(result, {parse: true});
+						self.renderFeedbackAndResult(questionId);
 					}).fail(function(error){
-						console.log(error);
+						console.log("Could not submit answer", error);
 					});
 
 				return false; // Also prevents from submitting the form

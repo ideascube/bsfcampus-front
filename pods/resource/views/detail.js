@@ -56,21 +56,18 @@ define(
 				var self = this;
 
 				var hierarchy = $.get(this.model.hierarchyUrl()).done(function(data){
-					var parsedSkill = new SkillModel().parse(data);
-					var skillModel = new SkillModel(parsedSkill);
-
+					var skillModel = new SkillModel(data, {parse: true});
+					
 					var resourcesModels = [];
 					_.each(data.cousins, function(resource) {
-						var parsedResource = new ResourceModel().parse({resource: resource});
-						var resourceModel = new ResourceModel(parsedResource);
+						var resourceModel = new ResourceModel({resource: resource}, {parse: true});
 						resourcesModels.push(resourceModel);
 					});
 					var resourcesSkillCollection = new ResourcesSkillCollection(resourcesModels);
 
 					var lessonsModels = [];
 					_.each(data.aunts, function(lesson) {
-						var parsedLesson = new LessonModel().parse({lesson: lesson});
-						var lessonModel = new LessonModel(parsedLesson);
+						var lessonModel = new LessonModel({lesson: lesson}, {parse: true});
 						var resources = resourcesSkillCollection.where({'lesson': lessonModel.id});
 						var resourcesCollection = new ResourcesLessonCollection(resources);
 						lessonModel.set('resources', resourcesCollection);

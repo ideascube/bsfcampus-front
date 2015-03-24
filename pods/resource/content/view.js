@@ -70,8 +70,6 @@ define(
 				var attempt = new ExerciseAttemptModel();
 				attempt.set('exercise', this.model.id);
 				attempt.save().done(function(result) {
-					console.log("Got response:", result);
-					console.log("Created exercise attempt", attempt);
 					var exerciseAttemptView = new ExerciseAttemptView({model: attempt});
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
