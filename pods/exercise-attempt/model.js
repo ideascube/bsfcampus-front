@@ -19,6 +19,13 @@ define(
 			
 			jsonKey: "exercise_attempt",
 
+			forRecapTemplate: function() {
+				var son = this.forTemplate();
+				son.number_questions = this.getCollection().length;
+				son.number_mistakes = this.getNumberOfMistakesMade();
+				return son;
+			},
+
 			getCollection: function() {
 				if (this.collection == null) {
 					// Lazy instantiation
@@ -49,6 +56,22 @@ define(
 
 			getQuestionAnswer: function(questionId) {
 				return this.getCollection().findWhere({'question_id': questionId});
+			},
+
+			getProgress: function() {
+				return this.getNumberOfQuestionsAnswered() / this.getCollection().length;
+			},
+
+			getNumberOfQuestionsAnswered: function() {
+				return _.filter(this.getCollection().models, function(questionAnswer){
+					return questionAnswer.get('given_answer') != null;
+				}).length;
+			},
+
+			getNumberOfMistakesMade: function() {
+				return _.filter(this.getCollection().models, function(questionAnswer){
+					return questionAnswer.get('is_answered_correctly') === false;
+				}).length;
 			},
 
 		});

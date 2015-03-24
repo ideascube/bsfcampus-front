@@ -6,7 +6,9 @@ define(
 		'app/config',
 
 		'pods/exercise-attempt/model',
-		'text!pods/exercise-attempt/template.html',
+		'text!pods/exercise-attempt/templates/modal.html',
+		'text!pods/exercise-attempt/templates/exerciseRecap.html',
+		'text!pods/exercise-attempt/templates/exerciseRecapFooter.html',
 
 		'pods/exercise-attempt/question-answer/models/question',
 		'pods/exercise-attempt/question-answer/models/question-answer',
@@ -14,7 +16,7 @@ define(
 		'pods/exercise-attempt/question-answer/views/feedback',
 	],
 	function($, _, Backbone, Config,
-		ExerciseAttemptModel, exerciseAttemptTemplate,
+		ExerciseAttemptModel, modalTemplate, recapTemplate, recapFooterTemplate,
 		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel, 
 			ExerciseAttemptQuestionAnswerFormView, ExerciseAttemptQuestionAnswerFeedbackView
 		) {
@@ -25,7 +27,8 @@ define(
 
 			tagName: 'div',
 
-			template: _.template(exerciseAttemptTemplate),
+			template: _.template(modalTemplate),
+			recapTemplate: _.template(recapTemplate),
 			
 			render: function() {
 				var html = this.template({
@@ -37,8 +40,7 @@ define(
 				this.$el.find('.exercise-attempt-question-answer-feedback').hide();
 				this.$el.find('.exercise-attempt-footer').hide();
 
-				this.updateCurrentQuestionAnswer();
-				this.renderCurrentQuestionAnswerForm();
+				this.continueExercise();
 
 				return this;
 			},
@@ -50,6 +52,13 @@ define(
 
 			updateCurrentQuestionAnswer: function() {
 				this.currentQuestionAnswer = this.model.getCurrentQuestionAnswer();
+			},
+
+			renderProgressBar: function() {
+				var width = (100 * this.model.getProgress()).toFixed(2);
+				this.$el.find('.progress-bar')
+					.attr('aria-valuenow', this.model.getNumberOfQuestionsAnswered())
+					.css('width', width + '%');
 			},
 
 			renderCurrentQuestionAnswerForm: function() {
@@ -105,6 +114,7 @@ define(
 						dataType: 'json'
 					}).done(function(result){
 						self.model = new ExerciseAttemptModel(result, {parse: true});
+						self.renderProgressBar();
 						self.renderFeedbackAndResult(questionId);
 					}).fail(function(error){
 						console.log("Could not submit answer", error);
@@ -114,10 +124,27 @@ define(
 				              // Not sure if useful
 			},
 
+			renderEndOfExercise: function() {
+
+				// FIXME: use real templates
+
+				var html = this.recapTemplate({
+					attempt: this.model.forRecapTemplate(),
+				});
+
+				this.$el.find('.modal-body').html(html);
+				this.$el.find('.exercise-attempt-footer').html(recapFooterTemplate).show();
+
+			},
+
 			continueExercise: function() {
-				// By default, this.render() renders the first unanswered question.
-				// So we just need to refresh the view.
-				this.render();
+				this.updateCurrentQuestionAnswer();
+				this.renderProgressBar();
+				if (this.currentQuestionAnswer != null) {
+					this.renderCurrentQuestionAnswerForm();
+				} else {
+					this.renderEndOfExercise();
+				}
 			},
 
 		});
