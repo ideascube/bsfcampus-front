@@ -521,6 +521,17 @@ a.btn-validate-skill.validated {
 	font-weight: 400;
 	color: #252525;
 }
+#resource-download-link p {
+	text-align: center;
+	margin-top: 10px;
+}
+#resource-download-link img {
+	display: block;
+	width: 48px;
+	height: 48px;
+	margin-left: auto;
+	margin-right: auto;
+}
 #resource-exercise-button {
 	display: block;
 	margin: 50px 20px 50px 20px;

@@ -10,12 +10,13 @@ define(
 		'text!pods/resource/content/templates/exercise.html',
 		'text!pods/resource/content/templates/audio.html',
 		'text!pods/resource/content/templates/video.html',
+		'text!pods/resource/content/templates/downloadable-file.html',
 
 		'pods/exercise-attempt/model',
 		'pods/exercise-attempt/view',
 	],
 	function($, _, Backbone, Config,
-		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate, videoTemplate,
+		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate, videoTemplate, downloadableFileTemplate,
 		ExerciseAttemptModel, ExerciseAttemptView
 		) {
 
@@ -40,6 +41,8 @@ define(
 						return audioTemplate;
 					case Config.stringsDict.RESOURCE_TYPE.VIDEO:
 						return videoTemplate;
+					case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
+						return downloadableFileTemplate;
 					default:
 						return 'Unrecognized resource type.';
 				}

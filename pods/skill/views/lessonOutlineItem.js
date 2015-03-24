@@ -40,6 +40,9 @@ define(
 					case Config.stringsDict.RESOURCE_TYPE.AUDIO:
 						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.AUDIO;
 						break;
+					case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
+						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.DOWNLOADABLE_FILE;
+						break;
 				}
 				var html = this.template({resource: resourceModelJSON});
 				this.$el.html(html);
