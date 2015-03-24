@@ -17,7 +17,7 @@ define(
 			certificateValidated: Constants.imagesPath + 'iconmonstr-certificate-validate.png',
 			certificateLocked: Constants.imagesPath + 'iconmonstr-certificate-locked.png',
 			lock: Constants.imagesPath + 'iconmonstr-lock-3-icon-256.png',
-			download: Constants.imagesPath + 'download.png',
+			download: Constants.imagesPath + 'download_arrow.png',
 			resourceIcon: {
 				RICH_TEXT: Constants.imagesPath + 'iconmonstr-text-file-4-icon-256_BLUE.png',
 				VIDEO: Constants.imagesPath + 'iconmonstr-video-camera-icon-256_BLUE.png',

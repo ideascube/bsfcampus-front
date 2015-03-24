@@ -530,20 +530,25 @@ a.btn-validate-skill.validated {
 	width: 100%;
 	margin-bottom: 0px;
 }
-#resource-download-link p {
-	text-align: center;
-	margin-top: 10px;
-}
-#resource-download-link img {
+#resource-download-link {
 	display: block;
-	width: 48px;
-	height: 48px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 50px 40px 50px 40px;
+	padding: 20px;
+	text-align: center;
+	color: white;
+	background-color: #1caff6;
+	border-radius: 5px;
+	border: none;
+	color: #ffffff;
+	font-size: 1.25em;
+}
+#resource-download-link img.download-arrow {
+	height:30px;
+	margin-right: 20px;
 }
 #resource-exercise-button {
 	display: block;
-	margin: 50px 20px 50px 20px;
+	margin: 50px 40px 50px 40px;
 	padding: 20px;
 	text-align: center;
 	color: white;
