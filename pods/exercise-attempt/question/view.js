@@ -20,8 +20,6 @@ define(
 			tagName: 'div',
 
 			templateHTML: function() {
-				console.log(this.model);
-				console.log(this.model.get('_cls'));
 				switch (this.model.get('_cls')) {
 					case 'UniqueAnswerMCQExerciseQuestion':
 						return uniqueAnswerMCQTemplate;
@@ -50,22 +48,22 @@ define(
 			renderUniqueAnswerMCQExerciseQuestion: function() {
 				var self = this;
 				_.each(this.model.get('propositions'), function(proposition){
-					var html = '<li>' 
-						+ '<input type="radio" name="answer" value="' + proposition._id + '" /> ' 
+					var html = '<div class="radio"><label>' 
+						+ '<input type="radio" name="proposition" value="' + proposition._id + '" /> ' 
 						+ proposition.text 
-						+ '</li>';
-					self.$el.find('ul.unique-answer-mcq-propositions').append(html);
+						+ '</label></div>';
+					self.$el.find('.unique-answer-mcq-propositions').append(html);
 				});
 			},
 
 			renderMultipleAnswerMCQExerciseQuestion: function() {
 				var self = this;
 				_.each(this.model.get('propositions'), function(proposition){
-					var html = '<li>' 
-						+ '<input type="checkbox" name="answers[]" value="' + proposition._id + '" /> ' 
+					var html = '<div class="checkbox"><label>' 
+						+ '<input type="checkbox" name="propositions[]" value="' + proposition._id + '" /> ' 
 						+ proposition.text 
-						+ '</li>';
-					self.$el.find('ul.multiple-answer-mcq-propositions').append(html);
+						+ '</label></div>';
+					self.$el.find('.multiple-answer-mcq-propositions').append(html);
 				});
 			},
 
