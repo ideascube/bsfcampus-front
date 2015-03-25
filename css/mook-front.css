@@ -142,7 +142,7 @@ ol.breadcrumb {
 
 #track-info {
 	border-radius: 5px;
-	min-height: 75vh;
+	padding-bottom: 40px;
 	border: none;
 	background: rgb(57, 99, 124); /* Fall-back for browsers that don't
                                     support rgba */

@@ -31,7 +31,7 @@ define(
 
 			model: ResourceModel,
 
-			el: $('#container'),
+			tagName: 'div',
 			
 			template: _.template(detailTemplate),
 
