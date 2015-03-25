@@ -265,6 +265,9 @@ a.btn-validate-track.validated img.lock {
 #track-outline a.media .media-heading.validated img.check {
 	display: inline;
 }
+#track-outline a.media img {
+	max-width: 96px;
+}
 #track-outline a.media .progress .progress-bar {
 	background-color: #bce520;
 }
@@ -325,6 +328,7 @@ a.btn-validate-track.validated img.lock {
 }
 #skill-info img {
 	margin: 30px auto 30px auto;
+	max-width: 50%;
 }
 #skill-info .progress {
 	background-color: #cdcdcd;
