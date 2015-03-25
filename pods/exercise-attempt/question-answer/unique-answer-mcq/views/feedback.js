@@ -26,7 +26,7 @@ define(
 			propositionTemplate: _.template(feedbackPropositionTemplate),
 			
 			render: function() {
-				var html = this.template({question: this.model.forTemplate()});
+				var html = this.template({question_answer: this.model.forTemplate()});
 				this.$el.html(html);
 
 				_.each(this.model.questionModel().get('propositions'), this.renderProposition, this);
