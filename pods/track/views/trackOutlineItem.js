@@ -22,6 +22,15 @@ define(
 				skillModel.validationClass = (skillModel.is_validated) ? 'validated' : '';
 				var html = this.template({skill: skillModel, config: Config});
 				this.$el.html(html);
+
+				this.$el.popover({
+					container: 'body',
+					content: this.model.get('description'),
+					title: this.model.get('title'),
+					html: true,
+					trigger: 'hover',
+					placement: 'left'
+				});
 				
 				return this;
 			}

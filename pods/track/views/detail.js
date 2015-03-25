@@ -57,7 +57,7 @@ define(
 				var skillsCollection = new SkillTrackCollection();
 				skillsCollection.meta('track_id', this.model.id);
 				skillsCollection.fetch().then(function(){
-					$('#track-outline').html('');
+					self.$el.find('#track-outline').html('');
 					_.each(skillsCollection.models, self.renderOne, self);
 				});
 
@@ -67,7 +67,7 @@ define(
 			renderOne: function(skill) {
 				var trackOutlineItem = new TrackOutlineItem({model: skill});
 				trackOutlineItem.render();
-				$('#track-outline').append(trackOutlineItem.$el);
+				this.$el.find('#track-outline').append(trackOutlineItem.$el);
 			
 				return this;
 			},

@@ -68,6 +68,13 @@ a, a:hover {
 	border: 0;
 }
 
+.popover {
+	max-width: 40%;
+}
+.popover-content {
+	font-size: .8em;
+}
+
 
 /** BREADCRUMB **/
 
