@@ -1,0 +1,212 @@
+#skill-nav {
+
+	#resource-skill-title {
+
+		background-color: #39637c;
+		border-bottom: 1px solid white;
+
+		.panel-title {
+
+			color: white;
+			font-size: 0.85em;
+			font-weight: 600;
+			padding: 10px;
+			text-align: left;
+		
+			img {
+				height:12px;
+				padding-bottom: 2px;
+				margin: 0px 10px 0px 0px;
+			}
+
+		}
+
+	}
+
+}
+
+#resource-skill-outline {
+	background-color: white;
+	border-radius: 5px;
+	overflow: hidden;
+	border: none;
+
+	.panel {
+
+		margin: 0;
+		border: none;
+		border-radius: 0;
+
+		.panel-heading {
+
+			background-color: white;
+			text-align: center;
+			padding: 10px 10px 15px 10px;
+		
+			h4 {
+				color: #39627c;
+				font-size: 1.0em;
+				font-weight: 600;
+			}
+
+			img {
+				height:24px;
+				padding-bottom: 2px;
+				margin: 0px 10px 0px 0px;
+				position: absolute;
+				left: 20px;
+			}
+
+			a:focus {
+				outline:none;
+			}
+
+			a[aria-expanded="true"] img {
+				-ms-transform: rotate(90deg); /* IE 9 */
+			    -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+			    -webkit-transition: webkit-transform 300ms;
+			    transform: rotate(90deg);
+			    transition: transform 300ms;
+			}
+
+			a[aria-expanded="false"] img {
+				-ms-transform: rotate(0deg); /* IE 9 */
+			    -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+			    -webkit-transition: webkit-transform 300ms;
+			    transform: rotate(0deg);
+			    transition: transform 300ms;
+			}
+
+		}
+
+		.lesson-outline {
+
+			border-bottom: 1px solid #DDD;
+
+			a.media {
+
+				border: none;
+				border-radius: 0;
+				margin: 0;
+				padding: 10px 10px 10px 50px;
+
+				img {
+					width: 42px;
+					height: 42px;
+					margin-right: 5px;
+				}
+
+				.media-body {
+					padding: 10px;
+					vertical-align: middle;
+				}
+
+				.media-body .media-heading {
+					font-size: 1.0em;
+					font-weight: 400;
+					color: #252525;
+				}
+
+			}
+
+			a.media.active {
+				background-color: #e0e0e0;
+				color: inherit;
+			}
+
+
+		}
+
+	}
+	
+}
+
+#resource {
+
+	background-color: white;
+	border-radius: 5px;
+	overflow: hidden;
+	padding-top: 20px;
+	padding-bottom: 50px;
+	min-height: 80vh;
+
+	#resource-inner-box {
+
+		margin-left: auto;
+		margin-right: auto;
+		float: none;
+
+		h1 {
+			font-size: 1.25em;
+			font-weight: 700;
+			color: #1caff6;
+			margin-bottom: 30px;
+		}
+
+		p {
+			margin: 30px 0px 30px 0px;
+			font-size: 0.85em;
+			font-weight: 400;
+			color: #252525;
+		}
+
+		hr {
+			border-width: 2px;
+		}
+
+	}
+
+}
+
+#resource-audio-player {
+
+	audio {
+		display: block;
+		width: 100%;
+	}
+
+	img {
+		display: block;
+		width: 100%;
+		margin-bottom: 0px;
+	}
+
+}
+
+#resource-download-link {
+
+	display: block;
+	margin: 50px 40px 50px 40px;
+	padding: 20px;
+	text-align: center;
+	color: white;
+	background-color: #1caff6;
+	border-radius: 5px;
+	border: none;
+	color: #ffffff;
+	font-size: 1.25em;
+
+	img.download-arrow {
+		height:30px;
+		margin-right: 20px;
+	}
+
+}
+
+#resource-exercise-button {
+	display: block;
+	margin: 50px 40px 50px 40px;
+	padding: 20px;
+	text-align: center;
+	color: white;
+	background-color: #bce520;
+	border-radius: 5px;
+	border: none;
+	color: #ffffff;
+	font-size: 1.25em;
+
+	img.quill {
+		height:30px;
+		margin-right: 20px;
+	}
+}

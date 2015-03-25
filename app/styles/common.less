@@ -1,0 +1,101 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700);
+
+body {
+	background-color: white;
+}
+* {
+	font-size: 100%;
+	font-family: "Open Sans", Arial, sans-serif;
+}
+h1, .h1, h2, .h2, h3, .h3 {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+i {
+	margin-left: 5px;
+	margin-right: 5px;
+}
+a, a:hover {
+	text-decoration: none;
+}
+#navbar {
+	background-color: #39637c;
+	border: none;
+}
+#navbar a {
+	color: #ffffff;
+}
+.responsive-embed {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	max-width: 100%;
+}
+.responsive-embed iframe,
+.responsive-embed object,
+.responsive-embed embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.col-lg-1.thin-gutter, .col-lg-10.thin-gutter, .col-lg-11.thin-gutter, .col-lg-12.thin-gutter, .col-lg-2.thin-gutter, .col-lg-3.thin-gutter, .col-lg-4.thin-gutter, .col-lg-5.thin-gutter, .col-lg-6.thin-gutter, .col-lg-7.thin-gutter, .col-lg-8.thin-gutter, .col-lg-9.thin-gutter,
+.col-md-1.thin-gutter, .col-md-10.thin-gutter, .col-md-11.thin-gutter, .col-md-12.thin-gutter, .col-md-2.thin-gutter, .col-md-3.thin-gutter, .col-md-4.thin-gutter, .col-md-5.thin-gutter, .col-md-6.thin-gutter, .col-md-7.thin-gutter, .col-md-8.thin-gutter, .col-md-9.thin-gutter,
+.col-sm-1.thin-gutter, .col-sm-10.thin-gutter, .col-sm-11.thin-gutter, .col-sm-12.thin-gutter, .col-sm-2.thin-gutter, .col-sm-3.thin-gutter, .col-sm-4.thin-gutter, .col-sm-5.thin-gutter, .col-sm-6.thin-gutter, .col-sm-7.thin-gutter, .col-sm-8.thin-gutter, .col-sm-9.thin-gutter,
+.col-xs-1.thin-gutter, .col-xs-10.thin-gutter, .col-xs-11.thin-gutter, .col-xs-12.thin-gutter, .col-xs-2.thin-gutter, .col-xs-3.thin-gutter, .col-xs-4.thin-gutter, .col-xs-5.thin-gutter, .col-xs-6.thin-gutter, .col-xs-7.thin-gutter, .col-xs-8.thin-gutter, .col-xs-9.thin-gutter {
+	padding-right:3px;
+  	padding-left:3px;
+}
+
+.progress {
+	background-color: #cdcdcd;
+	border-radius: 5px;
+	height: 10px;
+}
+#skill-info .progress, #track-outline .progress {
+	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
+}
+	
+.btn-validate-track, .btn-validate-skill {
+	/*display: block;*/
+	display: none; /* FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress */
+}
+
+.panel {
+	border: 0;
+}
+
+.popover {
+	max-width: 40%;
+}
+.popover-content {
+	font-size: .8em;
+}
+
+#container {
+	margin-bottom: 50px;
+}
+
+/** BREADCRUMB **/
+
+ol.breadcrumb {
+	background-color: transparent;
+	margin-bottom: 10px;
+
+	li + li:before {
+	    color: #9a9a9a;
+	    content: ">";
+		font-size: 0.85em;
+		font-weight: 600;
+	}
+
+	li.active, li a {
+		color: #9a9a9a;
+		font-size: 0.85em;
+		font-weight: 600;
+	}
+
+}

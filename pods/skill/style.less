@@ -1,0 +1,167 @@
+#skill-info {
+
+	border-radius: 5px;
+
+	.panel {
+		min-height: 75vh;
+		border: none;
+		background-color: #39637c;
+	}
+
+	.panel-heading {
+		border-bottom: 1px solid white;
+	
+		.panel-title {
+			color: white;
+			font-size: 0.85em;
+			font-weight: 600;
+			padding: 10px;
+			text-align: left;
+
+			img {
+				height:12px;
+				padding-bottom: 2px;
+				margin: 0px 10px 0px 0px;
+			}
+		}
+	}
+	
+	.panel-body {
+		background-color: #39637c;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+	}
+	
+	#skill-title {
+		color: white;
+		text-transform: uppercase;
+		font-weight: 600;
+		margin-bottom: 30px;
+		font-size: 1.12em;
+	}
+	
+	img {
+		margin: 30px auto 30px auto;
+		max-width: 50%;
+	}
+
+	.progress {
+		background-color: #cdcdcd;
+		margin-bottom: 30px;
+		.progress-bar {
+			background-color: #bce520;
+		}
+		.progress-bar.validated {
+			background-color: #f8d041;
+		}
+	}
+	
+	#skill-description {
+		color: white;
+		font-size: 0.9em;
+	}
+
+}
+
+a.btn-validate-skill {
+
+	padding: 20px;
+	color: white;
+	background-color: #bce520;
+	border-radius: 5px;
+	margin-bottom: 5px;
+
+	img.certificate {
+		height:40px;
+		margin-right: 40px;
+	}
+
+	img.check {
+		height:20px;
+		margin-left: 20px;
+	}
+
+}
+a.btn-validate-skill.disabled {
+	opacity: 1.00;
+}
+a.btn-validate-skill.validate-allowed {
+	color: #ffffff;
+	background-color: #bce520;
+	font-size: 1.25em;
+	img.check {
+		display: none;
+	}
+}
+a.btn-validate-skill.validated {
+	color: #ffffff;
+	background-color: #f8d041;
+	font-size: 1.25em;
+}
+
+#skill-outline {
+
+	background-color: white;
+	border-radius: 5px;
+	border: none;
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+	.lesson {
+
+		padding-left: 5%;
+
+		div[class^="col-md-"] {
+			padding-right:20px;
+		  	padding-left:20px;
+		}
+
+		.lesson-title {
+			font-size: 1em;
+			font-weight: 600;
+			margin-bottom: 25px;
+			color: #252525;
+		}
+
+		.lesson-description {
+			font-size: .75em;
+			color: #737373;
+		}
+
+		div.lesson-outline {
+
+			padding-right:0px;
+
+			a:hover {
+				background-color: #ececec;
+			}
+
+			.media {
+
+				margin: 0;
+				padding: 15px 10px 15px 25px;
+				display: block;
+				position: relative;
+
+				.media-body {
+					padding: 0px 0px 0px 10px;
+					vertical-align: middle;
+				}
+
+				.media-heading {
+					font-size: 1em;
+					font-weight: 600;
+					color: #252525;
+				}
+
+				img {
+					width: 48px;
+					height: 48px;
+				}
+			}
+
+		}
+
+	}
+
+}

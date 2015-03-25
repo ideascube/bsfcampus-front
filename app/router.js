@@ -19,6 +19,8 @@ define(
 		'pods/resource/views/detail',
 
 		'pods/breadcrumb/views/breadcrumbContainer',
+
+		'less!app/styles/common',
 	],
 	function($, _, Backbone, Config,
 		AppHeaderView, 
@@ -108,7 +110,6 @@ define(
 				var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
 				breadcrumbView.render();
 				$('#container').append(breadcrumbView.$el);
-				console.log("$('#container')", $('#container').html());
 			}
 
 		});

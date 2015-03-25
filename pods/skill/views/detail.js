@@ -15,6 +15,8 @@ define(
 		'pods/skill/views/lessonOutlineItem',
 		'pods/skill/views/backToTrack',
 		'text!pods/skill/templates/detail.html',
+
+		'less!pods/skill/style',
 	],
 	function($, _, Backbone, Config,
 		TrackModel, 

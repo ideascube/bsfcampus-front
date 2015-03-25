@@ -26,7 +26,6 @@ define(
 
 			templateHTML: function() {
 				var content = this.model.get('resource_content');
-				console.log("content._cls", content._cls);
 				switch(content._cls) {
 					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
 						return richTextTemplate;

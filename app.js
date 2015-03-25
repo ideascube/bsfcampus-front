@@ -5,6 +5,9 @@ require.config({
 		underscore: 'lib/underscore',
 		backbone: 'lib/backbone',
 		text: 'lib/text',
+		less: 'lib/require-less/less',
+		lessc: 'lib/require-less/lessc',
+		normalize: 'lib/require-less/normalize',
 		bootstrap: 'lib/bootstrap',
 
 		collection: 'app/abstract-collection',
@@ -22,6 +25,10 @@ require.config({
 		'bootstrap': {
 			deps: ['jquery']
 		}
+	},
+
+	less: {
+		async: true
 	}
 
 });

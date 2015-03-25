@@ -9,6 +9,8 @@ define(
 		'text!pods/track/templates/detail.html',
 		
 		'pods/skill/collections/track',
+
+		'less!pods/track/styles/detail',
 	],
 	function($, _, Backbone, Config,
 		TrackOutlineItem, detailTemplate,

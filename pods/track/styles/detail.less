@@ -1,0 +1,168 @@
+#track-info {
+	border-radius: 5px;
+	padding-bottom: 40px;
+	border: none;
+	background: rgb(57, 99, 124); /* Fall-back for browsers that don't
+                                    support rgba */
+    background: rgba(57, 99, 124, .85);
+
+	#track-title {
+		color: white;
+		text-transform: uppercase;
+		font-weight: 700;
+		margin: 20px auto 30px;
+		padding: 0 10px;
+		font-size: 1.5em;
+	}
+
+	#track-description {
+		color: white;
+		margin: 20px 50px;
+		font-weight: 400;
+		font-size: 0.9em;
+	}
+
+}
+
+
+/** PAGE: Track -> Track's validation button **/
+a.btn-validate-track {
+
+	padding: 20px;
+	color: white;
+	background-color: #bce520;
+	border-radius: 5px;
+	margin-bottom: 5px;
+
+	img.certificate-validated {
+		height:40px;
+		margin-right: 20px;
+	}
+	img.certificate-locked {
+		height:40px;
+		margin-right: 20px;
+	}
+	img.lock {
+		height:20px;
+		margin-left: 20px;
+	}
+	img.check {
+		height:20px;
+		margin-left: 20px;
+	}
+
+}
+a.btn-validate-track.disabled {
+	opacity: 1.00;
+}
+a.btn-validate-track.validate-disabled {
+
+	color: #818181;
+	background-color: #cdcdcd;
+	font-size: 1.25em;
+
+	img.certificate-validated {
+		display: none;
+	}
+	img.check {
+		display: none;
+	}
+
+}
+
+a.btn-validate-track.validate-allowed {
+
+	color: #ffffff;
+	background-color: #bce520;
+	font-size: 1.25em;
+
+	img.certificate-locked {
+		display: none;
+	}
+	img.lock {
+		display: none;
+	}
+	img.check {
+		display: none;
+	}
+
+}
+
+a.btn-validate-track.validated {
+	color: #ffffff;
+	background-color: #f8d041;
+	font-size: 1.25em;
+	img.certificate-locked {
+		display: none;
+	}
+	img.lock {
+		display: none;
+	}
+}
+
+#track-outline {
+
+	background-color: white;
+	border-radius: 5px;
+	overflow: hidden;
+
+	a.media {
+
+		margin: 0;
+		padding: 25px 30px;
+		display: block;
+		position: relative;
+		border: 1px #ececec solid;
+		border-left-width: 0;
+		border-right-width: 0;
+
+		.media-body {
+			padding: 10px;
+			vertical-align: middle;
+		}
+		.media-heading {
+			font-weight: 600;
+			margin-bottom: 15px;
+			font-size: 1.0em;
+			font-weight: 600;
+			color: #252525;
+		}
+		.media-heading img.check {
+			display: none;
+			height: 20px;
+			margin-left: 20px;
+		}
+		.media-heading.validated img.check {
+			display: inline;
+		}
+		img {
+			max-width: 96px;
+		}
+		.progress .progress-bar {
+			background-color: #bce520;
+		}
+		.progress .progress-bar.validated {
+			background-color: #f8d041;
+		}
+		.media-text {
+			font-size: .85em;
+			color: #737373;
+		}
+
+	}
+
+	a.media:hover {
+
+		background-color: #39637c;
+		color: white;
+
+		.media-heading {
+			color: #EEEEEE;
+		}
+		.media-text {
+			color: #DDDDDD;
+		}
+
+	}
+
+}

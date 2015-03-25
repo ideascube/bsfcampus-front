@@ -14,6 +14,8 @@ define(
 		'pods/exercise-attempt/question-answer/models/question-answer',
 		'pods/exercise-attempt/question-answer/views/form',
 		'pods/exercise-attempt/question-answer/views/feedback',
+
+		'less!pods/exercise-attempt/style',
 	],
 	function($, _, Backbone, Config,
 		ExerciseAttemptModel, modalTemplate, recapTemplate, recapFooterTemplate,
