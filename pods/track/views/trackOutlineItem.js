@@ -33,7 +33,16 @@ define(
 				});
 				
 				return this;
+			},
+
+			events: {
+				'click a': 'closePopover',
+			},
+
+			closePopover: function(e) {
+				this.$el.popover('destroy');
 			}
+
 		});
 
 	}
