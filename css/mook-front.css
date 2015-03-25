@@ -75,6 +75,10 @@ a, a:hover {
 	font-size: .8em;
 }
 
+#container {
+	margin-bottom: 50px;
+}
+
 
 /** BREADCRUMB **/
 
