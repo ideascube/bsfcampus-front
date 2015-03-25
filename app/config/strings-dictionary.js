@@ -3,7 +3,7 @@ define([],
 
 		return {
 			
-			SITE_TITLE: 'BSF Campus',
+			SITE_TITLE: 'GRYZZ-LAB',
 			ALL_TRACKS: 'Parcours',
 			SEARCH: 'Chercher',
 			SEARCH_HINT: 'Recherche',
@@ -18,6 +18,8 @@ define([],
 				CHECK_RIGHT_ANSWER: 'Cochez la bonne réponse',
 				VALIDATE: "Valider",
 				CONTINUE: "Continuer",
+				RIGHT_ANSWER: 'BONNE REPONSE',
+				WRONG_ANSWER: 'MAUVAISE REPONSE',
 			},
 
 			// Constants for Resources type

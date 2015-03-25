@@ -630,3 +630,33 @@ a.btn-validate-skill.validated {
 .exercise-attempt-form button.disabled {
 	background-color: #cdcdcd;
 }
+.exercise-attempt-question-answer-feedback li.proposition_selected {
+	color: red;
+}
+.exercise-attempt-question-answer-feedback li.proposition_correct {
+	color: #94c500;
+	background-color: rgba(148, 197, 0, 0.2);
+}
+.exercise-attempt-question-answer-feedback li img.right-answer {
+	display: none;
+	display: none;
+	padding: 2px;
+	height: 10px;
+	width: 10px;
+	background-color: rgba(148, 197, 0, 1);
+	margin-right: 20px;
+}
+.exercise-attempt-question-answer-feedback li img.wrong-answer {
+	display: none;
+	padding: 2px;
+	height: 10px;
+	width: 10px;
+	background-color: rgba(255, 0, 0, 1);
+	margin-right: 20px;
+}
+.exercise-attempt-question-answer-feedback li.proposition_selected.proposition_correct img.right-answer {
+	display: inline;
+}
+.exercise-attempt-question-answer-feedback li.proposition_selected:not(.proposition_correct) img.wrong-answer {
+	display: inline;
+}

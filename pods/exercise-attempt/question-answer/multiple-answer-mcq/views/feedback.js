@@ -35,7 +35,7 @@ define(
 			},
 
 			renderProposition: function(proposition) {
-				var html = this.propositionTemplate({proposition: proposition});
+				var html = this.propositionTemplate({proposition: proposition, config:Config});
 				var $proposition = $(html);
 				if (_.contains(this.model.get('given_answer').given_propositions, proposition._id)) {
 					$proposition.addClass('proposition_selected');

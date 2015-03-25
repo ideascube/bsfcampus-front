@@ -114,11 +114,11 @@ define(
 				
 				var $result = $('<p></p>').html('?');
 				if (currentQuestionAnswer.get('is_answered_correctly') === true) {
-					$result.html('Good answer 😀');
+					$result.html(Config.stringsDict.EXERCISES.RIGHT_ANSWER);
 					$result.addClass('text-success');
 				}
 				else if (currentQuestionAnswer.get('is_answered_correctly') === false) {
-					$result.html('Wrong answer 😟');
+					$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER);
 					$result.addClass('text-danger');
 				}
 
