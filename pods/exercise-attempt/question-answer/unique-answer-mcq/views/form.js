@@ -24,10 +24,18 @@ define(
 
 			template: _.template(formTemplate),
 			propositionTemplate: _.template(formPropositionTemplate),
+
+			events: {
+				'change input[type=radio]': 'changedRadio'
+			},
+
+			changedRadio: function() {
+			    this.trigger('onAnswerRadioSelected');
+			},
 			
 			render: function() {
 				var modelSON = this.model.forTemplate();
-				var html = this.template({question: modelSON.question});
+				var html = this.template({question: modelSON.question, config: Config});
 				this.$el.html(html);
 
 				var self = this;

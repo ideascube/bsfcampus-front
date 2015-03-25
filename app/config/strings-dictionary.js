@@ -13,6 +13,13 @@ define([],
 			START_TRACK: 'Démarrer',
 			DOWNLOAD_FILE: 'Télécharger le fichier',
 
+			EXERCISES: {
+				CHECK_RIGHT_ANSWERS: 'Cochez la ou les bonne(s) réponse(s)',
+				CHECK_RIGHT_ANSWER: 'Cochez la bonne réponse',
+				VALIDATE: "Valider",
+				CONTINUE: "Continuer",
+			},
+
 			// Constants for Resources type
 			RESOURCE_TYPE: {
 				RICH_TEXT: 'RichTextResourceContent',

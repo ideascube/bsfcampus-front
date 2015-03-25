@@ -109,6 +109,7 @@ define(
 				var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
 				breadcrumbView.render();
 				$('#container').append(breadcrumbView.$el);
+				console.log("$('#container')", $('#container').html());
 			}
 
 		});

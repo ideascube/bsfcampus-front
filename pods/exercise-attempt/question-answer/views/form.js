@@ -14,13 +14,17 @@ define(
 
 		return {
 
-			initialize: function(model) {
+			initialize: function(model, parentView) {
+				var ret = null;
 				switch (model.questionModel().get('_cls')) {
 					case 'UniqueAnswerMCQExerciseQuestion':
-						return new UniqueAnswerMCQView({model: model});
+						ret = new UniqueAnswerMCQView({model: model});
+						break;
 					case 'MultipleAnswerMCQExerciseQuestion':
-						return new MultipleAnswerMCQView({model: model});
+						ret = new MultipleAnswerMCQView({model: model});
+						break;
 				}
+				return ret;
 			},
 
 		};

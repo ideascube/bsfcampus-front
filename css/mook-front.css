@@ -582,3 +582,47 @@ a.btn-validate-skill.validated {
 #resource-inner-box hr {
 	border-width: 2px;
 }
+
+/** MODAL: Exercise Attempt **/
+
+.modal-content-exercise-attempt .modal-title {
+	color: #252525;
+	font-size: 1.25em;
+	font-weight: 700;
+}
+.modal-content-exercise-attempt .modal-title img {
+	width: 32px;
+	height: 32px;
+	margin-right: 20px;
+}
+.modal-content-exercise-attempt .exercise-attempt-progress {
+	background-color: #efefef;
+	color: #1caff6;
+	border-radius: 10px;
+	height: 20px;
+}
+.exercise-attempt-question p.exercise-question-title {
+	color: #252525;
+	font-size: 1.5em;
+	font-weight: 600;
+}
+.exercise-attempt-question .help-block {
+	color: #cdcdcd;
+	font-size: 0.95em;
+	font-weight: 400;
+	font-style: italic;
+}
+.exercise-attempt-form button, .exercise-attempt-footer button, .exercise-attempt-form button:hover, .exercise-attempt-footer button:hover {
+	height: 40px;
+	border: none;
+	border-radius: 20px;
+	padding-right: 40px;
+	padding-left: 40px;
+	color: white;
+	font-size: 1.0em;
+	font-weight: 400;
+	background-color: #bce520;
+}
+.exercise-attempt-form button.disabled {
+	background-color: #cdcdcd;
+}

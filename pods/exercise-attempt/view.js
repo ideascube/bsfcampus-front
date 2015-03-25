@@ -31,9 +31,30 @@ define(
 			recapTemplate: _.template(recapTemplate),
 			
 			render: function() {
+				var resourceModelJSON = this.resource.forTemplate();
+				// FIXME: factorize iconUrl addition
+				switch (resourceModelJSON.resource_content._cls) {
+					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
+						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.RICH_TEXT;
+						break;
+					case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
+					case Config.stringsDict.RESOURCE_TYPE.VIDEO:
+						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.VIDEO;
+						break;
+					case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
+						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.EXERCISE;
+						break;
+					case Config.stringsDict.RESOURCE_TYPE.AUDIO:
+						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.AUDIO;
+						break;
+					case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
+						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.DOWNLOADABLE_FILE;
+						break;
+				}
 				var html = this.template({
 					attempt: this.model.forTemplate(),
-					resource: this.resource.forTemplate(),
+					resource: resourceModelJSON,
+					config: Config
 				});
 				this.$el.html(html);
 				this.$el.find('.exercise-attempt-form').hide();
@@ -63,10 +84,18 @@ define(
 
 			renderCurrentQuestionAnswerForm: function() {
 				var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
+				this.listenTo(formView, 'onAnswerRadioSelected', function () {
+					console.log("onAnswerRadioSelected");
+					this.$el.find('.exercise-attempt-form button').removeClass('disabled');
+				});
 				formView.render();
 
 				this.$el.find('#current_question_id_input').val(this.currentQuestionAnswer.get('question_id'));
 				this.$el.find('.exercise-attempt-question').html(formView.$el);
+				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion')
+				{
+					this.$el.find('.exercise-attempt-form button').addClass('disabled');
+				}
 				this.$el.find('.exercise-attempt-form').show();
 
 				this.$el.find('.exercise-attempt-question-answer-feedback').empty().hide();
