@@ -165,7 +165,7 @@ ol.breadcrumb {
 	color: white;
 	margin: 20px 50px;
 	font-weight: 400;
-	font-size: 0.8em;
+	font-size: 0.9em;
 }
 /** PAGE: Track -> Track's validation button **/
 a.btn-validate-track {
@@ -342,7 +342,7 @@ a.btn-validate-track.validated img.lock {
 }
 #skill-info #skill-description {
 	color: white;
-	font-size: 0.75em;
+	font-size: 0.9em;
 }
 /** PAGE: Skill -> Skill's validation button **/
 a.btn-validate-skill {
