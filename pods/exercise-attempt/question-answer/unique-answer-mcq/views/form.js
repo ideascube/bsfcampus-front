@@ -26,7 +26,8 @@ define(
 			propositionTemplate: _.template(formPropositionTemplate),
 			
 			render: function() {
-				var html = this.template({question: this.model.forTemplate()});
+				var modelSON = this.model.forTemplate();
+				var html = this.template({question: modelSON.question});
 				this.$el.html(html);
 
 				var self = this;
