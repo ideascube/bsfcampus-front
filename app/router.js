@@ -71,7 +71,6 @@ define(
 				var self = this;
 				model.fetch().done(function(){
 					self.clearContainer();
-					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
 
 					var trackDetailView = new TrackDetailView({model: model});
 					trackDetailView.render();
