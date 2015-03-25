@@ -29,11 +29,21 @@ define(
 				var html = this.template({question: this.model.forTemplate()});
 				this.$el.html(html);
 
-				var self = this;
-				_.each(this.model.questionModel().get('propositions'), function(proposition) {
-					var html = self.propositionTemplate({proposition: proposition});
-					self.$el.find('.list-group').append(html);
-				});
+				_.each(this.model.questionModel().get('propositions'), this.renderProposition, this);
+
+				return this;
+			},
+
+			renderProposition: function(proposition) {
+				var html = this.propositionTemplate({proposition: proposition});
+				var $proposition = $(html);
+				if (_.contains(this.model.get('given_answer').given_propositions, proposition._id)) {
+					$proposition.addClass('proposition_selected');
+				}
+				if (_.contains(this.model.questionModel().get('correct_answer'), proposition._id)) {
+					$proposition.addClass('proposition_correct');
+				}
+				this.$el.find('.list-group').append($proposition);
 			},
 
 		});
