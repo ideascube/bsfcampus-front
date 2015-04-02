@@ -3,7 +3,7 @@ define([],
 
 		return {
 			
-			SITE_TITLE: 'GRYZZ-LAB',
+			SITE_TITLE: 'BSF Campus',
 			ALL_TRACKS: 'Parcours',
 			SEARCH: 'Chercher',
 			SEARCH_HINT: 'Recherche',

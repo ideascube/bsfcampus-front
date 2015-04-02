@@ -1,15 +1,17 @@
 .modal-content-exercise-attempt {
 
 	.modal-title {
+		
 		color: #252525;
 		font-size: 1.25em;
 		font-weight: 700;
-	}
 
-	.modal-title img {
-		width: 32px;
-		height: 32px;
-		margin-right: 20px;
+		img {
+			width: 32px;
+			height: 32px;
+			margin-right: 20px;
+		}
+
 	}
 
 	.exercise-attempt-progress {
@@ -35,38 +37,26 @@
 		}
 	}
 	
-	.exercise-attempt-form {
+	.exercise-attempt-form, .exercise-attempt-footer {
 
-		button, button:hover {
-			height: 40px;
-			border: none;
-			border-radius: 20px;
-			padding-right: 40px;
-			padding-left: 40px;
-			color: white;
-			font-size: 1.0em;
-			font-weight: 400;
-			background-color: #bce520;
-		}
+		button {
 
-		button.disabled {
-			background-color: #cdcdcd;
-		}
+			&, &:hover {
+				height: 40px;
+				border: none;
+				border-radius: 20px;
+				padding-right: 40px;
+				padding-left: 40px;
+				color: white;
+				font-size: 1.0em;
+				font-weight: 400;
+				background-color: #bce520;
+			}
 
-	} 
+			&.disabled {
+				background-color: #cdcdcd;
+			}
 
-	.exercise-attempt-footer {
-
-		button, button:hover {
-			height: 40px;
-			border: none;
-			border-radius: 20px;
-			padding-right: 40px;
-			padding-left: 40px;
-			color: white;
-			font-size: 1.0em;
-			font-weight: 400;
-			background-color: #bce520;
 		}
 
 	}
@@ -74,13 +64,30 @@
 	.exercise-attempt-question-answer-feedback {
 
 		li {
+
+			&.proposition_selected {
+				color: red;
+			}
+
+			&.proposition_correct {
+				color: #94c500;
+				background-color: rgba(148, 197, 0, 0.2);
+			}
+
+			&.proposition_selected.proposition_correct img.right-answer {
+				display: inline;
+			}
+
+			&.proposition_selected:not(.proposition_correct) img.wrong-answer {
+				display: inline;
+			}
+
 			img.right-answer {
-				display: none;
 				display: none;
 				padding: 2px;
 				height: 10px;
 				width: 10px;
-				background-color: rgba(148, 197, 0, 1);
+				background-color: rgb(148, 197, 0);
 				margin-right: 20px;
 			}
 
@@ -89,26 +96,10 @@
 				padding: 2px;
 				height: 10px;
 				width: 10px;
-				background-color: rgba(255, 0, 0, 1);
+				background-color: rgb(255, 0, 0);
 				margin-right: 20px;
 			}
-		}
-
-		li.proposition_selected {
-			color: red;
-		}
-
-		li.proposition_correct {
-			color: #94c500;
-			background-color: rgba(148, 197, 0, 0.2);
-		}
-
-		li.proposition_selected.proposition_correct img.right-answer {
-			display: inline;
-		}
-
-		li.proposition_selected:not(.proposition_correct) img.wrong-answer {
-			display: inline;
+			
 		}
 
 	}
