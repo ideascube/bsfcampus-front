@@ -3,7 +3,7 @@ define(['lib/window'],
 
 		return {
 
-			serverGateway: 'http://localhost:5000',
+			serverGateway: w.location.origin + ':5000',
 			
 			imagesPath: 'assets/images/',
 
