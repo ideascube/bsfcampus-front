@@ -1,4 +1,7 @@
-<div class="checkbox"><label>
-	<input type="checkbox" name="propositions[]" value="<%= proposition._id %>" />
-	<%= proposition.text %>
-</label></div>
+<div class="checkbox">
+	<label for="proposition_<%= index %>">
+		<input type="checkbox" id="proposition_<%= index %>" name="propositions[]" value="<%= proposition._id %>" />
+		<span></span>
+		<%= proposition.text %>
+	</label>
+</div>

@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
 	<div class="modal-content modal-content-exercise-attempt">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -15,16 +15,13 @@
 			<form class="exercise-attempt-form">
 				<input type="hidden" name="question_id" id="current_question_id_input" value="" />
 				<div class="exercise-attempt-question"></div>
-				<div class="clearfix">
-					<button type="submit" class="btn btn-success btn-validate pull-right"><%= config.stringsDict.EXERCISES.VALIDATE %></button>
-				</div>
 			</form>
 			<div class="exercise-attempt-question-answer-feedback">
 			</div>
 		</div>
 		<div class="modal-footer exercise-attempt-footer">
 			<div class="pull-left exercise-attempt-question-answer-result"></div>
-			<button type="button" class="btn btn-success btn-continue"><%= config.stringsDict.EXERCISES.CONTINUE %></button>
+			<button type="button" class="btn btn-success btn-continue"><%= config.stringsDict.EXERCISES.VALIDATE %></button>
 		</div>
 	</div>
 </div>

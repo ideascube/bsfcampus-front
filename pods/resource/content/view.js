@@ -73,7 +73,7 @@ define(
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
 					$('#modal-container').html(exerciseAttemptView.$el);
-					$('#modal-container').modal({show: true, backdrop: true});
+					$('#modal-container').modal({show: true});
 				}).fail(function(error) {
 
 				});

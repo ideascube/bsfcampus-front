@@ -29,8 +29,11 @@ define(
 
 			tagName: 'div',
 
+			isQuestionVerified: false,
+
 			template: _.template(modalTemplate),
 			recapTemplate: _.template(recapTemplate),
+			recapFooterTemplate: _.template(recapFooterTemplate),
 			
 			render: function() {
 				var resourceModelJSON = this.resource.forTemplate();
@@ -61,7 +64,6 @@ define(
 				this.$el.html(html);
 				this.$el.find('.exercise-attempt-form').hide();
 				this.$el.find('.exercise-attempt-question-answer-feedback').hide();
-				this.$el.find('.exercise-attempt-footer').hide();
 
 				this.continueExercise();
 
@@ -69,26 +71,27 @@ define(
 			},
 
 			events: {
-				'submit form': 'submitAnswer',
-				'click .btn-continue': 'continueExercise',
+				'click .btn-continue': 'nextStep',
 			},
 
 			updateCurrentQuestionAnswer: function() {
 				this.currentQuestionAnswer = this.model.getCurrentQuestionAnswer();
 			},
 
-			renderProgressBar: function() {
-				var width = (100 * this.model.getProgress()).toFixed(2);
+			renderProgressBar: function(nbQuestionsAnswered, nbQuestionsMax) {
+				var progress = nbQuestionsAnswered / nbQuestionsMax;
+				console.log("renderProgressBar", progress);
+				var width = (100 * progress).toFixed(2);
 				this.$el.find('.progress-bar')
-					.attr('aria-valuenow', this.model.getNumberOfQuestionsAnswered())
+					.attr('aria-valuenow', nbQuestionsAnswered)
+					.attr('aria-valuemax', nbQuestionsMax)
 					.css('width', width + '%');
 			},
 
 			renderCurrentQuestionAnswerForm: function() {
 				var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
 				this.listenTo(formView, 'onAnswerRadioSelected', function () {
-					console.log("onAnswerRadioSelected");
-					this.$el.find('.exercise-attempt-form button').removeClass('disabled');
+					this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
 				});
 				formView.render();
 
@@ -96,14 +99,13 @@ define(
 				this.$el.find('.exercise-attempt-question').html(formView.$el);
 				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion')
 				{
-					this.$el.find('.exercise-attempt-form button').addClass('disabled');
+					this.$el.find('.exercise-attempt-footer button').addClass('disabled');
 				}
 				this.$el.find('.exercise-attempt-form').show();
 
 				this.$el.find('.exercise-attempt-question-answer-feedback').empty().hide();
 
 				this.$el.find('.exercise-attempt-question-answer-result').empty();
-				this.$el.find('.exercise-attempt-footer').hide();
 			
 				return this;
 			},
@@ -129,12 +131,11 @@ define(
 				this.$el.find('.exercise-attempt-question-answer-feedback').html(feedbackView.$el).show();
 
 				this.$el.find('.exercise-attempt-question-answer-result').html($result);
-				this.$el.find('.exercise-attempt-footer').show();
 			},
 
-			submitAnswer: function(e) {
-				e.preventDefault(); // Prevents from submitting the form
-				
+			submitAnswer: function() {
+
+				console.log('submitAnswer');
 				var formData = this.$el.find('form').serialize();
 				var questionId = this.currentQuestionAnswer.get('question_id');
 				var self = this;
@@ -145,7 +146,7 @@ define(
 						dataType: 'json'
 					}).done(function(result){
 						self.model = new ExerciseAttemptModel(result, {parse: true});
-						self.renderProgressBar();
+						self.renderProgressBar(self.model.getNumberOfQuestionsAnswered(), self.model.getCollection().length);
 						self.renderFeedbackAndResult(questionId);
 					}).fail(function(error){
 						console.log("Could not submit answer", error);
@@ -156,21 +157,53 @@ define(
 			},
 
 			renderEndOfExercise: function() {
-
-				// FIXME: use real templates
-
+				var recapModelJSON = this.model.forRecapTemplate();
 				var html = this.recapTemplate({
-					attempt: this.model.forRecapTemplate(),
+					attempt: recapModelJSON,
+					config: Config
 				});
 
 				this.$el.find('.modal-body').html(html);
-				this.$el.find('.exercise-attempt-footer').html(recapFooterTemplate).show();
+				if (recapModelJSON.number_mistakes <= recapModelJSON.max_mistakes)
+				{
+					this.$el.find('.modal-body .exercise-recap').addClass('exercise-succeeded');
+					this.$el.find('.modal-body .exercise-recap .recap-header h1').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE_HEADER);
+					this.$el.find('.modal-body .exercise-recap .recap-details p').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE);
+					this.$el.find('.modal-body .exercise-recap .recap-details img').attr('src', Config.imagesDict.greenCheck);
+				}
+				else
+				{
+					this.$el.find('.modal-body .exercise-recap').addClass('exercise-failed');
+					this.$el.find('.modal-body .exercise-recap .recap-header h1').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE_HEADER);
+					this.$el.find('.modal-body .exercise-recap .recap-details p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
+					this.$el.find('.modal-body .exercise-recap .recap-details img').attr('src', Config.imagesDict.wrongRed);
+				}
+				this.renderProgressBar(recapModelJSON.question_answers.length, recapModelJSON.number_questions);
+				html = this.recapFooterTemplate({
+					config:Config
+				});
+				this.$el.find('.exercise-attempt-footer').html(html);
 
 			},
 
+			nextStep: function() {
+				if (this.isQuestionVerified)
+				{
+					this.$el.find('.exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.VALIDATE);
+					this.continueExercise();
+				}
+				else
+				{
+					this.$el.find('.exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.CONTINUE);
+					this.submitAnswer();
+				}
+				this.isQuestionVerified = !this.isQuestionVerified;
+			},
+
 			continueExercise: function() {
+				console.log("continueExercise", this.currentQuestionAnswer);
 				this.updateCurrentQuestionAnswer();
-				this.renderProgressBar();
+				this.renderProgressBar(this.model.getNumberOfQuestionsAnswered(), this.model.getCollection().length);
 				if (this.currentQuestionAnswer != null) {
 					this.renderCurrentQuestionAnswerForm();
 				} else {

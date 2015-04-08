@@ -26,24 +26,32 @@ define(
 			propositionTemplate: _.template(feedbackPropositionTemplate),
 			
 			render: function() {
-				var html = this.template({question_answer: this.model.forTemplate()});
+				console.log("multiple-answer-mcq render", this.model.forTemplate());
+				var html = this.template({question: this.model.forTemplate().question, config: Config});
 				this.$el.html(html);
 
-				_.each(this.model.questionModel().get('propositions'), this.renderProposition, this);
+				var propositions = this.model.questionModel().get('propositions');
+				for (var i=0; i < propositions.length; i++)
+				{
+					proposition = propositions[i];
+					this.renderProposition(proposition, i);
+					var el = this.$el.find('.multiple-answer-mcq-propositions');
+				};
 
 				return this;
 			},
 
-			renderProposition: function(proposition) {
-				var html = this.propositionTemplate({proposition: proposition, config:Config});
+			renderProposition: function(proposition, index) {
+				var html = this.propositionTemplate({proposition: proposition, index: index, config:Config});
 				var $proposition = $(html);
+				$proposition.addClass('disabled');
 				if (_.contains(this.model.get('given_answer').given_propositions, proposition._id)) {
 					$proposition.addClass('proposition_selected');
 				}
 				if (_.contains(this.model.questionModel().get('correct_answer'), proposition._id)) {
 					$proposition.addClass('proposition_correct');
 				}
-				this.$el.find('.list-group').append($proposition);
+				this.$el.find('.multiple-answer-mcq-propositions').append($proposition);
 			},
 
 		});

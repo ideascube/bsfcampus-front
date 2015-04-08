@@ -10,6 +10,8 @@ define(
 
 		'text!pods/exercise-attempt/question-answer/multiple-answer-mcq/templates/form.html',
 		'text!pods/exercise-attempt/question-answer/multiple-answer-mcq/templates/form-proposition.html',
+
+		'less!pods/exercise-attempt/question-answer/multiple-answer-mcq/style',
 	],
 	function($, _, Backbone, Config,
 		QuestionAnswerModel, QuestionModel,
@@ -30,10 +32,18 @@ define(
 				this.$el.html(html);
 
 				var self = this;
-				_.each(this.model.questionModel().get('propositions'), function(proposition) {
-					var html = self.propositionTemplate({proposition: proposition});
-					self.$el.find('.multiple-answer-mcq-propositions').append(html);
-				});
+				var propositions = this.model.questionModel().get('propositions');
+				for (var i=0; i < propositions.length; i++)
+				{
+					proposition = propositions[i];
+					var html = self.propositionTemplate({proposition: proposition, index: i});
+					var el = self.$el.find('.multiple-answer-mcq-propositions');
+					el.append(html);
+					// if (i < propositions.length - 1)
+					// {
+					// 	el.append('<hr>');
+					// }
+				};
 			},
 
 		});

@@ -1,5 +1,16 @@
-<p>C'est fini !</p>
-
-<p>Il y avait <%= attempt.number_questions %> question(s).</p>
-
-<p>Vous avez fait <%= attempt.number_mistakes %> erreur(s).</p>
+<div class="exercise-attempt-progress progress">
+	<div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="<%= attempt.question_answers.length %>">
+		<span class="sr-only">
+			<span class="number-questions-answered"></span>/<%= attempt.question_answers.length %>
+		</span>
+	</div>
+</div>
+<div class="exercise-recap">
+	<div class="recap-header">
+		<h1 class="text-center"></h1>
+	</div>
+	<hr>
+	<div class="recap-details text-center">
+		<p></p><img src="">
+	</div>
+</div>
