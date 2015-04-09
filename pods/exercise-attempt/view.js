@@ -7,7 +7,6 @@ define(
 
 		'pods/exercise-attempt/model',
 		'text!pods/exercise-attempt/templates/modal.html',
-		'text!pods/exercise-attempt/templates/exerciseMistakes.html',
 		'text!pods/exercise-attempt/templates/exerciseRecap.html',
 		'text!pods/exercise-attempt/templates/exerciseRecapFooter.html',
 
@@ -19,7 +18,7 @@ define(
 		'less!pods/exercise-attempt/style',
 	],
 	function($, _, Backbone, Config,
-		ExerciseAttemptModel, modalTemplate, mistakesTemplate, recapTemplate, recapFooterTemplate,
+		ExerciseAttemptModel, modalTemplate, recapTemplate, recapFooterTemplate,
 		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel, 
 			ExerciseAttemptQuestionAnswerFormView, ExerciseAttemptQuestionAnswerFeedbackView
 		) {
@@ -138,7 +137,14 @@ define(
 					$result.addClass('text-success');
 				}
 				else if (currentQuestionAnswer.get('is_answered_correctly') === false) {
-					$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER);
+					switch (currentQuestionAnswer.questionModel().get('_cls')) {
+						case 'UniqueAnswerMCQExerciseQuestion':
+							$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER_SINGLE);
+							break;
+						case 'MultipleAnswerMCQExerciseQuestion':
+							$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER_MULTI);
+							break;
+					}
 					$result.addClass('text-danger');
 				}
 
