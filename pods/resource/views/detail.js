@@ -38,14 +38,6 @@ define(
 
 			render: function() {
 				var html = this.template({resource: this.model.forTemplate()});
-				var bgColor = this.model.get('bg_color');
-				$('body')
-					.css('background-color', bgColor)
-					.css('background-image', "url('" + this.model.get('bg_image_url') + "')")
-					.css('background-repeat', 'no-repeat')
-					.css('background-size', '100%')
-					.css('background-position', 'center bottom')
-					.css('background-attachment', 'fixed');
 				this.$el.html(html);
 
 				this.renderHierarchy();

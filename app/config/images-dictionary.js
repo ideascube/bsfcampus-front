@@ -7,6 +7,7 @@ define(
 		return {
 
 			placeholder48: 'http://placehold.it/48x48/1caff6/ffffff',
+			default_background_image: Constants.imagesPath + 'BG_macchupicchu_cut.png',
 
 			arrow: Constants.imagesPath + 'arrow.png',
 			arrowInCircle: Constants.imagesPath + 'iconmonstr-arrow-28-icon-256.png',

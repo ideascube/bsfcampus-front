@@ -4,10 +4,17 @@
 			<h3><%= track.title %></h3>
 		</div>
 		<div class="hierarchy-text">
-			<!-- FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress -->
-			<!-- <p>0 % <%= config.stringsDict.COMPLETED %></p>
-			<p>0/<%= track.skills.length %> <%= config.stringsDict.SKILLS_ACQUIRED %></p> -->
-			<a href="<%= track.route %>" class="btn btn-info start"><%= config.stringsDict.START_TRACK %></a>
+			<div class="media media-middle">
+				<div class="media-left media-middle">
+					<img src="<%= track.icon_url %>">
+				</div>
+				<div class="media-body media-middle">
+					<!-- FIXME: we remove every element linked to user's progress bar until we have implemented proper user progress -->
+					<!-- <p>0 % <%= config.stringsDict.COMPLETED %></p>
+					<p>0/<%= track.skills.length %> <%= config.stringsDict.SKILLS_ACQUIRED %></p> -->
+					<a href="<%= track.route %>" class="btn btn-info start"><%= config.stringsDict.START_TRACK %></a>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

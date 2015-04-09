@@ -10,7 +10,7 @@ define([],
 			START_EXERCISE: 'Commencer l\'exercice',
 			COMPLETED: 'complété',
 			SKILLS_ACQUIRED: 'compétences acquises',
-			START_TRACK: 'Démarrer',
+			START_TRACK: 'Commencer',
 			DOWNLOAD_FILE: 'Télécharger le fichier',
 
 			EXERCISES: {

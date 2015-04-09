@@ -47,14 +47,6 @@ define(
 				}
 				
 				var html = this.template({skill: skillModel, config:Config});
-				var bgColor = this.model.get('bg_color');
-				$('body')
-					.css('background-color', bgColor)
-					.css('background-image', "url('" + this.model.get('bg_image_url') + "')")
-					.css('background-repeat', 'no-repeat')
-					.css('background-size', '100%')
-					.css('background-position', 'center bottom')
-					.css('background-attachment', 'fixed');
 				this.$el.html(html);
 
 				var self = this;

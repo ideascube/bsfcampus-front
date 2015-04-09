@@ -39,10 +39,6 @@ define(
 					var html = self.propositionTemplate({proposition: proposition, index: i});
 					var el = self.$el.find('.multiple-answer-mcq-propositions');
 					el.append(html);
-					// if (i < propositions.length - 1)
-					// {
-					// 	el.append('<hr>');
-					// }
 				};
 			},
 
