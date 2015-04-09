@@ -7,6 +7,7 @@ define(
 
 		'pods/exercise-attempt/model',
 		'text!pods/exercise-attempt/templates/modal.html',
+		'text!pods/exercise-attempt/templates/exerciseMistakes.html',
 		'text!pods/exercise-attempt/templates/exerciseRecap.html',
 		'text!pods/exercise-attempt/templates/exerciseRecapFooter.html',
 
@@ -18,7 +19,7 @@ define(
 		'less!pods/exercise-attempt/style',
 	],
 	function($, _, Backbone, Config,
-		ExerciseAttemptModel, modalTemplate, recapTemplate, recapFooterTemplate,
+		ExerciseAttemptModel, modalTemplate, mistakesTemplate, recapTemplate, recapFooterTemplate,
 		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel, 
 			ExerciseAttemptQuestionAnswerFormView, ExerciseAttemptQuestionAnswerFeedbackView
 		) {
@@ -87,6 +88,22 @@ define(
 					.css('width', width + '%');
 			},
 
+			renderMistakes: function() {
+				var nbMistakesMade = this.model.getNumberOfMistakesMade();
+				var maxMistakes = this.model.get('max_mistakes');
+				console.log("renderMistakes", nbMistakesMade, maxMistakes);
+				var mistakesCounterEl = this.$el.find('.exercise-mistakes-counter');
+				mistakesCounterEl.html('');
+				for (var i=0; i < Math.min(nbMistakesMade, maxMistakes); i++)
+				{
+					mistakesCounterEl.append('<img src="' + Config.imagesDict.inkDropOff + '">');
+				}
+				for (var i=0; i < (maxMistakes - nbMistakesMade); i++)
+				{
+					mistakesCounterEl.append('<img src="' + Config.imagesDict.inkDropOn + '">');
+				}
+			},
+
 			renderCurrentQuestionAnswerForm: function() {
 				var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
 				this.listenTo(formView, 'onAnswerRadioSelected', function () {
@@ -146,6 +163,7 @@ define(
 					}).done(function(result){
 						self.model = new ExerciseAttemptModel(result, {parse: true});
 						self.renderProgressBar();
+						self.renderMistakes();
 						self.renderFeedbackAndResult(questionId);
 					}).fail(function(error){
 						console.log("Could not submit answer", error);
@@ -179,6 +197,7 @@ define(
 				}
 				console.log("renderEndOfExercise", recapModelJSON);
 				this.renderProgressBar();
+				this.renderMistakes();
 				html = this.recapFooterTemplate({
 					config:Config
 				});
@@ -203,6 +222,7 @@ define(
 			continueExercise: function() {
 				this.updateCurrentQuestionAnswer();
 				this.renderProgressBar();
+				this.renderMistakes();
 				if (this.currentQuestionAnswer != null && this.model.getNumberOfMistakesMade() <= this.model.get('max_mistakes')) {
 					this.renderCurrentQuestionAnswerForm();
 				} else {
