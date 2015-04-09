@@ -35,8 +35,26 @@ define(
 				{
 					proposition = propositions[i];
 					this.renderProposition(proposition, i);
-					var el = this.$el.find('.multiple-answer-mcq-propositions');
-				};
+				}
+
+				var answerExplanationEl = this.$el.find('.answer-explanation');
+				if (this.model.get('is_answered_correctly') === true)
+				{
+					answerExplanationEl.addClass('right-answer');
+				}
+				else
+				{
+					answerExplanationEl.addClass('wrong-answer');
+				}
+				if (this.model.get('question').answer_feedback != null)
+				{
+					answerExplanationEl.html(this.model.get('question').answer_feedback);
+					answerExplanationEl.show();
+				}
+				else
+				{
+					answerExplanationEl.hide();
+				}
 
 				return this;
 			},
