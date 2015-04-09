@@ -68,6 +68,10 @@ define(
 				}).length;
 			},
 
+			getNumberOfQuestions: function() {
+				return this.getCollection().length;
+			},
+
 			getNumberOfMistakesMade: function() {
 				return _.filter(this.getCollection().models, function(questionAnswer){
 					return questionAnswer.get('is_answered_correctly') === false;

@@ -78,13 +78,12 @@ define(
 				this.currentQuestionAnswer = this.model.getCurrentQuestionAnswer();
 			},
 
-			renderProgressBar: function(nbQuestionsAnswered, nbQuestionsMax) {
-				var progress = nbQuestionsAnswered / nbQuestionsMax;
-				console.log("renderProgressBar", progress);
+			renderProgressBar: function() {
+				var progress = this.model.getNumberOfQuestionsAnswered() / this.model.getNumberOfQuestions();
 				var width = (100 * progress).toFixed(2);
 				this.$el.find('.progress-bar')
-					.attr('aria-valuenow', nbQuestionsAnswered)
-					.attr('aria-valuemax', nbQuestionsMax)
+					.attr('aria-valuenow', this.model.getNumberOfQuestionsAnswered())
+					.attr('aria-valuemax', this.model.getNumberOfQuestions())
 					.css('width', width + '%');
 			},
 
@@ -146,7 +145,7 @@ define(
 						dataType: 'json'
 					}).done(function(result){
 						self.model = new ExerciseAttemptModel(result, {parse: true});
-						self.renderProgressBar(self.model.getNumberOfQuestionsAnswered(), self.model.getCollection().length);
+						self.renderProgressBar();
 						self.renderFeedbackAndResult(questionId);
 					}).fail(function(error){
 						console.log("Could not submit answer", error);
@@ -178,7 +177,8 @@ define(
 					this.$el.find('.modal-body .exercise-recap .recap-details p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
 					this.$el.find('.modal-body .exercise-recap .recap-details img').attr('src', Config.imagesDict.wrongRed);
 				}
-				this.renderProgressBar(recapModelJSON.question_answers.length, recapModelJSON.number_questions);
+				console.log("renderEndOfExercise", recapModelJSON);
+				this.renderProgressBar();
 				html = this.recapFooterTemplate({
 					config:Config
 				});
@@ -201,10 +201,9 @@ define(
 			},
 
 			continueExercise: function() {
-				console.log("continueExercise", this.currentQuestionAnswer);
 				this.updateCurrentQuestionAnswer();
-				this.renderProgressBar(this.model.getNumberOfQuestionsAnswered(), this.model.getCollection().length);
-				if (this.currentQuestionAnswer != null) {
+				this.renderProgressBar();
+				if (this.currentQuestionAnswer != null && this.model.getNumberOfMistakesMade() <= this.model.get('max_mistakes')) {
 					this.renderCurrentQuestionAnswerForm();
 				} else {
 					this.renderEndOfExercise();
