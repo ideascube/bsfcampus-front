@@ -65,7 +65,7 @@ define(
 				if (this.model.get('given_answer').given_proposition == proposition._id) {
 					$proposition.addClass('proposition_selected');
 				}
-				if (this.model.questionModel().get('correct_answer') == proposition._id) {
+				if (proposition.is_correct_answer) {
 					$proposition.addClass('proposition_correct');
 				}
 				this.$el.find('.unique-answer-mcq-propositions').append($proposition);

@@ -66,7 +66,7 @@ define(
 				if (_.contains(this.model.get('given_answer').given_propositions, proposition._id)) {
 					$proposition.addClass('proposition_selected');
 				}
-				if (_.contains(this.model.questionModel().get('correct_answer'), proposition._id)) {
+				if (proposition.is_correct_answer) {
 					$proposition.addClass('proposition_correct');
 				}
 				this.$el.find('.multiple-answer-mcq-propositions').append($proposition);
