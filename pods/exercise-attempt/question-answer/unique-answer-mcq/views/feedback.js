@@ -28,6 +28,11 @@ define(
 			render: function() {
 				var html = this.template({question: this.model.forTemplate().question, config: Config});
 				this.$el.html(html);
+				
+				if (this.model.questionModel().get('image_url') != null)
+				{
+					this.$el.find('.question-image-media').html('<img src="' + this.model.questionModel().get('image_url') + '">');
+				}
 
 				var propositions = this.model.questionModel().get('propositions');
 				for (var i=0; i < propositions.length; i++)

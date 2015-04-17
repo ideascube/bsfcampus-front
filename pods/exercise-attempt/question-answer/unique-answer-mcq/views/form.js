@@ -38,14 +38,18 @@ define(
 			render: function() {
 				var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
 				this.$el.html(html);
+				
+				if (this.model.questionModel().get('image_url') != null)
+				{
+					this.$el.find('.question-image-media').html('<img src="' + this.model.questionModel().get('image_url') + '">');
+				}
 
-				var self = this;
 				var propositions = this.model.questionModel().get('propositions');
 				for (var i=0; i < propositions.length; i++)
 				{
 					proposition = propositions[i];
-					var html = self.propositionTemplate({proposition: proposition, index: i});
-					var el = self.$el.find('.unique-answer-mcq-propositions');
+					var html = this.propositionTemplate({proposition: proposition, index: i});
+					var el = this.$el.find('.unique-answer-mcq-propositions');
 					el.append(html);
 					// if (i < propositions.length - 1)
 					// {

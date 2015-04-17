@@ -31,13 +31,17 @@ define(
 				var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
 				this.$el.html(html);
 
-				var self = this;
+				if (this.model.questionModel().get('image_url') != null)
+				{
+					this.$el.find('.question-image-media').html('<img src="' + this.model.questionModel().get('image_url') + '">');
+				}
+
 				var propositions = this.model.questionModel().get('propositions');
 				for (var i=0; i < propositions.length; i++)
 				{
 					proposition = propositions[i];
-					var html = self.propositionTemplate({proposition: proposition, index: i});
-					var el = self.$el.find('.multiple-answer-mcq-propositions');
+					var html = this.propositionTemplate({proposition: proposition, index: i});
+					var el = this.$el.find('.multiple-answer-mcq-propositions');
 					el.append(html);
 				};
 			},
