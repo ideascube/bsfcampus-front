@@ -6,12 +6,13 @@ define(
 		'app/config',
 
 		'model',
+		'pods/resource/model',
 
 		'pods/exercise-attempt/question-answer/models/question-answer',
 		'pods/exercise-attempt/question-answer/collections/attempt',
 	],
 	function($, _, Backbone, Config,
-		AbstractModel,
+		AbstractModel, ResourceModel,
 		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionAnswersCollection
 		) {
 
@@ -77,6 +78,10 @@ define(
 					return questionAnswer.get('is_answered_correctly') === false;
 				}).length;
 			},
+
+			getFailedLinkedResource: function() {
+				return this.get('fail_linked_resource');
+			}
 
 		});
 

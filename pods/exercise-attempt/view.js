@@ -15,12 +15,16 @@ define(
 		'pods/exercise-attempt/question-answer/views/form',
 		'pods/exercise-attempt/question-answer/views/feedback',
 
+		'pods/resource/model',
+		'pods/resource/views/button-link-to-resource',
+
 		'less!pods/exercise-attempt/style',
 	],
 	function($, _, Backbone, Config,
 		ExerciseAttemptModel, modalTemplate, recapTemplate, recapFooterTemplate,
 		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel, 
-			ExerciseAttemptQuestionAnswerFormView, ExerciseAttemptQuestionAnswerFeedbackView
+		ExerciseAttemptQuestionAnswerFormView, ExerciseAttemptQuestionAnswerFeedbackView,
+		ResourceModel, FailLinkedResourceView
 		) {
 
 		return Backbone.View.extend({
@@ -187,19 +191,33 @@ define(
 				});
 
 				this.$el.find('.modal-body').html(html);
+				var $exerciseRecap = this.$el.find('.modal-body .exercise-recap');
+				var $exerciseRecapDetails = $exerciseRecap.find('.recap-details');
 				if (recapModelJSON.number_mistakes <= recapModelJSON.max_mistakes)
 				{
-					this.$el.find('.modal-body .exercise-recap').addClass('exercise-succeeded');
-					this.$el.find('.modal-body .exercise-recap .recap-header h1').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE_HEADER);
-					this.$el.find('.modal-body .exercise-recap .recap-details p').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE);
-					this.$el.find('.modal-body .exercise-recap .recap-details img').attr('src', Config.imagesDict.greenCheck);
+					$exerciseRecap.addClass('exercise-succeeded');
+					$exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE_HEADER);
+					$exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE);
+					$exerciseRecapDetails.append('<img src="' + Config.imagesDict.greenCheck + '">');
 				}
 				else
 				{
-					this.$el.find('.modal-body .exercise-recap').addClass('exercise-failed');
-					this.$el.find('.modal-body .exercise-recap .recap-header h1').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE_HEADER);
-					this.$el.find('.modal-body .exercise-recap .recap-details p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
-					this.$el.find('.modal-body .exercise-recap .recap-details img').attr('src', Config.imagesDict.wrongRed);
+					$exerciseRecap.addClass('exercise-failed');
+					$exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE_HEADER);
+					$exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
+					
+					if (this.model.getFailedLinkedResource() != null)
+					{
+						var resourceModel = new ResourceModel(this.model.getFailedLinkedResource())
+						var failLinkedResourceView = new FailLinkedResourceView({model: resourceModel});
+						var failLinkRendered = failLinkedResourceView.render();
+						failLinkRendered.$el.bind("click", this.closeModal);
+						$exerciseRecapDetails.append(failLinkRendered.$el);
+					}
+					else
+					{
+						$exerciseRecapDetails.append('<img src="' + Config.imagesDict.wrongRed + '">');
+					}
 				}
 				console.log("renderEndOfExercise", recapModelJSON);
 				this.renderProgressBar();
@@ -234,6 +252,10 @@ define(
 				} else {
 					this.renderEndOfExercise();
 				}
+			},
+
+			closeModal: function() {
+				$('#modal-container').modal('hide');
 			},
 
 		});

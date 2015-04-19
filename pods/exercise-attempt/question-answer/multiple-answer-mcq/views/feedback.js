@@ -58,7 +58,7 @@ define(
 				}
 				else
 				{
-					answerExplanationEl.hide();
+					answerExplanationEl.html('');
 				}
 
 				return this;
