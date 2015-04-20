@@ -32,6 +32,13 @@ define(
 				AUDIO: Constants.imagesPath + 'iconmonstr-sound-audio-icon-256_BLUE.png',
 				DOWNLOADABLE_FILE: Constants.imagesPath + 'download.png',
 			},
+			resourceIconWhite: {
+				RICH_TEXT: Constants.imagesPath + 'icon_text_white.png',
+				VIDEO: Constants.imagesPath + 'icon_video_white.png',
+				EXERCISE: Constants.imagesPath + 'icon_exercice_white.png',
+				AUDIO: Constants.imagesPath + 'icon_download_white.png',
+				DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_white.png',
+			},
 
 		};
 	}
