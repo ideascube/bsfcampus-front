@@ -122,6 +122,8 @@ define(
 				}
 				this.$el.find('.exercise-attempt-form').show();
 
+				this.$el.find('.answer-explanation').empty().hide();
+
 				this.$el.find('.exercise-attempt-question-answer-feedback').empty().hide();
 
 				this.$el.find('.exercise-attempt-question-answer-result').empty();
@@ -134,6 +136,26 @@ define(
 				
 				var feedbackView = ExerciseAttemptQuestionAnswerFeedbackView.initialize(currentQuestionAnswer);
 				feedbackView.render();
+
+				var answerExplanationEl = this.$el.find('.answer-explanation');
+				if (currentQuestionAnswer.get('is_answered_correctly') === true)
+				{
+					answerExplanationEl.addClass('right-answer');
+				}
+				else
+				{
+					answerExplanationEl.addClass('wrong-answer');
+				}
+				console.log(currentQuestionAnswer);
+				if (currentQuestionAnswer.get('question').answer_feedback != null)
+				{
+					answerExplanationEl.html(currentQuestionAnswer.get('question').answer_feedback);
+					answerExplanationEl.show();
+				}
+				else
+				{
+					answerExplanationEl.html('');
+				}
 				
 				var $result = $('<p></p>').html('?');
 				if (currentQuestionAnswer.get('is_answered_correctly') === true) {
@@ -143,6 +165,7 @@ define(
 				else if (currentQuestionAnswer.get('is_answered_correctly') === false) {
 					switch (currentQuestionAnswer.questionModel().get('_cls')) {
 						case 'UniqueAnswerMCQExerciseQuestion':
+						case 'RightOrWrongExerciseQuestion':
 							$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER_SINGLE);
 							break;
 						case 'MultipleAnswerMCQExerciseQuestion':

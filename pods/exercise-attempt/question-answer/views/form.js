@@ -7,9 +7,10 @@ define(
 
 		'pods/exercise-attempt/question-answer/unique-answer-mcq/views/form',
 		'pods/exercise-attempt/question-answer/multiple-answer-mcq/views/form',
+		'pods/exercise-attempt/question-answer/right-or-wrong/views/form',
 	],
 	function($, _, Backbone, Config,
-		UniqueAnswerMCQView, MultipleAnswerMCQView
+		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView
 		) {
 
 		return {
@@ -22,6 +23,9 @@ define(
 						break;
 					case 'MultipleAnswerMCQExerciseQuestion':
 						ret = new MultipleAnswerMCQView({model: model});
+						break;
+					case 'RightOrWrongExerciseQuestion':
+						ret = new RightOrWrongView({model: model});
 						break;
 				}
 				return ret;
