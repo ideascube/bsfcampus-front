@@ -112,11 +112,19 @@ define(
 				this.listenTo(formView, 'onAnswerRadioSelected', function () {
 					this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
 				});
+				this.listenTo(formView, 'onDropdownSelected', function (dropdownId, propositionId) {
+					this.currentQuestionAnswer.setDropdownSelection(dropdownId, propositionId);
+					if (this.currentQuestionAnswer.areAllDropdownsSelected())
+					{
+						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
+					}
+				});
 				formView.render();
 
 				this.$el.find('#current_question_id_input').val(this.currentQuestionAnswer.get('question_id'));
 				this.$el.find('.exercise-attempt-question').html(formView.$el);
-				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion')
+				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion'
+					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'DropdownExerciseQuestion')
 				{
 					this.$el.find('.exercise-attempt-footer button').addClass('disabled');
 				}
@@ -166,6 +174,7 @@ define(
 					switch (currentQuestionAnswer.questionModel().get('_cls')) {
 						case 'UniqueAnswerMCQExerciseQuestion':
 						case 'RightOrWrongExerciseQuestion':
+						case 'DropdownExerciseQuestion':
 							$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER_SINGLE);
 							break;
 						case 'MultipleAnswerMCQExerciseQuestion':

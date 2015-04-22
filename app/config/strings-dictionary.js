@@ -16,6 +16,7 @@ define([],
 			EXERCISES: {
 				CHECK_RIGHT_ANSWERS: 'Cochez la ou les bonne(s) réponse(s)',
 				CHECK_RIGHT_ANSWER: 'Cochez la bonne réponse',
+				CHOOSE_MISSING_WORDS: 'Choisissez les mots manquants',
 				VALIDATE: "Vérifier",
 				CONTINUE: "Continuer",
 				CLOSE: 'Fermer',

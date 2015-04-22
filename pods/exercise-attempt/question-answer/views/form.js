@@ -8,9 +8,10 @@ define(
 		'pods/exercise-attempt/question-answer/unique-answer-mcq/views/form',
 		'pods/exercise-attempt/question-answer/multiple-answer-mcq/views/form',
 		'pods/exercise-attempt/question-answer/right-or-wrong/views/form',
+		'pods/exercise-attempt/question-answer/dropdowns/views/form',
 	],
 	function($, _, Backbone, Config,
-		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView
+		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView, DropdownView
 		) {
 
 		return {
@@ -26,6 +27,9 @@ define(
 						break;
 					case 'RightOrWrongExerciseQuestion':
 						ret = new RightOrWrongView({model: model});
+						break;
+					case 'DropdownExerciseQuestion':
+						ret = new DropdownView({model: model});
 						break;
 				}
 				return ret;
