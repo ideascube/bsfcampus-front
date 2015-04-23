@@ -56,11 +56,9 @@ define(
 					var html = this.propositionTemplate({proposition: proposition, index: i});
 					var el = this.$el.find('.right-or-wrong-propositions');
 					el.append(html);
-					// if (i < propositions.length - 1)
-					// {
-					// 	el.append('<hr>');
-					// }
 				};
+
+				return this;
 			},
 
 		});

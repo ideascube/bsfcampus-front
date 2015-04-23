@@ -57,6 +57,8 @@ define(
 						});
 					}
 				};
+
+				return this;
 			},
 
 			onPropositionSelected: function($proposition) {
@@ -65,7 +67,7 @@ define(
 				$dropdown.find('input').attr('value', $proposition.attr('proposition-id'));
 				$dropdown.find('.dropdown-toggle').html(selText+' <span class="caret"></span>').removeClass('unselected').addClass('selected');
 				
-				this.trigger('onDropdownSelected', $dropdown.attr('dropdown-id'), $proposition.attr('proposition-id'))
+				this.trigger('onDropdownSelected', $dropdown.attr('dropdown-id'), $proposition.attr('proposition-id'));
 			},
 
 		});

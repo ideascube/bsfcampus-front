@@ -4,6 +4,7 @@ require.config({
 		jquery: 'lib/jquery',
 		underscore: 'lib/underscore',
 		backbone: 'lib/backbone',
+		jqueryui: 'lib/jquery-ui',
 		text: 'lib/text',
 		less: 'lib/require-less/less',
 		lessc: 'lib/require-less/lessc',
@@ -21,6 +22,9 @@ require.config({
 		},
 		'underscore': {
 			exports: '_'
+		},
+		'jqueryui': {
+			deps: ['jquery']
 		},
 		'bootstrap': {
 			deps: ['jquery']

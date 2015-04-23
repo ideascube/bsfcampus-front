@@ -119,12 +119,23 @@ define(
 						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
 					}
 				});
+				this.listenTo(formView, 'onSortableItemReceived', function () {
+					if (this.$el.find('#ordering-items-target').children().length == this.currentQuestionAnswer.questionModel().get('items').length)
+					{
+						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
+					}
+					else if (!this.$el.find('.exercise-attempt-footer button').hasClass('disabled'))
+					{
+						this.$el.find('.exercise-attempt-footer button').addClass('disabled');
+					}
+				});
 				formView.render();
 
 				this.$el.find('#current_question_id_input').val(this.currentQuestionAnswer.get('question_id'));
 				this.$el.find('.exercise-attempt-question').html(formView.$el);
 				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion'
-					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'DropdownExerciseQuestion')
+					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'DropdownExerciseQuestion'
+					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'OrderingExerciseQuestion')
 				{
 					this.$el.find('.exercise-attempt-footer button').addClass('disabled');
 				}
@@ -175,6 +186,7 @@ define(
 						case 'UniqueAnswerMCQExerciseQuestion':
 						case 'RightOrWrongExerciseQuestion':
 						case 'DropdownExerciseQuestion':
+						case 'OrderingExerciseQuestion':
 							$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER_SINGLE);
 							break;
 						case 'MultipleAnswerMCQExerciseQuestion':

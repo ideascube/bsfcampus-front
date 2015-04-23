@@ -25,6 +25,7 @@ define(
 			download: Constants.imagesPath + 'download_arrow.png',
 			inkDropOn: Constants.imagesPath + 'iconmonstr-drop-7-on.png',
 			inkDropOff: Constants.imagesPath + 'iconmonstr-drop-7-off.png',
+			orderingExerciseBg: Constants.imagesPath + 'carre_ligne.png',
 			resourceIcon: {
 				RICH_TEXT: Constants.imagesPath + 'iconmonstr-text-file-4-icon-256_BLUE.png',
 				VIDEO: Constants.imagesPath + 'iconmonstr-video-camera-icon-256_BLUE.png',

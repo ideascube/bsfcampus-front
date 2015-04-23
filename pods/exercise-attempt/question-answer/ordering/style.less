@@ -1,0 +1,52 @@
+.media-body {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+#ordering-items-source, #ordering-items-target, #ordering-items-target-feedback {
+	min-height: 100px;
+	padding: 5px 0 0 0;
+
+	> div {
+		display: inline-block;
+		text-align: center;
+		vertical-align: top;
+		background-color: white;
+		border-radius: 5px;
+		border: solid 1px #cccccc;
+		margin: 0 5px 5px 5px;
+		height: 40px;
+		line-height: 20px;
+		padding: 10px;
+		font-size: 1.0em;
+		min-width: 100px;
+		&:not(.item-draggable-placeholder) {
+			box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+		}
+	    input[type="text"] {
+		    display:none;
+		}
+		&.wrong-answer {
+			border: solid 2px #e71f2e;
+		}
+	}
+
+	.item-draggable-placeholder {
+		background-color: #dddddd;
+		border: none;
+		border-radius: 3px;
+	}
+}
+
+#ordering-items-target, #ordering-items-target-feedback {
+	min-height: 140px; /* three lines + 4*5px margin*/
+	margin-bottom: 40px;
+	background-image: url('../../../../assets/images/carre_ligne.png');
+	background-repeat: repeat-x;
+	background-position: 0px 3px;
+}
+
+#ordering-items-source {
+	text-align: center;
+}
+
