@@ -41,7 +41,7 @@ define(
 				
 				if (this.model.questionModel().get('image_url') != null)
 				{
-					this.$el.find('.question-image-media').html('<img src="' + this.model.questionModel().get('image_url') + '">');
+					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('image_url') + '"></a>');
 					this.$el.find('.media-body').addClass('vertical');
 				}
 				else
