@@ -39,6 +39,7 @@ define(
 				var splittedText = text.split("[%%]");
 
 				var dropdowns = this.model.questionModel().get('dropdowns');
+				var given_propositions = this.model.get('given_answer').given_propositions;
 				dropdownHtmlText = '';
 				for (var i=0; i < splittedText.length; i++)
 				{
@@ -47,20 +48,24 @@ define(
 					{
 						// We add the dropdown here
 						dropdown = dropdowns[i];
+						var given_answer = _.find(dropdown.propositions, function (proposition) {
+							return _.contains(given_propositions, proposition._id);
+						})
+						var html = this.dropdownTemplate({answer: given_answer});
+						$dropdown = $(html);
 						correct_answer = _.find(dropdown.propositions, function (proposition) {
 							return proposition.is_correct_answer;
 						})
 						console.log(correct_answer);
-						var html = this.dropdownTemplate({correct_answer: correct_answer});
-						this.$el.find('.dropdowns-feedback').append(html);
 						if (_.contains(this.model.get('given_answer').given_propositions, correct_answer._id))
 						{
-							this.$el.find('.dropdowns-feedback .dropdown').addClass('right-answer');
+							$dropdown.addClass('right-answer');
 						}
 						else
 						{
-							this.$el.find('.dropdowns-feedback .dropdown').addClass('wrong-answer');
+							$dropdown.addClass('wrong-answer');
 						}
+						this.$el.find('.dropdowns-feedback').append($dropdown);
 					}
 				};
 
