@@ -1,64 +1,62 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'jqueryui',
-		'app/config',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'jqueryui',
+        'app/config',
 
-		'pods/exercise-attempt/question-answer/models/question-answer',
-		'pods/exercise-attempt/question-answer/models/question',
+        'pods/exercise-attempt/question-answer/models/question-answer',
+        'pods/exercise-attempt/question-answer/models/question',
 
-		'text!pods/exercise-attempt/question-answer/ordering/templates/form.html',
-		'text!pods/exercise-attempt/question-answer/ordering/templates/form-ordering.html',
+        'text!pods/exercise-attempt/question-answer/ordering/templates/form.html',
+        'text!pods/exercise-attempt/question-answer/ordering/templates/form-ordering.html',
 
-		'less!pods/exercise-attempt/question-answer/ordering/style.less'
-	],
-	function($, _, Backbone, JQueryUI, Config,
-		QuestionAnswerModel, QuestionModel,
-		formTemplate, formOrderingTemplate
-		) {
+        'less!pods/exercise-attempt/question-answer/ordering/style.less'
+    ],
+    function ($, _, Backbone, JQueryUI, Config,
+              QuestionAnswerModel, QuestionModel,
+              formTemplate, formOrderingTemplate) {
 
-		return Backbone.View.extend({
+        return Backbone.View.extend({
 
-			model: QuestionAnswerModel,
+            model: QuestionAnswerModel,
 
-			tagName: 'div',
+            tagName: 'div',
 
-			id: 'ordering',
+            id: 'ordering',
 
-			template: _.template(formTemplate),
-			orderingTemplate: _.template(formOrderingTemplate),
-			
-			render: function() {
-				var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
-				this.$el.html(html);
+            template: _.template(formTemplate),
+            orderingTemplate: _.template(formOrderingTemplate),
 
-				if (this.model.questionModel().get('image_url') != null)
-				{
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('image_url') + '"></a>');
-				}
+            render: function () {
+                var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
+                this.$el.html(html);
 
-				_.each(this.model.questionModel().get('items'), this.renderItem, this);
+                if (this.model.questionModel().get('image_url') != null) {
+                    this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('image_url') + '"></a>');
+                }
 
-				self = this;
-				this.$el.find( "#ordering-items-target, #ordering-items-source" ).sortable({
-			      connectWith: ".connectedSortable",
-			      placeholder: "item-draggable-placeholder",
-			      receive: function (event, ui) {
-					self.trigger('onSortableItemReceived');
-				  }
-			    }).disableSelection();
+                _.each(this.model.questionModel().get('items'), this.renderItem, this);
 
-				return this;
-			},
+                self = this;
+                this.$el.find("#ordering-items-target, #ordering-items-source").sortable({
+                    connectWith: ".connectedSortable",
+                    placeholder: "item-draggable-placeholder",
+                    receive: function (event, ui) {
+                        self.trigger('onSortableItemReceived');
+                    }
+                }).disableSelection();
 
-			renderItem: function(item) {
-				var html = this.orderingTemplate({item: item});
-				this.$el.find("#ordering-items-source").append(html);
-			},
+                return this;
+            },
 
-		});
-		
-	}
-);
+            renderItem: function (item) {
+                var html = this.orderingTemplate({item: item});
+                this.$el.find("#ordering-items-source").append(html);
+            }
+
+        })
+
+    }
+)

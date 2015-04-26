@@ -36,7 +36,7 @@ define(
 			changedRadio: function() {
 			    this.trigger('onAnswerRadioSelected');
 			},
-			
+
 			render: function() {
 				var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
 				this.$el.html(html);
@@ -57,6 +57,6 @@ define(
 			}
 
 		});
-		
+
 	}
 );

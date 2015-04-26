@@ -46,13 +46,16 @@ define(
 				{
 					item = userGivenItems[i];
 					isFailed = false;
-					console.log("item", item);
-					console.log("correctAnswerItems[i]", correctAnswerItems[i]);
 					if (item._id != correctAnswerItems[i]._id)
 					{
 						isFailed = true;
 					}
 					this.renderItem(item, isFailed);
+				}
+				for (var i = 0; i < correctAnswerItems.length; i++)
+				{
+					item = correctAnswerItems[i];
+					this.renderCorrectAnswerItem(item);
 				}
 
 				return this;
@@ -71,6 +74,11 @@ define(
 					$html.addClass('right-answer');
 				}
 				this.$el.find("#ordering-items-target-feedback").append($html);
+			},
+
+            renderCorrectAnswerItem: function(item) {
+				var $html = $(this.orderingTemplate({item: item}));
+				this.$el.find("#ordering-items-answer-feedback").append($html);
 			}
 
 		});
