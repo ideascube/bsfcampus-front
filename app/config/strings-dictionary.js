@@ -26,8 +26,8 @@ define([],
 				WRONG_ANSWER_MULTI: 'DOMMAGE, AU MOINS UNE REPONSE EST INCORRECTE',
 				SUCCESS_MESSAGE_HEADER: 'BRAVO, vous avez réussi cet exercice !',
 				SUCCESS_MESSAGE: 'Vous pouvez désormais passer à un nouveau contenu et parfaire votre apprentissage.<br>Bonne continuation !',
-				FAILURE_MESSAGE_HEADER: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ?',
-				FAILURE_MESSAGE: 'Nous vous invitons à reprendre la leçon.<br>Courage !',
+				FAILURE_MESSAGE_HEADER: 'Dommage !',
+				FAILURE_MESSAGE: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ? Renforcez vos connaissances en consultant la ressource suivante.'
 			},
 
 			// Constants for Resources type

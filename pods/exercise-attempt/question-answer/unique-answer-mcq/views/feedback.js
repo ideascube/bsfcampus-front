@@ -22,6 +22,8 @@ define(
 
 			tagName: 'div',
 
+			id: 'unique-answer-mcq',
+
 			template: _.template(feedbackTemplate),
 			propositionTemplate: _.template(feedbackPropositionTemplate),
 			

@@ -1,75 +1,77 @@
-.media, .media-body {
-	overflow: visible;
-}
+#dropdowns {
+  .media, .media-body {
+    overflow: visible;
+  }
 
-.dropdowns-text {
-	width: 100%;
-	padding: 20px 60px 20px 60px;
-	text-align: left;
-	font-size: 1.25em;
-	.dropdown {
-		display: inline-block;
-		min-width: 150px;
-		margin: auto 10px;
-	    input[type="text"] {
-		    display:none;
-		}
-		.dropdown-toggle {
-			border-color: #39637c;
-			border-width: 2px;
-			width: 100%;
-			padding: 2px 20px 2px 10px;
-			font-weight: 600;
-			&.unselected {
-				color: #39637c;
-			}
-			&.selected {
-				color: #1db0f6;
-			}
-			.caret {
-				position: absolute;
-				color: #39637c;
-				right: 10px;
-				top: 50%;
-			}
-		}
-		.dropdown-menu {
-			li {
-				a, a:focus, a:hover {
-					color: #1db0f6;
-					font-weight: 600;
-				}
-			}
-		}
+  .dropdowns-text {
+    width: 100%;
+    padding: 20px 60px 20px 60px;
+    text-align: left;
+    font-size: 1.25em;
+    .dropdown {
+      display: inline-block;
+      min-width: 150px;
+      margin: auto 10px;
+      input[type="text"] {
+        display:none;
+      }
+      .dropdown-toggle {
+        border-color: #39637c;
+        border-width: 2px;
+        width: 100%;
+        padding: 2px 20px 2px 10px;
+        font-weight: 600;
+        &.unselected {
+          color: #39637c;
+        }
+        &.selected {
+          color: #1db0f6;
+        }
+        .caret {
+          position: absolute;
+          color: #39637c;
+          right: 10px;
+          top: 50%;
+        }
+      }
+      .dropdown-menu {
+        li {
+          a, a:focus, a:hover {
+            color: #1db0f6;
+            font-weight: 600;
+          }
+        }
+      }
 
-	}
-}
+    }
+  }
 
-.dropdowns-feedback {
-	width: 100%;
-	padding: 20px 60px 20px 60px;
-	text-align: left;
-	font-size: 1.25em;
-	.dropdown {
-		display: inline-block;
-		min-width: 150px;
-		margin: auto 10px;
-		.btn {
-			color: #1db0f6;
-			font-weight: 600;
-			border-width: 2px;
-			width: 100%;
-			padding: 2px 20px 2px 10px;
-		}
-		&.right-answer {
-			.btn {
-				border-color: #bce421;
-			}
-		}
-		&.wrong-answer {
-			.btn {
-				border-color: #e71f2e;
-			}
-		}
-	}
+  .dropdowns-feedback {
+    width: 100%;
+    padding: 20px 60px 20px 60px;
+    text-align: left;
+    font-size: 1.25em;
+    .dropdown {
+      display: inline-block;
+      min-width: 150px;
+      margin: auto 10px;
+      .btn {
+        color: #1db0f6;
+        font-weight: 600;
+        border-width: 2px;
+        width: 100%;
+        padding: 2px 20px 2px 10px;
+      }
+      &.right-answer {
+        .btn {
+          border-color: #94c500;
+        }
+      }
+      &.wrong-answer {
+        .btn {
+          border-color: #e71f2e;
+        }
+      }
+    }
+  }
 }

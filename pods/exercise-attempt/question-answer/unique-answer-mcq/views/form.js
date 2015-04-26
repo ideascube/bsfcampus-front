@@ -11,7 +11,7 @@ define(
 		'text!pods/exercise-attempt/question-answer/unique-answer-mcq/templates/form.html',
 		'text!pods/exercise-attempt/question-answer/unique-answer-mcq/templates/form-proposition.html',
 
-		'less!pods/exercise-attempt/question-answer/unique-answer-mcq/style',
+		'less!pods/exercise-attempt/question-answer/unique-answer-mcq/style.less'
 	],
 	function($, _, Backbone, Config,
 		QuestionAnswerModel, QuestionModel,
@@ -23,6 +23,8 @@ define(
 			model: QuestionAnswerModel,
 
 			tagName: 'div',
+
+			id: 'unique-answer-mcq',
 
 			template: _.template(formTemplate),
 			propositionTemplate: _.template(formPropositionTemplate),
@@ -38,7 +40,7 @@ define(
 			render: function() {
 				var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
 				this.$el.html(html);
-				
+
 				if (this.model.questionModel().get('image_url') != null)
 				{
 					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('image_url') + '"></a>');
@@ -51,12 +53,8 @@ define(
 					var html = this.propositionTemplate({proposition: proposition, index: i});
 					var el = this.$el.find('.unique-answer-mcq-propositions');
 					el.append(html);
-					// if (i < propositions.length - 1)
-					// {
-					// 	el.append('<hr>');
-					// }
-				};
-			},
+				}
+			}
 
 		});
 		

@@ -12,7 +12,7 @@ define(
 		'text!pods/exercise-attempt/question-answer/ordering/templates/form.html',
 		'text!pods/exercise-attempt/question-answer/ordering/templates/form-ordering.html',
 
-		'less!pods/exercise-attempt/question-answer/ordering/style',
+		'less!pods/exercise-attempt/question-answer/ordering/style.less'
 	],
 	function($, _, Backbone, JQueryUI, Config,
 		QuestionAnswerModel, QuestionModel,
@@ -24,6 +24,8 @@ define(
 			model: QuestionAnswerModel,
 
 			tagName: 'div',
+
+			id: 'ordering',
 
 			template: _.template(formTemplate),
 			orderingTemplate: _.template(formOrderingTemplate),

@@ -11,7 +11,7 @@ define(
 		'text!pods/exercise-attempt/question-answer/multiple-answer-mcq/templates/form.html',
 		'text!pods/exercise-attempt/question-answer/multiple-answer-mcq/templates/form-proposition.html',
 
-		'less!pods/exercise-attempt/question-answer/multiple-answer-mcq/style',
+		'less!pods/exercise-attempt/question-answer/multiple-answer-mcq/style.less'
 	],
 	function($, _, Backbone, Config,
 		QuestionAnswerModel, QuestionModel,
@@ -23,6 +23,8 @@ define(
 			model: QuestionAnswerModel,
 
 			tagName: 'div',
+
+			id: 'multiple-answer-mcq',
 
 			template: _.template(formTemplate),
 			propositionTemplate: _.template(formPropositionTemplate),

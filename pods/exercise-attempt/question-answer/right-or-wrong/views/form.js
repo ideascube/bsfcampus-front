@@ -11,7 +11,7 @@ define(
 		'text!pods/exercise-attempt/question-answer/right-or-wrong/templates/form.html',
 		'text!pods/exercise-attempt/question-answer/right-or-wrong/templates/form-proposition.html',
 
-		'less!pods/exercise-attempt/question-answer/right-or-wrong/style',
+		'less!pods/exercise-attempt/question-answer/right-or-wrong/style.less'
 	],
 	function($, _, Backbone, Config,
 		QuestionAnswerModel, QuestionModel,
@@ -23,6 +23,8 @@ define(
 			model: QuestionAnswerModel,
 
 			tagName: 'div',
+
+			id: 'right-or-wrong',
 
 			template: _.template(formTemplate),
 			propositionTemplate: _.template(formPropositionTemplate),

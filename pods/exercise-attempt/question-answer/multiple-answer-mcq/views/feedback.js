@@ -22,6 +22,8 @@ define(
 
 			tagName: 'div',
 
+			id: 'multiple-answer-mcq',
+
 			template: _.template(feedbackTemplate),
 			propositionTemplate: _.template(feedbackPropositionTemplate),
 			

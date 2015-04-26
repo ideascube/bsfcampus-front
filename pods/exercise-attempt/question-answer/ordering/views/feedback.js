@@ -22,6 +22,8 @@ define(
 
 			tagName: 'div',
 
+			id: 'ordering',
+
 			template: _.template(feedbackTemplate),
 			orderingTemplate: _.template(feedbackOrderingTemplate),
 			
@@ -64,8 +66,12 @@ define(
 				{
 					$html.addClass('wrong-answer');
 				}
+				else
+				{
+					$html.addClass('right-answer');
+				}
 				this.$el.find("#ordering-items-target-feedback").append($html);
-			},
+			}
 
 		});
 		

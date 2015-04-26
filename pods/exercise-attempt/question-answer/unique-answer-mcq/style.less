@@ -1,110 +1,113 @@
-.unique-answer-mcq-propositions {
-	hr {
-		width: 82%;
-		border-color: #CCCCCC;
-		margin: 0px auto;
-	}
-	.radio {
-		margin: 0px auto;
-		padding: 0px;
-		label {
-			margin-left: 20px;
-			margin-right: 20px;
-	    }
-	    input[type="radio"] {
-		    display:none;
-		}
-		label {
-			display: block;
-			padding: 20px 60px;
-			margin: 0px;
-		    color: #292321;
-		    font-size:1.25em;
-		    font-weight: 400;
-		    span {
-			    display:inline-block;
-			    width:30px;
-			    height:30px;
-			    vertical-align:middle;
-			    background-color: #E6E6E6;
-			    margin-right: 30px;
-			    cursor:pointer;
-			    border-radius: 50%;
-			}
-		}
-		label input[type="radio"]:checked + span{
-		    background-color: #39627c;
-		}
+#unique-answer-mcq {
+  .unique-answer-mcq-propositions {
+    hr {
+      width: 82%;
+      border-color: #CCCCCC;
+      margin: 0px auto;
+    }
+    .radio {
+      margin: 0px auto;
+      padding: 0px;
+      label {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      input[type="radio"] {
+        display: none;
+      }
+      label {
+        display: block;
+        padding: 20px 60px;
+        margin: 0px;
+        color: #292321;
+        font-size: 1.25em;
+        font-weight: 400;
+        text-align: left;
+        span {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          vertical-align: middle;
+          background-color: #E6E6E6;
+          margin-right: 30px;
+          cursor: pointer;
+          border-radius: 50%;
+        }
+      }
 
-		&:not(.disabled) {
+      label input[type="radio"]:checked + span {
+        background-color: #39627c;
+      }
 
-			label {
-				cursor:pointer;
-			}
-			&:hover {
-				background-color: #E6E6E6;
-				label input[type="radio"] + span {
-				    background-color: white;
-				}
-			}
-			label input[type="radio"]:checked + span{
-			    background-color: #39627c;
-			}
-		}
-		&.disabled {
-			label {
-				cursor:default;
-				span {
-					cursor:default;
-				}
-			}
-		}
-	}
+      &:not(.disabled) {
+
+        label {
+          cursor: pointer;
+        }
+        &:hover {
+          background-color: #E6E6E6;
+          label input[type="radio"] + span {
+            background-color: white;
+          }
+        }
+        label input[type="radio"]:checked + span {
+          background-color: #39627c;
+        }
+      }
+      &.disabled {
+        label {
+          cursor: default;
+          span {
+            cursor: default;
+          }
+        }
+      }
+    }
+  }
 }
-		
+
 .exercise-attempt-question-answer-feedback {
+  #unique-answer-mcq {
+    .unique-answer-mcq-propositions {
 
-	 .unique-answer-mcq-propositions {
+      .radio {
 
-		.radio {
+        &.proposition_selected {
+          input[type="radio"] + label {
+            color: #e71f2e;
+          }
+        }
 
-			&.proposition_selected {
-				input[type="radio"] + label {
-					color: red;
-				}
-			}
+        &.proposition_correct {
+          background-color: rgba(148, 197, 0, 0.2);
+          input[type="radio"] + label {
+            color: #94c500;
+          }
+        }
 
-			&.proposition_correct {
-				background-color: rgba(148, 197, 0, 0.2);
-				input[type="radio"] + label {
-					color: #94c500;
-				}
-			}
+        &.proposition_selected.proposition_correct img.right-answer {
+          display: inline;
+        }
 
-			&.proposition_selected.proposition_correct img.right-answer {
-				display: inline;
-			}
+        &.proposition_selected:not(.proposition_correct) img.wrong-answer {
+          display: inline;
+        }
 
-			&.proposition_selected:not(.proposition_correct) img.wrong-answer {
-				display: inline;
-			}
-
-			img {
-				vertical-align: initial;
-				padding: 4px;
-				display: none;
-				width:100%;
-				height:100%;
-				border-radius: 50%;
-				&.right-answer {
-					background-color: #bce520;
-				}
-				&.wrong-answer {
-					background-color: #e71f2e;
-				}
-			}
-			
-		}
-	 }
-
+        img {
+          vertical-align: initial;
+          padding: 4px;
+          display: none;
+          width:100%;
+          height:100%;
+          border-radius: 50%;
+          &.right-answer {
+            background-color: #94c500;
+          }
+          &.wrong-answer {
+            background-color: #e71f2e;
+          }
+        }
+      }
+    }
+  }
 }

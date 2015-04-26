@@ -11,7 +11,7 @@ define(
 		'text!pods/exercise-attempt/question-answer/dropdowns/templates/form.html',
 		'text!pods/exercise-attempt/question-answer/dropdowns/templates/form-dropdown.html',
 
-		'less!pods/exercise-attempt/question-answer/dropdowns/style',
+		'less!pods/exercise-attempt/question-answer/dropdowns/style.less'
 	],
 	function($, _, Backbone, Config,
 		QuestionAnswerModel, QuestionModel,
@@ -23,6 +23,8 @@ define(
 			model: QuestionAnswerModel,
 
 			tagName: 'div',
+
+			id: 'dropdowns',
 
 			template: _.template(formTemplate),
 			dropdownTemplate: _.template(formDropdownTemplate),

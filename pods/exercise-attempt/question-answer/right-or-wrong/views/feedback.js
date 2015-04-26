@@ -22,6 +22,8 @@ define(
 
 			tagName: 'div',
 
+			id: 'right-or-wrong',
+
 			template: _.template(feedbackTemplate),
 			propositionTemplate: _.template(feedbackPropositionTemplate),
 			

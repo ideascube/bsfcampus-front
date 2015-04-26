@@ -22,6 +22,8 @@ define(
 
 			tagName: 'div',
 
+			id: 'dropdowns',
+
 			template: _.template(feedbackTemplate),
 			dropdownTemplate: _.template(feedbackDropdownTemplate),
 			
@@ -67,7 +69,7 @@ define(
 						}
 						this.$el.find('.dropdowns-feedback').append($dropdown);
 					}
-				};
+				}
 
 				var answerExplanationEl = this.$el.find('.answer-explanation');
 				if (this.model.get('is_answered_correctly') === true)
