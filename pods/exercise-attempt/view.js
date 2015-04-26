@@ -18,7 +18,7 @@ define(
 		'pods/resource/model',
 		'pods/resource/views/button-link-to-resource',
 
-		'less!pods/exercise-attempt/style',
+		'less!pods/exercise-attempt/style.less'
 	],
 	function($, _, Backbone, Config,
 		ExerciseAttemptModel, modalTemplate, recapTemplate, recapFooterTemplate,
@@ -75,7 +75,7 @@ define(
 			},
 
 			events: {
-				'click .btn-continue': 'nextStep',
+				'click .btn-continue': 'nextStep'
 			},
 
 			updateCurrentQuestionAnswer: function() {
@@ -300,7 +300,7 @@ define(
 
 			closeModal: function() {
 				$('#modal-container').modal('hide');
-			},
+			}
 
 		});
 		

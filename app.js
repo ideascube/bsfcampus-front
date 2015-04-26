@@ -12,7 +12,7 @@ require.config({
 		bootstrap: 'lib/bootstrap',
 
 		collection: 'app/abstract-collection',
-		model: 'app/abstract-model',
+		model: 'app/abstract-model'
 	},
 
 	shim: {

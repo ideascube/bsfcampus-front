@@ -5,7 +5,7 @@ define(['lib/window'],
 
 			serverGateway: w.location.origin + ':5000',
 			
-			imagesPath: 'assets/images/',
+			imagesPath: 'assets/images/'
 
 		};
 
