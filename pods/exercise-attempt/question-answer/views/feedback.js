@@ -10,9 +10,10 @@ define(
 		'pods/exercise-attempt/question-answer/right-or-wrong/views/feedback',
 		'pods/exercise-attempt/question-answer/dropdowns/views/feedback',
 		'pods/exercise-attempt/question-answer/ordering/views/feedback',
+		'pods/exercise-attempt/question-answer/categorizer/views/feedback'
 	],
 	function($, _, Backbone, Config,
-		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView, DropdownView, OrderingView
+		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView, DropdownView, OrderingView, CategorizerView
 		) {
 
 		return {
@@ -29,6 +30,8 @@ define(
 						return new DropdownView({model: model});
 					case 'OrderingExerciseQuestion':
 						return new OrderingView({model: model});
+					case 'CategorizeExerciseQuestion':
+						return new CategorizerView({model: model});
 				}
 			},
 

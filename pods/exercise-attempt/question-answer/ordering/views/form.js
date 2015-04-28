@@ -3,6 +3,7 @@ define(
         'jquery',
         'underscore',
         'backbone',
+        'form2js',
         'jqueryui',
         'app/config',
 
@@ -14,7 +15,7 @@ define(
 
         'less!pods/exercise-attempt/question-answer/ordering/style.less'
     ],
-    function ($, _, Backbone, JQueryUI, Config,
+    function ($, _, Backbone, form2js, JQueryUI, Config,
               QuestionAnswerModel, QuestionModel,
               formTemplate, formOrderingTemplate) {
 
@@ -44,7 +45,7 @@ define(
                     connectWith: ".connectedSortable",
                     placeholder: "item-draggable-placeholder",
                     receive: function (event, ui) {
-                        self.trigger('onSortableItemReceived');
+                        self.trigger('onOrderingSortableItemReceived');
                     }
                 }).disableSelection();
 
@@ -54,6 +55,10 @@ define(
             renderItem: function (item) {
                 var html = this.orderingTemplate({item: item});
                 this.$el.find("#ordering-items-source").append(html);
+            },
+
+            serializeForm: function () {
+                return {form_data: JSON.stringify(form2js('question-form', '.'))};
             }
 
         })

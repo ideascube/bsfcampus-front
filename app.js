@@ -5,6 +5,7 @@ require.config({
 		underscore: 'lib/underscore',
 		backbone: 'lib/backbone',
 		jqueryui: 'lib/jquery-ui',
+		form2js: 'lib/form2js/form2js',
 		text: 'lib/text',
 		less: 'lib/require-less/less',
 		lessc: 'lib/require-less/lessc',

@@ -1,0 +1,7 @@
+<div class="categorizer-category-group" id="category_<%= category._id %>">
+    <input type="text" name="given_categorized_categories[]" value="<%= category._id %>"/>
+    <div class="categorizer-category-header"><%= category.title %></div>
+    <div class="categorizer-category-items-container">
+        <div class="categorizer-category-items connectedSortable"></div>
+    </div>
+</div>

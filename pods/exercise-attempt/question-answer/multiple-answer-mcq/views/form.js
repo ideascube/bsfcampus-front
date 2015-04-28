@@ -3,6 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+		'form2js',
 		'app/config',
 
 		'pods/exercise-attempt/question-answer/models/question-answer',
@@ -13,7 +14,7 @@ define(
 
 		'less!pods/exercise-attempt/question-answer/multiple-answer-mcq/style.less'
 	],
-	function($, _, Backbone, Config,
+	function($, _, Backbone, form2js, Config,
 		QuestionAnswerModel, QuestionModel,
 		formTemplate, formPropositionTemplate
 		) {
@@ -48,6 +49,9 @@ define(
 				};
 			},
 
+			serializeForm: function () {
+				return {form_data: JSON.stringify(form2js('question-form', '.'))};
+			}
 		});
 		
 	}

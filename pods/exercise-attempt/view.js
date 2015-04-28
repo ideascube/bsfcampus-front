@@ -119,8 +119,18 @@ define(
 						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
 					}
 				});
-				this.listenTo(formView, 'onSortableItemReceived', function () {
-					if (this.$el.find('#ordering-items-target').children().length == this.currentQuestionAnswer.questionModel().get('items').length)
+				this.listenTo(formView, 'onOrderingSortableItemReceived', function () {
+					if (this.$el.find('#ordering-items-source').children().length == 0)
+					{
+						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
+					}
+					else if (!this.$el.find('.exercise-attempt-footer button').hasClass('disabled'))
+					{
+						this.$el.find('.exercise-attempt-footer button').addClass('disabled');
+					}
+				});
+				this.listenTo(formView, 'onCategorizerSortableItemReceived', function () {
+					if (this.$el.find('#categorizer-items-source').children().length == 0)
 					{
 						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
 					}
@@ -135,7 +145,8 @@ define(
 				this.$el.find('.exercise-attempt-question').html(formView.$el);
 				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion'
 					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'DropdownExerciseQuestion'
-					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'OrderingExerciseQuestion')
+					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'OrderingExerciseQuestion'
+					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'CategorizeExerciseQuestion')
 				{
 					this.$el.find('.exercise-attempt-footer button').addClass('disabled');
 				}
@@ -187,6 +198,7 @@ define(
 						case 'RightOrWrongExerciseQuestion':
 						case 'DropdownExerciseQuestion':
 						case 'OrderingExerciseQuestion':
+						case 'CategorizeExerciseQuestion':
 							$result.html(Config.stringsDict.EXERCISES.WRONG_ANSWER_SINGLE);
 							break;
 						case 'MultipleAnswerMCQExerciseQuestion':
@@ -205,8 +217,9 @@ define(
 
 			submitAnswer: function() {
 
-				console.log('submitAnswer');
-				var formData = this.$el.find('form').serialize();
+                console.log('submitAnswer');
+                var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
+				var formData = formView.serializeForm();
 				var questionId = this.currentQuestionAnswer.get('question_id');
 				var self = this;
 				$.ajax({
