@@ -35,7 +35,11 @@ define(
 
 				if (this.model.questionModel().get('image_url') != null) {
 					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('image_url') + '"></a>');
-				}
+                }
+                else
+                {
+                    this.$el.find('.question-image-media').hide();
+                }
 
 				var correctAnswerCategories = this.model.questionModel().get('categories');
 				for (var i = 0; i < correctAnswerCategories.length; i++)

@@ -49,6 +49,7 @@ define(
 				}
 				else
 				{
+					this.$el.find('.question-image-media').hide();
 					this.$el.find('.media-body').addClass('horizontal');
 				}
 

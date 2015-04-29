@@ -36,6 +36,10 @@ define(
 				{
 					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('image_url') + '"></a>');
 				}
+				else
+				{
+					this.$el.find('.question-image-media').hide();
+				}
 
 				var text = this.model.questionModel().get('text');
 				var splittedText = text.split("[%%]");
