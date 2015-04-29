@@ -168,6 +168,7 @@ define(
 				feedbackView.render();
 
 				var answerExplanationEl = this.$el.find('.answer-explanation');
+				answerExplanationEl.removeClass('right-answer').removeClass('wrong-answer');
 				if (currentQuestionAnswer.get('is_answered_correctly') === true)
 				{
 					answerExplanationEl.addClass('right-answer');
