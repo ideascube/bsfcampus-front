@@ -54,6 +54,7 @@ define(
 			},
 
 			home: function () {
+				this.clearContainer();
 			},
 
 			trackList: function() {
