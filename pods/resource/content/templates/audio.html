@@ -1,9 +1,8 @@
 <div  id="resource-audio-player">
 	<h1><%= resource.title %></h1>
 
-	<% console.log(resource.resource_content.content_image_url) %>
-	<% if (resource.resource_content.content_image_url != undefined) { %>
-		<img src="<%= resource.resource_content.content_image_url %>">
+	<% if (resource.resource_content.image_url != undefined) { %>
+		<img src="<%= resource.resource_content.image_url %>">
 	<% } %>
 	<audio controls="controls" src="<%= resource.resource_content.content_file_url %>">
 	    Your browser does not support the HTML5 Audio element.
