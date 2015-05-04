@@ -42,9 +42,9 @@ define(
 				var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
 				this.$el.html(html);
 
-				if (this.model.questionModel().get('image_url') != null)
+				if (this.model.questionModel().get('question_image_url') != null)
 				{
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('image_url') + '"></a>');
+					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
 				}
 				else
 				{
