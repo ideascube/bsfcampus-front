@@ -9,7 +9,7 @@ define(
 		'pods/exercise-attempt/question-answer/models/question',
 
 		'text!pods/exercise-attempt/question-answer/dropdowns/templates/feedback.html',
-		'text!pods/exercise-attempt/question-answer/dropdowns/templates/feedback-dropdown.html',
+		'text!pods/exercise-attempt/question-answer/dropdowns/templates/feedback-dropdown.html'
 	],
 	function($, _, Backbone, Config,
 		QuestionAnswerModel, QuestionModel,
@@ -57,7 +57,7 @@ define(
 						var given_answer = _.find(dropdown.propositions, function (proposition) {
 							return _.contains(given_propositions, proposition._id);
 						})
-						var html = this.dropdownTemplate({answer: given_answer});
+						var html = this.dropdownTemplate({dropdown: dropdown, answer: given_answer, index: i});
 						$dropdown = $(html);
 						correct_answer = _.find(dropdown.propositions, function (proposition) {
 							return proposition.is_correct_answer;
