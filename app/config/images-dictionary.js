@@ -7,7 +7,10 @@ define(
 		return {
 
 			placeholder48: 'http://placehold.it/48x48/1caff6/ffffff',
-			default_background_image: Constants.imagesPath + 'BG_macchupicchu_cut.png',
+			default_background_image: Constants.imagesPath + 'bg_city.png',
+			logo_gates_foundation: Constants.imagesPath + 'gatesfound.png',
+			logo_bsf_campus: Constants.imagesPath + 'BSF_logo_header.png',
+			logo_bsf: Constants.imagesPath + 'BSF_logo_footer.png',
 
 			arrow: Constants.imagesPath + 'arrow.png',
 			arrowInCircle: Constants.imagesPath + 'iconmonstr-arrow-28-icon-256.png',

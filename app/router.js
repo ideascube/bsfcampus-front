@@ -6,6 +6,7 @@ define(
 		'app/config',
 
 		'app/header/view',
+		'app/footer/view',
 
 		'pods/track/model',
 		'pods/track/collection',
@@ -23,7 +24,7 @@ define(
 		'less!app/styles/common',
 	],
 	function($, _, Backbone, Config,
-		AppHeaderView, 
+		AppHeaderView, AppFooterView,
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
 		SkillModel, SkillDetailView,
 		ResourceModel, ResourceDetailView,
@@ -37,6 +38,11 @@ define(
 			renderHeader: function() {
 				var appHeaderView = new AppHeaderView();
 				appHeaderView.render();
+			},
+
+			renderFooter: function() {
+				var appFooterView = new AppFooterView();
+				appFooterView.render();
 			},
 
 			clearContainer: function() {
@@ -119,6 +125,7 @@ define(
 			initialize: function() {
 				var app_router = new AppRouter();
 				app_router.renderHeader();
+				app_router.renderFooter();
 				Backbone.history.start();
 			}
 		};
