@@ -18,6 +18,8 @@ define(
 
 			tagName: 'div',
 
+			id: 'track-list-container',
+
 			template: _.template(listTemplate),
 
 			render: function() {

@@ -18,6 +18,10 @@ define(
 
 			tagName: 'div',
 
+			id: function() {
+				return 'track-' + this.model.id;
+			},
+
 			template: _.template(listItemTemplate),
 
 			render: function() {
