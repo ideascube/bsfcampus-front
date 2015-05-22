@@ -11,6 +11,7 @@ define(
 			logo_gates_foundation: Constants.imagesPath + 'gatesfound.png',
 			logo_bsf_campus: Constants.imagesPath + 'BSF_logo_header.png',
 			logo_bsf: Constants.imagesPath + 'BSF_logo_footer.png',
+			bsfHomeImage: Constants.imagesPath + 'bsf_home_image.jpg',
 
 			arrow: Constants.imagesPath + 'arrow.png',
 			arrowInCircle: Constants.imagesPath + 'iconmonstr-arrow-28-icon-256.png',
@@ -42,7 +43,7 @@ define(
 				EXERCISE: Constants.imagesPath + 'icon_exercice_white.png',
 				AUDIO: Constants.imagesPath + 'icon_download_white.png',
 				DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_white.png',
-			},
+			}
 
 		};
 	}

@@ -8,6 +8,8 @@ define(
 		'app/header/view',
 		'app/footer/view',
 
+		'pods/home/view',
+
 		'pods/track/model',
 		'pods/track/collection',
 		'pods/track/views/list',
@@ -24,7 +26,7 @@ define(
 		'less!app/styles/common',
 	],
 	function($, _, Backbone, Config,
-		AppHeaderView, AppFooterView,
+		AppHeaderView, AppFooterView, HomeView,
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
 		SkillModel, SkillDetailView,
 		ResourceModel, ResourceDetailView,
@@ -45,6 +47,10 @@ define(
 				appFooterView.render();
 			},
 
+			clearHome: function() {
+				$('#home').html('');
+			},
+
 			clearContainer: function() {
 				$('#container').html('');
 			},
@@ -56,17 +62,23 @@ define(
 				'track': 'trackList',
 				'track/:id': 'trackDetail',
 				'skill/:id': 'skillDetail',
-				'resource/:id': 'resourceDetail',
+				'resource/:id': 'resourceDetail'
 			},
 
 			home: function () {
+                this.clearHome();
 				this.clearContainer();
+
+				var homeView = new HomeView();
+				homeView.render();
+				$('#home').append(homeView.$el);
 			},
 
 			trackList: function() {
 				var collection = new TrackCollection();
 				var self = this;
 				collection.fetch().done(function(){
+                    self.clearHome();
 					self.clearContainer();
 
 					var trackListView = new TrackListView({collection: collection});
@@ -79,6 +91,7 @@ define(
 				var model = new TrackModel({_id: id});
 				var self = this;
 				model.fetch().done(function(){
+                    self.clearHome();
 					self.clearContainer();
 
 					var trackDetailView = new TrackDetailView({model: model});
@@ -91,6 +104,7 @@ define(
 				var model = new SkillModel({_id: id});
 				var self = this;
 				model.fetch().done(function(){
+                    self.clearHome();
 					self.clearContainer();
 					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
 
@@ -104,6 +118,7 @@ define(
 				var model = new ResourceModel({_id: id});
 				var self = this;
 				model.fetch().done(function(){
+                    self.clearHome();
 					self.clearContainer();
 					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
 
