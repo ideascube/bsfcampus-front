@@ -41,16 +41,14 @@ define([],
             },
 
             HOME: {
-                BSF_HOME_PUNCHLINE: 'Les bibliothèques, c\'est la vie !',
-                BSF_HOME_TEXT: 'Et olim licet otiosae sint tribus pacataeque centuriae et nulla suffragiorum certamina ' +
-                    'set Pompiliani redierit securitas temporis, per omnes tamen quotquot sunt partes terrarum, ut domina ' +
-                    'suscipitur et regina et ubique patrum reverenda cum auctoritate canities populique Romani nomen ' +
-                    'circumspectum et verecundum.<br>' +
-                    'Dum apud Persas, ut supra narravimus, perfidia regis motus agitat insperatos, et in eois tractibus ' +
-                    'bella rediviva consurgunt, anno sexto decimo et eo diutius post Nepotiani exitium, saeviens per urbem ' +
-                    'aeternam urebat cuncta Bellona, ex primordiis minimis ad clades excita luctuosas, quas obliterasset ' +
-                    'utinam iuge silentium! ne forte paria quandoque temptentur, plus exemplis generalibus nocitura quam ' +
-                    'delictis.'
+                BSF_HOME_PUNCHLINE: 'Bienvenue sur BSF Campus !',
+                BSF_HOME_TEXT: '<p>En 2015, l\'ONG Bibliothèques Sans Frontières lance, avec le soutien de la '
+                    + 'Bill & Melinda Gates Foundation, le programme BSF Campus, qui vise à renforcer les '
+                    + 'bibliothèques publiques et communautaires d\'Afrique francophone dans leur rôle de '
+                    + 'conduite de l\'innovation et de transformation sociale.</p>'
+                    + '<p>BSF Campus, c\'est une plateforme d\'e-learning, gratuit et certifiant, pour les '
+                    + 'professionnels en poste dans la région. La plateforme sera également accessible sans '
+                    + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>'
             }
 
         };
