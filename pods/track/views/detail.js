@@ -20,6 +20,12 @@ define(
 		return Backbone.View.extend({
 
 			tagName: 'div',
+
+			className: 'track-info-container',
+
+			id: function() {
+				return 'track-info-' + this.model.id;
+			},
 			
 			template: _.template(detailTemplate),
 
