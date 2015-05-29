@@ -6,7 +6,12 @@
         <img src="<%= config.imagesDict.bsfHomeImage %>">
     </div>
     <div class="col-md-4 col-md-offset-1" id="home-text">
-        <p><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
-        <!-- TODO: add Login and Register button -->
+        <div id="home-text-group">
+            <p><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
+        </div>
+        <div id="home-btn-group">
+            <button class="btn" id="home-login-btn"><%= config.stringsDict.HOME.CONNECTION %></button>
+            <button class="btn" id="home-register-btn"><%= config.stringsDict.HOME.REGISTER %></button>
+        </div>
     </div>
 </div>

@@ -10,6 +10,8 @@ define(
 
 		'pods/home/view',
 
+		'pods/user/views/register',
+
 		'pods/track/model',
 		'pods/track/collection',
 		'pods/track/views/list',
@@ -23,10 +25,10 @@ define(
 
 		'pods/breadcrumb/views/breadcrumbContainer',
 
-		'less!app/styles/common',
+		'less!app/styles/common'
 	],
 	function($, _, Backbone, Config,
-		AppHeaderView, AppFooterView, HomeView,
+		AppHeaderView, AppFooterView, HomeView, RegisterUserView,
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
 		SkillModel, SkillDetailView,
 		ResourceModel, ResourceDetailView,
@@ -35,7 +37,7 @@ define(
 
 		var AppRouter = Backbone.Router.extend({
 
-			// Global views
+            // Global views
 
 			renderHeader: function() {
 				var appHeaderView = new AppHeaderView();
@@ -55,10 +57,17 @@ define(
 				$('#container').html('');
 			},
 
+			clearModal: function() {
+                var $modal = $('#modal-container');
+                $modal.html('');
+                $modal.hide();
+			},
+
 			// Routes handling
 
 			routes: {
 				'': 'home',
+				'register': 'register',
 				'track': 'trackList',
 				'track/:id': 'trackDetail',
 				'skill/:id': 'skillDetail',
@@ -68,10 +77,21 @@ define(
 			home: function () {
                 this.clearHome();
 				this.clearContainer();
+				this.clearModal();
 
 				var homeView = new HomeView();
 				homeView.render();
 				$('#home').append(homeView.$el);
+			},
+
+			register: function () {
+                console.log("register");
+                var registerUserView = new RegisterUserView();
+				registerUserView.render();
+                this.listenTo(registerUserView, 'close', this.clearModal);
+				var $modal = $('#modal-container');
+				$modal.html(registerUserView.$el);
+				$modal.modal({show: true});
 			},
 
 			trackList: function() {
@@ -80,6 +100,7 @@ define(
 				collection.fetch().done(function(){
                     self.clearHome();
 					self.clearContainer();
+                    self.clearModal();
 
 					var trackListView = new TrackListView({collection: collection});
 					trackListView.render();
@@ -93,6 +114,7 @@ define(
 				model.fetch().done(function(){
                     self.clearHome();
 					self.clearContainer();
+                    self.clearModal();
 
 					var trackDetailView = new TrackDetailView({model: model});
 					trackDetailView.render();
@@ -106,6 +128,7 @@ define(
 				model.fetch().done(function(){
                     self.clearHome();
 					self.clearContainer();
+                    self.clearModal();
 					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
 
 					var skillDetailView = new SkillDetailView({model: model});
@@ -120,6 +143,7 @@ define(
 				model.fetch().done(function(){
                     self.clearHome();
 					self.clearContainer();
+                    self.clearModal();
 					self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
 
 					var resourceDetailView = new ResourceDetailView({model: model});

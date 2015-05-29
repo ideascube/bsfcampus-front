@@ -22,11 +22,25 @@ define(
 
             template: _.template(homeTemplate),
 
+            events: {
+                'click #home-login-btn': 'login',
+                'click #home-register-btn': 'register'
+            },
+
             render: function() {
                 $("body").removeAttr("style");
                 this.$el.html(this.template({config: Config}));
 
                 return this;
+            },
+
+            login: function() {
+                Backbone.history.loadUrl("/login");
+            },
+
+            register: function() {
+                console.log('home -> register');
+                Backbone.history.loadUrl("/register");
             }
 
         });

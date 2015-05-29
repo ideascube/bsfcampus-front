@@ -37,7 +37,7 @@ define([],
                 EXTERNAL_VIDEO: 'ExternalVideoResourceContent',
                 EXERCISE: 'ExerciseResourceContent',
                 AUDIO: 'AudioResourceContent',
-                DOWNLOADABLE_FILE: 'DownloadableFileResourceContent',
+                DOWNLOADABLE_FILE: 'DownloadableFileResourceContent'
             },
 
             HOME: {
@@ -48,7 +48,20 @@ define([],
                     + 'conduite de l\'innovation et de transformation sociale.</p>'
                     + '<p>BSF Campus, c\'est une plateforme d\'e-learning, gratuit et certifiant, pour les '
                     + 'professionnels en poste dans la région. La plateforme sera également accessible sans '
-                    + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>'
+                    + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>',
+                CONNECTION: 'Connexion',
+                REGISTER: 'Inscription'
+            },
+
+            USER: {
+                REGISTER: 'S\'inscrire',
+                FULL_NAME: 'Nom complet',
+                EMAIL: 'E-mail',
+                PASSWORD: 'Mot de pase',
+                CONFIRM_PASSWORD: 'Confirmer le mot de passe',
+                CGU: 'j\'accepte les conditions d\'utilisation du site',
+                SUBMIT: 'Créer le compte'
+
             }
 
         };
