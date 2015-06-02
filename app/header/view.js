@@ -14,9 +14,19 @@ define(
 
 			template: _.template(template),
 
+            events: {
+                'click #header-login-btn': 'login'
+            },
+
 			render: function() {
 				this.$el.html(this.template({config: Config}));
-			}
+			},
+
+            login: function(e) {
+                e.preventDefault();
+                console.log('header -> login');
+                Backbone.history.loadUrl("/login");
+            }
 
 		});
 		

@@ -35,6 +35,7 @@ define(
             },
 
             login: function() {
+                console.log('home -> login');
                 Backbone.history.loadUrl("/login");
             },
 

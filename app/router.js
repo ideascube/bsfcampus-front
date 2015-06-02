@@ -11,6 +11,7 @@ define(
 		'pods/home/view',
 
 		'pods/user/views/register',
+		'pods/user/views/login',
 
 		'pods/track/model',
 		'pods/track/collection',
@@ -28,7 +29,7 @@ define(
 		'less!app/styles/common'
 	],
 	function($, _, Backbone, Config,
-		AppHeaderView, AppFooterView, HomeView, RegisterUserView,
+		AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView,
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
 		SkillModel, SkillDetailView,
 		ResourceModel, ResourceDetailView,
@@ -68,6 +69,7 @@ define(
 			routes: {
 				'': 'home',
 				'register': 'register',
+				'login': 'login',
 				'track': 'trackList',
 				'track/:id': 'trackDetail',
 				'skill/:id': 'skillDetail',
@@ -82,6 +84,16 @@ define(
 				var homeView = new HomeView();
 				homeView.render();
 				$('#home').append(homeView.$el);
+			},
+
+			login: function () {
+                console.log("login");
+                var loginUserView = new LoginUserView();
+                loginUserView.render();
+                this.listenTo(loginUserView, 'close', this.clearModal);
+				var $modal = $('#modal-container');
+				$modal.html(loginUserView.$el);
+				$modal.modal({show: true});
 			},
 
 			register: function () {
@@ -162,6 +174,29 @@ define(
 
 		return {
 			initialize: function() {
+
+                // Use withCredentials to send the server cookies
+                // The server must allow this through response headers
+                $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+                    options.xhrFields = {
+                        withCredentials: true
+                    };
+                    //// If we have a csrf token send it through with the next request
+                    //if(typeof that.get('_csrf') !== 'undefined') {
+                    //    jqXHR.setRequestHeader('X-CSRF-Token', that.get('_csrf'));
+                    //}
+                });
+
+                // Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
+                $.ajaxSetup({
+                    statusCode: {
+                        302: function(){
+                            // Redirec the to the login page.
+                            Backbone.history.loadUrl("/login");
+                        }
+                    }
+                });
+
 				var app_router = new AppRouter();
 				app_router.renderHeader();
 				app_router.renderFooter();

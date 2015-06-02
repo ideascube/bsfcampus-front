@@ -49,12 +49,13 @@ define([],
                     + '<p>BSF Campus, c\'est une plateforme d\'e-learning, gratuit et certifiant, pour les '
                     + 'professionnels en poste dans la région. La plateforme sera également accessible sans '
                     + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>',
-                CONNECTION: 'Connexion',
+                LOGIN: 'Connexion',
                 REGISTER: 'Inscription'
             },
 
             USER: {
                 REGISTER: 'S\'inscrire',
+                LOG_IN: 'Se connecter',
                 FULL_NAME: 'Nom complet',
                 EMAIL: 'E-mail',
                 PASSWORD: 'Mot de pase',
