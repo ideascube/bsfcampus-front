@@ -190,8 +190,9 @@ define(
                 // Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
                 $.ajaxSetup({
                     statusCode: {
-                        302: function(){
+                        401: function(){
                             // Redirec the to the login page.
+                            console.log("error 401 detected");
                             Backbone.history.loadUrl("/login");
                         }
                     }
