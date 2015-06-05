@@ -47,10 +47,10 @@ define(
 				for (var i=0; i < propositions.length; i++)
 				{
 					proposition = propositions[i];
-					var html = this.propositionTemplate({proposition: proposition, index: i});
+					html = this.propositionTemplate({proposition: proposition, index: i});
 					var el = this.$el.find('.multiple-answer-mcq-propositions');
 					el.append(html);
-				};
+				}
 			},
 
 			serializeForm: function () {

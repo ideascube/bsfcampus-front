@@ -19,7 +19,7 @@ define(
 		'pods/lesson/model',
 		'pods/lesson/collections/skill',
 		
-		'less!pods/resource/style',
+		'less!pods/resource/style'
 	],
 	function($, _, Backbone, Config,
 		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, SkillNavView, detailTemplate,

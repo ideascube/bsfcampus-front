@@ -58,7 +58,7 @@ define(
 			},
 
 			events: {
-				'click .btn-start-exercise': 'startExercise',
+				'click .btn-start-exercise': 'startExercise'
 			},
 
 			startExercise: function(e) {
@@ -72,8 +72,15 @@ define(
 					var exerciseAttemptView = new ExerciseAttemptView({model: attempt});
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
-					$('#modal-container').html(exerciseAttemptView.$el);
-					$('#modal-container').modal({show: true});
+                    var $modal = $('#modal-container');
+                    $modal.html(exerciseAttemptView.$el);
+					$modal.modal({show: true});
+                    $modal.on('hidden.bs.modal', function () {
+                        if (!self.model.get('is_validated') && exerciseAttemptView.isExerciseCompleted)
+                        {
+                            Backbone.history.loadUrl(Backbone.history.getFragment());
+                        }
+                    });
 				}).fail(function(error) {
 
 				});

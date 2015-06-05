@@ -35,34 +35,16 @@ define(
 
 			isQuestionVerified: false,
 
+            isExerciseCompleted: false,
+
 			template: _.template(modalTemplate),
 			recapTemplate: _.template(recapTemplate),
 			recapFooterTemplate: _.template(recapFooterTemplate),
-			
-			render: function() {
-				var resourceModelJSON = this.resource.forTemplate();
-				// FIXME: factorize iconUrl addition
-				switch (resourceModelJSON.resource_content._cls) {
-					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.RICH_TEXT;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
-					case Config.stringsDict.RESOURCE_TYPE.VIDEO:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.VIDEO;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.EXERCISE;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.AUDIO:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.AUDIO;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.DOWNLOADABLE_FILE;
-						break;
-				}
+
+            render: function() {
 				var html = this.template({
 					attempt: this.model.forTemplate(),
-					resource: resourceModelJSON,
+					resource: this.resource.forTemplate(),
 					config: Config
 				});
 				this.$el.html(html);
@@ -253,6 +235,7 @@ define(
 				var $exerciseRecapDetails = $exerciseRecap.find('.recap-details');
 				if (recapModelJSON.number_mistakes <= recapModelJSON.max_mistakes)
 				{
+                    this.isExerciseCompleted = true;
 					$exerciseRecap.addClass('exercise-succeeded');
 					$exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE_HEADER);
 					$exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE);
@@ -260,6 +243,7 @@ define(
 				}
 				else
 				{
+                    this.isExerciseCompleted = false;
 					$exerciseRecap.addClass('exercise-failed');
 					$exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE_HEADER);
 					$exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
@@ -312,8 +296,8 @@ define(
 				}
 			},
 
-			closeModal: function() {
-				$('#modal-container').modal('hide');
+            closeModal: function() {
+                $('#modal-container').modal('hide');
 			}
 
 		});

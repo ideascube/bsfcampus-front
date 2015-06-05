@@ -1,61 +1,41 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
-		
-		'pods/resource/model',
-		'text!pods/resource/templates/lesson-outline-item.html',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-	],
-	function($, _, Backbone, Config,
-		ResourceModel, lessonOutlineItemTemplate
-		) {
+        'pods/resource/model',
+        'text!pods/resource/templates/lesson-outline-item.html',
 
-		return Backbone.View.extend({
+    ],
+    function ($, _, Backbone, Config,
+              ResourceModel, lessonOutlineItemTemplate) {
 
-			model: ResourceModel,
+        return Backbone.View.extend({
 
-			tagName: 'a',
+            model: ResourceModel,
 
-			className: 'list-group-item media',
+            tagName: 'a',
 
-			attributes: function() {
-				return {
-					'href': this.model.route()
-				}
-			},
-			
-			template: _.template(lessonOutlineItemTemplate),
+            className: 'list-group-item media',
 
-			render: function() {
-				var resourceModelJSON = this.model.forTemplate();
-				switch (resourceModelJSON.resource_content._cls) {
-					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.RICH_TEXT;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
-					case Config.stringsDict.RESOURCE_TYPE.VIDEO:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.VIDEO;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.EXERCISE;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.AUDIO:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.AUDIO;
-						break;
-					case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIcon.DOWNLOADABLE_FILE;
-						break;
-				}
-				var html = this.template({resource: resourceModelJSON });
-				this.$el.html(html);
-				
-				return this;
-			},
+            attributes: function () {
+                return {
+                    'href': this.model.route()
+                }
+            },
 
-		});
-		
-	}
+            template: _.template(lessonOutlineItemTemplate),
+
+            render: function () {
+                var html = this.template({resource: this.model.forTemplate()});
+                this.$el.html(html);
+
+                return this;
+            }
+
+        });
+
+    }
 );

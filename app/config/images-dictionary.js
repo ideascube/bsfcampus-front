@@ -30,19 +30,26 @@ define(
 			inkDropOn: Constants.imagesPath + 'iconmonstr-drop-7-on.png',
 			inkDropOff: Constants.imagesPath + 'iconmonstr-drop-7-off.png',
 			orderingExerciseBg: Constants.imagesPath + 'carre_ligne.png',
-			resourceIcon: {
-				RICH_TEXT: Constants.imagesPath + 'iconmonstr-text-file-4-icon-256_BLUE.png',
-				VIDEO: Constants.imagesPath + 'iconmonstr-video-camera-icon-256_BLUE.png',
-				EXERCISE: Constants.imagesPath + 'iconmonstr-pen-12-icon-256_BLUE.png',
-				AUDIO: Constants.imagesPath + 'iconmonstr-sound-audio-icon-256_BLUE.png',
-				DOWNLOADABLE_FILE: Constants.imagesPath + 'download.png',
+			resourceIconOff: {
+                RICH_TEXT: Constants.imagesPath + 'icon_text_off.png',
+                VIDEO: Constants.imagesPath + 'icon_video_off.png',
+                EXERCISE: Constants.imagesPath + 'icon_exercice_off.png',
+                AUDIO: Constants.imagesPath + 'icon_download_off.png',
+                DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_off.png'
+			},
+			resourceIconOn: {
+                RICH_TEXT: Constants.imagesPath + 'icon_text_on.png',
+                VIDEO: Constants.imagesPath + 'icon_video_on.png',
+                EXERCISE: Constants.imagesPath + 'icon_exercice_on.png',
+                AUDIO: Constants.imagesPath + 'icon_download_on.png',
+                DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_on.png'
 			},
 			resourceIconWhite: {
 				RICH_TEXT: Constants.imagesPath + 'icon_text_white.png',
 				VIDEO: Constants.imagesPath + 'icon_video_white.png',
 				EXERCISE: Constants.imagesPath + 'icon_exercice_white.png',
 				AUDIO: Constants.imagesPath + 'icon_download_white.png',
-				DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_white.png',
+				DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_white.png'
 			}
 
 		};

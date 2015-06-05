@@ -2,4 +2,12 @@
 
 <p><%= resource.description %></p>
 
-<a href="" class="btn btn-default btn-start-exercise" id="resource-exercise-button"><img src="<%= config.imagesDict.quill %>" class="quill"><%= config.stringsDict.START_EXERCISE %></a>
+<a href="" class="btn btn-default btn-start-exercise <% if (resource.is_validated) { %> validated <% } %>" id="resource-exercise-button">
+    <img src="<%= config.imagesDict.quill %>" class="quill">
+    <% if (resource.is_validated) { %>
+        <%= config.stringsDict.EXERCISE_VALIDATED %>
+    <% } else { %>
+        <%= config.stringsDict.START_EXERCISE %>
+    <% } %>
+    <img src="<%= config.imagesDict.checkStroke %>" class="check">
+</a>
