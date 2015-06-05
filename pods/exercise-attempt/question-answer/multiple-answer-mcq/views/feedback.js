@@ -81,7 +81,7 @@ define(
 					$proposition.addClass('proposition_correct');
 				}
 				this.$el.find('.multiple-answer-mcq-propositions').append($proposition);
-			},
+			}
 
 		});
 		

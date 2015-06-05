@@ -4,7 +4,15 @@
         <h4 class="modal-title"><%= config.stringsDict.USER.LOG_IN %></h4>
     </div>
     <div class="modal-body">
-        <%= form %>
+        <form action="/login" method="POST" name="login_user_form">
+            <div style="display:none;"><input id="csrf_token" name="csrf_token" type="hidden" value="<%= csrf_token %>"><input id="next" name="next" type="hidden" value=""></div>
+            <p>
+                <label for="email"><%= config.stringsDict.USER.EMAIL %></label> <input id="email" name="email" type="text" value="">
+            </p>
+            <p>
+                <label for="password"><%= config.stringsDict.USER.PASSWORD %></label> <input id="password" name="password" type="password" value="">
+            </p>
+        </form>
         <button type="button" class="btn btn-submit"><%= config.stringsDict.USER.LOG_IN %></button>
     </div>
 </div>

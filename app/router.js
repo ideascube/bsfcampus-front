@@ -61,7 +61,7 @@ define(
 			clearModal: function() {
                 var $modal = $('#modal-container');
                 $modal.html('');
-                $modal.hide();
+                $modal.modal('hide');
 			},
 
 			// Routes handling
@@ -70,6 +70,7 @@ define(
 				'': 'home',
 				'register': 'register',
 				'login': 'login',
+				'login/redirect': 'login_redirect',
 				'track': 'trackList',
 				'track/:id': 'trackDetail',
 				'skill/:id': 'skillDetail',
@@ -90,10 +91,29 @@ define(
                 console.log("login");
                 var loginUserView = new LoginUserView();
                 loginUserView.render();
-                this.listenTo(loginUserView, 'close', this.clearModal);
+                var self = this;
+                this.listenTo(loginUserView, 'close', function () {
+                    self.clearModal();
+                    self.navigate(next);
+                });
 				var $modal = $('#modal-container');
 				$modal.html(loginUserView.$el);
-				$modal.modal({show: true});
+				$modal.modal('show');
+			},
+
+			login_redirect: function () {
+                console.log("login_redirect");
+                var self = this;
+                var next = Backbone.history.getFragment();
+                var loginUserView = new LoginUserView();
+                loginUserView.render();
+                this.listenTo(loginUserView, 'close', function () {
+                    self.clearModal();
+                    Backbone.history.loadUrl(next);
+                });
+				var $modal = $('#modal-container');
+				$modal.html(loginUserView.$el);
+				$modal.modal('show');
 			},
 
 			register: function () {
@@ -193,7 +213,7 @@ define(
                         401: function(){
                             // Redirec the to the login page.
                             console.log("error 401 detected");
-                            Backbone.history.loadUrl("/login");
+                            Backbone.history.loadUrl("/login/redirect");
                         }
                     }
                 });

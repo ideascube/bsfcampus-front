@@ -5,6 +5,7 @@ require.config({
 		underscore: 'lib/underscore',
 		backbone: 'lib/backbone',
 		jqueryui: 'lib/jquery-ui',
+        jqueryserialize: 'lib/jquery.serialize-object.min',
 		form2js: 'lib/form2js/form2js',
 		text: 'lib/text',
 		less: 'lib/require-less/less',
@@ -27,6 +28,9 @@ require.config({
 		'jqueryui': {
 			deps: ['jquery']
 		},
+        'jqueryserialize': {
+            deps: ['jquery']
+        },
 		'bootstrap': {
 			deps: ['jquery']
 		}

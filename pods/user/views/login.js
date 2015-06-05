@@ -3,12 +3,13 @@ define(
         'jquery',
         'underscore',
         'backbone',
+        'jqueryserialize',
         'app/config',
 
         'text!pods/user/templates/login.html',
         'text!pods/user/templates/error-login.html'
     ],
-    function($, _, Backbone, Config,
+    function($, _, Backbone, $serialize, Config,
              loginTemplate, errorLoginTemplate
     ) {
 
@@ -31,11 +32,13 @@ define(
                     url: Config.constants.serverGateway + "/login"
                 }).done(function(result){
                     console.log("get login done", result);
-                    var html = self.template({ config: Config, form: result });
+                    var $result = $(result);
+                    var csrf_token = $result.attr('value');
+                    var html = self.template({ config: Config, csrf_token: csrf_token });
                     self.$el.html(html);
                 }).fail(function(error){
                     console.log("Could not get login token", error);
-                    var html = this.errorTemplate({ config: Config });
+                    var html = self.errorTemplate({ config: Config });
                     self.$el.html(html);
                 });
 
@@ -45,9 +48,10 @@ define(
             submit: function () {
                 console.log("submit");
                 var self = this;
-                var formData = this.$el.find('form').serialize();
+                var formData = this.$el.find('form').serializeJSON();
                 $.ajax({
                     type: 'POST',
+                    contentType: 'application/json',
                     url: Config.constants.serverGateway + "/login",
                     data: formData,
                     dataType: 'json'
@@ -55,6 +59,7 @@ define(
                     self.trigger('close');
                 }).fail(function(error){
                     console.log("Could not submit login data", error);
+                    // TODO: implement case where login is false
                 });
             }
         });

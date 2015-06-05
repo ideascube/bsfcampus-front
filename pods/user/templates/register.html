@@ -4,7 +4,24 @@
         <h4 class="modal-title"><%= config.stringsDict.USER.REGISTER %></h4>
     </div>
     <div class="modal-body">
-        <%= form %>
+        <form action="/register" method="POST" name="register_user_form">
+            <div style="display:none;"><input id="csrf_token" name="csrf_token" type="hidden" value="<%= csrf_token %>"><input id="next" name="next" type="hidden" value=""></div>
+            <p>
+                <label for="full_name"><%= config.stringsDict.USER.FULL_NAME %></label> <input id="full_name" name="full_name" type="text" value="">
+            </p>
+            <p>
+                <label for="email"><%= config.stringsDict.USER.EMAIL %></label> <input id="email" name="email" type="text" value="">
+            </p>
+            <p>
+                <label for="password"><%= config.stringsDict.USER.PASSWORD %></label> <input id="password" name="password" type="password" value="">
+            </p>
+            <p>
+                <label for="password_confirm"><%= config.stringsDict.USER.CONFIRM_PASSWORD %></label> <input id="password_confirm" name="password_confirm" type="password" value="">
+            </p>
+            <p>
+                <label for="accept_cgu"><%= config.stringsDict.USER.CGU %></label> <input id="accept_cgu" name="accept_cgu" type="checkbox" value="y">
+            </p>
+        </form>
         <button type="button" class="btn btn-submit"><%= config.stringsDict.USER.REGISTER %></button>
     </div>
 </div>
