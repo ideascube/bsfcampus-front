@@ -76,7 +76,8 @@ define(
                     $modal.html(exerciseAttemptView.$el);
 					$modal.modal({show: true});
                     $modal.on('hidden.bs.modal', function () {
-                        if (!self.model.get('is_validated') && exerciseAttemptView.isExerciseCompleted)
+                        var validated = self.model.get('is_validated');
+                        if (!validated && exerciseAttemptView.isExerciseCompleted)
                         {
                             Backbone.history.loadUrl(Backbone.history.getFragment());
                         }
