@@ -36,6 +36,7 @@ define(
                     var csrf_token = $result.attr('value');
                     var html = self.template({ config: Config, csrf_token: csrf_token });
                     self.$el.html(html);
+                    console.log(self.$el.html());
                 }).fail(function(error){
                     console.log("Could not get login token", error);
                     var html = self.errorTemplate({ config: Config });

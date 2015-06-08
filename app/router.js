@@ -65,9 +65,12 @@ define(
 			},
 
             clearLoginModal: function() {
+                console.log('clearLoginModal');
                 var $modal = $('#modal-login-container');
                 $modal.html('');
                 $modal.modal('hide');
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
 			},
 
 			// Routes handling
@@ -96,6 +99,7 @@ define(
 
 			login: function () {
                 console.log("login");
+                this.clearLoginModal();
                 var loginUserView = new LoginUserView();
                 loginUserView.render();
                 this.listenTo(loginUserView, 'close', this.clearLoginModal);
@@ -106,6 +110,7 @@ define(
 
 			login_redirect: function () {
                 console.log("login_redirect");
+                this.clearLoginModal();
                 var self = this;
                 var next = Backbone.history.getFragment();
                 var loginUserView = new LoginUserView();
@@ -121,6 +126,7 @@ define(
 
 			register: function () {
                 console.log("register");
+                this.clearLoginModal();
                 var registerUserView = new RegisterUserView();
 				registerUserView.render();
                 this.listenTo(registerUserView, 'close', this.clearLoginModal);

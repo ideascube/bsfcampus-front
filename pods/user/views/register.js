@@ -24,7 +24,8 @@ define(
             errorTemplate: _.template(errorRegisterTemplate),
 
             events: {
-                'click .btn-submit': 'submit'
+                'click .btn-submit': 'submit',
+                'click #got-account-btn': 'redirect_to_login'
             },
 
             render: function () {
@@ -63,6 +64,10 @@ define(
                     console.log("Could not submit register data", error);
                     // TODO: implement case where register is wrong
                 });
+            },
+
+            redirect_to_login: function() {
+                Backbone.history.loadUrl("/login/redirect");
             }
         });
     }
