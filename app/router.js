@@ -64,6 +64,12 @@ define(
                 $modal.modal('hide');
 			},
 
+            clearLoginModal: function() {
+                var $modal = $('#modal-login-container');
+                $modal.html('');
+                $modal.modal('hide');
+			},
+
 			// Routes handling
 
 			routes: {
@@ -81,6 +87,7 @@ define(
                 this.clearHome();
 				this.clearContainer();
 				this.clearModal();
+				this.clearLoginModal();
 
 				var homeView = new HomeView();
 				homeView.render();
@@ -91,12 +98,8 @@ define(
                 console.log("login");
                 var loginUserView = new LoginUserView();
                 loginUserView.render();
-                var self = this;
-                this.listenTo(loginUserView, 'close', function () {
-                    self.clearModal();
-                    self.navigate(next);
-                });
-				var $modal = $('#modal-container');
+                this.listenTo(loginUserView, 'close', this.clearLoginModal);
+				var $modal = $('#modal-login-container');
 				$modal.html(loginUserView.$el);
 				$modal.modal('show');
 			},
@@ -108,10 +111,10 @@ define(
                 var loginUserView = new LoginUserView();
                 loginUserView.render();
                 this.listenTo(loginUserView, 'close', function () {
-                    self.clearModal();
+                    self.clearLoginModal();
                     Backbone.history.loadUrl(next);
                 });
-				var $modal = $('#modal-container');
+				var $modal = $('#modal-login-container');
 				$modal.html(loginUserView.$el);
 				$modal.modal('show');
 			},
@@ -120,8 +123,8 @@ define(
                 console.log("register");
                 var registerUserView = new RegisterUserView();
 				registerUserView.render();
-                this.listenTo(registerUserView, 'close', this.clearModal);
-				var $modal = $('#modal-container');
+                this.listenTo(registerUserView, 'close', this.clearLoginModal);
+				var $modal = $('#modal-login-container');
 				$modal.html(registerUserView.$el);
 				$modal.modal({show: true});
 			},

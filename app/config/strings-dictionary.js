@@ -61,9 +61,9 @@ define([],
                 EMAIL: 'E-mail',
                 PASSWORD: 'Mot de pase',
                 CONFIRM_PASSWORD: 'Confirmer le mot de passe',
-                CGU: 'j\'accepte les conditions d\'utilisation du site',
-                SUBMIT: 'Créer le compte'
-
+                CGU: 'j\'accepte les <a href="#">conditions d\'utilisation</a> du site.',
+                SUBMIT: 'Créer le compte',
+                GOT_AN_ACCOUNT: 'Déjà un compte ?'
             }
 
         };

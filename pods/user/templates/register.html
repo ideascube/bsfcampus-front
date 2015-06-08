@@ -1,27 +1,22 @@
-<div class="modal-dialog modal-sm modal-user-register">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"><%= config.stringsDict.USER.REGISTER %></h4>
-    </div>
-    <div class="modal-body">
-        <form action="/register" method="POST" name="register_user_form">
-            <div style="display:none;"><input id="csrf_token" name="csrf_token" type="hidden" value="<%= csrf_token %>"><input id="next" name="next" type="hidden" value=""></div>
-            <p>
-                <label for="full_name"><%= config.stringsDict.USER.FULL_NAME %></label> <input id="full_name" name="full_name" type="text" value="">
-            </p>
-            <p>
-                <label for="email"><%= config.stringsDict.USER.EMAIL %></label> <input id="email" name="email" type="text" value="">
-            </p>
-            <p>
-                <label for="password"><%= config.stringsDict.USER.PASSWORD %></label> <input id="password" name="password" type="password" value="">
-            </p>
-            <p>
-                <label for="password_confirm"><%= config.stringsDict.USER.CONFIRM_PASSWORD %></label> <input id="password_confirm" name="password_confirm" type="password" value="">
-            </p>
-            <p>
-                <label for="accept_cgu"><%= config.stringsDict.USER.CGU %></label> <input id="accept_cgu" name="accept_cgu" type="checkbox" value="y">
-            </p>
-        </form>
-        <button type="button" class="btn btn-submit"><%= config.stringsDict.USER.REGISTER %></button>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 class="modal-title"><%= config.stringsDict.USER.REGISTER %></h3>
+        </div>
+        <div class="modal-body">
+            <form>
+                <div style="display:none;"><input id="csrf_token" name="csrf_token" type="hidden" value="<%= csrf_token %>"><input id="next" name="next" type="hidden" value=""></div>
+                <p><input type="text" class="connexion_text" name="full_name" id="full_name" placeholder="   <%= config.stringsDict.USER.FULL_NAME %>"/></p>
+                <p><input type="email" class="connexion_text" name="email" id="email" placeholder="   <%= config.stringsDict.USER.EMAIL %>"/></p>
+                <p><input type="password" class="connexion_text" name="password" id="password" placeholder="   <%= config.stringsDict.USER.PASSWORD %>"/></p>
+                <p><input type="password" class="connexion_text" name="password_confirm" id="password_confirm" placeholder="   <%= config.stringsDict.USER.CONFIRM_PASSWORD %>"/></p>
+                <p><input type="checkbox" name="accept_cgu" id="accept_cgu"  /> <label for="accept_cgu" class="check-box"></label> <em class="accept_cgu"><%= config.stringsDict.USER.CGU %></em></p>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button id="connexion" type="button" class="btn btn-primary"><%= config.stringsDict.USER.REGISTER %></button>
+            <p><a href="" id="got-account-btn"><%= config.stringsDict.USER.GOT_AN_ACCOUNT %></a></p>
+        </div>
     </div>
 </div>
