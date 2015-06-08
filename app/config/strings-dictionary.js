@@ -65,7 +65,8 @@ define([],
                 CONFIRM_PASSWORD: 'Confirmer le mot de passe',
                 CGU: 'j\'accepte les <a href="#">conditions d\'utilisation</a> du site.',
                 SUBMIT: 'Créer le compte',
-                GOT_AN_ACCOUNT: 'Déjà un compte ?'
+                GOT_AN_ACCOUNT: 'Déjà un compte ?',
+                PWD_FORGOTTEN: 'Mot de passe oublié ?'
             }
 
         };

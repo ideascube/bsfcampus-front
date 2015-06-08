@@ -7,7 +7,9 @@ define(
         'app/config',
 
         'text!pods/user/templates/login.html',
-        'text!pods/user/templates/error-login.html'
+        'text!pods/user/templates/error-login.html',
+
+        'less!pods/user/style'
     ],
     function($, _, Backbone, $serialize, Config,
              loginTemplate, errorLoginTemplate
