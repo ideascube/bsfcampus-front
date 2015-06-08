@@ -25,7 +25,20 @@ define(
 			template: _.template(listItemTemplate),
 
 			render: function() {
-				var html = this.template({track: this.model.forTemplate(), config: Config});
+                var trackSon = this.model.forTemplate();
+                var trackStatusClass = '';
+                var btnText = Config.stringsDict.START_TRACK;
+                if (trackSon.is_validated)
+                {
+                    trackStatusClass = 'validated';
+                    var btnText = Config.stringsDict.TRACK_VALIDATED;
+                }
+                else if (trackSon.is_started)
+                {
+                    trackStatusClass = 'started';
+                    var btnText = Config.stringsDict.RESUME_TRACK;
+                }
+				var html = this.template({track: trackSon, trackStatusClass: trackStatusClass, btnText: btnText, config: Config});
 				this.$el.html(html);
 				
 				return this;

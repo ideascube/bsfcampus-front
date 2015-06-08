@@ -39,12 +39,14 @@ define(
 					skillModel.validateButtonText = "Test de compétence validé";
 					skillModel.validateButtonStatus = "validated";
 					skillModel.validateButtonClass = "disabled";
+                    skillModel.validationClass = 'validated';
 				}
 				else
 				{
 					skillModel.validateButtonText = "Passer le test de compétence";
 					skillModel.validateButtonStatus = "validate-allowed";
-				}
+                    skillModel.validationClass = '';
+                }
 				
 				var html = this.template({skill: skillModel, config:Config});
 				this.$el.html(html);

@@ -12,6 +12,8 @@ define([],
             COMPLETED: 'complété',
             SKILLS_ACQUIRED: 'compétences acquises',
             START_TRACK: 'Commencer',
+            RESUME_TRACK: 'Continuer',
+            TRACK_VALIDATED: 'Validé',
             DOWNLOAD_FILE: 'Télécharger le fichier',
 
             EXERCISES: {
