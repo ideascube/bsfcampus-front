@@ -4,6 +4,7 @@ define([],
         return {
 
             SITE_TITLE: 'BSF Campus',
+            HOME_PAGE: 'Accueil',
             ALL_TRACKS: 'Parcours',
             SEARCH: 'Chercher',
             SEARCH_HINT: 'Recherche',

@@ -15,7 +15,7 @@ define(
 			template: _.template(template),
 
             events: {
-                'click #header-login-btn': 'login'
+                'click #navbar-login-btn': 'login'
             },
 
 			render: function() {

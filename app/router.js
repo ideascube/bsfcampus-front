@@ -86,7 +86,19 @@ define(
 				'resource/:id': 'resourceDetail'
 			},
 
-			home: function () {
+            resetHeaderButtonFocus: function () {
+                var $navbar = $('#navbar');
+                $navbar.find('#navbar-home-btn').removeClass('focus');
+                $navbar.find('#navbar-tracks-btn').removeClass('focus');
+                $navbar.find('#navbar-login-btn').removeClass('focus');
+            },
+
+            updateHeaderButtonFocus: function (buttonId) {
+                this.resetHeaderButtonFocus();
+                $('#navbar').find(buttonId).addClass('focus');
+            },
+
+            home: function () {
                 this.clearHome();
 				this.clearContainer();
 				this.clearModal();
@@ -95,6 +107,8 @@ define(
 				var homeView = new HomeView();
 				homeView.render();
 				$('#home').append(homeView.$el);
+
+                this.updateHeaderButtonFocus('#navbar-home-btn');
 			},
 
 			login: function () {
@@ -147,6 +161,8 @@ define(
 					trackListView.render();
 					$('#container').append(trackListView.$el);
 				});
+
+                this.updateHeaderButtonFocus('#navbar-tracks-btn');
 			},
 
 			trackDetail: function(id) {
