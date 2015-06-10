@@ -1,34 +1,73 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'text!app/header/template.html',
-		'app/config'
-	],
-	function($, _, Backbone, template, Config) {
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		return Backbone.View.extend({
+        'pods/user/models/current',
 
-			el: $('#header'),
+        'text!app/header/template.html'
+    ],
+    function ($, _, Backbone, Config,
+              currentUser,
+              template) {
 
-			template: _.template(template),
+        return Backbone.View.extend({
+
+            el: $('#header'),
+
+            template: _.template(template),
 
             events: {
                 'click #navbar-login-btn': 'login'
             },
 
-			render: function() {
-				this.$el.html(this.template({config: Config}));
-			},
+            initialize: function () {
+                this.listenTo(currentUser, "change", this.render);
+            },
 
-            login: function(e) {
+            render: function () {
+                var html = this.template({currentUser: currentUser, config: Config});
+                this.$el.html(html);
+
+                this.updateHeaderButtonFocus(this.currentFocusedElement);
+            },
+
+            login: function (e) {
                 e.preventDefault();
                 console.log('header -> login');
                 Backbone.history.loadUrl("/login");
+            },
+
+            resetHeaderButtonFocus: function () {
+                this.$el.find('#navbar-home-btn').removeClass('focus');
+                this.$el.find('#navbar-tracks-btn').removeClass('focus');
+                this.$el.find('#navbar-login-btn').removeClass('focus');
+            },
+
+            updateHeaderButtonFocus: function (element) {
+                this.resetHeaderButtonFocus();
+                this.currentFocusedElement = element;
+                var buttonId = null;
+                switch (element) {
+                    case 'home':
+                        buttonId = '#navbar-home-btn';
+                        break;
+                    case 'hierarchy':
+                        buttonId = '#navbar-tracks-btn';
+                        break;
+                    case 'user':
+                        buttonId = 'navbar-user-btn';
+                        break;
+                }
+                if (buttonId != null)
+                {
+                    this.$el.find(buttonId).addClass('focus');
+                }
             }
 
-		});
-		
-	}
+        });
+
+    }
 );

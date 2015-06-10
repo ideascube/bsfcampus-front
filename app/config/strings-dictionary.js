@@ -54,6 +54,7 @@ define([],
                     + 'professionnels en poste dans la région. La plateforme sera également accessible sans '
                     + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>',
                 LOGIN: 'Connexion',
+                LOG_OUT: 'Déconnexion',
                 REGISTER: 'Inscription'
             },
 

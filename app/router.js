@@ -26,6 +26,8 @@ define(
 
 		'pods/breadcrumb/views/breadcrumbContainer',
 
+		'pods/user/models/current',
+
 		'less!app/styles/common'
 	],
 	function($, _, Backbone, Config,
@@ -33,7 +35,8 @@ define(
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
 		SkillModel, SkillDetailView,
 		ResourceModel, ResourceDetailView,
-		ResourceHierarchyBreadcrumbView
+		ResourceHierarchyBreadcrumbView,
+		currentUser
 		) {
 
 		var AppRouter = Backbone.Router.extend({
@@ -41,8 +44,8 @@ define(
             // Global views
 
 			renderHeader: function() {
-				var appHeaderView = new AppHeaderView();
-				appHeaderView.render();
+				this.appHeaderView = new AppHeaderView();
+				this.appHeaderView.render();
 			},
 
 			renderFooter: function() {
@@ -80,23 +83,12 @@ define(
 				'register': 'register',
 				'login': 'login',
 				'login/redirect': 'login_redirect',
+				'logout': 'logout',
 				'track': 'trackList',
 				'track/:id': 'trackDetail',
 				'skill/:id': 'skillDetail',
 				'resource/:id': 'resourceDetail'
 			},
-
-            resetHeaderButtonFocus: function () {
-                var $navbar = $('#navbar');
-                $navbar.find('#navbar-home-btn').removeClass('focus');
-                $navbar.find('#navbar-tracks-btn').removeClass('focus');
-                $navbar.find('#navbar-login-btn').removeClass('focus');
-            },
-
-            updateHeaderButtonFocus: function (buttonId) {
-                this.resetHeaderButtonFocus();
-                $('#navbar').find(buttonId).addClass('focus');
-            },
 
             home: function () {
                 this.clearHome();
@@ -108,7 +100,7 @@ define(
 				homeView.render();
 				$('#home').append(homeView.$el);
 
-                this.updateHeaderButtonFocus('#navbar-home-btn');
+                this.appHeaderView.updateHeaderButtonFocus('home');
 			},
 
 			login: function () {
@@ -138,6 +130,23 @@ define(
 				$modal.modal('show');
 			},
 
+			logout: function () {
+				console.log("logout");
+				$.ajax({
+					type: 'POST',
+					contentType: 'application/json',
+					url: Config.constants.serverGateway + "/users/logout",
+					dataType: 'json'
+				}).done(function(result){
+					console.log(JSON.stringify(result));
+					currentUser.clear();
+					Backbone.history.navigate('');
+				}).fail(function(error){
+					console.log("Could not log out", error);
+					// TODO: implement case where logout is wrong
+				});
+			},
+
 			register: function () {
                 console.log("register");
                 this.clearLoginModal();
@@ -162,7 +171,7 @@ define(
 					$('#container').append(trackListView.$el);
 				});
 
-                this.updateHeaderButtonFocus('#navbar-tracks-btn');
+				this.appHeaderView.updateHeaderButtonFocus('hierarchy');
 			},
 
 			trackDetail: function(id) {
@@ -235,7 +244,7 @@ define(
                 // Tell jQuery to watch for any 401 or 403 errors and handle them appropriately
                 $.ajaxSetup({
                     statusCode: {
-                        401: function(){
+                        403: function(){
                             // Redirec the to the login page.
                             console.log("error 401 detected");
                             Backbone.history.loadUrl("/login/redirect");
@@ -247,6 +256,8 @@ define(
 				app_router.renderHeader();
 				app_router.renderFooter();
 				Backbone.history.start();
+
+				currentUser.fetch();
 			}
 		};
 

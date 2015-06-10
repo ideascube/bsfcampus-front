@@ -36,7 +36,7 @@ define(
 				this.$el.find('#track-list').append(listItemView.$el);
 				
 				return this;
-			},
+			}
 
 		});
 		

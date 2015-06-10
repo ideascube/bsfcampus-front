@@ -6,12 +6,15 @@ define(
         'jqueryserialize',
         'app/config',
 
+        'pods/user/models/current',
+
         'text!pods/user/templates/login.html',
         'text!pods/user/templates/error-login.html',
 
         'less!pods/user/style'
     ],
     function($, _, Backbone, $serialize, Config,
+             currentUser,
              loginTemplate, errorLoginTemplate
     ) {
 
@@ -48,6 +51,10 @@ define(
                 return this;
             },
 
+            traceUser: function (currentUser) {
+                console.log(currentUser.forTemplate());
+            },
+
             submit: function () {
                 console.log("submit");
                 var self = this;
@@ -59,6 +66,10 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
+                    console.log(JSON.stringify(result));
+                    currentUser.fetch().done(function (userResponse) {
+                        console.log(JSON.stringify(userResponse));
+                    });
                     self.trigger('close');
                 }).fail(function(error){
                     console.log("Could not submit login data", error);

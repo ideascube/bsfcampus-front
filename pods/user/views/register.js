@@ -32,7 +32,7 @@ define(
                 var self = this;
                 $.ajax({
                     type: 'GET',
-                    url: Config.constants.serverGateway + "/register",
+                    url: Config.constants.serverGateway + "/register"
                 }).done(function(result){
                     console.log("get register done", result);
                     var $result = $(result);
@@ -59,6 +59,10 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
+                    console.log(JSON.stringify(result));
+                    currentUser.fetch().done(function (userResponse) {
+                        console.log(JSON.stringify(userResponse));
+                    });
                     self.trigger('close');
                 }).fail(function(error){
                     console.log("Could not submit register data", error);
