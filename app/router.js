@@ -140,7 +140,7 @@ define(
 				}).done(function(result){
 					console.log(JSON.stringify(result));
 					currentUser.clear();
-					Backbone.history.navigate('');
+					Backbone.history.navigate('', {trigger: true});
 				}).fail(function(error){
 					console.log("Could not log out", error);
 					// TODO: implement case where logout is wrong
