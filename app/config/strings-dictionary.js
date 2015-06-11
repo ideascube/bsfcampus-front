@@ -75,7 +75,12 @@ define([],
                 SUBMIT: 'Créer le compte',
                 GOT_AN_ACCOUNT: 'Déjà un compte ?',
                 PWD_FORGOTTEN: 'Mot de passe oublié ?',
-                PROFILE_TITLE: 'Profil utilisateur'
+                PROFILE: {
+                    PROFILE_TITLE: 'RÉGLAGES DU COMPTE',
+                    INSERT_IMG: 'Insérez un fichier',
+                    SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
+                    PROFILE_PICTURE: 'Photo de profil'
+                }
             }
 
         };

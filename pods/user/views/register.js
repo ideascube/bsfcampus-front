@@ -11,7 +11,7 @@ define(
         'text!pods/user/templates/register.html',
         'text!pods/user/templates/error-register.html',
 
-        'less!pods/user/style'
+        'less!pods/user/styles/register'
     ],
     function($, _, Backbone, $serialize, Config,
              currentUser,

@@ -6,12 +6,15 @@ define(
         'jquery',
         'underscore',
         'backbone',
+        'jqueryserialize',
         'app/config',
 
         'pods/user/models/current',
-        'text!pods/user/templates/profile.html'
+        'text!pods/user/templates/profile.html',
+
+        'less!pods/user/styles/profile'
     ],
-    function($, _, Backbone, Config,
+    function($, _, Backbone, $serialize, Config,
              currentUser, profileTemplate
     ) {
 
@@ -19,9 +22,17 @@ define(
 
             tagName: 'div',
 
-            className: 'track-info-container',
+            id: 'user-profile-container',
 
             template: _.template(profileTemplate),
+
+            events: {
+                'click #save_modification': 'saveModifications'
+            },
+
+            initialize: function () {
+                this.listenTo(currentUser, "change", this.render);
+            },
 
             render: function() {
                 var userModel = this.model.forTemplate();
@@ -29,6 +40,26 @@ define(
                 this.$el.html(html);
 
                 return this;
+            },
+
+            saveModifications: function() {
+                console.log("save user profile modifications");
+                var formData = this.$el.find('form').serializeJSON();
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/users/current",
+                    data: formData,
+                    dataType: 'json'
+                }).done(function(result){
+                    console.log(JSON.stringify(result));
+                    currentUser.fetch().done(function (userResponse) {
+                        console.log(JSON.stringify(userResponse));
+                    });
+                }).fail(function(error){
+                    console.log("Could not post user modifications", error);
+                    // TODO: implement case where modifications are not saved
+                });
             }
 
         });
