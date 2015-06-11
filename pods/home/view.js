@@ -8,11 +8,14 @@ define(
         'backbone',
         'app/config',
 
+        'pods/user/models/current',
+
         'text!pods/home/template.html',
 
         'less!pods/home/style'
     ],
     function($, _, Backbone, Config,
+             currentUser,
              homeTemplate
     ) {
 
@@ -27,9 +30,14 @@ define(
                 'click #home-register-btn': 'register'
             },
 
+            initialize: function () {
+                this.listenTo(currentUser, "change", this.render);
+            },
+
             render: function() {
                 $("body").removeAttr("style");
-                this.$el.html(this.template({config: Config}));
+                console.log("home render", currentUser.id);
+                this.$el.html(this.template({currentUser: currentUser, config: Config}));
 
                 return this;
             },

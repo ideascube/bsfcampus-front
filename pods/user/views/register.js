@@ -6,12 +6,15 @@ define(
         'jqueryserialize',
         'app/config',
 
+        'pods/user/models/current',
+
         'text!pods/user/templates/register.html',
         'text!pods/user/templates/error-register.html',
 
         'less!pods/user/style'
     ],
     function($, _, Backbone, $serialize, Config,
+             currentUser,
              registerTemplate, errorRegisterTemplate
     ) {
 

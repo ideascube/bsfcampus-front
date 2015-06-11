@@ -9,9 +9,11 @@
         <div id="home-text-group">
             <p><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
         </div>
+        <% if (currentUser.id == null) { %>
         <div id="home-btn-group">
             <button class="btn" id="home-login-btn"><%= config.stringsDict.HOME.LOGIN %></button>
             <button class="btn" id="home-register-btn"><%= config.stringsDict.HOME.REGISTER %></button>
         </div>
+        <% } %>
     </div>
 </div>
