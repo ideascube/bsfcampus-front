@@ -4,8 +4,6 @@ define([],
         return {
 
             SITE_TITLE: 'BSF Campus',
-            HOME_PAGE: 'Accueil',
-            ALL_TRACKS: 'Parcours',
             SEARCH: 'Chercher',
             SEARCH_HINT: 'Recherche',
             START_EXERCISE: 'Commencer l\'exercice',
@@ -44,6 +42,14 @@ define([],
                 DOWNLOADABLE_FILE: 'DownloadableFileResourceContent'
             },
 
+            HEADER: {
+                LOG_OUT: 'Déconnexion',
+                LOGIN: 'Connexion',
+                ALL_TRACKS: 'Parcours',
+                HOME_PAGE: 'Accueil',
+                USER: 'Profil'
+            },
+
             HOME: {
                 BSF_HOME_PUNCHLINE: 'Bienvenue sur BSF Campus !',
                 BSF_HOME_TEXT: '<p>En 2015, l\'ONG Bibliothèques Sans Frontières lance, avec le soutien de la '
@@ -54,7 +60,6 @@ define([],
                     + 'professionnels en poste dans la région. La plateforme sera également accessible sans '
                     + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>',
                 LOGIN: 'Connexion',
-                LOG_OUT: 'Déconnexion',
                 REGISTER: 'Inscription',
                 WELCOME: 'Bienvenue '
             },
