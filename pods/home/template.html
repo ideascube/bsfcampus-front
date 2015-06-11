@@ -14,6 +14,10 @@
             <button class="btn" id="home-login-btn"><%= config.stringsDict.HOME.LOGIN %></button>
             <button class="btn" id="home-register-btn"><%= config.stringsDict.HOME.REGISTER %></button>
         </div>
+        <% } else { %>
+        <div id="home-msg-welcome">
+            <p><%= config.stringsDict.HOME.WELCOME %><%= currentUser.attributes.full_name %></p>
+        </div>
         <% } %>
     </div>
 </div>

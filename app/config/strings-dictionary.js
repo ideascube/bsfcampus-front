@@ -55,7 +55,8 @@ define([],
                     + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>',
                 LOGIN: 'Connexion',
                 LOG_OUT: 'Déconnexion',
-                REGISTER: 'Inscription'
+                REGISTER: 'Inscription',
+                WELCOME: 'Bienvenue '
             },
 
             USER: {
