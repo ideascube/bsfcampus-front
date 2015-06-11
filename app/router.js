@@ -12,6 +12,7 @@ define(
 
 		'pods/user/views/register',
 		'pods/user/views/login',
+        'pods/user/views/profile',
 
 		'pods/track/model',
 		'pods/track/collection',
@@ -31,7 +32,7 @@ define(
 		'less!app/styles/common'
 	],
 	function($, _, Backbone, Config,
-		AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView,
+		AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
 		TrackModel, TrackCollection, TrackListView, TrackDetailView, 
 		SkillModel, SkillDetailView,
 		ResourceModel, ResourceDetailView,
@@ -84,6 +85,8 @@ define(
 				'login': 'login',
 				'login/redirect': 'login_redirect',
 				'logout': 'logout',
+                'user/profile': 'userProfile',
+
 				'track': 'trackList',
 				'track/:id': 'trackDetail',
 				'skill/:id': 'skillDetail',
@@ -102,6 +105,17 @@ define(
 
                 this.appHeaderView.updateHeaderButtonFocus('home');
 			},
+
+            register: function () {
+                console.log("register");
+                this.clearLoginModal();
+                var registerUserView = new RegisterUserView();
+                registerUserView.render();
+                this.listenTo(registerUserView, 'close', this.clearLoginModal);
+                var $modal = $('#modal-login-container');
+                $modal.html(registerUserView.$el);
+                $modal.modal({show: true});
+            },
 
 			login: function () {
                 console.log("login");
@@ -147,16 +161,18 @@ define(
 				});
 			},
 
-			register: function () {
-                console.log("register");
-                this.clearLoginModal();
-                var registerUserView = new RegisterUserView();
-				registerUserView.render();
-                this.listenTo(registerUserView, 'close', this.clearLoginModal);
-				var $modal = $('#modal-login-container');
-				$modal.html(registerUserView.$el);
-				$modal.modal({show: true});
-			},
+            userProfile: function() {
+                var self = this;
+                currentUser.fetch().done( function() {
+                    self.clearHome();
+                    self.clearContainer();
+                    self.clearModal();
+
+                    var userProfileView = new UserProfileView({model: currentUser});
+                    userProfileView.render();
+                    $('#container').append(userProfileView.$el);
+                });
+            },
 
 			trackList: function() {
 				var collection = new TrackCollection();

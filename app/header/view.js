@@ -28,7 +28,7 @@ define(
             },
 
             render: function () {
-                var html = this.template({currentUser: currentUser, config: Config});
+                var html = this.template({currentUser: currentUser.forTemplate(), config: Config});
                 this.$el.html(html);
 
                 this.updateHeaderButtonFocus(this.currentFocusedElement);

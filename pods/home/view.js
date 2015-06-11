@@ -37,7 +37,7 @@ define(
             render: function() {
                 $("body").removeAttr("style");
                 console.log("home render", currentUser.id);
-                this.$el.html(this.template({currentUser: currentUser, config: Config}));
+                this.$el.html(this.template({currentUser: currentUser.forTemplate(), config: Config}));
 
                 return this;
             },
