@@ -58,12 +58,13 @@ define(
 						console.log('dropdown' + JSON.stringify(dropdown));
 						var html = this.dropdownTemplate({dropdown: dropdown, index: i});
 						this.$el.find('.dropdowns-text').append(html);
-						self = this
-						this.$el.find(".dropdown-menu li a").click(function(){
+						self = this;
+						this.$el.find(".dropdown-menu li a").click(function(e){
+                            e.preventDefault();
 							self.onPropositionSelected($(this));
 						});
 					}
-				};
+				}
 
 				return this;
 			},
