@@ -21,6 +21,15 @@ define(
 
 			route: function() {
 				return '#/skill/' + this.id;
+			},
+
+			forTemplate: function() {
+
+				var son = AbstractModel.prototype.forTemplate.call(this); // equivalent to super.forTemplate()
+
+				son.iconUrl = son.icon_url;
+
+				return son;
 			}
 
 		});

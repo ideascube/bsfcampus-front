@@ -6,23 +6,23 @@ define(
 		'app/config',
 
 		'pods/track/model',
-
 		'pods/lesson/collections/skill',
-		
 		'pods/resource/collections/lesson',
+		'pods/attempts/skill-validation-attempt/model',
 		
 		'pods/skill/views/skillOutlineItem',
 		'pods/skill/views/lessonOutlineItem',
 		'pods/skill/views/backToTrack',
+		'pods/attempts/skill-validation-attempt/view',
+
 		'text!pods/skill/templates/detail.html',
 
-		'less!pods/skill/style',
+		'less!pods/skill/style'
 	],
 	function($, _, Backbone, Config,
-		TrackModel, 
-		LessonSkillCollection,
-		ResourceLessonCollection,
-		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView, detailTemplate
+		TrackModel, LessonSkillCollection, ResourceLessonCollection, SkillValidationAttemptModel,
+		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView, SkillValidationAttemptView,
+	 	detailTemplate
 		) {
 
 		return Backbone.View.extend({
@@ -30,6 +30,10 @@ define(
 			tagName: 'div',
 			
 			template: _.template(detailTemplate),
+
+			events: {
+				'click .btn-validate-skill': 'startSkillValidation'
+			},
 
 			render: function() {
 				
@@ -83,6 +87,32 @@ define(
 				skillOutlineItemView.render();
 				$('#skill-outline').append(skillOutlineItemView.$el);
 			},
+
+			startSkillValidation: function(e) {
+				e.preventDefault();
+
+				var self = this;
+
+				var attempt = new SkillValidationAttemptModel();
+				attempt.set('skill', this.model.id);
+				attempt.save().done(function(result) {
+					var exerciseAttemptView = new SkillValidationAttemptView({model: attempt});
+					exerciseAttemptView.resource = self.model;
+					exerciseAttemptView.render();
+					var $modal = $('#modal-container');
+					$modal.html(exerciseAttemptView.$el);
+					$modal.modal({show: true});
+					$modal.on('hidden.bs.modal', function () {
+						var validated = self.model.get('is_validated');
+						if (!validated && exerciseAttemptView.isExerciseCompleted)
+						{
+							Backbone.history.loadUrl(Backbone.history.getFragment());
+						}
+					});
+				}).fail(function(error) {
+
+				});
+			}
 
 		});
 		

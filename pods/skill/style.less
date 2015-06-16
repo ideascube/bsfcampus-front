@@ -83,25 +83,24 @@ a.btn-validate-skill {
     margin-left: 20px;
   }
 
-}
-
-a.btn-validate-skill.disabled {
-  opacity: 1.00;
-}
-
-a.btn-validate-skill.validate-allowed {
-  color: #ffffff;
-  background-color: #bce520;
-  font-size: 1.25em;
-  img.check {
-    display: none;
+  &.disabled {
+    opacity: 1.00;
   }
-}
 
-a.btn-validate-skill.validated {
-  color: #ffffff;
-  background-color: #f8d041;
-  font-size: 1.25em;
+  &.validate-allowed {
+    color: #ffffff;
+    background-color: #bce520;
+    font-size: 1.25em;
+    img.check {
+      display: none;
+    }
+  }
+
+  &.validated {
+    color: #ffffff;
+    background-color: #f8d041;
+    font-size: 1.25em;
+  }
 }
 
 #skill-outline {

@@ -12,8 +12,8 @@ define(
 		'text!pods/resource/content/templates/video.html',
 		'text!pods/resource/content/templates/downloadable-file.html',
 
-		'pods/exercise-attempt/model',
-		'pods/exercise-attempt/view',
+		'pods/attempts/exercise-attempt/model',
+		'pods/attempts/exercise-attempt/view',
 	],
 	function($, _, Backbone, Config,
 		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate, videoTemplate, downloadableFileTemplate,
