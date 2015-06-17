@@ -5,16 +5,20 @@ define(
 		'backbone',
 		'app/config',
 
-		'pods/track/views/trackOutlineItem',
-		'text!pods/track/templates/detail.html',
-		
-		'pods/skill/collections/track',
+        'pods/skill/collections/track',
+        'pods/attempts/track-validation-attempt/model',
 
-		'less!pods/track/styles/detail',
+        'pods/track/views/trackOutlineItem',
+        'pods/attempts/track-validation-attempt/view',
+
+        'text!pods/track/templates/detail.html',
+
+		'less!pods/track/styles/detail'
 	],
 	function($, _, Backbone, Config,
-		TrackOutlineItem, detailTemplate,
-		SkillTrackCollection
+            SkillTrackCollection, TrackValidationAttemptModel,
+            TrackOutlineItem, TrackValidationAttemptView,
+            detailTemplate
 		) {
 
 		return Backbone.View.extend({
@@ -71,6 +75,36 @@ define(
 			
 				return this;
 			},
+
+            events: {
+                'click .btn-start-exercise': 'startExercise'
+            },
+
+            startSkillValidation: function(e) {
+                e.preventDefault();
+
+                var self = this;
+
+                var attempt = new TrackValidationAttemptModel();
+                attempt.set('exercise', this.model.get('validation_test').id);
+                attempt.save().done(function(result) {
+                    var exerciseAttemptView = new TrackValidationAttemptView({model: attempt});
+                    exerciseAttemptView.resource = self.model;
+                    exerciseAttemptView.render();
+                    var $modal = $('#modal-container');
+                    $modal.html(exerciseAttemptView.$el);
+                    $modal.modal({show: true});
+                    $modal.on('hidden.bs.modal', function () {
+                        var validated = self.model.get('is_validated');
+                        if (!validated && exerciseAttemptView.isExerciseCompleted)
+                        {
+                            Backbone.history.loadUrl(Backbone.history.getFragment());
+                        }
+                    });
+                }).fail(function(error) {
+
+                });
+            }
 
 		});
 

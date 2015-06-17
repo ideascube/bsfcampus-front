@@ -13,7 +13,7 @@ define(
 		'text!pods/resource/content/templates/downloadable-file.html',
 
 		'pods/attempts/exercise-attempt/model',
-		'pods/attempts/exercise-attempt/view',
+		'pods/attempts/exercise-attempt/view'
 	],
 	function($, _, Backbone, Config,
 		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate, videoTemplate, downloadableFileTemplate,
