@@ -6,6 +6,7 @@ define([],
             SITE_TITLE: 'BSF Campus',
             SEARCH: 'Chercher',
             SEARCH_HINT: 'Recherche',
+            QUIT: 'Quitter',
             START_EXERCISE: 'Commencer l\'exercice',
             EXERCISE_VALIDATED: 'Exercice validé',
             COMPLETED: 'complété',
@@ -32,6 +33,13 @@ define([],
                 WRONG_ANSWER_MULTI: 'DOMMAGE, AU MOINS UNE REPONSE EST INCORRECTE',
                 SUCCESS_MESSAGE_HEADER: 'BRAVO, vous avez réussi cet exercice !',
                 SUCCESS_MESSAGE: 'Vous pouvez désormais passer à un nouveau contenu et parfaire votre apprentissage.<br>Bonne continuation !',
+                FAILURE_MESSAGE_HEADER: 'Dommage !',
+                FAILURE_MESSAGE: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ? Renforcez vos connaissances en consultant la ressource suivante.'
+            },
+
+            TRACK_VALIDATION: {
+                SUCCESS_MESSAGE_HEADER: 'Félicitations !',
+                SUCCESS_MESSAGE: 'Suspendisse potenti. Nulla a luctus dolor, nec gravida ligula. Maecenas feugiat sapien at purus maximus, at accumsan nisl dignissim. Integer nisi magna, commodo ac augue in, eleifend tincidunt elit. In egestas tellus ac est finibus pulvinar. Sed vitae sem non odio feugiat feugiat sit amet ut nunc. Morbi quis euismod ligula. Fusce egestas arcu et porta aliquet. Nulla ac hendrerit dui. Suspendisse nisl ante, pharetra pharetra libero ac, hendrerit volutpat sapien.',
                 FAILURE_MESSAGE_HEADER: 'Dommage !',
                 FAILURE_MESSAGE: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ? Renforcez vos connaissances en consultant la ressource suivante.'
             },

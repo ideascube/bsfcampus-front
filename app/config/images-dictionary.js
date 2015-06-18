@@ -50,7 +50,14 @@ define(
 				EXERCISE: Constants.imagesPath + 'icon_exercice_white.png',
 				AUDIO: Constants.imagesPath + 'icon_download_white.png',
 				DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_white.png'
-			}
+			},
+            skillValidation: {
+
+            },
+            trackValidation: {
+                CERTIFICATE: Constants.imagesPath + 'certificate_laurel.png',
+                STARS: Constants.imagesPath + 'stars_tracks.png'
+            }
 
 		};
 	}
