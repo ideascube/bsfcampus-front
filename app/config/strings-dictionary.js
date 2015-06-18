@@ -13,6 +13,10 @@ define([],
             START_TRACK: 'Commencer',
             RESUME_TRACK: 'Continuer',
             TRACK_VALIDATED: 'Validé',
+            TRACK_TEST_VALIDATED: 'Parcours Validé',
+            TRACK_TEST_VALIDATION_ALLOWED: 'Passer le test du parcours',
+            SKILL_TEST_VALIDATED: 'Compétence Validée',
+            SKILL_TEST_VALIDATION_ALLOWED: 'Passer le test de compétence',
             DOWNLOAD_FILE: 'Télécharger le fichier',
 
             EXERCISES: {

@@ -40,14 +40,14 @@ define(
 				var skillModel = this.model.forTemplate();
 				if (skillModel.is_validated)
 				{
-					skillModel.validateButtonText = "Test de compétence validé";
+					skillModel.validateButtonText = Config.stringsDict.SKILL_TEST_VALIDATED;
 					skillModel.validateButtonStatus = "validated";
 					skillModel.validateButtonClass = "disabled";
                     skillModel.validationClass = 'validated';
 				}
 				else
 				{
-					skillModel.validateButtonText = "Passer le test de compétence";
+					skillModel.validateButtonText = Config.stringsDict.SKILL_TEST_VALIDATION_ALLOWED;
 					skillModel.validateButtonStatus = "validate-allowed";
                     skillModel.validationClass = '';
                 }

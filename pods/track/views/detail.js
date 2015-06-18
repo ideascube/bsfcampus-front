@@ -33,22 +33,25 @@ define(
 			
 			template: _.template(detailTemplate),
 
+            events: {
+                'click .btn-validate-track': 'startTrackValidation'
+            },
+
 			render: function() {
 				var trackModel = this.model.forTemplate();
 				if (trackModel.is_validated)
 				{
-					trackModel.validateButtonText = "Test du parcours validé";
+					trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATED;
 					trackModel.validateButtonStatus = "validated";
-					trackModel.validateButtonClass = "disabled";
 				}
 				else if (trackModel.progress.current >= trackModel.progress.max)
 				{
-					trackModel.validateButtonText = "Passer le test du parcours";
+					trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
 					trackModel.validateButtonStatus = "validate-allowed";
 				}
 				else
 				{
-					trackModel.validateButtonText = "Passer le test du parcours";
+					trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
 					trackModel.validateButtonStatus = "validate-disabled";
 					trackModel.validateButtonClass = "disabled";
 				}
@@ -76,17 +79,14 @@ define(
 				return this;
 			},
 
-            events: {
-                'click .btn-start-exercise': 'startExercise'
-            },
-
-            startSkillValidation: function(e) {
+            startTrackValidation: function(e) {
                 e.preventDefault();
 
                 var self = this;
 
                 var attempt = new TrackValidationAttemptModel();
-                attempt.set('exercise', this.model.get('validation_test').id);
+                var validationTest = this.model.get('validation_test');
+                attempt.set('exercise', validationTest);
                 attempt.save().done(function(result) {
                     var exerciseAttemptView = new TrackValidationAttemptView({model: attempt});
                     exerciseAttemptView.resource = self.model;
