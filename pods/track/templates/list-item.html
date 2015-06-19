@@ -10,7 +10,10 @@
 				</div>
 				<div class="media-body media-middle">
 					<p><%= track.progress.current %>/<%= track.progress.max %> <%= config.stringsDict.SKILLS_ACQUIRED %></p>
-					<a href="<%= track.route %>" class="btn btn-info start <%= trackStatusClass %>"><%= btnText %></a>
+					<a href="<%= track.route %>" class="btn btn-info start <%= trackStatusClass %>">
+                        <p><%= btnText %></p>
+                        <img src="<%= config.imagesDict.checkStroke %>" class="check pull-right" />
+                    </a>
 				</div>
 			</div>
 		</div>
