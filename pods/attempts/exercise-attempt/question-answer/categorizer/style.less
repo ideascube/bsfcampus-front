@@ -1,5 +1,24 @@
 #categorizer {
 
+  @media (max-height: 719px) {
+    .categorizer-item {
+      height: 30px;
+      line-height: 7px;
+    }
+  }
+  @media (min-height: 720px) {
+    .categorizer-item {
+      height: 35px;
+      line-height: 12px;
+    }
+  }
+  @media (min-height: 900px) {
+    .categorizer-item {
+      height: 40px;
+      line-height: 18px;
+    }
+  }
+
   #categorizer-items-source, #categorizer-items-answer-feedback {
     background-color: #EDEDED;
     border-radius: 5px;
@@ -15,8 +34,6 @@
       border-radius: 5px;
       border: solid 1px #cccccc;
       margin: 0 5px 5px 5px;
-      height: 40px;
-      line-height: 20px;
       padding: 10px;
       font-size: 1.0em;
       min-width: 100px;
@@ -84,7 +101,15 @@
         padding: 5px 2px;
 
         .categorizer-category-items, .categorizer-category-items-feedback {
-          height: 230px;
+          @media (max-height: 719px) {
+            height: 180px;
+          }
+          @media (min-height: 720px) {
+            height: 200px;
+          }
+          @media (min-height: 900px) {
+            height: 230px;
+          }
           text-align: center;
           horiz-align: left;
           overflow-x: hidden;
@@ -96,8 +121,6 @@
             border-radius: 5px;
             border: solid 1px #cccccc;
             margin: 0 5px 5px 5px;
-            height: 40px;
-            line-height: 20px;
             padding: 10px;
             font-size: 1.0em;
             min-width: 100px;

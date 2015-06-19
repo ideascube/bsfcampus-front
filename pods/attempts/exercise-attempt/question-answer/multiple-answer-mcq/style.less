@@ -1,5 +1,37 @@
 #multiple-answer-mcq {
   .multiple-answer-mcq-propositions {
+
+    @media (max-height: 719px) {
+      .checkbox label {
+        padding: 12px 60px;
+        span {
+          width: 24px;
+          height: 24px;
+          margin-right: 24px;
+        }
+      }
+    }
+    @media (min-height: 720px) {
+      .checkbox label {
+        padding: 16px 60px;
+        span {
+          width: 27px;
+          height: 27px;
+          margin-right: 27px;
+        }
+      }
+    }
+    @media (min-height: 900px) {
+      .checkbox label {
+        padding: 20px 60px;
+        span {
+          width: 30px;
+          height: 30px;
+          margin-right: 30px;
+        }
+      }
+    }
+
     hr {
       width: 82%;
       border-color: #CCCCCC;
@@ -8,26 +40,17 @@
     .checkbox {
       margin: 0px auto;
       padding: 0px;
-      label {
-        margin-left: 20px;
-        margin-right: 20px;
-      }
       input[type="checkbox"] {
         display: none;
       }
       label {
         display: block;
-        padding: 20px 60px;
-        margin: 0px;
+        margin: 0;
         color: #292321;
-        font-size: 1.25em;
         span {
           display: inline-block;
-          width: 30px;
-          height: 30px;
           vertical-align: middle;
           background-color: #E6E6E6;
-          margin-right: 30px;
           cursor: pointer;
         }
       }

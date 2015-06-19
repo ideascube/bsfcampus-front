@@ -18,18 +18,30 @@
       label {
         display: block;
         padding: 20px 60px;
-        margin: 0px;
+        margin: 0;
         color: #292321;
         font-size: 1.25em;
         font-weight: 400;
         text-align: left;
         span {
           display: inline-block;
-          width: 30px;
-          height: 30px;
+          @media (max-height: 719px) {
+            width: 24px;
+            height: 24px;
+            margin-right: 24px;
+          }
+          @media (min-height: 720px) {
+            width: 27px;
+            height: 27px;
+            margin-right: 27px;
+          }
+          @media (min-height: 900px) {
+            width: 30px;
+            height: 30px;
+            margin-right: 30px;
+          }
           vertical-align: middle;
           background-color: #E6E6E6;
-          margin-right: 30px;
           cursor: pointer;
           border-radius: 50%;
         }
