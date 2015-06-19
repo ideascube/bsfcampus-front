@@ -11,7 +11,6 @@ define(
 			logo_gates_foundation: Constants.imagesPath + 'gatesfound.png',
 			logo_bsf_campus: Constants.imagesPath + 'BSF_logo_header.png',
 			logo_bsf: Constants.imagesPath + 'BSF_logo_footer.png',
-			bsfHomeImage: Constants.imagesPath + 'bsf_home_image.jpg',
 
 			arrow: Constants.imagesPath + 'arrow.png',
 			arrowInCircle: Constants.imagesPath + 'iconmonstr-arrow-28-icon-256.png',
@@ -30,6 +29,11 @@ define(
 			inkDropOn: Constants.imagesPath + 'iconmonstr-drop-7-on.png',
 			inkDropOff: Constants.imagesPath + 'iconmonstr-drop-7-off.png',
 			orderingExerciseBg: Constants.imagesPath + 'carre_ligne.png',
+            home: {
+                bsfHomeImage: Constants.imagesPath + 'bsf_home_image.jpg',
+                bsfHomeImage3: Constants.imagesPath + 'bsf_home_image_3.jpg',
+                downArrow: Constants.imagesPath + 'down_arrow.png'
+            },
 			resourceIconOff: {
                 RICH_TEXT: Constants.imagesPath + 'icon_text_off.png',
                 VIDEO: Constants.imagesPath + 'icon_video_off.png',

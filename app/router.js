@@ -59,7 +59,12 @@ define(
 			},
 
 			clearContainer: function() {
+				$('#container').show();
 				$('#container').html('');
+			},
+
+			hideContainer: function() {
+				$('#container').hide();
 			},
 
 			clearModal: function() {
@@ -96,6 +101,7 @@ define(
             home: function () {
                 this.clearHome();
 				this.clearContainer();
+                this.hideContainer();
 				this.clearModal();
 				this.clearLoginModal();
 

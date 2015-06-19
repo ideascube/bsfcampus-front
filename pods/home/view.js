@@ -27,7 +27,8 @@ define(
 
             events: {
                 'click #home-login-btn': 'login',
-                'click #home-register-btn': 'register'
+                'click #home-register-btn': 'register',
+                'click #arrow_center': 'scrollTo'
             },
 
             initialize: function () {
@@ -38,6 +39,9 @@ define(
                 $("body").removeAttr("style");
                 console.log("home render", currentUser.id);
                 this.$el.html(this.template({currentUser: currentUser.forTemplate(), config: Config}));
+                this.$el.find("#first_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
+                this.$el.find("#second_window").css('background-image', 'url(' + Config.imagesDict.default_background_image + ')');
+                this.$el.find("#third_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage3 + ')');
 
                 return this;
             },
@@ -50,9 +54,18 @@ define(
             register: function() {
                 console.log('home -> register');
                 Backbone.history.loadUrl("/register");
+            },
+
+            scrollTo: function (e) {
+                e.preventDefault();
+
+                var the_id = $(e.currentTarget).find('a').attr("href");
+                var $target = this.$el.find(the_id);
+
+                $('html, body').stop().animate({
+                    'scrollTop': $target.offset().top
+                }, 'slow');
             }
-
         });
-
     }
 );

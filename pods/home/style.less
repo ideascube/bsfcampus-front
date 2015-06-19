@@ -1,54 +1,158 @@
-#punch-line {
-  background-color: #39637c;
-  text-align: center;
-  color: white;
-  padding: 20px 60px;
-  h1 {
-    margin: 0;
-  }
-}
-
 #home-content {
-  padding: 60px 10px;
-  #home-image img {
-    width: 100%;
-  }
-  #home-text-group {
-    text-align: justify;
-    margin-bottom: 30px;
-  }
-  #home-btn-group {
-    text-align: center;
-  }
-  #home-login-btn {
-    color: white;
-    background-color: #1caef7;
-    font-weight: 600;
-    border: none;
-    border-radius: 25px;
-    width: 75%;
-    font-size: 1.3em;
-    margin: 10px auto;
-    padding: 10px;
-  }
-  #home-register-btn {
-    color: #39637c;
-    background-color: white;
-    font-weight: 600;
-    border: 2px solid #1caef7;
-    border-radius: 25px;
-    width: 75%;
-    font-size: 1.3em;
-    margin: 10px auto;
-    padding: 10px;
+  /* ----- Premiere Fenêtre ----- */
+
+  #first_window{
+    -webkit-background-size: cover; /* pour Chrome et Safari */
+    -moz-background-size: cover; /* pour Firefox */
+    -o-background-size: cover; /* pour Opera */
+    background-size: cover; /* version standardisée */
+    height:720px;
+    border-radius: 0px;
   }
 
-  #home-msg-welcome {
-    p {
+  #title_1{
+    text-align: center;
+    margin: 150px 0 150px 0;
+    font-weight: 700;
+  }
+
+  .button_center_1{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #arrow_center{
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  /* ----- Second Window ----- */
+
+  #second_window{
+    background-color: #f8f6f7;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:720px;
+    border-radius: 0px;
+  }
+
+  #title_2{
+    text-align: center;
+    margin: 50px 0 50px 0;
+    font-weight: 700;
+  }
+
+  .text_justify{
+    text-align: justify;
+  }
+
+  #button_window_2{
+    margin-top: 40px;
+  }
+
+  .button_center_2{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* ----- Third Window ----- */
+
+  #third_window{
+    -webkit-background-size: cover; /* pour Chrome et Safari */
+    -moz-background-size: cover; /* pour Firefox */
+    -o-background-size: cover; /* pour Opera */
+    background-size: cover; /* version standardisée */
+    height:720px;
+    border-radius: 0px;
+  }
+
+  /* ----- All windows ----- */
+
+  /* "connection" buttons */
+  .connection{
+    color: white;
+    background-color: #3498db;
+    border-color: #3498db;
+    border-radius: 20px;
+    width: 225px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .connection:hover{
+    color: white;
+    background-color: #42befa;
+    border-color: #42befa;
+    border-radius: 20px;
+    width: 225px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .home-msg-welcome {
+    h4 {
       font-weight: 600;
       text-align: center;
       font-size: 1.5em;
       font-style: italic;
+    }
+  }
+
+  /* "subscribe" buttons */
+  .subscribe{
+    background-color: rgba(255,255,255,0.2);
+    border-color: white;
+    color: white;
+    border-radius: 20px;
+    width: 225px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .subscribe:hover{
+    background-color: #42befa;
+    border-color: #42befa;
+    opacity: 1;
+    color: #ffffff;
+    border-radius: 20px;
+    width: 225px;
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  /* ----- Bootstrap Modifications ----- */
+
+  input,
+  button,
+  select,
+  textarea {
+    background: #fcfcfc;
+  }
+
+  .btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+  }
+
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #42befa;
+    border-color: #42befa;
+  }
+
+  p {
+    color: #636363;
+  }
+
+  /* ------ Media Queries Modifications ----- */
+
+  @media (min-width: 992px){
+    .col-md-4{
+      width: 100%;
+    }
+    .col-md-offset-2 {
+      margin-left: 0%;
     }
   }
 }

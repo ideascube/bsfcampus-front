@@ -1,23 +1,54 @@
-<div id="punch-line">
-    <h1><%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %></h1>
-</div>
-<div id="home-content" class="container">
-    <div class="col-md-6" id="home-image">
-        <img src="<%= config.imagesDict.bsfHomeImage %>">
+<div id="home-content" class="container-fluid">
+    <div class="row"> <!-- First Window -->
+        <div id="first_window" class="col-sm-12 col-md-12 col-lg-12">
+            <h1 id="title_1" class="col-sm-12 col-md-12 col-lg-12"><%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %></h1>
+            <% if (currentUser.id == null) { %>
+            <div class="col-sm-12 col-md-12 col-lg-12 button_center_1">
+                <button type="button" class="btn connection"><%= config.stringsDict.HOME.LOGIN %></button>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 button_center_1">
+                <button type="button" class="btn subscribe"><%= config.stringsDict.HOME.REGISTER %></button>
+            </div>
+            <% } else { %>
+            <div class="home-msg-welcome">
+                <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
+            </div>
+            <% } %>
+            <div class="col-sm-12 col-md-12 col-lg-12" id="arrow_center">
+                <a href="#second_window"><img src="<%= config.imagesDict.home.downArrow %>" alt="scroll_arrow"></a>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4 col-md-offset-1" id="home-text">
-        <div id="home-text-group">
-            <p><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
+    <div class="row"><!-- Second Window -->
+        <div id="second_window" class="col-sm-12 col-md-12 col-lg-12">
+            <h1 id="title_2"><%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %></h1>
+            <div class="row">
+                <div class="col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
+                    <p class="text_justify"><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5">
+                    <p class="text_justify"><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
+                </div>
+            </div>
+            <% if (currentUser.id == null) { %>
+            <div id="button_window_2">
+                <div class="col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 col-lg-12 button_center_2">
+                    <button type="button" class="btn btn-primary connection"><%= config.stringsDict.HOME.LOGIN %></button>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-12 button_center_2">
+                    <button type="button" class="btn btn-primary subscribe"><%= config.stringsDict.HOME.REGISTER %></button>
+                </div>
+            </div>
+            <% } else { %>
+            <div class="home-msg-welcome">
+                <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
+            </div>
+            <% } %>
         </div>
-        <% if (currentUser.id == null) { %>
-        <div id="home-btn-group">
-            <button class="btn" id="home-login-btn"><%= config.stringsDict.HOME.LOGIN %></button>
-            <button class="btn" id="home-register-btn"><%= config.stringsDict.HOME.REGISTER %></button>
+    </div>
+    <div class="row"> <!-- Third Window -->
+        <div id="third_window" class="col-sm-12 col-md-12 col-lg-12">
+
         </div>
-        <% } else { %>
-        <div id="home-msg-welcome">
-            <p><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></p>
-        </div>
-        <% } %>
     </div>
 </div>
