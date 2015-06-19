@@ -18,7 +18,7 @@ define(
 			studentHat: Constants.imagesPath + 'student-hat.png',
 			quill: Constants.imagesPath + 'iconmonstr-pen-12-icon-256.png',
 			checkStroke: Constants.imagesPath + 'iconmonstr-check-mark-4-icon-256.png',
-			checkFull: Constants.imagesPath + 'iconmonstr-check-mark-3-icon-256.png',
+			checkFull: Constants.imagesPath + 'validate.png',
 			checkSingle: Constants.imagesPath + 'iconmonstr-check-mark-6-icon-256.png',
 			greenCheck: Constants.imagesPath + 'check_green.png',
 			wrong: Constants.imagesPath + 'wrong-icon.png',
