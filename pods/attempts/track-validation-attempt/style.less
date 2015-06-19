@@ -6,41 +6,18 @@
   //box-shadow: 0 0 5px #44f6d01c;
 
   .modal-header {
-    border: none;
-    .track-validation-modal-title {
+    .modal-title.track-validation {
       color: #888888;
-      font-size: 1.5em;
-      font-weight: 700;
-      text-transform: uppercase;
-
-      img {
-        margin-right: 20px;
-        margin-left: 20px;
-      }
-
     }
   }
 
-  .track-validation-attempt-progress {
-    background-color: #efefef;
-    border-radius: 15px;
-    height: 30px;
-    margin-left: 60px;
-    margin-right: 60px;
-    margin-bottom: 10px;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
+  .exercise-attempt-progress.track-validation {
     .progress-bar {
       background-color: #F7D01D;
-      margin-bottom: 40px;
-      box-shadow: none;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
     }
   }
 
-  .track-validation-recap {
+  .exercise-recap.track-validation {
     .recap-header {
       margin: 40px auto;
       text-align: center;
@@ -60,44 +37,11 @@
 
     .recap-details {
       margin: auto 60px;
-
-      p {
-        /*display: inline-block;*/
-        font-size: 1.2em;
-        font-weight: 400;
-        line-height: 2.5em;
-      }
-      .btn-fail-linked-exercise {
-        margin: 40px auto;
-        padding: 10px 40px;
-        text-align: center;
-        color: white;
-        background-color: #1caff6;
-        border-radius: 5px;
-        border: none;
-        font-size: 1.0em;
-
-        img {
-          height: 30px;
-          width: 30px;
-          margin-right: 30px;
-        }
-      }
-    }
-    &.track-validation-succeeded {
-      .recap-header h1 {
-        color: #F7D01D;
-      }
-    }
-    &.track-validation-failed {
-      .recap-header h1 {
-        color: #e71f2e;
-      }
     }
   }
 
   .exercise-attempt-footer {
-    button.track-validation-continue {
+    button.track-validation {
       &, &:hover {
         background-color: #BCE421;
       }
