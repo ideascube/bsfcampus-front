@@ -42,7 +42,6 @@ define(
 				{
 					skillModel.validateButtonText = Config.stringsDict.SKILL_TEST_VALIDATED;
 					skillModel.validateButtonStatus = "validated";
-					skillModel.validateButtonClass = "disabled";
                     skillModel.validationClass = 'validated';
 				}
 				else
