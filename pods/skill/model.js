@@ -23,14 +23,14 @@ define(
 				return '#/skill/' + this.id;
 			},
 
-			forTemplate: function() {
+            forTemplate: function() {
 
-				var son = AbstractModel.prototype.forTemplate.call(this); // equivalent to super.forTemplate()
+                var son = AbstractModel.prototype.forTemplate.call(this); // equivalent to super.forTemplate()
 
-				son.iconUrl = son.icon_url;
+                son.iconUrl = son.icon_url;
 
-				return son;
-			}
+                return son;
+            }
 
 		});
 

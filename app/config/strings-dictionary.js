@@ -37,11 +37,18 @@ define([],
                 FAILURE_MESSAGE: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ? Renforcez vos connaissances en consultant la ressource suivante.'
             },
 
+            SKILL_VALIDATION: {
+                SUCCESS_MESSAGE_HEADER: 'Super, vous avez validé cette compétence !',
+                SUCCESS_MESSAGE: 'Ne vous arrêtez pas en si bon chemin !',
+                FAILURE_MESSAGE_HEADER: 'Aïe, vous n\'êtes pas encore au point sur cette compétence !',
+                FAILURE_MESSAGE: 'Reprenez les leçons et cela ira mieux la prochaine fois !'
+            },
+
             TRACK_VALIDATION: {
                 SUCCESS_MESSAGE_HEADER: 'Félicitations !',
                 SUCCESS_MESSAGE: 'Suspendisse potenti. Nulla a luctus dolor, nec gravida ligula. Maecenas feugiat sapien at purus maximus, at accumsan nisl dignissim. Integer nisi magna, commodo ac augue in, eleifend tincidunt elit. In egestas tellus ac est finibus pulvinar. Sed vitae sem non odio feugiat feugiat sit amet ut nunc. Morbi quis euismod ligula. Fusce egestas arcu et porta aliquet. Nulla ac hendrerit dui. Suspendisse nisl ante, pharetra pharetra libero ac, hendrerit volutpat sapien.',
-                FAILURE_MESSAGE_HEADER: 'Dommage !',
-                FAILURE_MESSAGE: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ? Renforcez vos connaissances en consultant la ressource suivante.'
+                FAILURE_MESSAGE_HEADER: 'On ne réussit pas toujours du premier coup !',
+                FAILURE_MESSAGE: 'Prenez le temps de reprendre les leçons et les exercices afin valider ce parcours'
             },
 
             // Constants for Resources type
