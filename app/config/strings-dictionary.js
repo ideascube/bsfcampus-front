@@ -95,10 +95,21 @@ define([],
                 GOT_AN_ACCOUNT: 'Déjà un compte ?',
                 PWD_FORGOTTEN: 'Mot de passe oublié ?',
                 PROFILE: {
-                    PROFILE_TITLE: 'RÉGLAGES DU COMPTE',
-                    INSERT_IMG: 'Insérez un fichier',
-                    SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
-                    PROFILE_PICTURE: 'Photo de profil'
+                    MENU: {
+                        DASHBOARD: "Mon tableau de bord",
+                        ACCOUNT: "Mon compte",
+                        PASSWORD: "Mon mot de passe",
+                        PARAMETERS: "Paramètres"
+                    },
+                    ACCOUNT: {
+                        PROFILE_TITLE: 'RÉGLAGES DU COMPTE',
+                        INSERT_IMG: 'Insérez un fichier',
+                        SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
+                        PROFILE_PICTURE: 'Photo de profil'
+                    },
+                    DASHBOARD: {
+                        TITLE: 'MON TABLEAU DE BORD'
+                    }
                 }
             }
 

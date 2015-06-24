@@ -24,6 +24,10 @@ define(
 
             url: function() {
                 return this.urlRoot();
+            },
+
+            dashboardUrl: function() {
+                return this.urlRoot + "/dashboard";
             }
 
         });

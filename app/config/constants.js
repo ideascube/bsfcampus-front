@@ -14,7 +14,14 @@ define(['lib/window', 'config'],
 
 			serverGateway: w.location.protocol + '//' + w.location.hostname  + ':' + port,
 
-			imagesPath: 'assets/images/'
+			imagesPath: 'assets/images/',
+
+			userProfile: {
+				DASHBOARD: 0,
+				ACCOUNT: 1,
+				PASSWORD: 2,
+				PARAMETERS: 3
+			}
 
 		};
 

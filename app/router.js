@@ -10,9 +10,9 @@ define(
 
 		'pods/home/view',
 
-		'pods/user/views/register',
-		'pods/user/views/login',
-        'pods/user/views/profile',
+		'pods/user/connection/views/register',
+		'pods/user/connection/views/login',
+        'pods/user/profile/views/profile',
 
 		'pods/track/model',
 		'pods/track/collection',
@@ -59,8 +59,9 @@ define(
 			},
 
 			clearContainer: function() {
-				$('#container').show();
-				$('#container').html('');
+				var $container = $('#container');
+				$container.show();
+				$container.html('');
 			},
 
 			hideContainer: function() {

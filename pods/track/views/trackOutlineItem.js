@@ -5,7 +5,7 @@ define(
 		'backbone',
 		'app/config',
 
-		'text!pods/track/templates/track-outline-item.html',
+		'text!pods/track/templates/track-outline-item.html'
 	],
 	function($, _, Backbone, Config,
 		trackOutlineItemTemplate

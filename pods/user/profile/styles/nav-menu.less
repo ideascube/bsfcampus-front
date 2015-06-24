@@ -1,0 +1,44 @@
+#profile-nav-menu {
+  /* ---------- Fenêtre gauche ---------- */
+
+  /* ----- Titre "h3" ----- */
+
+  &.col-lg-3 h3{
+    text-align: center;
+  }
+
+  /* ----- Nav Boutons ----- */
+
+  nav button{
+    margin: 0 auto;
+  }
+
+  nav button, nav button:hover{
+    box-shadow: 0px 4px 3px #e7e7e7;
+  }
+
+  #navigation{
+    margin-top: 30px;
+  }
+}
+
+
+
+/* ----- Modif Bootstrap Media Queries */
+
+@media (min-width: 1200px){
+  #profile-nav-menu {
+    &.col-lg-3 {
+      width: 23%;
+    }
+  }
+}
+
+@media (min-width: 768px){
+  #profile-nav-menu {
+    &.col-md-3 {
+      text-align: right;
+      background-color: white;
+    }
+  }
+}

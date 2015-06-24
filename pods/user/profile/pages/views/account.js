@@ -10,21 +10,21 @@ define(
         'app/config',
 
         'pods/user/models/current',
-        'text!pods/user/templates/profile.html',
+        'text!pods/user/profile/pages/templates/account.html',
 
-        'less!pods/user/styles/profile'
+        'less!pods/user/profile/pages/styles/account'
     ],
     function($, _, Backbone, $serialize, Config,
-             currentUser, profileTemplate
+             currentUser, accountTemplate
     ) {
 
         return Backbone.View.extend({
 
             tagName: 'div',
 
-            id: 'user-profile-container',
+            id: 'user-profile-account-container',
 
-            template: _.template(profileTemplate),
+            template: _.template(accountTemplate),
 
             events: {
                 'click #save_modification': 'saveModifications'

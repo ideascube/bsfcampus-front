@@ -8,47 +8,51 @@ define(
 
         'pods/user/models/current',
 
-        'text!pods/user/templates/register.html',
-        'text!pods/user/templates/error-register.html',
+        'text!pods/user/connection/templates/login.html',
+        'text!pods/user/connection/templates/error-login.html',
 
-        'less!pods/user/styles/register'
+        'less!pods/user/connection/styles/login'
     ],
     function($, _, Backbone, $serialize, Config,
              currentUser,
-             registerTemplate, errorRegisterTemplate
+             loginTemplate, errorLoginTemplate
     ) {
 
         return Backbone.View.extend({
 
             tagName: 'div',
 
-            template: _.template(registerTemplate),
+            template: _.template(loginTemplate),
 
-            errorTemplate: _.template(errorRegisterTemplate),
+            errorTemplate: _.template(errorLoginTemplate),
 
             events: {
-                'click .btn-submit': 'submit',
-                'click #got-account-btn': 'redirect_to_login'
+                'click .btn-submit': 'submit'
             },
 
             render: function () {
                 var self = this;
                 $.ajax({
                     type: 'GET',
-                    url: Config.constants.serverGateway + "/register"
+                    url: Config.constants.serverGateway + "/login"
                 }).done(function(result){
-                    console.log("get register done", result);
+                    console.log("get login done", result);
                     var $result = $(result);
                     var csrf_token = $result.attr('value');
                     var html = self.template({ config: Config, csrf_token: csrf_token });
                     self.$el.html(html);
+                    console.log(self.$el.html());
                 }).fail(function(error){
-                    console.log("Could not get register token", error);
+                    console.log("Could not get login token", error);
                     var html = self.errorTemplate({ config: Config });
                     self.$el.html(html);
                 });
 
                 return this;
+            },
+
+            traceUser: function (currentUser) {
+                console.log(currentUser.forTemplate());
             },
 
             submit: function () {
@@ -58,7 +62,7 @@ define(
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: Config.constants.serverGateway + "/register",
+                    url: Config.constants.serverGateway + "/login",
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
@@ -68,13 +72,9 @@ define(
                     });
                     self.trigger('close');
                 }).fail(function(error){
-                    console.log("Could not submit register data", error);
-                    // TODO: implement case where register is wrong
+                    console.log("Could not submit login data", error);
+                    // TODO: implement case where login is false
                 });
-            },
-
-            redirect_to_login: function() {
-                Backbone.history.loadUrl("/login/redirect");
             }
         });
     }
