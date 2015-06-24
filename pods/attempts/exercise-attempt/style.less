@@ -2,22 +2,30 @@
   top: 40px;
 }
 
-.modal-content-exercise-attempt {
+@media (min-width: 768px) {
 
-  @media (min-width: 768px) {
+  .modal-dialog {
     width: auto;
     margin: 30px 10px;
   }
+}
 
-  @media (min-width: 992px) {
-    width: 956px;
+@media (min-width: 992px) {
+
+  .modal-dialog {
+    width: 826px;
     margin: 30px auto;
   }
+}
 
-  @media (min-width: 1200px) {
-    width: 1150px;
+@media (min-width: 1200px) {
+  .modal-dialog {
+    width: 1000px;
     margin: 30px auto;
   }
+}
+
+.modal-content-exercise-attempt {
 
   @media (max-height: 719px) {
     .modal-header {

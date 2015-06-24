@@ -61,7 +61,7 @@ define(
 					var lessonsModels = [];
 					_.each(data.aunts, function(lesson) {
 						var lessonModel = new LessonModel({lesson: lesson}, {parse: true});
-						var resources = resourcesSkillCollection.where({'lesson': lessonModel.id});
+						var resources = resourcesSkillCollection.where({'parent': lessonModel.id});
 						var resourcesCollection = new ResourcesLessonCollection(resources);
 						lessonModel.set('resources', resourcesCollection);
 						lessonsModels.push(lessonModel);
