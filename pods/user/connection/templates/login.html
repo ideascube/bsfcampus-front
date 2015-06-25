@@ -6,8 +6,7 @@
         </div>
         <div class="modal-body">
             <form>
-                <div style="display:none;"><input id="csrf_token" name="csrf_token" type="hidden" value="<%= csrf_token %>"><input id="next" name="next" type="hidden" value=""></div>
-                <p><input type="text" class="connexion_text" name="email" id="email" placeholder="   <%= config.stringsDict.USER.EMAIL %>"/></p>
+                <p><input type="text" class="connexion_text" name="username" id="username" placeholder="   <%= config.stringsDict.USER.USERNAME %>"/></p>
                 <br />
                 <input type="password" class="connexion_text" name="password" id="password" placeholder="   <%= config.stringsDict.USER.PASSWORD %>"/>
             </form>

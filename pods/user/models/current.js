@@ -18,6 +18,8 @@ define(
 
             jsonKey: "user",
 
+            jwt: null,
+
             urlRoot: function() {
                 return Config.constants.serverGateway + '/users/current';
             },
@@ -28,6 +30,35 @@ define(
 
             dashboardUrl: function() {
                 return this.urlRoot + "/dashboard";
+            },
+
+            logIn: function(username, password) {
+                var self = this;
+                var data = {
+                    "username": username,
+                    "password": password
+                };
+                return $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/auth",
+                    data: JSON.stringify(data),
+                    dataType: 'json'
+                }).done(
+                    function(result){
+                        self.jwt = result.token;
+                        self.fetch();
+                    }
+                );
+            },
+
+            logOut: function() {
+                this.jwt = null;
+                this.clear();
+            },
+
+            isLoggedIn: function() {
+                return (this.jwt !== null);
             }
 
         });
