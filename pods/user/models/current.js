@@ -7,10 +7,11 @@ define(
         'underscore',
         'backbone',
         'app/config',
+        'lib/window',
 
         'model'
     ],
-    function($, _, Backbone, Config,
+    function($, _, Backbone, Config, w,
              AbstractModel
     ) {
 
@@ -47,6 +48,10 @@ define(
                 }).done(
                     function(result){
                         self.jwt = result.token;
+                        if ('localStorage' in w && w['localStorage'] !== null) {
+                            localStorage = w['localStorage'];
+                            localStorage['mookbsf_jwt'] = self.jwt;
+                        }
                         self.fetch();
                     }
                 );
@@ -54,11 +59,30 @@ define(
 
             logOut: function() {
                 this.jwt = null;
+                if ('localStorage' in w && w['localStorage'] !== null) {
+                    localStorage = w['localStorage'];
+                    localStorage['mookbsf_jwt'] = null;
+                }
                 this.clear();
             },
 
             isLoggedIn: function() {
                 return (this.jwt !== null);
+            },
+
+            findSession: function() {
+                if ('localStorage' in w && w['localStorage'] !== null) {
+                    localStorage = w['localStorage'];
+                    var storedToken = localStorage['mookbsf_jwt'];
+                    if (storedToken !== null) {
+                        this.jwt = storedToken;
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
             }
 
         });

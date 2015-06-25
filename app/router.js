@@ -241,6 +241,8 @@ define(
         return {
             initialize: function () {
 
+                currentUser.findSession();
+
                 $(document).ajaxSend(function(event, jqxhr, settings) {
                     if (currentUser.jwt !== null) {
                         jqxhr.setRequestHeader('Authorization', 'Bearer ' + currentUser.jwt);
@@ -258,14 +260,14 @@ define(
                     }
                 });
 
+                if (currentUser.isLoggedIn()) {
+                    currentUser.fetch();
+                }
+
                 var app_router = new AppRouter();
                 app_router.renderHeader();
                 app_router.renderFooter();
                 Backbone.history.start();
-
-                if (currentUser.isLoggedIn()) {
-                    currentUser.fetch();
-                }
             }
         };
 
