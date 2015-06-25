@@ -115,22 +115,24 @@ define(
             register: function () {
                 console.log("register");
                 this.clearLoginModal();
-                var registerUserView = new RegisterUserView();
+                var $modal = $('#modal-login-container');
+                var registerUserView = new RegisterUserView({
+                    el: $modal
+                });
                 registerUserView.render();
                 this.listenTo(registerUserView, 'close', this.clearLoginModal);
-                var $modal = $('#modal-login-container');
-                $modal.html(registerUserView.$el);
                 $modal.modal({show: true});
             },
 
             login: function () {
                 console.log("login");
                 this.clearLoginModal();
-                var loginUserView = new LoginUserView();
+                var $modal = $('#modal-login-container');
+                var loginUserView = new LoginUserView({
+                    el: $modal
+                });
                 loginUserView.render();
                 this.listenTo(loginUserView, 'close', this.clearLoginModal);
-                var $modal = $('#modal-login-container');
-                $modal.html(loginUserView.$el);
                 $modal.modal('show');
             },
 

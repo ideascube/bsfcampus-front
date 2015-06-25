@@ -23,18 +23,20 @@ define(
             template: _.template(registerTemplate),
 
             events: {
-                'click .btn-submit': 'submit',
+                'submit form': 'submit',
                 'click #got-account-btn': 'redirect_to_login'
             },
 
             render: function () {
                 var html = this.template({config: Config});
                 this.$el.html(html);
+                this.$('form input').focus();
 
                 return this;
             },
 
-            submit: function () {
+            submit: function (e) {
+                e.preventDefault();
 
                 var formData = this.$('form').serializeJSON();
                 var username = this.$('form #username').val();

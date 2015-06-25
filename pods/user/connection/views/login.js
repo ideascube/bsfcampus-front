@@ -23,7 +23,7 @@ define(
             template: _.template(loginTemplate),
 
             events: {
-                'click .btn-submit': 'submit'
+                'submit form': 'submit'
             },
 
             render: function () {
@@ -37,7 +37,9 @@ define(
                 console.log(currentUser.forTemplate());
             },
 
-            submit: function () {
+            submit: function (e) {
+                e.preventDefault();
+
                 var username = this.$('form input#username').val();
                 var password = this.$('form input#password').val();
 
