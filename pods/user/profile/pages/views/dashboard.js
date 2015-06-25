@@ -45,7 +45,7 @@ define(
                 this.model = new DashboardModel({_id: currentUser.id});
                 var self = this;
                 this.model.fetch().done(function(data){
-                    _.each(self.model.tracks, self.renderTrack, self);
+                    _.each(self.model.get('tracks'), self.renderTrack, self);
 
                     self.renderTrackOutline(self.currentTrackIdx);
                 });
@@ -54,10 +54,11 @@ define(
             },
 
             renderTrack: function(track) {
-                var trackComputerItemView = new DashboardTrackComputerItemView({model: new TrackModel(track, {parse: true})});
+                var trackModel = new TrackModel({track: track}, {parse: true});
+                var trackComputerItemView = new DashboardTrackComputerItemView({model: trackModel});
                 trackComputerItemView.render();
                 this.$el.find('#dashboard-tracks .computer_version').append(trackComputerItemView.$el);
-                var trackTabletItemView = new DashboardTrackTabletItemView({model: new TrackModel(track, {parse: true})});
+                var trackTabletItemView = new DashboardTrackTabletItemView({model: trackModel});
                 trackTabletItemView.render();
                 this.$el.find('#dashboard-tracks .tablet_version .navbar-nav').append(trackTabletItemView.$el);
             },

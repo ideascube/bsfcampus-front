@@ -42,7 +42,6 @@
   }
 
   #dashboard-track-skills{
-    border-bottom: 3px solid #e74c3c;
     padding-bottom: 11px;
   }
 
@@ -72,10 +71,7 @@
   }
 
   .icon_track{
-    padding-left: 30px;
-    padding-right: 5px;
-    padding-top: 5px;
-    padding-bottom: 10px;
+    margin-left: 30px;
   }
 
   .link_border_bottom{
@@ -95,16 +91,14 @@
 
   /* ----- Right side ----- */
 
-  #dashboard-skill-title {
+  .skill, .track {
     &.media {
 
       margin: 0;
-      padding: 25px 30px;
+      padding: 15px 30px 15px 30px;
       display: block;
       position: relative;
-      border: 1px #ececec solid;
-      border-left-width: 0;
-      border-right-width: 0;
+      border-top: 1px #ececec solid;
 
       .media-body {
         padding: 10px;
@@ -151,7 +145,6 @@
       .media-text {
         color: #DDDDDD;
       }
-
     }
   }
 
@@ -159,9 +152,22 @@
     margin-left: 5px;
   }
 
-  .top_space{
-    margin-top: 30px;
-    padding-left: 30px;
+  .dashboard-skill-resources {
+    margin-left: 20%;
+
+    a.list-group-item {
+      border: none;
+
+      &.media {
+        margin-top: 0;
+      }
+
+      .media-body {
+        img {
+          height: 20px;
+        }
+      }
+    }
   }
 
   .progress_bar{
@@ -203,19 +209,16 @@
   /* ----- Media Queries ----- */
 
   @media (min-width: 991px){
-    #tablet_version{
+    .tablet_version{
       display: none;
     }
   }
 
   @media (min-width: 768px) and (max-width: 1199px){
-    .top_space {
-      padding-left: 13px;
-    }
 
     h4,
     .h4 {
-      font-size: 16px;
+      font-size: 0.9em;
     }
 
     .progress_bar{
@@ -243,16 +246,9 @@
       margin-top: 30px;
       margin-bottom: 15px;
     }
-
-    .top_space {
-      margin-top: 0px;
-    }
   }
 
   @media (max-width: 768px){
-    .top_space{
-      padding-left: 14px;
-    }
 
     nav ul#menu li {
       margin-left: 0px;
@@ -276,7 +272,7 @@
 
   h4,
   .h4 {
-    font-size: 18px;
+    font-size: 1.0em;
     font-weight: 600;
     margin-top: 5px;
     margin-bottom: 0px;
@@ -309,7 +305,7 @@
 
 
   @media (max-width: 991px){
-    #computer_version{
+    .computer_version{
       display: none;
     }
   }

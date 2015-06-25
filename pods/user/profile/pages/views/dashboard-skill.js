@@ -33,7 +33,7 @@ define(
                 this.$el.html(html);
 
                 var self = this;
-                _.each(this.model.lessons, function(lesson) {
+                _.each(this.model.get('lessons'), function(lesson) {
                     _.each(lesson.resources, self.renderResource, self);
                 });
 
@@ -43,7 +43,7 @@ define(
             renderResource: function(resource) {
                 var skillResourceItemView = new DashboardSkillResourceItemView({model: new ResourceModel({resource: resource}, {parse: true})});
                 skillResourceItemView.render();
-                this.$el.find('#dashboard-skill-resources').append(skillResourceItemView.$el);
+                this.$el.find('.dashboard-skill-resources').append(skillResourceItemView.$el);
             }
 
         });
