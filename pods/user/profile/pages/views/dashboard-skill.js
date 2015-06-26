@@ -28,7 +28,7 @@ define(
 
             render: function() {
                 var modelSON = this.model.forTemplate();
-                modelSON.validatedStatus = (modelSON.is_validated) ? "validated" : "";
+                modelSON.validationClass = (modelSON.is_validated) ? "validated" : "";
                 var html = this.template({skill: modelSON, config: Config});
                 this.$el.html(html);
 
