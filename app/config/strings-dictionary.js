@@ -109,7 +109,8 @@ define([],
                         PROFILE_PICTURE: 'Photo de profil'
                     },
                     DASHBOARD: {
-                        TITLE: 'MON TABLEAU DE BORD'
+                        TITLE: 'MON TABLEAU DE BORD',
+                        TABLET_ALL_TRACKS_LIST: "LISTE DES PARCOURS"
                     }
                 }
             }
