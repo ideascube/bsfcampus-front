@@ -21,18 +21,6 @@
     .recap-header {
       margin: 40px auto;
       text-align: center;
-
-      h1 {
-        font-size: 2.0em;
-        font-weight: 600;
-      }
-      
-      #track-recap-icons {
-        img {
-          margin: 20px auto;
-          height: 120px;
-        }
-      }
     }
 
     .recap-details {
@@ -44,6 +32,69 @@
     button.track-validation {
       &, &:hover {
         background-color: #BCE421;
+      }
+    }
+  }
+
+  @media (max-height: 719px) {
+    h1 {
+      font-size: 1.2em;
+      font-weight: 600;
+    }
+
+    .recap-details {
+      p {
+        font-size: 0.9em;
+        line-height: 1.60em;
+      }
+    }
+
+    #track-recap-icons {
+      img {
+        margin: 10px auto;
+        height: 80px;
+      }
+    }
+  }
+
+  @media (min-height: 720px) {
+    h1 {
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+
+    .recap-details {
+      p {
+        font-size: 1.0em;
+        line-height: 1.8em;
+      }
+    }
+
+    #track-recap-icons {
+      img {
+        margin: 15px auto;
+        height: 100px;
+      }
+    }
+  }
+
+  @media (min-height: 900px) {
+    h1 {
+      font-size: 1.6em;
+      font-weight: 600;
+    }
+
+    .recap-details {
+      p {
+        font-size: 1.2em;
+        line-height: 2.0em;
+      }
+    }
+
+    #track-recap-icons {
+      img {
+        margin: 20px auto;
+        height: 120px;
       }
     }
   }

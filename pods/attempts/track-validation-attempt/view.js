@@ -49,7 +49,7 @@ define (
                 });
 
                 this.$el.find('.modal-body').html(html);
-                var $exerciseRecap = this.$el.find('.modal-body .track-validation-recap');
+                var $exerciseRecap = this.$el.find('.modal-body .exercise-recap');
                 $exerciseRecap.addClass("track-validation");
                 var $exerciseRecapDetails = $exerciseRecap.find('.recap-details');
                 if (recapModelJSON.number_mistakes <= recapModelJSON.max_mistakes)
