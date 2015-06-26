@@ -35,7 +35,7 @@ define(
             },
 
             render: function() {
-                var userModel = this.model.forTemplate();
+                var userModel = currentUser.forTemplate();
                 var html = this.template({user: userModel, config: Config});
                 this.$el.html(html);
 

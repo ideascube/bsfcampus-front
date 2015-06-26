@@ -34,19 +34,21 @@ define(
 
             template: _.template(profileTemplate),
 
+            navMenuView: null,
+
             render: function() {
                 var html = this.template({resource: this.model.forTemplate()});
                 this.$el.html(html);
 
                 this.renderNavMenu();
-                this.renderNavContent();
+                this.navMenuView.changeSelectedPage(Config.constants.userProfile.DASHBOARD);
             },
 
             renderNavMenu: function() {
-
-                var navMenuView = new NavMenuView();
-                navMenuView.render();
-                this.$el.find('#profile-nav-menu').html(navMenuView.$el);
+                this.navMenuView = new NavMenuView();
+                this.navMenuView.render();
+                this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
+                this.$el.find('#profile-nav-menu').html(this.navMenuView.$el);
             },
 
             renderNavContent: function(pageId) {
@@ -67,7 +69,7 @@ define(
                         profileDetailPageView = new ParametersView();
                         break;
                     default:
-                        profileDetailPageView = new DashboardView();
+                        return;
                 }
                 profileDetailPageView.render();
                 this.$el.find('#profile-nav-details').html(profileDetailPageView.$el);

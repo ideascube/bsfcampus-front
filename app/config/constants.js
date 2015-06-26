@@ -17,10 +17,10 @@ define(['lib/window', 'config'],
 			imagesPath: 'assets/images/',
 
 			userProfile: {
-				DASHBOARD: 0,
-				ACCOUNT: 1,
-				PASSWORD: 2,
-				PARAMETERS: 3
+				DASHBOARD: "dashboard",
+				ACCOUNT: "my_account",
+				PASSWORD: "my_password",
+				PARAMETERS: "settings"
 			}
 
 		};
