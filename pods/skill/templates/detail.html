@@ -8,7 +8,7 @@
 			
 			<h2 class="text-center" id="skill-title"><%= skill.title %></h2>
 			
-			<img src="<%= skill.icon_url %>" class="img-responsive center-block img-circle" />
+			<img src="<%= skill.icon_url %>" class="img-responsive center-block" />
 
 			<div class="progress">
 			  <div class="progress-bar <%= skill.validationClass %>" role="progressbar" aria-valuenow="<%= skill.progress.current*100/skill.progress.max %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= skill.progress.current*100/skill.progress.max %>%;">

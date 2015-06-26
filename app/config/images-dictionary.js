@@ -38,22 +38,22 @@ define(
                 RICH_TEXT: Constants.imagesPath + 'icon_text_off.png',
                 VIDEO: Constants.imagesPath + 'icon_video_off.png',
                 EXERCISE: Constants.imagesPath + 'icon_exercice_off.png',
-                AUDIO: Constants.imagesPath + 'icon_download_off.png',
-                DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_off.png'
+                AUDIO: Constants.imagesPath + 'icon_audio_off.png',
+                DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_download_off.png'
 			},
 			resourceIconOn: {
                 RICH_TEXT: Constants.imagesPath + 'icon_text_on.png',
                 VIDEO: Constants.imagesPath + 'icon_video_on.png',
                 EXERCISE: Constants.imagesPath + 'icon_exercice_on.png',
-                AUDIO: Constants.imagesPath + 'icon_download_on.png',
-                DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_on.png'
+                AUDIO: Constants.imagesPath + 'icon_audio_on.png',
+                DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_download_on.png'
 			},
 			resourceIconWhite: {
 				RICH_TEXT: Constants.imagesPath + 'icon_text_white.png',
 				VIDEO: Constants.imagesPath + 'icon_video_white.png',
 				EXERCISE: Constants.imagesPath + 'icon_exercice_white.png',
-				AUDIO: Constants.imagesPath + 'icon_download_white.png',
-				DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_audio_white.png'
+				AUDIO: Constants.imagesPath + 'icon_audio_white.png',
+				DOWNLOADABLE_FILE: Constants.imagesPath + 'icon_download_white.png'
 			},
             skillValidation: {
 

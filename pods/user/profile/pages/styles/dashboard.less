@@ -41,34 +41,16 @@
     padding-bottom: 11px;
   }
 
+  #dashboard-tracks {
+    border-top: 1px #ececec solid;
+  }
+
   #dashboard-track-skills{
     padding-bottom: 11px;
+    border-top: 1px #ececec solid;
   }
 
   /* ----- Left side ----- */
-
-  a.link_selected{
-    color: #5e5e5e;
-    text-decoration: none;
-    background-color: #e0e0e0;
-    display: block;
-    height: 60px;
-  }
-
-  a.link_no_selected{
-    color: black;
-    text-decoration: none;
-    display: block;
-    height: 60px;
-  }
-
-  a.link_no_selected:hover{
-    color: #5e5e5e;
-    text-decoration: none;
-    background-color: #e0e0e0;
-    display: block;
-    height: 60px;
-  }
 
   .icon_track{
     margin-left: 30px;
@@ -91,14 +73,24 @@
 
   /* ----- Right side ----- */
 
-  .skill, .track {
+  a.skill, a.track {
+
+    color: black;
+    text-decoration: none;
+    display: block;
+    min-height: 60px;
+
+    &:hover, &.link_selected{
+      color: #5e5e5e;
+      background-color: #e0e0e0;
+    }
+
     &.media {
 
       margin: 0;
       padding: 15px 30px 15px 30px;
       display: block;
       position: relative;
-      border-top: 1px #ececec solid;
 
       .media-body {
         padding: 10px;
