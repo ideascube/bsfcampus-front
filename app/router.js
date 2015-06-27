@@ -261,7 +261,11 @@ define(
                 });
 
                 if (currentUser.isLoggedIn()) {
-                    currentUser.fetch();
+                    currentUser.fetch().fail(
+                        function() {
+                            currentUser.logOut();
+                        }
+                    );
                 }
 
                 var app_router = new AppRouter();
