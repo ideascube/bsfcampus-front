@@ -61,7 +61,7 @@ define(
                 this.jwt = null;
                 if ('localStorage' in w && w['localStorage'] !== null) {
                     localStorage = w['localStorage'];
-                    localStorage['mookbsf_jwt'] = null;
+                    localStorage.removeItem('mookbsf_jwt');
                 }
                 this.clear();
             },
@@ -73,12 +73,12 @@ define(
             findSession: function() {
                 if ('localStorage' in w && w['localStorage'] !== null) {
                     localStorage = w['localStorage'];
-                    var storedToken = localStorage['mookbsf_jwt'];
-                    if (storedToken !== null) {
+                    var storedToken = localStorage.getItem('mookbsf_jwt');
+                    if (storedToken === null) {
+                        return false;
+                    } else {
                         this.jwt = storedToken;
                         return true;
-                    } else {
-                        return false;
                     }
                 } else {
                     return false;
