@@ -1,22 +1,43 @@
-<div class="modal-dialog" id="register-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3 class="modal-title"><%= config.stringsDict.USER.REGISTER %></h3>
-        </div>
-        <div class="modal-body">
-            <form>
-                <p><input type="text" class="connexion_text" name="full_name" id="full_name" placeholder="   <%= config.stringsDict.USER.FULL_NAME %>"/></p>
-                <p><input type="text" class="connexion_text" name="username" id="username" placeholder="   <%= config.stringsDict.USER.USERNAME %>"/></p>
-                <p><input type="email" class="connexion_text" name="email" id="email" placeholder="   <%= config.stringsDict.USER.EMAIL %>"/></p>
-                <p><input type="password" class="connexion_text" name="password" id="password" placeholder="   <%= config.stringsDict.USER.PASSWORD %>"/></p>
-                <p><input type="password" class="connexion_text" name="password_confirm" id="password_confirm" placeholder="   <%= config.stringsDict.USER.CONFIRM_PASSWORD %>"/></p>
-                <p><input type="checkbox" name="accept_cgu" id="accept_cgu"  /> <label for="accept_cgu" class="check-box"></label> <em class="accept_cgu"><%= config.stringsDict.USER.CGU %></em></p>
-                <button id="connexion" type="submit" class="btn btn-primary btn-submit"><%= config.stringsDict.USER.REGISTER %></button>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <!--<p><a href="#" id="got-account-btn"><%= config.stringsDict.USER.GOT_AN_ACCOUNT %></a></p>-->
-        </div>
+<div class="modal-content" id="register-modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title"><%= config.stringsDict.USER.REGISTER %></h3>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <input type="text" class="connection_text" name="full_name" id="full_name"
+                      placeholder="<%= config.stringsDict.USER.FULL_NAME %>"/>
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="connection_text" name="username" id="username"
+                      placeholder="<%= config.stringsDict.USER.USERNAME %>"/>
+            </div>
+
+            <div class="form-group">
+                <input type="email" class="connection_text" name="email" id="email"
+                      placeholder="<%= config.stringsDict.USER.EMAIL %>"/>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="connection_text" name="password" id="password"
+                      placeholder="<%= config.stringsDict.USER.PASSWORD %>"/>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="connection_text" name="password_confirm" id="password_confirm"
+                      placeholder="<%= config.stringsDict.USER.CONFIRM_PASSWORD %>"/>
+            </div>
+
+            <div>
+                <input type="checkbox" name="accept_cgu" id="accept_cgu"/>
+                <label for="accept_cgu" class="check-box"></label>
+                <em class="accept_cgu"><%= config.stringsDict.USER.CGU %></em>
+            </div>
+            <button id="connection" type="submit" class="btn btn-primary btn-submit">
+                <%= config.stringsDict.USER.REGISTER %>
+            </button>
+        </form>
     </div>
 </div>

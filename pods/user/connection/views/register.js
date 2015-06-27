@@ -49,7 +49,7 @@ define(
                     url: Config.constants.serverGateway + "/register",
                     data: formData,
                     dataType: 'json'
-                }).done(function (result) {
+                }).done(function () {
                     currentUser
                         .logIn(username, password)
                         .done(function(){

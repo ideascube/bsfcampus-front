@@ -37,7 +37,7 @@ define(
 
             render: function() {
                 $("body").removeAttr("style");
-                console.log("home render", currentUser.id);
+
                 this.$el.html(this.template({currentUser: currentUser.forTemplate(), config: Config}));
                 this.$el.find("#first_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
                 this.$el.find("#second_window").css('background-image', 'url(' + Config.imagesDict.default_background_image + ')');
@@ -47,12 +47,10 @@ define(
             },
 
             login: function() {
-                console.log('home -> login');
                 Backbone.history.loadUrl("/login");
             },
 
             register: function() {
-                console.log('home -> register');
                 Backbone.history.loadUrl("/register");
             },
 

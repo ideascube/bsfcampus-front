@@ -1,23 +1,22 @@
-<div class="modal-dialog" id="login-modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h3 class="modal-title"><%= config.stringsDict.USER.LOG_IN %></h3>
-        </div>
-        <div class="modal-body">
-            <form method="post">
-                <p><input type="text" class="connexion_text" name="username" id="username" placeholder="   <%= config.stringsDict.USER.USERNAME %>"/></p>
-                <p><input type="password" class="connexion_text" name="password" id="password" placeholder="   <%= config.stringsDict.USER.PASSWORD %>"/></p>
-                <button id="connexion" type="submit" class="btn btn-primary btn-submit"><%= config.stringsDict.USER.LOG_IN %></button>
-            </form>
-        </div>
-        <div class="modal-footer">
-            <!--<div class="foot_info_center">
-                <a href="#" id="pwd_forgotten"><%= config.stringsDict.USER.PWD_FORGOTTEN %></a>
+<div class="modal-content" id="login-modal">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 class="modal-title"><%= config.stringsDict.USER.LOG_IN %></h3>
+    </div>
+    <div class="modal-body">
+        <form method="post">
+            <div class="form-group">
+                <input type="text" class="connection_text" name="username" id="username"
+                      placeholder="<%= config.stringsDict.USER.USERNAME %>"/>
             </div>
-            <div class="foot_info_center">
-                <a href="#" id="register"><%= config.stringsDict.USER.REGISTER %></a>
-            </div>-->
-        </div>
+
+            <div class="form-group">
+                <input type="password" class="connection_text" name="password" id="password"
+                      placeholder="<%= config.stringsDict.USER.PASSWORD %>"/>
+            </div>
+            <button id="connection" type="submit" class="btn btn-primary btn-submit">
+                <%= config.stringsDict.USER.LOG_IN %>
+            </button>
+        </form>
     </div>
 </div>

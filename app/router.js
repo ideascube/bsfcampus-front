@@ -41,6 +41,11 @@ define(
 
         var AppRouter = Backbone.Router.extend({
 
+            initialize: function() {
+                this.$modal = $('#modal');
+                this.$modalDialog = this.$modal.find('.modal-dialog');
+            },
+
             // Global views
 
             renderHeader: function () {
@@ -68,16 +73,8 @@ define(
             },
 
             clearModal: function () {
-                var $modal = $('#modal-container');
-                $modal.html('');
-                $modal.modal('hide');
-            },
-
-            clearLoginModal: function () {
-                console.log('clearLoginModal');
-                var $modal = $('#modal-login-container');
-                $modal.html('');
-                $modal.modal('hide');
+                this.$modalDialog.empty();
+                this.$modal.modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
             },
@@ -88,7 +85,7 @@ define(
                 '': 'home',
                 'register': 'register',
                 'login': 'login',
-                'login/redirect': 'login_redirect',
+                'login/redirect': 'loginRedirect',
                 'logout': 'logout',
                 'user/profile': 'userProfile',
 
@@ -103,53 +100,53 @@ define(
                 this.clearContainer();
                 this.hideContainer();
                 this.clearModal();
-                this.clearLoginModal();
 
-                var homeView = new HomeView();
+                var homeView = new HomeView({
+                    el: $('#home')
+                });
                 homeView.render();
-                $('#home').append(homeView.$el);
 
                 this.appHeaderView.updateHeaderButtonFocus('home');
             },
 
             register: function () {
-                console.log("register");
-                this.clearLoginModal();
-                var $modal = $('#modal-login-container');
+                this.clearModal();
                 var registerUserView = new RegisterUserView({
-                    el: $modal
+                    el: this.$modalDialog
                 });
                 registerUserView.render();
-                this.listenTo(registerUserView, 'close', this.clearLoginModal);
-                $modal.modal({show: true});
+                this.listenTo(registerUserView, 'close', this.clearModal);
+                this.$modal.on('shown.bs.modal', function() {
+                    registerUserView.$('form input#full_name').focus();
+                }).modal({show: true});
             },
 
             login: function () {
-                console.log("login");
-                this.clearLoginModal();
-                var $modal = $('#modal-login-container');
+                this.clearModal();
                 var loginUserView = new LoginUserView({
-                    el: $modal
+                    el: this.$modalDialog
                 });
                 loginUserView.render();
-                this.listenTo(loginUserView, 'close', this.clearLoginModal);
-                $modal.modal('show');
+                this.listenTo(loginUserView, 'close', this.clearModal);
+                this.$modal.on('shown.bs.modal', function() {
+                    loginUserView.$('form input#username').focus();
+                }).modal('show');
             },
 
-            login_redirect: function () {
-                console.log("login_redirect");
-                this.clearLoginModal();
+            loginRedirect: function () {
                 var self = this;
                 var next = Backbone.history.getFragment();
-                var loginUserView = new LoginUserView();
+                var loginUserView = new LoginUserView({
+                    el: this.$modalDialog
+                });
                 loginUserView.render();
                 this.listenTo(loginUserView, 'close', function () {
-                    self.clearLoginModal();
+                    self.clearModal();
                     Backbone.history.loadUrl(next);
                 });
-                var $modal = $('#modal-login-container');
-                $modal.html(loginUserView.$el);
-                $modal.modal('show');
+                this.$modal.on('shown.bs.modal', function() {
+                    loginUserView.$('form input#username').focus();
+                }).modal('show');
             },
 
             logout: function () {
