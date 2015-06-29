@@ -18,8 +18,6 @@ define(
 
 		return AbstractModel.extend({
 			
-			jsonKey: "exercise_attempt",
-
 			forRecapTemplate: function() {
 				var son = this.forTemplate();
 				son.number_questions = this.getCollection().length;

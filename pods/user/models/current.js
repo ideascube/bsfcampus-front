@@ -1,6 +1,3 @@
-/**
- * Created by Fred on 10/06/2015.
- */
 define(
     [
         'jquery',
@@ -16,8 +13,6 @@ define(
     ) {
 
         var CurrentUserClass = AbstractModel.extend({
-
-            jsonKey: "user",
 
             jwt: null,
 

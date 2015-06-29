@@ -1,6 +1,3 @@
-/**
- * Created by Fred on 10/06/2015.
- */
 define(
     [
         'jquery',
@@ -15,8 +12,6 @@ define(
     ) {
 
         return AbstractModel.extend({
-
-            jsonKey: "user",
 
             urlRoot: function() {
                 return Config.constants.serverGateway + '/users';

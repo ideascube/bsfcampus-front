@@ -1,6 +1,3 @@
-/**
- * Created by Fred on 24/06/2015.
- */
 define(
     [
         'jquery',
@@ -41,7 +38,7 @@ define(
             },
 
             renderResource: function(resource) {
-                var skillResourceItemView = new DashboardSkillResourceItemView({model: new ResourceModel({resource: resource}, {parse: true})});
+                var skillResourceItemView = new DashboardSkillResourceItemView({model: new ResourceModel({data: resource}, {parse: true})});
                 skillResourceItemView.render();
                 this.$el.find('.dashboard-skill-resources').append(skillResourceItemView.$el);
             }

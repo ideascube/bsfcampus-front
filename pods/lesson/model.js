@@ -13,8 +13,6 @@ define(
 
 		return AbstractModel.extend({
 
-			jsonKey: "lesson",
-
 			urlRoot: function() {
 				return Config.constants.serverGateway + '/hierarchy/lessons';
 			},

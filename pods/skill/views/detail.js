@@ -56,7 +56,7 @@ define(
 
 				var self = this;
 
-				var trackModel = new TrackModel({_id: this.model.get('track')});
+				var trackModel = new TrackModel(this.model.get('track'));
 				trackModel.fetch().done(function(){
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
@@ -66,16 +66,14 @@ define(
 				var lessonsCollection = new LessonSkillCollection();
 				lessonsCollection.meta('skill_id', this.model.id);
 				lessonsCollection.fetch().then(function(){
-					$('#skill-outline').html('');
+					$('#skill-outline').empty();
 
-					for (var i=0; i < lessonsCollection.models.length; i++)
-					{
-						self.renderLesson(lessonsCollection.models[i]);
-						if (i < lessonsCollection.models.length-1)
-						{
+					lessonsCollection.each(function(lesson, index, list){
+						self.renderLesson(lesson);
+						if (index < list.length - 1) {
 							$('#skill-outline').append('<hr>');
 						}
-					}
+					})
 				});
 			
 				return this;
@@ -98,8 +96,9 @@ define(
 					var exerciseAttemptView = new SkillValidationAttemptView({model: attempt});
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
-					var $modal = $('#modal-container');
-					$modal.html(exerciseAttemptView.$el);
+					var $modal = $('#modal');
+					var $modalDialog = $modal.find('.modal-dialog');
+					$modalDialog.html(exerciseAttemptView.$el);
 					$modal.modal({show: true});
 					$modal.on('hidden.bs.modal', function () {
 						var validated = self.model.get('is_validated');

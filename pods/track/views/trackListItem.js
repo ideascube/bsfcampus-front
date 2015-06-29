@@ -31,12 +31,12 @@ define(
                 if (trackSon.is_validated)
                 {
                     trackStatusClass = 'validated';
-                    var btnText = Config.stringsDict.TRACK_VALIDATED;
+                    btnText = Config.stringsDict.TRACK_VALIDATED;
                 }
                 else if (trackSon.is_started)
                 {
                     trackStatusClass = 'started';
-                    var btnText = Config.stringsDict.RESUME_TRACK;
+                    btnText = Config.stringsDict.RESUME_TRACK;
                 }
 				var html = this.template({track: trackSon, trackStatusClass: trackStatusClass, btnText: btnText, config: Config});
 				this.$el.html(html);

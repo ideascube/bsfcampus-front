@@ -46,7 +46,7 @@ define(
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
-                    url: Config.constants.serverGateway + "/register",
+                    url: Config.constants.serverGateway + "/users/register",
                     data: formData,
                     dataType: 'json'
                 }).done(function () {

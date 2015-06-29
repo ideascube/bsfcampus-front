@@ -1,6 +1,3 @@
-/**
- * Created by Fred on 24/06/2015.
- */
 define(
     [
         'jquery',
@@ -50,12 +47,7 @@ define(
                 var self = this;
                 this.model.fetch().done(function(data){
                     var tracks = self.model.get('tracks');
-
-                    for (var i = 0; i < tracks.length; i++)
-                    {
-                        self.renderTrack(tracks[i], i);
-                    }
-
+                    _.each(tracks, self.renderTrack, self);
                     self.renderTrackOutline(self.currentTrackIndex);
                 });
 
@@ -63,7 +55,7 @@ define(
             },
 
             renderTrack: function(track, index) {
-                var trackModel = new TrackModel({track: track}, {parse: true});
+                var trackModel = new TrackModel({data: track}, {parse: true});
                 var trackComputerItemView = new DashboardTrackComputerItemView({model: trackModel});
                 trackComputerItemView.index = index;
                 trackComputerItemView.render();
@@ -83,7 +75,7 @@ define(
                 this.$el.find('#dashboard-track-skills').html('');
                 var self = this;
                 _.each(track.skills, function(skill) {
-                    var skillOutlineItemView = new DashboardSkillItemView({model: new SkillModel({skill: skill}, {parse: true})});
+                    var skillOutlineItemView = new DashboardSkillItemView({model: new SkillModel({data: skill}, {parse: true})});
                     skillOutlineItemView.render();
                     self.$el.find('#dashboard-track-skills').append(skillOutlineItemView.$el);
                 });
@@ -100,7 +92,7 @@ define(
                 }
                 else
                 {
-                    // we do not prevent default bahavior => it will open the selected track
+                    // we do not prevent default behavior => it will open the selected track
                 }
             }
 

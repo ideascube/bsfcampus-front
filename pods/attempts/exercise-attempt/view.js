@@ -268,11 +268,11 @@ define(
 					
 					if (this.model.getFailedLinkedResource() != null)
 					{
-						var resourceModel = new ResourceModel(this.model.getFailedLinkedResource())
+						var resourceModel = new ResourceModel(this.model.getFailedLinkedResource());
 						var failLinkedResourceView = new FailLinkedResourceView({model: resourceModel});
-						var failLinkRendered = failLinkedResourceView.render();
-						failLinkRendered.$el.bind("click", this.closeModal);
-						$exerciseRecapDetails.append(failLinkRendered.$el);
+						failLinkedResourceView.render();
+						failLinkedResourceView.$el.bind("click", this.closeModal);
+						$exerciseRecapDetails.append(failLinkedResourceView.$el);
 					}
 					else
 					{

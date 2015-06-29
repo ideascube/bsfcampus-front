@@ -8,7 +8,7 @@ define(
 		'pods/track/views/trackListItem',
 		'text!pods/track/templates/list.html',
 
-		'less!pods/track/styles/list',
+		'less!pods/track/styles/list'
 	],
 	function($, _, Backbone, Config,
 		ListItemView, listTemplate

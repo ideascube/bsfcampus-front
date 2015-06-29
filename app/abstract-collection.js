@@ -22,14 +22,13 @@ define(
 			},
 
 			parse: function(response, options) {
-				if (options) {
-					if (options.jsonKey) {
-						return response[options.jsonKey];
-					}
+				if (!options) {
+					options = {};
 				}
-				
-				return response[this.jsonKey];
-			},
+
+				var jsonKey = options.jsonKey || this.jsonKey || 'data';
+				return response[jsonKey];
+			}
 
 		});
 

@@ -16,8 +16,6 @@ define(
 
 		return AbstractModel.extend({
 			
-			jsonKey: "questionAnswer",
-
 			currentQuestionModel: null,
 
 			questionModel: function() {

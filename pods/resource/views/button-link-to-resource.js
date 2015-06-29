@@ -31,7 +31,7 @@ define(
 
 			render: function() {
 				var resourceModelJSON = this.model.forTemplate();
-				switch (resourceModelJSON.resource_content._cls) {
+				switch (this.model.get('resource_content')._cls.split('.').pop()) {
 					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
 						resourceModelJSON.iconUrl = Config.imagesDict.resourceIconWhite.RICH_TEXT;
 						break;
@@ -53,7 +53,7 @@ define(
 				this.$el.html(html);
 				
 				return this;
-			},
+			}
 
 		});
 		

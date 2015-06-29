@@ -1,6 +1,3 @@
-/**
- * Created by Fred on 16/06/2015.
- */
 define (
     [
         'jquery',

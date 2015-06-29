@@ -85,14 +85,15 @@ define(
                 var self = this;
 
                 var attempt = new TrackValidationAttemptModel();
-                var validationTest = this.model.get('validation_test');
+                var validationTest = this.model.get('validation_test')._id;
                 attempt.set('exercise', validationTest);
                 attempt.save().done(function(result) {
                     var exerciseAttemptView = new TrackValidationAttemptView({model: attempt});
                     exerciseAttemptView.resource = self.model;
                     exerciseAttemptView.render();
-                    var $modal = $('#modal-container');
-                    $modal.html(exerciseAttemptView.$el);
+                    var $modal = $('#modal');
+                    var $modalDialog = $modal.find('.modal-dialog');
+					$modalDialog.html(exerciseAttemptView.$el);
                     $modal.modal({show: true});
                     $modal.on('hidden.bs.modal', function () {
                         var validated = self.model.get('is_validated');

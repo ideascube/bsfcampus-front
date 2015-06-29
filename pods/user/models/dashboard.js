@@ -1,6 +1,3 @@
-/**
- * Created by Fred on 24/06/2015.
- */
 define(
     [
         'jquery',
@@ -8,15 +5,13 @@ define(
         'backbone',
         'app/config',
 
-        'model',
+        'model'
     ],
     function($, _, Backbone, Config,
              AbstractModel
     ) {
 
         return AbstractModel.extend({
-
-            jsonKey: "dashboard",
 
             urlRoot: function() {
                 return Config.constants.serverGateway + '/users';

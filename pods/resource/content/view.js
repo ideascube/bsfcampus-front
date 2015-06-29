@@ -26,13 +26,16 @@ define(
 
 			templateHTML: function() {
 				var content = this.model.get('resource_content');
-				switch(content._cls) {
+				var cls = content._cls.split('.').pop();
+				switch(cls) {
 					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
 						return richTextTemplate;
 					case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
 						switch(content.source) {
 							case 'youtube':
 								return youtubeVideoTemplate;
+							default:
+								return 'Unrecognized resource type.';
 						}
 					case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
 						return exerciseTemplate;
@@ -72,8 +75,10 @@ define(
 					var exerciseAttemptView = new ExerciseAttemptView({model: attempt});
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
-                    var $modal = $('#modal-container');
-                    $modal.html(exerciseAttemptView.$el);
+
+					var $modal = $('#modal');
+					var $modalDialog = $modal.find('.modal-dialog');
+					$modalDialog.html(exerciseAttemptView.$el);
 					$modal.modal({show: true});
                     $modal.on('hidden.bs.modal', function () {
                         var validated = self.model.get('is_validated');

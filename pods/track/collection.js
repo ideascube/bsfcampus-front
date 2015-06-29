@@ -7,7 +7,7 @@ define(
 		
 		'collection',
 		
-		'pods/track/model',
+		'pods/track/model'
 	],
 	function($, _, Backbone, Config,
 		AbstractCollection,
@@ -18,15 +18,13 @@ define(
 
 			model: TrackModel,
 
-			jsonKey: 'tracks',
-
 			urlRoot: function() {
 				return Config.constants.serverGateway + '/hierarchy/tracks';
 			},
 
 			url: function() {
 				return this.urlRoot();
-			},
+			}
 
 		});
 

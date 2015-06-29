@@ -18,15 +18,13 @@ define(
 
 			model: ResourceModel,
 
-			jsonKey: 'resources',
-
 			urlRoot: function() {
 				return Config.constants.serverGateway + '/resources/skill';
 			},
 
 			url: function() {
 				return this.urlRoot() + '/' + this.meta('skill_id');
-			},
+			}
 
 		});
 

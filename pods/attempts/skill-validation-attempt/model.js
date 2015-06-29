@@ -1,6 +1,3 @@
-/**
- * Created by Fred on 16/06/2015.
- */
 define (
     [
         'jquery',
@@ -15,8 +12,6 @@ define (
         ) {
 
         return ExerciseAttemptModel.extend({
-
-            jsonKey: "skill_validation_attempt",
 
             urlRoot: function() {
                 return Config.constants.serverGateway + '/activity/skill_validation_attempts';

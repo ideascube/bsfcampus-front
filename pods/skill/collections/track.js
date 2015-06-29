@@ -7,7 +7,7 @@ define(
 		
 		'collection',
 		
-		'pods/skill/model',
+		'pods/skill/model'
 	],
 	function($, _, Backbone, Config,
 		AbstractCollection,
@@ -18,15 +18,13 @@ define(
 
 			model: SkillModel,
 
-			jsonKey: 'skills',
-
 			urlRoot: function() {
 				return Config.constants.serverGateway + '/hierarchy/skills/track';
 			},
 
 			url: function() {
 				return this.urlRoot() + '/' + this.meta('track_id');
-			},
+			}
 
 		});
 

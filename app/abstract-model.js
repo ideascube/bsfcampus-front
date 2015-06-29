@@ -16,15 +16,13 @@ define(
 					options = {};
 				}
 
-				if (options.collection) { 
-					// Anything to do?
-				} else if (options.jsonKey) {
-					response = response[options.jsonKey];
-				} else {
-					response = response[this.jsonKey];
+				if (!options.collection) {
+					var jsonKey = options.jsonKey || this.jsonKey || 'data';
+					response = response[jsonKey];
 				}
-				
+
 				response = this.recursiveNormalize(response);
+
 				return response;
 			},
 

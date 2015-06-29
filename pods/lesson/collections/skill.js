@@ -18,8 +18,6 @@ define(
 
 			model: LessonModel,
 
-			jsonKey: 'lessons',
-
 			urlRoot: function() {
 				return Config.constants.serverGateway + '/hierarchy/lessons/skill';
 			},

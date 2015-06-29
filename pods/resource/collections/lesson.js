@@ -18,8 +18,6 @@ define(
 
 			model: ResourceModel,
 
-			jsonKey: 'resources',
-
 			urlRoot: function() {
 				return Config.constants.serverGateway + '/resources/lesson';
 			},

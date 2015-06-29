@@ -13,7 +13,7 @@ define(
 
 		return AbstractModel.extend({
 			
-			jsonKey: "question",
+
 
 		});
 
