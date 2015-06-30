@@ -22,6 +22,8 @@ define(
         'pods/skill/model',
         'pods/skill/views/detail',
 
+        'pods/lesson/model',
+
         'pods/resource/model',
         'pods/resource/views/detail',
 
@@ -35,6 +37,7 @@ define(
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
               TrackModel, TrackCollection, TrackListView, TrackDetailView,
               SkillModel, SkillDetailView,
+              LessonModel,
               ResourceModel, ResourceDetailView,
               ResourceHierarchyBreadcrumbView,
               currentUser) {
