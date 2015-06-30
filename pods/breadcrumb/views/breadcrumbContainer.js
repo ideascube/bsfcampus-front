@@ -29,27 +29,26 @@ define(
 			className: 'breadcrumb',
 			
 			render: function() {
-				for (var i = 0; i < this.model.length; i++)
-				{
-					element = this.getRenderedElement(this.model[i]);
-					if (i == this.model.length - 1)
+				_.each(this.model, function(element, index, list) {
+					var renderedElement = this.getRenderedElement(element);
+					if (index == list.length - 1)
 					{
-						var currentHTML = element.$el.find('a').html();
-						element.$el.html(currentHTML);
-						element.$el.addClass('active');
+						var currentHTML = renderedElement.$el.find('a').html();
+						renderedElement.$el.html(currentHTML);
+						renderedElement.$el.addClass('active');
 					}
-					this.$el.append(element.$el);
-				}
+					this.$el.append(renderedElement.$el);
+				}, this);
 
 				return this;
 			},
 
-			getRenderedElement: function(element) {
-				var breadcrumbElementView = new BreadcrumbElementView({model: element});
+			getRenderedElement: function(breadcrumbInfo) {
+				var breadcrumbElementView = new BreadcrumbElementView({model: breadcrumbInfo});
 				breadcrumbElementView.render();
 			
 				return breadcrumbElementView;
-			},
+			}
 
 		});
 

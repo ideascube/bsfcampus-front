@@ -92,6 +92,7 @@ define(
                 'track': 'trackList',
                 'track/:id': 'trackDetail',
                 'skill/:id': 'skillDetail',
+                'lesson/:id': 'lessonDetail',
                 'resource/:id': 'resourceDetail'
             },
 
@@ -209,6 +210,19 @@ define(
                     var skillDetailView = new SkillDetailView({model: model});
                     skillDetailView.render();
                     $('#container').append(skillDetailView.$el);
+                });
+            },
+
+            lessonDetail: function (id) {
+                var model = new LessonModel({_id: id});
+                var self = this;
+                model.fetch().done(function () {
+                    self.clearHome();
+                    self.clearContainer();
+                    self.clearModal();
+                    self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
+
+                    //FIXME show something here, or redirect to skill detail
                 });
             },
 

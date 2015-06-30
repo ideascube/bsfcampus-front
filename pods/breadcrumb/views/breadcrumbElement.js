@@ -12,12 +12,15 @@ define(
 
 		'pods/skill/model',
 
-		'pods/resource/model',
+		'pods/lesson/model',
+
+		'pods/resource/model'
 	],
 	function($, _, Backbone, Config,
 		BreadcrumbModel, breadcrumbElementTemplate,
 		TrackModel,
 		SkillModel,
+		LessonModel,
 		ResourceModel
 		) {
 
@@ -30,23 +33,27 @@ define(
 			template: _.template(breadcrumbElementTemplate),
 
 			render: function() {
-				if (this.model.track_id != undefined)
-				{
-					var track = new TrackModel({_id: this.model.track_id});
-					this.model['url'] = track.route();
-				}
-				else if (this.model.skill_id != undefined)
-				{
-					var skill = new SkillModel({_id: this.model.skill_id});
-					this.model['url'] = skill.route();
-				}
-				else if (this.model.resource_id != undefined)
-				{
-					var resource = new ResourceModel({_id: this.model.resource_id});
-					this.model['url'] = resource.route();
+				switch (this.model._cls) {
+					case 'Track':
+						this.model = new TrackModel({data: this.model}, {parse: true});
+						break;
+					case 'Skill':
+						this.model = new SkillModel({data: this.model}, {parse: true});
+						break;
+					case 'Lesson':
+						this.model = new LessonModel({data: this.model}, {parse: true});
+						break;
+					default:
+						var suffix = 'Resource';
+						var className = this.model._cls;
+						if (className.indexOf(suffix, className.length - suffix.length) !== -1) {
+							this.model = new ResourceModel({data: this.model}, {parse: true});
+							break;
+						}
+						return;
 				}
 
-				var html = this.template({breadcrumb: this.model});
+				var html = this.template({model: this.model.forTemplate()});
 				this.$el.html(html);
 				
 				return this;
