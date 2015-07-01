@@ -8,6 +8,7 @@ define(
 		'pods/attempts/exercise-attempt/model',
 
 		'text!pods/attempts/exercise-attempt/templates/modal.html',
+		'text!pods/attempts/exercise-attempt/templates/progress-question-icon.html',
 		'text!pods/attempts/exercise-attempt/templates/exerciseRecap.html',
 		'text!pods/attempts/exercise-attempt/templates/exerciseRecapFooter.html',
 
@@ -23,7 +24,7 @@ define(
 	],
 	function($, _, Backbone, Config,
 		ExerciseAttemptModel,
-	 	modalTemplate, recapTemplate, recapFooterTemplate,
+	 	modalTemplate, progressQuestionIconTemplate, recapTemplate, recapFooterTemplate,
 		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel, 
 		ExerciseAttemptQuestionAnswerFormView, ExerciseAttemptQuestionAnswerFeedbackView,
 		ResourceModel, FailLinkedResourceView
@@ -40,6 +41,7 @@ define(
             isExerciseCompleted: false,
 
 			template: _.template(modalTemplate),
+            progressQuestionIconTemplate: _.template(progressQuestionIconTemplate),
 			recapTemplate: _.template(recapTemplate),
 			recapFooterTemplate: _.template(recapFooterTemplate),
 
@@ -54,8 +56,6 @@ define(
 				this.$el.find('.exercise-attempt-form').hide();
 				this.$el.find('.exercise-attempt-question-answer-feedback').hide();
 
-				this.continueExercise();
-
 				return this;
 			},
 
@@ -67,30 +67,55 @@ define(
 				this.currentQuestionAnswer = this.model.getCurrentQuestionAnswer();
 			},
 
-			renderProgressBar: function() {
-				var progress = this.model.getNumberOfQuestionsAnswered() / this.model.getNumberOfQuestions();
-				var width = (100 * progress).toFixed(2);
-				this.$el.find('.progress-bar')
-					.attr('aria-valuenow', this.model.getNumberOfQuestionsAnswered())
-					.attr('aria-valuemax', this.model.getNumberOfQuestions())
-					.css('width', width + '%');
-			},
+            renderProgression: function() {
+                var questionsCollection = this.model.getCollection();
+                var $progress = this.$el.find('.exercise-attempt-progress');
+                var $table = $progress.find('.question-icon-table');
+                $table.html('');
 
-			renderMistakes: function() {
-				var nbMistakesMade = this.model.getNumberOfMistakesMade();
-				var maxMistakes = this.model.get('max_mistakes');
-				console.log("renderMistakes", nbMistakesMade, maxMistakes);
-				var mistakesCounterEl = this.$el.find('.exercise-mistakes-counter');
-				mistakesCounterEl.html('');
-				for (var i=0; i < Math.min(nbMistakesMade, maxMistakes); i++)
-				{
-					mistakesCounterEl.append('<img src="' + Config.imagesDict.inkDropOff + '">');
-				}
-				for (var i=0; i < (maxMistakes - nbMistakesMade); i++)
-				{
-					mistakesCounterEl.append('<img src="' + Config.imagesDict.inkDropOn + '">');
-				}
-			},
+                var progressWidth = $progress.width();
+                console.log("renderProgression : progressWidth =", progressWidth);
+                var singleWidth = Math.floor(progressWidth/(this.model.getNumberOfQuestions()*2));
+                var singleMarginRightLeft = Math.floor(singleWidth / 4);
+
+                for (var i=0; i < questionsCollection.length; i++)
+                {
+                    var questionAnswer = questionsCollection.models[i];
+                    var question = questionAnswer.get('question');
+                    var successStatus = "";
+                    if (question != null)
+                    {
+                        var givenAnswer = questionAnswer.get('given_answer');
+                        if (givenAnswer != null)
+                        {
+                            // the question has been answered
+                            var isCorrect = questionAnswer.get('is_answered_correctly');
+                            successStatus = isCorrect ? "success" : "fail";
+                        }
+                        else
+                        {
+                            // the question has been asked but not answered yet
+                        }
+                    }
+                    else
+                    {
+                        // The question has not been asked yet
+                    }
+                    var questionIconHtml = this.progressQuestionIconTemplate({successStatus: successStatus, config: Config});
+                    var $questionHtml = $(questionIconHtml);
+                    $questionHtml.css("width", singleWidth);
+                    $questionHtml.css("height", singleWidth);
+                    //$questionHtml.css("margin", "auto " + singleMarginRightLeft + "px");
+                    $table.append($questionHtml);
+                }
+            },
+
+            renderObjective: function() {
+                var objectiveMessage = Config.stringsDict.EXERCISES.OBJECTIVE_MESSAGE;
+                var maxMistakes = this.model.get('max_mistakes');
+                objectiveMessage = objectiveMessage.replace("[%NB_SUCCESS_MIN%]", "" + (this.model.getNumberOfQuestions() - maxMistakes));
+                this.$el.find(".exercise-objective").html(objectiveMessage);
+            },
 
 			renderCurrentQuestionAnswerForm: function() {
 				var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
@@ -204,8 +229,8 @@ define(
 			answerReceived: function(result){
 				var questionId = this.currentQuestionAnswer.get('question_id');
 				this.model = new ExerciseAttemptModel(result, {parse: true});
-				this.renderProgressBar();
-				this.renderMistakes();
+				this.renderProgression();
+				this.renderObjective();
 				this.renderFeedbackAndResult(questionId);
 				// we enable the continue button until we get the response
 				this.$el.find('.btn-continue').removeClass('disabled');
@@ -280,8 +305,8 @@ define(
 					}
 				}
 				console.log("renderEndOfExercise", recapModelJSON);
-				this.renderProgressBar();
-				this.renderMistakes();
+				this.renderProgression();
+				this.renderObjective();
 				html = this.recapFooterTemplate({
 					config:Config
 				});
@@ -305,8 +330,8 @@ define(
 
 			continueExercise: function() {
 				this.updateCurrentQuestionAnswer();
-				this.renderProgressBar();
-				this.renderMistakes();
+				this.renderProgression();
+				this.renderObjective();
 				if (this.currentQuestionAnswer != null && this.model.getNumberOfMistakesMade() <= this.model.get('max_mistakes')) {
 					this.renderCurrentQuestionAnswerForm();
 				} else {

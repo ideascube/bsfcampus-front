@@ -9,7 +9,7 @@ define(
 		'pods/resource/model',
 
 		'pods/attempts/exercise-attempt/question-answer/models/question-answer',
-		'pods/attempts/exercise-attempt/question-answer/collections/attempt',
+		'pods/attempts/exercise-attempt/question-answer/collections/attempt'
 	],
 	function($, _, Backbone, Config,
 		AbstractModel, ResourceModel,

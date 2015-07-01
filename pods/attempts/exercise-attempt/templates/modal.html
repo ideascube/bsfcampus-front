@@ -4,15 +4,13 @@
 		<h4 class="modal-title"><img src="<%= resource.iconUrl %>" class="img-circle"><%= resource.title %></h4>
 	</div>
 	<div class="modal-body">
-		<div class="exercise-attempt-progress progress">
-			<div class="progress-bar" role="progressbar" aria-valuenow="" aria-valuemin="0" aria-valuemax="<%= attempt.question_answers.length %>">
-				<span class="sr-only">
-					<span class="number-questions-answered"></span>/<%= attempt.question_answers.length %>
-				</span>
-			</div>
-			<div class="exercise-mistakes-counter"></div>
+		<div class="exercise-attempt-progress">
+            <div class="question-icon-table">
+
+            </div>
 		</div>
-		<form class="exercise-attempt-form" id="question-form">
+        <div class="exercise-objective"></div>
+        <form class="exercise-attempt-form" id="question-form">
 			<input type="hidden" name="question_id" id="current_question_id_input" value="" />
 			<div class="exercise-attempt-question"></div>
 		</form>

@@ -62,7 +62,12 @@
     }
 
     .exercise-attempt-progress {
-      height: 20px;
+      height: 30px;
+
+      .question-icon {
+        max-height: 30px;
+        max-width: 30px;
+      }
     }
 
     .exercise-attempt-question, .exercise-attempt-question-answer-feedback {
@@ -121,7 +126,12 @@
     }
 
     .exercise-attempt-progress {
-      height: 25px;
+      height: 37px;
+
+      .question-icon {
+        max-height: 37px;
+        max-width: 37px;
+      }
     }
 
     .exercise-attempt-question, .exercise-attempt-question-answer-feedback {
@@ -180,7 +190,12 @@
     }
 
     .exercise-attempt-progress {
-      height: 30px;
+      height: 45px;
+
+      .question-icon {
+        max-height: 45px;
+        max-width: 45px;
+      }
     }
 
     .exercise-attempt-question, .exercise-attempt-question-answer-feedback {
@@ -272,34 +287,63 @@
   }
 
   .exercise-attempt-progress {
-    background-color: #efefef;
-    border-radius: 15px;
+    //background-color: #efefef;
     margin-left: 60px;
     margin-right: 60px;
     margin-bottom: 10px;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    .progress-bar {
-      background-color: #bce421;
-      margin-bottom: 40px;
-      box-shadow: none;
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
+    .question-icon-table {
+      margin:auto;
+      text-align: left;
+
+      div.question-icon {
+        display: inline-block;
+        background-color: #ECECEC;
+        border-radius: 50%;
+        border: solid 2px #D0D0D0;
+        margin-left: 5px;
+        margin-right: 5px;
+
+        img {
+          vertical-align: initial;
+          padding: 6px;
+          display: none;
+          border-radius: 50%;
+          width: 100%;
+          height: 100%;
+          &.right-answer {
+            background-color: #BCE520;
+          }
+          &.wrong-answer {
+            background-color: #E53720;
+          }
+        }
+
+        &.success {
+          border: solid 2px #A3C71C;
+          
+          img.right-answer {
+            display: inline;
+          }
+        }
+
+        &.fail {
+          border: solid 2px #C9301C;
+
+          img.wrong-answer {
+            display: inline;
+          }
+        }
+      }
     }
   }
 
-  .exercise-mistakes-counter {
+  .exercise-objective {
     //margin-left: 60px;
     //margin-right: 60px;
     //margin-bottom: 10px;
     margin: auto 60px;
     height: 20px;
     text-align: right;
-    img {
-      display: inline;
-      height: 100%;
-    }
   }
 
   .exercise-attempt-question, .exercise-attempt-question-answer-feedback {

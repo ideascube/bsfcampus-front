@@ -80,12 +80,17 @@ define(
 					var $modalDialog = $modal.find('.modal-dialog');
 					$modalDialog.html(exerciseAttemptView.$el);
 					$modal.modal({show: true});
+
                     $modal.on('hidden.bs.modal', function () {
                         var validated = self.model.get('is_validated');
                         if (!validated && exerciseAttemptView.isExerciseCompleted)
                         {
                             Backbone.history.loadUrl(Backbone.history.getFragment());
                         }
+                    });
+
+                    $modal.on('shown.bs.modal', function () {
+                        exerciseAttemptView.continueExercise();
                     });
 				}).fail(function(error) {
 
