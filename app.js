@@ -12,6 +12,7 @@ require.config({
 		lessc: 'lib/require-less/lessc',
 		normalize: 'lib/require-less/normalize',
 		bootstrap: 'lib/bootstrap',
+        projekktor: 'lib/projekktor',
 
 		collection: 'app/abstract-collection',
 		model: 'app/abstract-model'
@@ -33,7 +34,10 @@ require.config({
         },
 		'bootstrap': {
 			deps: ['jquery']
-		}
+		},
+        'projekktor': {
+            deps: ['jquery']
+        }
 	},
 
 	less: {

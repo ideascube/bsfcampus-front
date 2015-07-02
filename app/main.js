@@ -4,6 +4,7 @@ define(
 		'underscore',
 		'backbone',
 		'app/router',
+
 	],
 	function($, _, Backbone, AppRouter) {
 
