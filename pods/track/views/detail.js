@@ -39,25 +39,28 @@ define(
 
 			render: function() {
 				var trackModel = this.model.forTemplate();
-				if (trackModel.is_validated)
-				{
-					trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATED;
-					trackModel.validateButtonStatus = "validated";
-				}
-				else if (trackModel.progress.current >= trackModel.progress.max)
-				{
-					trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
-					trackModel.validateButtonStatus = "validate-allowed";
-				}
-				else
-				{
-					trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
-					trackModel.validateButtonStatus = "validate-disabled";
-					trackModel.validateButtonClass = "disabled";
-				}
+                if (trackModel.is_validated)
+                {
+                    trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATED;
+                    trackModel.validateButtonStatus = "validated";
+                }
+                else if (trackModel.progress.current >= trackModel.progress.max)
+                {
+                    trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
+                    trackModel.validateButtonStatus = "validate-allowed";
+                }
+                else
+                {
+                    trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
+                    trackModel.validateButtonStatus = "validate-disabled";
+                    trackModel.validateButtonClass = "disabled";
+                }
 
 				var html = this.template({track: trackModel, config: Config});
 				this.$el.html(html);
+                if (trackModel.validation_test == null) {
+                    this.$el.find(".btn-validate-track").hide();
+                }
 
 				var self = this;
 
