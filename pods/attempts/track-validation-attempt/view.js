@@ -31,8 +31,8 @@ define (
             answerReceived: function(result){
                 var questionId = this.currentQuestionAnswer.get('question_id');
                 this.model = new TrackValidationAttemptModel(result, {parse: true});
-                this.renderProgressBar();
-                this.renderMistakes();
+                this.renderProgression();
+                this.renderObjective();
                 this.renderFeedbackAndResult(questionId);
                 // we enable the continue button until we get the response
                 this.$el.find('.btn-continue').removeClass('disabled');
@@ -82,8 +82,8 @@ define (
                     }
                 }
                 console.log("renderEndOfExercise", recapModelJSON);
-                this.renderProgressBar();
-                this.renderMistakes();
+                this.renderProgression();
+                this.renderObjective();
                 html = this.recapFooterTemplate({
                     config:Config
                 });

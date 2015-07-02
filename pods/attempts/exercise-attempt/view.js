@@ -118,6 +118,8 @@ define(
             },
 
 			renderCurrentQuestionAnswerForm: function() {
+                this.renderProgression();
+                this.renderObjective();
 				var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
 				this.listenTo(formView, 'onAnswerRadioSelected', function () {
 					this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
@@ -305,8 +307,8 @@ define(
 					}
 				}
 				console.log("renderEndOfExercise", recapModelJSON);
-				this.renderProgression();
-				this.renderObjective();
+                this.renderProgression();
+                this.renderObjective();
 				html = this.recapFooterTemplate({
 					config:Config
 				});
@@ -330,8 +332,6 @@ define(
 
 			continueExercise: function() {
 				this.updateCurrentQuestionAnswer();
-				this.renderProgression();
-				this.renderObjective();
 				if (this.currentQuestionAnswer != null && this.model.getNumberOfMistakesMade() <= this.model.get('max_mistakes')) {
 					this.renderCurrentQuestionAnswerForm();
 				} else {

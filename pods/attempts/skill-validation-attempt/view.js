@@ -20,8 +20,8 @@ define (
             answerReceived: function(result){
                 var questionId = this.currentQuestionAnswer.get('question_id');
                 this.model = new SkillValidationAttemptModel(result, {parse: true});
-                this.renderProgressBar();
-                this.renderMistakes();
+                this.renderProgression();
+                this.renderObjective();
                 this.renderFeedbackAndResult(questionId);
                 // we enable the continue button until we get the response
                 this.$el.find('.btn-continue').removeClass('disabled');

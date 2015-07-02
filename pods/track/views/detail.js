@@ -102,6 +102,10 @@ define(
                             Backbone.history.loadUrl(Backbone.history.getFragment());
                         }
                     });
+
+                    $modal.on('shown.bs.modal', function () {
+                        exerciseAttemptView.continueExercise();
+                    });
                 }).fail(function(error) {
 
                 });
