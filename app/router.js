@@ -225,7 +225,8 @@ define(
                     self.clearModal();
                     self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
 
-                    //FIXME show something here, or redirect to skill detail
+                    var skillId = model.get('skill')._id;
+                    Backbone.history.navigate('skill/' + skillId, {trigger: true});
                 });
             },
 
