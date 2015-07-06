@@ -46,8 +46,12 @@
   }
 
   #dashboard-track-skills{
-    padding-bottom: 11px;
-    border-top: 1px #ececec solid;
+    margin-bottom: 11px;
+    border-left: 1px #ececec solid;
+  }
+
+  &.div_theme {
+    padding: 0;
   }
 
   /* ----- Left side ----- */
@@ -97,7 +101,7 @@
       }
       .media-heading {
         font-weight: 600;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
         font-size: 1.0em;
         color: #252525;
       }
@@ -110,10 +114,10 @@
         display: inline;
       }
       img {
-        height: 50px;
+        height: 60px;
       }
       .progress .progress-bar {
-        background-color: #bce520;
+        background-color: #bbe41a;
       }
       .progress .progress-bar.validated {
         background-color: #f8d041;
@@ -127,12 +131,9 @@
 
     &.media:hover {
 
-      background-color: #39637c;
+      background-color: #F5F5F5;
       color: white;
 
-      .media-heading {
-        color: #EEEEEE;
-      }
       .media-text {
         color: #DDDDDD;
       }
@@ -144,13 +145,13 @@
   }
 
   .dashboard-skill-resources {
-    margin-left: 20%;
 
     a.list-group-item {
       border: none;
 
       &.media {
         margin-top: 0;
+        padding-left: 25%;
       }
 
       .media-body {
@@ -203,6 +204,17 @@
     .tablet_version{
       display: none;
     }
+
+    .dashboard-skill-resources {
+
+      a.list-group-item {
+
+        &.media {
+          margin-top: 0;
+          padding-left: 28%;
+        }
+      }
+    }
   }
 
   @media (min-width: 768px) and (max-width: 1199px){
@@ -215,6 +227,17 @@
     .progress_bar{
       width: 150px;
       height: 7px;
+    }
+
+    .dashboard-skill-resources {
+
+      a.list-group-item {
+
+        &.media {
+          margin-top: 0;
+          padding-left: 14%;
+        }
+      }
     }
   }
 
@@ -242,12 +265,23 @@
   @media (max-width: 768px){
 
     nav ul#menu li {
-      margin-left: 0px;
+      margin-left: 0;
       text-align: initial;
     }
 
     #menu .col-xs-6{
       text-align: center;
+    }
+
+    .dashboard-skill-resources {
+
+      a.list-group-item {
+
+        &.media {
+          margin-top: 0;
+          padding-left: 7em;
+        }
+      }
     }
   }
 

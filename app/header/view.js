@@ -58,7 +58,7 @@ define(
                         buttonId = '#navbar-tracks-btn';
                         break;
                     case 'user':
-                        buttonId = 'navbar-user-btn';
+                        buttonId = '#navbar-user-btn';
                         break;
                 }
                 if (buttonId != null)

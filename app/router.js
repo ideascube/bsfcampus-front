@@ -168,6 +168,8 @@ define(
                     var userProfileView = new UserProfileView({model: currentUser});
                     userProfileView.render();
                     $('#container').append(userProfileView.$el);
+
+                    self.appHeaderView.updateHeaderButtonFocus('user');
                 });
             },
 
@@ -286,6 +288,7 @@ define(
                         }
                     );
                 }
+
 
                 var app_router = new AppRouter();
                 app_router.renderHeader();
