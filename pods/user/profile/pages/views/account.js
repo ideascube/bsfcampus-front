@@ -42,20 +42,28 @@ define(
             saveModifications: function() {
                 console.log("save user profile modifications");
                 var formData = this.$el.find('form').serializeJSON();
+                var $saveButton = this.$el.find('#save_modification');
+                $saveButton.addClass('disabled');
+                var $accountSaveResult = this.$el.find('#account-save-result');
+                $accountSaveResult.removeClass('success');
+                $accountSaveResult.removeClass('fail');
                 $.ajax({
-                    type: 'POST',
+                    type: 'PATCH',
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/users/current",
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
                     console.log(JSON.stringify(result));
-                    currentUser.fetch().done(function (userResponse) {
-                        console.log(JSON.stringify(userResponse));
-                    });
+                    currentUser.set(currentUser.parse(result));
+                    $accountSaveResult.html(Config.stringsDict.USER.PROFILE.ACCOUNT.SAVE_SUCCESS_MESSAGE);
+                    $accountSaveResult.addClass('success');
+                    $saveButton.removeClass('disabled');
                 }).fail(function(error){
                     console.log("Could not post user modifications", error);
-                    // TODO: implement case where modifications are not saved
+                    $accountSaveResult.html(Config.stringsDict.USER.PROFILE.ACCOUNT.SAVE_FAIL_MESSAGE);
+                    $accountSaveResult.addClass('fail');
+                    $saveButton.removeClass('disabled');
                 });
             }
 

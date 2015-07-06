@@ -270,7 +270,11 @@ define(
                         401: function () {
                             // Redirect the to the login page.
                             console.log("error 401 detected");
-                            Backbone.history.loadUrl("/login/redirect");
+                            console.log(Backbone.history.getFragment());
+                            if (Backbone.history.getFragment() != '')
+                            {
+                                Backbone.history.loadUrl("/login/redirect");
+                            }
                         }
                     }
                 });

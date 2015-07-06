@@ -107,7 +107,9 @@ define([],
                         PROFILE_TITLE: 'RÉGLAGES DU COMPTE',
                         INSERT_IMG: 'Insérez un fichier',
                         SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
-                        PROFILE_PICTURE: 'Photo de profil'
+                        PROFILE_PICTURE: 'Photo de profil',
+                        SAVE_SUCCESS_MESSAGE: 'Vos modifications ont été enregistrées',
+                        SAVE_FAIL_MESSAGE: 'Erreur lors de l\'enregistrement : Merci de vérifier les données'
                     },
                     DASHBOARD: {
                         TITLE: 'MON TABLEAU DE BORD',
