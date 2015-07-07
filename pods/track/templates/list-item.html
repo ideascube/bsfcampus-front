@@ -1,16 +1,16 @@
 <div class="col-md-6">
-	<div class="text-center track-thumbnail">
-		<div class="hierarchy-title <%= trackStatusClass %>">
+	<div class="text-center track-thumbnail <%= trackStatusClass %>">
+		<div class="hierarchy-title">
 			<h3><%= track.title %></h3>
 		</div>
 		<div class="hierarchy-text">
 			<div class="media media-middle">
-				<div class="media-left media-middle">
+				<div class="media-left media-middle track-icon">
 					<img src="<%= track.icon_url %>">
 				</div>
 				<div class="media-body media-middle">
 					<p><%= track.progress.current %>/<%= track.progress.max %> <%= config.stringsDict.SKILLS_ACQUIRED %></p>
-					<a href="<%= track.route %>" class="btn btn-info start <%= trackStatusClass %>">
+					<a href="<%= track.route %>" class="btn btn-info start">
                         <p><%= btnText %></p>
                         <img src="<%= config.imagesDict.checkStroke %>" class="check pull-right" />
                     </a>

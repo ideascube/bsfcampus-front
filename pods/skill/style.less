@@ -41,6 +41,12 @@
     font-size: 1.5em;
   }
 
+  &.validated {
+    #skill-title {
+      color: #f6d01c;
+    }
+  }
+
   img {
     margin: 30px auto 30px auto;
     max-width: 50%;
@@ -54,7 +60,10 @@
       background-color: #bce520;
     }
     .progress-bar.validated {
-      background-color: #f8d041;
+      background-color: #f6d01c;
+      background-image: url("../../assets/images/gold_effect.png");
+      background-size: 100% 100%;
+      box-shadow: none;
     }
   }
 
@@ -98,7 +107,13 @@ a.btn-validate-skill {
 
   &.validated {
     color: #ffffff;
-    background-color: #f8d041;
+    background-color: #f6d01c;
+    background-image: url("../../assets/images/gold_effect.png");
+    background-size: 100% 100%;
+    box-shadow: inset 0 -2px 1px #E4B640,
+                inset 2px 0 1px #F9DD6F,
+                inset 0 2px 1px #FBE979,
+                inset -2px 0 1px #F1DE82;
     font-size: 1.25em;
   }
 }
