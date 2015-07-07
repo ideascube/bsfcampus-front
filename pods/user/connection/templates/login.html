@@ -9,11 +9,11 @@
                 <input type="text" class="connection_text" name="username" id="username"
                       placeholder="<%= config.stringsDict.USER.USERNAME %>"/>
             </div>
-
             <div class="form-group">
                 <input type="password" class="connection_text" name="password" id="password"
                       placeholder="<%= config.stringsDict.USER.PASSWORD %>"/>
             </div>
+            <p class="login-error hide"><%= config.stringsDict.USER.LOG_IN_ERROR %></p>
             <button id="connection" type="submit" class="btn btn-primary btn-submit">
                 <%= config.stringsDict.USER.LOG_IN %>
             </button>

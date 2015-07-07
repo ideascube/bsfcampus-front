@@ -52,7 +52,7 @@ define(
                     })
                     .fail(function(error){
                         console.log("Could not submit login data", error);
-                        // TODO: implement case where login is false
+                        self.$el.find(".login-error").removeClass('hide');
                     });
             }
         });

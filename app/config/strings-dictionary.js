@@ -96,6 +96,15 @@ define([],
                 SUBMIT: 'Créer le compte',
                 GOT_AN_ACCOUNT: 'Déjà un compte ?',
                 PWD_FORGOTTEN: 'Mot de passe oublié ?',
+                LOG_IN_ERROR: 'l\'identifiant et/ou le mot de passe n\'existe pas',
+                REGISTER_ERROR: {
+                    INVALID_EMAIL_ADDRESS: "l'adresse e-mail est incorrecte",
+                    USERNAME_ALREADY_EXISTS: "l'identifiant est déjà utilisé",
+                    PASSWORD: "le mot de passe est trop court",
+                    PASSWORD_MATCH: "les mots de passe ne correspondent pas",
+                    ACCEPT_CGU: "vous devez accepter les Conditions générales d'utilisation",
+                    DEFAULT_ERROR: "une erreur est survenue lors de l'inscription"
+                },
                 PROFILE: {
                     MENU: {
                         DASHBOARD: "Mon tableau de bord",

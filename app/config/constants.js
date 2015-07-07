@@ -21,6 +21,14 @@ define(['lib/window', 'config'],
 				ACCOUNT: "my_account",
 				PASSWORD: "my_password",
 				PARAMETERS: "settings"
+			},
+
+			registerErrorsCode: {
+				INVALID_EMAIL_ADDRESS: 2,
+				USERNAME_ALREADY_EXISTS: 3,
+				PASSWORD: 4,
+				PASSWORD_MATCH: 5,
+				ACCEPT_CGU: 6
 			}
 
 		};

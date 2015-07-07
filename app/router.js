@@ -119,7 +119,11 @@ define(
                     el: this.$modalDialog
                 });
                 registerUserView.render();
-                this.listenTo(registerUserView, 'close', this.clearModal);
+                var self = this;
+                this.listenTo(registerUserView, 'close', function() {
+                    registerUserView.undelegateEvents();
+                    self.clearModal();
+                });
                 this.$modal.on('shown.bs.modal', function() {
                     registerUserView.$('form input#full_name').focus();
                 }).modal({show: true});

@@ -8,15 +8,18 @@ define(
 
         'pods/user/models/current',
 
+        'app/abstract-view',
+
         'text!pods/user/connection/templates/register.html',
 
         'less!pods/user/connection/styles/register'
     ],
     function ($, _, Backbone, $serialize, Config,
               currentUser,
+              AbstractView,
               registerTemplate) {
 
-        return Backbone.View.extend({
+        return AbstractView.extend({
 
             tagName: 'div',
 
@@ -49,7 +52,8 @@ define(
                     url: Config.constants.serverGateway + "/users/register",
                     data: formData,
                     dataType: 'json'
-                }).done(function () {
+                }).done(function (result) {
+                    console.log("submit result = ", result);
                     currentUser
                         .logIn(username, password)
                         .done(function(){
@@ -57,7 +61,33 @@ define(
                         });
                 }).fail(function (error) {
                     console.log("Could not submit register data", error);
-                    // TODO: implement case where register is wrong
+                    self.$el.find('form .error').removeClass('error');
+                    var $registerError = self.$el.find('#register-error');
+                    switch (error.responseJSON.code){
+                        case Config.constants.registerErrorsCode.USERNAME_ALREADY_EXISTS:
+                            self.$el.find('form input#username').addClass('error');
+                            $registerError.html(Config.stringsDict.USER.REGISTER_ERROR.USERNAME_ALREADY_EXISTS);
+                            break;
+                        case Config.constants.registerErrorsCode.INVALID_EMAIL_ADDRESS:
+                            self.$el.find('form input#email').addClass('error');
+                            $registerError.html(Config.stringsDict.USER.REGISTER_ERROR.INVALID_EMAIL_ADDRESS);
+                            break;
+                        case Config.constants.registerErrorsCode.PASSWORD:
+                            self.$el.find('form input#password').addClass('error');
+                            $registerError.html(Config.stringsDict.USER.REGISTER_ERROR.PASSWORD);
+                            break;
+                        case Config.constants.registerErrorsCode.PASSWORD_MATCH:
+                            self.$el.find('form input#password_confirm').addClass('error');
+                            $registerError.html(Config.stringsDict.USER.REGISTER_ERROR.PASSWORD_MATCH);
+                            break;
+                        case Config.constants.registerErrorsCode.ACCEPT_CGU:
+                            self.$el.find('form input#accept_cgu+label.check-box').addClass('error');
+                            $registerError.html(Config.stringsDict.USER.REGISTER_ERROR.ACCEPT_CGU);
+                            break;
+                        default:
+                            $registerError.html(Config.stringsDict.USER.REGISTER_ERROR.DEFAULT_ERROR);
+                            break;
+                    }
                 });
             },
 
