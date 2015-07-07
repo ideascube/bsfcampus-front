@@ -32,7 +32,8 @@ define(
 
 			render: function() {
 				var son = this.model.forTemplate();
-				son.active = this.model.id === this.currentResource.get('lesson');
+				var lesson = this.currentResource.get('parent');
+                son.active = this.model.id === lesson._id;
 				var html = this.template({lesson: son, config: Config});
 				this.$el.html(html);
 
