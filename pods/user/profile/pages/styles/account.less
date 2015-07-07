@@ -14,6 +14,9 @@
     height: 40px;
     width: 225px;
     margin-bottom: 20px;
+    margin-left: 8px;
+    border-radius: 0px;
+    background-color: #fafafb;
   }
 
   .size{
@@ -56,13 +59,13 @@
 
   /* ----- Bouton "Sauvegarder" ----- */
 
-  #save_modification{
+  #save_modification {
     color: #ffffff;
     background-color: #9bbe16;
     border-radius: 5px;
     width: 225px;
     height: 32px;
-    margin: 5px 0 37px 24px;
+    margin: 5px 0 20px 20px;
   }
 
   #save_modification:hover{
@@ -71,11 +74,12 @@
     border-radius: 5px;
     width: 225px;
     height: 32px;
-    margin: 5px 0 37px 24px;
+    margin: 5px 0 20px 20px;
   }
 
   #account-save-result {
     display: inline-block;
+    margin: 0 0 30px 20px;
     //&.success {
     //  color: #BCE520;
     //}
@@ -90,15 +94,28 @@
 
   @media all and (min-width: 992px) and (max-width: 1199px){
     #save_modification{
-      margin: 0 0 35px 0;
+      margin: 0 0 20px 0;
     }
 
     #save_modification:hover{
-      margin: 0 0 35px 0;
+      margin: 0 0 20px 0;
     }
 
     #label_user{
       margin: 10px 0 0 42px;
+    }
+    #label_username {
+      margin: 7px 0 30px 30px;
+      text-align: right;
+    }
+    #label_user {
+      margin: 10px 0 30px 30px;
+    }
+    #label_mail {
+      margin: 0 0 30px 47px;
+    }
+    #account-save-result {
+      margin: 0 0 30px 8px;
     }
   }
 
@@ -111,34 +128,46 @@
     }
 
     #title{
-      text-align: center;
+      text-align: left;
       margin: 30px 0 26px 0;
     }
 
     #save_modification{
-      margin: 10px 0 30px 100px;
+      margin: 10px 0 30px 190px;
     }
 
     #save_modification:hover{
-      margin: 10px 0 30px 100px;
+      margin: 10px 0 30px 190px;
     }
 
     #label_user{
-      text-align: center;
-      margin: 0 0 15px 135px;
+      text-align: right;
+      margin: 10px 0 15px 20px;
     }
 
     #user{
-      margin: 0 0 10px 115px;
+      margin: 0 0 10px 0px;
     }
 
     #label_mail{
-      margin: 0 0 15px 170px;
-      text-align: center;
+      margin: 10px 0 15px 98px;
+      padding-left: 15px;
+      padding-right: 15px;
+      text-align: right;
     }
 
     #email{
-      margin: 0 0 10px 115px;
+      margin: 0 0 10px 0px;
+    }
+    #label_username {
+      margin: 7px 0 15px 28px;
+      text-align: right;
+    }
+    #username {
+      margin: 0 0 10px 0px;
+    }
+    #account-save-result {
+      margin: 0 0 30px 190px;
     }
   }
 
@@ -146,7 +175,8 @@
 
   @media (min-width: 1200px){
     .col-lg-4{
-      margin: 10px 0px 0 18px;
+      margin: 10px 0px 0 55px;
+      text-align: right;
     }
   }
 
@@ -156,17 +186,48 @@
     }
   }
 
-  @media (min-width: 768px){
-    .col-md-3{
+  @media (min-width: 768px) {
+    .col-md-3 {
       text-align: right;
     }
 
     .col-sm-8 {
       width: 63%;
     }
+  }
 
+  @media (max-width: 768px) {
+
+    #label_username {
+      margin: 7px 0 15px 0px;
+      text-align: center;
+    }
+    #label_user {
+      text-align: center;
+      margin: 10px 0 15px 0px;
+    }
     #label_mail{
-      padding: 10px 15px 0 0;
+      margin: 10px 0 15px 0px;
+      text-align: center;
+    }
+    #account-save-result {
+      margin: 10px auto 30px auto;
+    }
+    #title {
+      text-align: center;
+      margin: 30px 0 26px 0;
+    }
+    p {
+      text-align: center;
+    }
+    #save_modification {
+      margin: 10px auto 15px auto;
+    }
+    #save_modification:hover {
+      margin: 10px auto 15px auto;
+    }
+    #account-save-result-center{
+      text-align: center;
     }
   }
 
@@ -246,11 +307,20 @@
       width: 23%;
       text-align: right;
     }
+    .col-lg-5 {
+      width: 57.666667%;
+    }
   }
 
   @media (min-width: 992px){
     .col-md-9 {
       width: 72%;
+    }
+    .col-md-6 {
+      width: 70%;
+    }
+    .col-md-offset-5 {
+      margin-left: 38.666667%;
     }
   }
 
