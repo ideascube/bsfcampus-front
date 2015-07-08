@@ -29,7 +29,13 @@ define(['lib/window', 'config'],
 				PASSWORD: 4,
 				PASSWORD_MATCH: 5,
 				ACCEPT_CGU: 6
-			}
+			},
+
+            changePasswordErrorsCode: {
+                INVALID_CURRENT_PASSWORD: 1,
+                INVALID_NEW_PASSWORD: 2,
+                INVALID_CONFIRM_PASSWORD: 3
+            }
 
 		};
 

@@ -24,7 +24,7 @@ define(
             template: _.template(accountTemplate),
 
             events: {
-                'click #save_modification': 'saveModifications'
+                'click button.save_modification': 'saveModifications'
             },
 
             initialize: function () {
@@ -42,9 +42,9 @@ define(
             saveModifications: function() {
                 console.log("save user profile modifications");
                 var formData = this.$el.find('form').serializeJSON();
-                var $saveButton = this.$el.find('#save_modification');
+                var $saveButton = this.$el.find('button.save_modification');
                 $saveButton.addClass('disabled');
-                var $accountSaveResult = this.$el.find('#account-save-result');
+                var $accountSaveResult = this.$el.find('.save-result');
                 $accountSaveResult.removeClass('success');
                 $accountSaveResult.removeClass('fail');
                 $.ajax({

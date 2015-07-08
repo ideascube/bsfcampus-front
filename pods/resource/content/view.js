@@ -111,8 +111,13 @@ define(
                         var validated = self.model.get('is_validated');
                         if (!validated && exerciseAttemptView.isExerciseCompleted)
                         {
-                            Backbone.history.loadUrl(Backbone.history.getFragment());
+                            self.model.set('is_validated', true);
                         }
+                        self.render();
+                        if (exerciseAttemptView.trackValidationId != null) {
+                            Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
+                        }
+                        $modal.unbind('hidden.bs.modal');
                     });
 
                     $modal.on('shown.bs.modal', function () {

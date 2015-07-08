@@ -5,42 +5,35 @@ define(
         'backbone',
         'app/config',
 
+        'pods/user/models/current',
+        'pods/track/model',
+        'pods/track/collection',
+        'pods/skill/model',
+        'pods/lesson/model',
+        'pods/resource/model',
+
         'app/header/view',
         'app/footer/view',
-
         'pods/home/view',
-
         'pods/user/connection/views/register',
         'pods/user/connection/views/login',
         'pods/user/profile/views/profile',
-
-        'pods/track/model',
-        'pods/track/collection',
         'pods/track/views/list',
         'pods/track/views/detail',
-
-        'pods/skill/model',
         'pods/skill/views/detail',
-
-        'pods/lesson/model',
-
-        'pods/resource/model',
         'pods/resource/views/detail',
-
         'pods/breadcrumb/views/breadcrumbContainer',
-
-        'pods/user/models/current',
+        'pods/track/views/promptValidation',
 
         'less!app/styles/common'
     ],
     function ($, _, Backbone, Config,
+              currentUser, TrackModel, TrackCollection, SkillModel,
+              LessonModel, ResourceModel,
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
-              TrackModel, TrackCollection, TrackListView, TrackDetailView,
-              SkillModel, SkillDetailView,
-              LessonModel,
-              ResourceModel, ResourceDetailView,
-              ResourceHierarchyBreadcrumbView,
-              currentUser) {
+              TrackListView, TrackDetailView, SkillDetailView,
+              ResourceDetailView, ResourceHierarchyBreadcrumbView, PromptTrackValidationView
+              ) {
 
         var AppRouter = Backbone.Router.extend({
 
@@ -96,7 +89,8 @@ define(
                 'track/:id': 'trackDetail',
                 'skill/:id': 'skillDetail',
                 'lesson/:id': 'lessonDetail',
-                'resource/:id': 'resourceDetail'
+                'resource/:id': 'resourceDetail',
+                'prompt_track_validation/:track_id': 'promptTrackValidation'
             },
 
             home: function () {
@@ -255,6 +249,17 @@ define(
                 var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
                 breadcrumbView.render();
                 $('#container').append(breadcrumbView.$el);
+            },
+
+            promptTrackValidation: function (track_id) {
+                this.clearModal();
+                var promptTrackValidationView = new PromptTrackValidationView({
+                    el: this.$modalDialog,
+                    trackId: track_id
+                });
+                promptTrackValidationView.render();
+                this.listenTo(promptTrackValidationView, 'close', this.clearModal);
+                this.$modal.modal('show');
             }
 
         });

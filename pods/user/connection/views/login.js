@@ -42,6 +42,7 @@ define(
 
                 var username = this.$('form input#username').val();
                 var password = this.$('form input#password').val();
+                this.$el.find(".login-error").addClass('hide');
 
                 var self = this;
 

@@ -16,6 +16,38 @@
     background-color: white;
   }
 
+
+  /* ----- "Save" Button ----- */
+
+  .save_modification {
+    color: #ffffff;
+    background-color: #9bbe16;
+    border-radius: 5px;
+    width: 225px;
+    height: 32px;
+    margin: 5px 0 20px 20px;
+  }
+
+  .save_modification:hover{
+    color: #ffffff;
+    background-color: #bce51f;
+    border-radius: 5px;
+    width: 225px;
+    height: 32px;
+    margin: 5px 0 20px 20px;
+  }
+
+  .save-result {
+    display: inline-block;
+    margin: 0 0 30px 20px;
+    //&.success {
+    //  color: #BCE520;
+    //}
+    &.fail {
+      color: #E53720;
+    }
+  }
+
   /* ----- Modifications Bootstrap ----- */
 
   .btn-primary{
@@ -88,6 +120,49 @@
   @media (min-width: 768px){
     .col-sm-8 {
       width: 63%;
+    }
+  }
+
+  @media all and (min-width: 992px) and (max-width: 1199px) {
+    .save_modification {
+      margin: 0 0 20px 0;
+    }
+
+    .save_modification:hover {
+      margin: 0 0 20px 0;
+    }
+
+    .save-result {
+      margin: 0 0 30px 8px;
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+
+    .save_modification {
+      margin: 10px 0 30px 190px;
+    }
+
+    .save_modification:hover {
+      margin: 10px 0 30px 190px;
+    }
+
+    .save-result {
+      margin: 0 0 30px 190px;
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    .save_modification {
+      margin: 10px auto 15px auto;
+    }
+
+    .save_modification:hover {
+      margin: 10px auto 15px auto;
+    }
+    .save-result {
+      margin: 10px auto 30px auto;
     }
   }
 }

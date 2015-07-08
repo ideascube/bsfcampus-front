@@ -18,6 +18,8 @@ define (
             model: SkillValidationAttemptModel,
 
             answerReceived: function(result){
+                this.handleAlert(result['alert']);
+
                 var questionId = this.currentQuestionAnswer.get('question_id');
                 this.model = new SkillValidationAttemptModel(result, {parse: true});
                 this.renderProgression();

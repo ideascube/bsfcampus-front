@@ -102,10 +102,11 @@ define(
 					$modal.modal({show: true});
 					$modal.on('hidden.bs.modal', function () {
 						var validated = self.model.get('is_validated');
-						if (!validated && exerciseAttemptView.isExerciseCompleted)
-						{
-							Backbone.history.loadUrl(Backbone.history.getFragment());
-						}
+                        if (!validated && exerciseAttemptView.isExerciseCompleted)
+                        {
+                            self.model.set('is_validated', true);
+                        }
+                        self.render();
 					});
 
                     $modal.on('shown.bs.modal', function () {

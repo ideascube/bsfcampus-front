@@ -112,12 +112,21 @@ define([],
                         PASSWORD: "Mon mot de passe",
                         PARAMETERS: "Paramètres"
                     },
+                    SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
                     ACCOUNT: {
                         PROFILE_TITLE: 'RÉGLAGES DU COMPTE',
                         INSERT_IMG: 'Insérez un fichier',
-                        SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
                         PROFILE_PICTURE: 'Photo de profil',
                         SAVE_SUCCESS_MESSAGE: 'Vos modifications ont été enregistrées',
+                        SAVE_FAIL_MESSAGE: 'Erreur lors de l\'enregistrement : Merci de vérifier les données'
+                    },
+                    PASSWORD: {
+                        TITLE: "MON MOT DE PASSE",
+                        CURRENT_PASSWORD: "Mot de passe actuel",
+                        NEW_PASSWORD: "Nouveau mot de passe",
+                        CONFIRM_NEW_PASSWORD: "Confirmer le nouveau mot de passe",
+                        SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
+                        SAVE_SUCCESS_MESSAGE: 'Votre nouveau mot de passe a été enregistré',
                         SAVE_FAIL_MESSAGE: 'Erreur lors de l\'enregistrement : Merci de vérifier les données'
                     },
                     DASHBOARD: {

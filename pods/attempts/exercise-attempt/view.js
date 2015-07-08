@@ -228,7 +228,15 @@ define(
 				this.$el.find('.exercise-attempt-question-answer-result').html($result);
 			},
 
-			answerReceived: function(result){
+            handleAlert: function (alert) {
+                if (alert.code == 'prompt_track_validation') {
+                    this.trackValidationId = alert.id['$oid'];
+                }
+            },
+
+            answerReceived: function(result){
+                this.handleAlert(result['alert']);
+
 				var questionId = this.currentQuestionAnswer.get('question_id');
 				this.model = new ExerciseAttemptModel(result, {parse: true});
 				this.renderProgression();

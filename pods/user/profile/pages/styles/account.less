@@ -42,7 +42,7 @@
 
   /* ----- Titre "h2" ----- */
 
-  #title{
+  .title{
     margin: 40px 0 50px 30px;
   }
 
@@ -56,54 +56,12 @@
     margin-left: 22px;
   }
 
-
-  /* ----- Bouton "Sauvegarder" ----- */
-
-  #save_modification {
-    color: #ffffff;
-    background-color: #9bbe16;
-    border-radius: 5px;
-    width: 225px;
-    height: 32px;
-    margin: 5px 0 20px 20px;
-  }
-
-  #save_modification:hover{
-    color: #ffffff;
-    background-color: #bce51f;
-    border-radius: 5px;
-    width: 225px;
-    height: 32px;
-    margin: 5px 0 20px 20px;
-  }
-
-  #account-save-result {
-    display: inline-block;
-    margin: 0 0 30px 20px;
-    //&.success {
-    //  color: #BCE520;
-    //}
-    &.fail {
-      color: #E53720;
-    }
-  }
-
   /* ------ Media Queries ------ */
 
   /* Écran version */
 
   @media all and (min-width: 992px) and (max-width: 1199px){
-    #save_modification{
-      margin: 0 0 20px 0;
-    }
 
-    #save_modification:hover{
-      margin: 0 0 20px 0;
-    }
-
-    #label_user{
-      margin: 10px 0 0 42px;
-    }
     #label_username {
       margin: 7px 0 30px 30px;
       text-align: right;
@@ -114,30 +72,20 @@
     #label_mail {
       margin: 0 0 30px 47px;
     }
-    #account-save-result {
-      margin: 0 0 30px 8px;
-    }
   }
 
   /* Tablette version */
 
   @media screen and (max-width: 991px){
+
     #bloc_informations{
       text-align: center;
       margin: 30px 0 0 10px;
     }
 
-    #title{
+    .title{
       text-align: left;
       margin: 30px 0 26px 0;
-    }
-
-    #save_modification{
-      margin: 10px 0 30px 190px;
-    }
-
-    #save_modification:hover{
-      margin: 10px 0 30px 190px;
     }
 
     #label_user{
@@ -165,9 +113,6 @@
     }
     #username {
       margin: 0 0 10px 0px;
-    }
-    #account-save-result {
-      margin: 0 0 30px 190px;
     }
   }
 
@@ -210,23 +155,11 @@
       margin: 10px 0 15px 0px;
       text-align: center;
     }
-    #account-save-result {
-      margin: 10px auto 30px auto;
-    }
-    #title {
+    .title {
       text-align: center;
       margin: 30px 0 26px 0;
     }
     p {
-      text-align: center;
-    }
-    #save_modification {
-      margin: 10px auto 15px auto;
-    }
-    #save_modification:hover {
-      margin: 10px auto 15px auto;
-    }
-    #account-save-result-center{
       text-align: center;
     }
   }
