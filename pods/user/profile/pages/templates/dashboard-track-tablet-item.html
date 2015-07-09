@@ -1,1 +1,5 @@
-<a href="<%= track.route %>" class="track <%= track.validatedStatus %>" index="<%= index %>"><%= track.title %></a>
+<a href="<%= track.route %>" class="track <%= track.validatedStatus %>" index="<%= index %>">
+    <div class="title">
+        <h4 class="<%= track.validationClass %>"><%= track.title %><img src="<%= config.imagesDict.checkFull %>" class="circle check"></h4>
+    </div>
+</a>
