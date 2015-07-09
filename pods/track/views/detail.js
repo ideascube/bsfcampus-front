@@ -39,12 +39,12 @@ define(
 
 			render: function() {
 				var trackModel = this.model.forTemplate();
-                if (trackModel.is_validated)
+                if (this.model.get('is_validated'))
                 {
                     trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATED;
                     trackModel.validateButtonStatus = "validated";
                 }
-                else if (trackModel.progress.current >= trackModel.progress.max)
+                else if (this.model.get('progress').current >= this.model.get('progress').max)
                 {
                     trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
                     trackModel.validateButtonStatus = "validate-allowed";
