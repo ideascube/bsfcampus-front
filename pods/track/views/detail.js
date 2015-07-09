@@ -94,6 +94,8 @@ define(
                     var exerciseAttemptView = new TrackValidationAttemptView({model: attempt});
                     exerciseAttemptView.resource = self.model;
                     exerciseAttemptView.render();
+                    $("#container").hide();
+                    $("body").css('background-color', '#36404A');
                     var $modal = $('#modal');
                     var $modalDialog = $modal.find('.modal-dialog');
 					$modalDialog.html(exerciseAttemptView.$el);
@@ -109,6 +111,8 @@ define(
                             Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
                         }
                         $modal.unbind('hidden.bs.modal');
+                        $("#container").show();
+                        $("body").css('background-color', '');
                     });
 
                     $modal.on('shown.bs.modal', function () {

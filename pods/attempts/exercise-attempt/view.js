@@ -235,7 +235,9 @@ define(
             },
 
             answerReceived: function(result){
-                this.handleAlert(result['alert']);
+                if (result['alert'] != null) {
+                    this.handleAlert(result['alert']);
+                }
 
 				var questionId = this.currentQuestionAnswer.get('question_id');
 				this.model = new ExerciseAttemptModel(result, {parse: true});
