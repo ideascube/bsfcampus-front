@@ -3,6 +3,7 @@
 
   .modal-header {
     min-height: 20px;
+    border-bottom: none;
     button.close {
       vertical-align: middle;
     }
@@ -10,11 +11,13 @@
 
   .modal-body {
     .prompt-details-header {
-      margin: 40px auto;
+      margin: 0 auto 30px;
       text-align: center;
       h1 {
+        width: 400px;
+        margin: 0 auto;
         text-align: center;
-        padding: auto 10px;
+        padding: 8px;
         color: #656565;
         border-bottom: solid 1px #ECECEC;
       }
@@ -32,6 +35,10 @@
       p {
         font-weight: 400;
       }
+    }
+    a.btn-validate-track {
+      width: 500px;
+      margin: 35px auto;
     }
   }
 
@@ -57,7 +64,7 @@
 
     .track-icon {
       img {
-        margin: 10px auto;
+        margin: 0px auto;
         height: 80px;
       }
     }
@@ -115,6 +122,31 @@
       img {
         margin: 20px auto;
         height: 120px;
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    width: 700px;
+    margin: 0 auto;
+
+    a.btn-validate-track {
+      width: 300px;
+      margin: 20px auto;
+      padding: 10px 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: auto !important;
+    font-size: 97%;
+
+    .modal-body {
+      .prompt-details-header h1 {
+        width: 250px;
+      }
+      .prompt-details-text {
+        margin: 0 20px;
       }
     }
   }
