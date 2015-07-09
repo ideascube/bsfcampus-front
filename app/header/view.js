@@ -43,7 +43,7 @@ define(
             resetHeaderButtonFocus: function () {
                 this.$el.find('#navbar-home-btn').removeClass('focus');
                 this.$el.find('#navbar-tracks-btn').removeClass('focus');
-                this.$el.find('#navbar-login-btn').removeClass('focus');
+                this.$el.find('#navbar-user-btn').removeClass('focus');
             },
 
             updateHeaderButtonFocus: function (element) {

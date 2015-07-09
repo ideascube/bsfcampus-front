@@ -1,0 +1,121 @@
+.modal-content.prompt-track-validation {
+  border: solid 2px #f7d63b;
+
+  .modal-header {
+    min-height: 20px;
+    button.close {
+      vertical-align: middle;
+    }
+  }
+
+  .modal-body {
+    .prompt-details-header {
+      margin: 40px auto;
+      text-align: center;
+      h1 {
+        text-align: center;
+        padding: auto 10px;
+        color: #656565;
+        border-bottom: solid 1px #ECECEC;
+      }
+    }
+
+    .prompt-details-text {
+      margin: auto 60px;
+      text-align: center;
+      h1 {
+        font-weight: 700;
+      }
+      h2 {
+        font-weight: 600;
+      }
+      p {
+        font-weight: 400;
+      }
+    }
+  }
+
+  @media (max-height: 719px) {
+    .prompt-details-header {
+      h1 {
+        font-size: 1.2em;
+      }
+    }
+
+    .prompt-details-text {
+      h1 {
+        font-size: 1.0em;
+      }
+      h2 {
+        font-size: 0.9em;
+      }
+      p {
+        font-size: 0.8em;
+        line-height: 1.5em;
+      }
+    }
+
+    .track-icon {
+      img {
+        margin: 10px auto;
+        height: 80px;
+      }
+    }
+  }
+
+  @media (min-height: 720px) {
+    .prompt-details-header {
+      h1 {
+        font-size: 1.4em;
+      }
+    }
+
+    .prompt-details-text {
+      h1 {
+        font-size: 1.2em;
+      }
+      h2 {
+        font-size: 1.0em;
+      }
+      p {
+        font-size: 0.9em;
+        line-height: 1.6em;
+      }
+    }
+
+    .track-icon {
+      img {
+        margin: 15px auto;
+        height: 100px;
+      }
+    }
+  }
+
+  @media (min-height: 900px) {
+    .prompt-details-header {
+      h1 {
+        font-size: 1.6em;
+      }
+    }
+
+    .prompt-details-text {
+      h1 {
+        font-size: 1.4em;
+      }
+      h2 {
+        font-size: 1.2em;
+      }
+      p {
+        font-size: 1.0em;
+        line-height: 1.8em;
+      }
+    }
+
+    .track-icon {
+      img {
+        margin: 20px auto;
+        height: 120px;
+      }
+    }
+  }
+}

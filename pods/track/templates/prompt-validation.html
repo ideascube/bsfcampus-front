@@ -5,15 +5,19 @@
     </div>
     <div class="modal-body">
         <div class="prompt-details-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title track-validation"><img src="<%= config.imagesDict.trackValidation.CERTIFICATE %>"><%= resource.title %></h4>
+            <div class="track-icon">
+                <img src="<%= track.iconUrl %>" class="track-icon">
+            </div>
+            <h1><%= track.title %></h1>
         </div>
-        <div class="prompt-details-text text-center">
-            <p></p>
+        <div class="prompt-details-text">
+            <h1><%= config.stringsDict.TRACK_VALIDATION.PROMPT_HEADER_TEXT %></h1>
+            <h2><%= config.stringsDict.TRACK_VALIDATION.PROMPT_SUB_HEADER_TEXT %></h2>
+            <p><%= config.stringsDict.TRACK_VALIDATION.PROMPT_TEXT %></p>
         </div>
         <a href="<%= track.route %>" class="btn btn-validate-track">
             <img src="<%= config.imagesDict.certificateValidated %>" class="certificate-validated" />
-            <%= track.validateButtonText %>
+            <%= config.stringsDict.TRACK_VALIDATION.GO_TO_TRACK_BUTTON %>
         </a>
     </div>
 </div>

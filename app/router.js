@@ -254,9 +254,9 @@ define(
             promptTrackValidation: function (track_id) {
                 this.clearModal();
                 var promptTrackValidationView = new PromptTrackValidationView({
-                    el: this.$modalDialog,
-                    trackId: track_id
+                    el: this.$modalDialog
                 });
+                promptTrackValidationView.trackId = track_id;
                 promptTrackValidationView.render();
                 this.listenTo(promptTrackValidationView, 'close', this.clearModal);
                 this.$modal.modal('show');

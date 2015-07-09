@@ -23,9 +23,12 @@ define(
             template: _.template(promptValidationTemplate),
 
             render: function () {
-                var track = new TrackModel({_id: this.trackId});
-                var html = this.template({track: track.forTemplate(), config: Config});
-                this.$el.html(html);
+                var trackModel = new TrackModel({_id: this.trackId});
+                var self = this;
+                trackModel.fetch().done(function () {
+                    var html = self.template({track: trackModel.forTemplate(), config: Config});
+                    self.$el.html(html);
+                });
 
                 return this;
             },
