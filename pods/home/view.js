@@ -28,6 +28,10 @@ define(
                 'click #arrow_center': 'scrollTo'
             },
 
+            initialize: function () {
+                this.listenTo(currentUser, "change", this.render);
+            },
+
             render: function() {
                 $("body").removeAttr("style");
 
