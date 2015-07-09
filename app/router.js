@@ -3,6 +3,7 @@ define(
         'jquery',
         'underscore',
         'backbone',
+        'viewmanager',
         'app/config',
 
         'pods/user/models/current',
@@ -27,7 +28,7 @@ define(
 
         'less!app/styles/common'
     ],
-    function ($, _, Backbone, Config,
+    function ($, _, Backbone, VM, Config,
               currentUser, TrackModel, TrackCollection, SkillModel,
               LessonModel, ResourceModel,
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
@@ -94,17 +95,25 @@ define(
             },
 
             home: function () {
-                this.clearHome();
-                this.clearContainer();
-                this.hideContainer();
-                this.clearModal();
+                if (currentUser.isLoggedIn())
+                {
+                    this.navigate('user/profile', {trigger: true});
+                }
+                else
+                {
+                    this.clearHome();
+                    this.clearContainer();
+                    this.hideContainer();
+                    this.clearModal();
 
-                var homeView = new HomeView({
-                    el: $('#home')
-                });
-                homeView.render();
+                    var homeView = VM.createView(Config.constants.VIEWS_ID.HOME, function() {
+                        return new HomeView();
+                    });
+                    homeView.render();
+                    $('#home').append(homeView.$el);
 
-                this.appHeaderView.updateHeaderButtonFocus('home');
+                    this.appHeaderView.updateHeaderButtonFocus('home');
+                }
             },
 
             register: function () {
@@ -115,8 +124,7 @@ define(
                 registerUserView.render();
                 var self = this;
                 this.listenTo(registerUserView, 'close', function() {
-                    registerUserView.undelegateEvents();
-                    self.clearModal();
+                    self.returnFromAuthenticationPopup(registerUserView);
                 });
                 this.$modal.on('shown.bs.modal', function() {
                     registerUserView.$('form input#full_name').focus();
@@ -129,7 +137,10 @@ define(
                     el: this.$modalDialog
                 });
                 loginUserView.render();
-                this.listenTo(loginUserView, 'close', this.clearModal);
+                var self = this;
+                this.listenTo(loginUserView, 'close', function() {
+                    self.returnFromAuthenticationPopup(loginUserView);
+                });
                 this.$modal.on('shown.bs.modal', function() {
                     loginUserView.$('form input#username').focus();
                 }).modal('show');
@@ -149,6 +160,14 @@ define(
                 this.$modal.on('shown.bs.modal', function() {
                     loginUserView.$('form input#username').focus();
                 }).modal('show');
+            },
+
+            returnFromAuthenticationPopup: function (authView) {
+                console.log("returnFromAuthenticationPopup");
+                this.clearModal();
+                authView.undelegateEvents();
+                var fragment = Backbone.history.getFragment();
+                this.navigate(fragment, {trigger:true, replace:true});
             },
 
             logout: function () {

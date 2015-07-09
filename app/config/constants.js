@@ -12,6 +12,10 @@ define(['lib/window', 'config'],
 
 		return {
 
+            VIEWS_ID: {
+                HOME: "HOME_VIEW"
+            },
+
 			serverGateway: w.location.protocol + '//' + w.location.hostname  + ':' + port,
 
 			imagesPath: 'assets/images/',

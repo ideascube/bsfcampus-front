@@ -6,6 +6,7 @@ require.config({
 		backbone: 'lib/backbone',
 		jqueryui: 'lib/jquery-ui',
         jqueryserialize: 'lib/jquery.serialize-object.min',
+        viewmanager: 'lib/vm',
 		form2js: 'lib/form2js/form2js',
 		text: 'lib/text',
 		less: 'lib/require-less/less',

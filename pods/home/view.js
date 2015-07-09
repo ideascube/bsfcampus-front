@@ -23,8 +23,8 @@ define(
             template: _.template(homeTemplate),
 
             events: {
-                'click #home-login-btn': 'login',
-                'click #home-register-btn': 'register',
+                'click a.btn.connection': 'login',
+                'click a.btn.subscribe': 'register',
                 'click #arrow_center': 'scrollTo'
             },
 
@@ -43,11 +43,15 @@ define(
                 return this;
             },
 
-            login: function() {
+            login: function(e) {
+                e.preventDefault();
+
                 Backbone.history.loadUrl("/login");
             },
 
             register: function() {
+                e.preventDefault();
+
                 Backbone.history.loadUrl("/register");
             },
 
