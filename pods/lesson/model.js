@@ -13,13 +13,11 @@ define(
 
 		return AbstractModel.extend({
 
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/hierarchy/lessons';
-			},
+			serverPath: '/hierarchy/lessons',
 
 			route: function() {
 				return '#/lesson/' + this.id;
-			},
+			}
 
 		});
 

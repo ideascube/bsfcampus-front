@@ -18,12 +18,8 @@ define(
 
 			model: SkillModel,
 
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/hierarchy/skills/track';
-			},
-
-			url: function() {
-				return this.urlRoot() + '/' + this.meta('track_id');
+			serverPath: function() {
+				return '/hierarchy/skills/track/' + this.meta('track_id');
 			}
 
 		});

@@ -18,12 +18,8 @@ define(
 
 			model: LessonModel,
 
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/hierarchy/lessons/skill';
-			},
-
-			url: function() {
-				return this.urlRoot() + '/' + this.meta('skill_id');
+			serverPath: function() {
+				return '/hierarchy/lessons/skill/' + this.meta('skill_id');
 			}
 
 		});

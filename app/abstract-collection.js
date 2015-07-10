@@ -28,6 +28,18 @@ define(
 
 				var jsonKey = options.jsonKey || this.jsonKey || 'data';
 				return response[jsonKey];
+			},
+
+			serverPath: '',
+
+			url: function () {
+				var serverPath = '';
+				if (typeof this.serverPath === "function") {
+					serverPath = this.serverPath();
+				} else if (typeof this.serverPath === "string") {
+					serverPath = this.serverPath;
+				}
+				return Config.constants.serverGateway + serverPath;
 			}
 
 		});

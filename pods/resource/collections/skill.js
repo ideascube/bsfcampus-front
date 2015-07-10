@@ -18,12 +18,8 @@ define(
 
 			model: ResourceModel,
 
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/resources/skill';
-			},
-
-			url: function() {
-				return this.urlRoot() + '/' + this.meta('skill_id');
+			serverPath: function() {
+				return '/resources/skill/' + this.meta('skill_id');
 			}
 
 		});

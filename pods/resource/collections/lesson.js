@@ -18,13 +18,9 @@ define(
 
 			model: ResourceModel,
 
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/resources/lesson';
-			},
-
-			url: function() {
-				return this.urlRoot() + '/' + this.meta('lesson_id');
-			},
+			serverPath: function() {
+				return '/resources/lesson/' + this.meta('lesson_id');
+			}
 
 		});
 

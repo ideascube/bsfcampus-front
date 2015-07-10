@@ -39,9 +39,7 @@ define(
 				return this.collection;
 			},
 			
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/activity/exercise_attempts';
-			},
+			serverPath: '/activity/exercise_attempts',
 
 			postAnswerUrl: function() {
 				return this.url() + '/answer';

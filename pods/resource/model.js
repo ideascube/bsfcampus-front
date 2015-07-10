@@ -13,9 +13,7 @@ define(
 
 		return AbstractModel.extend({
 			
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/resources';
-			},
+			serverPath: '/resources',
 
 			hierarchyUrl: function() {
 				return this.url() + '/hierarchy';

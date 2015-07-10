@@ -16,16 +16,14 @@ define(
 
             jwt: null,
 
-            urlRoot: function() {
-                return Config.constants.serverGateway + '/users/current';
-            },
+            serverPath: '/users',
 
             url: function() {
-                return this.urlRoot();
+                return this.urlRoot() + '/current';
             },
 
             dashboardUrl: function() {
-                return this.urlRoot + "/dashboard";
+                return this.url() + "/dashboard";
             },
 
             logIn: function(username, password) {

@@ -13,13 +13,7 @@ define(
 
         return AbstractModel.extend({
 
-            urlRoot: function() {
-                return Config.constants.serverGateway + '/users';
-            },
-
-            url: function() {
-                return this.urlRoot() + "/" + this.id;
-            }
+            serverPath: '/users'
 
         });
 

@@ -18,13 +18,7 @@ define(
 
 			model: TrackModel,
 
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/hierarchy/tracks';
-			},
-
-			url: function() {
-				return this.urlRoot();
-			}
+			serverPath: '/hierarchy/tracks'
 
 		});
 

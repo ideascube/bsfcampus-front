@@ -2,12 +2,17 @@ define(['lib/window', 'config'],
 	function (w, config) {
 
 		var port = 5000;
-		if ('server_port' in config) {
+		if (config.hasOwnProperty('server_port')) {
 			port = config.server_port;
-		} else if ('server_type' in config) {
+		} else if (config.hasOwnProperty('server_type')) {
 			if (config.server_type == 'local') {
 				port = 5001;
 			}
+		}
+
+		var api_path = '';
+		if (config.hasOwnProperty('api_path')) {
+			api_path = config.api_path;
 		}
 
 		return {
@@ -16,7 +21,7 @@ define(['lib/window', 'config'],
                 HOME: "HOME_VIEW"
             },
 
-			serverGateway: w.location.protocol + '//' + w.location.hostname  + ':' + port,
+			serverGateway: w.location.protocol + '//' + w.location.hostname  + ':' + port + api_path,
 
 			imagesPath: 'assets/images/',
 

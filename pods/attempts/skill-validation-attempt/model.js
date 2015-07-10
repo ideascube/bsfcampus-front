@@ -13,9 +13,7 @@ define (
 
         return ExerciseAttemptModel.extend({
 
-            urlRoot: function() {
-                return Config.constants.serverGateway + '/activity/skill_validation_attempts';
-            }
+            serverPath: '/activity/skill_validation_attempts'
 
         });
 

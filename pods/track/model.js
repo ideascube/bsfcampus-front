@@ -13,9 +13,7 @@ define(
 
 		return AbstractModel.extend({
 
-			urlRoot: function() {
-				return Config.constants.serverGateway + '/hierarchy/tracks';
-			},
+			serverPath: '/hierarchy/tracks',
 
 			route: function() {
 				return '#/track/' + this.id;

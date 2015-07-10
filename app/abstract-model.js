@@ -81,6 +81,18 @@ define(
 					son.route = this.route();
 				}
 				return son;
+			},
+
+			serverPath: '',
+
+			urlRoot: function () {
+				var serverPath = '';
+				if (typeof this.serverPath === "function") {
+					serverPath = this.serverPath();
+				} else if (typeof this.serverPath === "string") {
+					serverPath = this.serverPath;
+				}
+				return Config.constants.serverGateway + serverPath;
 			}
 
 		});
