@@ -4,7 +4,7 @@ define(
         'underscore',
         'backbone',
         'app/config',
-        'lib/window',
+        'scripts/window',
 
         'model'
     ],

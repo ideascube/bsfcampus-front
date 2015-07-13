@@ -1,4 +1,4 @@
-define(['lib/window', 'config'],
+define(['scripts/window', 'config'],
 	function (w, config) {
 
 		var port = 5000;
