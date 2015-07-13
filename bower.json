@@ -1,0 +1,19 @@
+{
+  "name": "BSF Campus",
+  "version": "1.0.0",
+  "dependencies": {
+    "jquery": "1.*",
+    "jquery-ui": null,
+    "jQuery.serializeObject": null,
+    "magnific-popup": null,
+    "backbone": null,
+    "underscore": null,
+    "requirejs": null,
+    "requirejs-text": null,
+    "require-less": null,
+    "bootstrap": null,
+    "jquery.stellar": null,
+    "form2js": null,
+    "projekktor": null
+  }
+}

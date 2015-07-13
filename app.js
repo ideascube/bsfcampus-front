@@ -1,19 +1,19 @@
 require.config({
 
 	paths: {
-		jquery: 'lib/jquery',
-		underscore: 'lib/underscore',
-		backbone: 'lib/backbone',
-		jqueryui: 'lib/jquery-ui',
-        jqueryserialize: 'lib/jquery.serialize-object.min',
+		jquery: 'vendor/jquery/dist/jquery',
+		underscore: 'vendor/underscore/underscore',
+		backbone: 'vendor/backbone/backbone',
+		jqueryui: 'vendor/jquery-ui/jquery-ui',
+        jqueryserialize: 'vendor/jquery.serializeObject/jquery.serializeObject',
         viewmanager: 'lib/vm',
-		form2js: 'lib/form2js/form2js',
-		text: 'lib/text',
-		less: 'lib/require-less/less',
-		lessc: 'lib/require-less/lessc',
-		normalize: 'lib/require-less/normalize',
-		bootstrap: 'lib/bootstrap',
-        projekktor: 'lib/projekktor',
+		form2js: 'vendor/form2js/src/form2js',
+		text: 'vendor/requirejs-text/text',
+		less: 'vendor/require-less/less',
+		lessc: 'vendor/require-less/lessc',
+		normalize: 'vendor/require-less/normalize',
+		bootstrap: 'vendor/bootstrap/dist/js/bootstrap',
+        projekktor: 'vendor/projekktor/dist/projekktor',
 
 		collection: 'app/abstract-collection',
 		model: 'app/abstract-model'
