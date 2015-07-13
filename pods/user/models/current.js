@@ -4,11 +4,10 @@ define(
         'underscore',
         'backbone',
         'app/config',
-        'scripts/window',
 
         'model'
     ],
-    function($, _, Backbone, Config, w,
+    function($, _, Backbone, Config,
              AbstractModel
     ) {
 
@@ -41,8 +40,9 @@ define(
                 }).done(
                     function(result){
                         self.jwt = result.token;
-                        if ('localStorage' in w && w['localStorage'] !== null) {
-                            localStorage = w['localStorage'];
+                        //console.log(window);
+                        if ('localStorage' in window && window['localStorage'] !== null) {
+                            localStorage = window['localStorage'];
                             localStorage['mookbsf_jwt'] = self.jwt;
                         }
                         self.fetch();
@@ -52,8 +52,8 @@ define(
 
             logOut: function() {
                 this.jwt = null;
-                if ('localStorage' in w && w['localStorage'] !== null) {
-                    localStorage = w['localStorage'];
+                if ('localStorage' in window && window['localStorage'] !== null) {
+                    localStorage = window['localStorage'];
                     localStorage.removeItem('mookbsf_jwt');
                 }
                 this.clear();
@@ -64,8 +64,8 @@ define(
             },
 
             findSession: function() {
-                if ('localStorage' in w && w['localStorage'] !== null) {
-                    localStorage = w['localStorage'];
+                if ('localStorage' in window && window['localStorage'] !== null) {
+                    localStorage = window['localStorage'];
                     var storedToken = localStorage.getItem('mookbsf_jwt');
                     if (storedToken === null) {
                         return false;

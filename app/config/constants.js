@@ -1,5 +1,5 @@
-define(['scripts/window', 'config'],
-	function (w, config) {
+define(['config'],
+	function (config) {
 
 		var port = 5000;
 		if (config.hasOwnProperty('server_port')) {
@@ -21,7 +21,7 @@ define(['scripts/window', 'config'],
                 HOME: "HOME_VIEW"
             },
 
-			serverGateway: w.location.protocol + '//' + w.location.hostname  + ':' + port + api_path,
+			serverGateway: window.location.protocol + '//' + window.location.hostname  + ':' + port + api_path,
 
 			imagesPath: 'assets/images/',
 
