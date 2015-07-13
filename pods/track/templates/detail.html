@@ -1,28 +1,30 @@
 <div class="col-md-6 thin-gutter <%= track.validateButtonStatus %>" id="track-info">
 
-	<div class="text-center track-icon">
-		<img src="<%= track.icon_url %>">
-	</div>
+    <div class="text-center track-icon">
+        <img src="<%= track.icon_url %>">
+    </div>
 
-	<h2 class="text-center" id="track-title"><%= track.title %></h2>
+    <h2 class="text-center" id="track-title"><%= track.title %></h2>
 
-	<div id="track-description"><%= track.description %></div>
+    <div id="track-description"><%= track.description %></div>
 
 
 </div>
 
 <div class="col-md-6 thin-gutter">
 
-	<a href="" class="btn <%= track.validateButtonClass %> btn-validate-track <%= track.validateButtonStatus %>">
-		<img src="<%= config.imagesDict.certificateValidated %>" class="certificate-validated" />
-		<img src="<%= config.imagesDict.certificateLocked %>" class="certificate-locked" />
-		<%= track.validateButtonText %>
-		<img src="<%= config.imagesDict.lock %>" class="lock" />
-		<img src="<%= config.imagesDict.checkStroke %>" class="check" />
-	</a>
+    <a href="" class="btn <%= track.validateButtonClass %> btn-validate-track <%= track.validateButtonStatus %>">
+        <img src="<%= config.imagesDict.certificateValidated %>" class="certificate-validated"/>
+        <img src="<%= config.imagesDict.certificateLocked %>" class="certificate-locked"/>
+        <%= track.validateButtonText %>
+        <img src="<%= config.imagesDict.lock %>" class="lock"/>
+        <img src="<%= config.imagesDict.checkStroke %>" class="check"/>
+    </a>
 
-	<ul id="track-outline" class="media-list">
-		<li>Loading skills...</li>
-	</ul>
+    <div id="track-outline" class="media-list">
+        <div class="skill media">
+            Loading skills...
+        </div>
+    </div>
 
 </div>
