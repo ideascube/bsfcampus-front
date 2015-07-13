@@ -49,7 +49,7 @@ define(
                 Backbone.history.loadUrl("/login");
             },
 
-            register: function() {
+            register: function(e) {
                 e.preventDefault();
 
                 Backbone.history.loadUrl("/register");

@@ -131,6 +131,9 @@ define([],
                         CONFIRM_NEW_PASSWORD: "Confirmer le nouveau mot de passe",
                         SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
                         SAVE_SUCCESS_MESSAGE: 'Votre nouveau mot de passe a été enregistré',
+                        CURRENT_PASSWORD_ERROR: 'Le mot de passe actuel est erroné',
+                        ERROR_NEW_PASSWORD: 'Le nouveau mot de passe ne peut être vide',
+                        ERROR_CONFIRM_NEW_PASSWORD: 'La confirmation du mot de passe ne correspond pas au nouveau mot de passe',
                         SAVE_FAIL_MESSAGE: 'Erreur lors de l\'enregistrement : Merci de vérifier les données'
                     },
                     DASHBOARD: {

@@ -41,7 +41,7 @@ define(
 
             saveModifications: function() {
                 console.log("save user profile modifications");
-                var formData = this.$el.find('form').serializeJSON();
+                var formData = JSON.stringify(this.$el.find('form').serializeObject());
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',

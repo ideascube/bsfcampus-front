@@ -23,7 +23,7 @@ define(
             template: _.template(loginTemplate),
 
             events: {
-                'submit form': 'submit'
+                'submit #login-modal form': 'submit'
             },
 
             render: function () {

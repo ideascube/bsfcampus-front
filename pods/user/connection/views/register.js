@@ -26,7 +26,7 @@ define(
             template: _.template(registerTemplate),
 
             events: {
-                'submit form': 'submit',
+                'submit #register-modal form': 'submit',
                 'click #got-account-btn': 'redirect_to_login'
             },
 
@@ -41,7 +41,7 @@ define(
             submit: function (e) {
                 e.preventDefault();
 
-                var formData = this.$('form').serializeJSON();
+                var formData = JSON.stringify(this.$('form').serializeObject());
                 var username = this.$('form #username').val();
                 var password = this.$('form #password').val();
 

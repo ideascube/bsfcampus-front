@@ -36,7 +36,7 @@ define(
 
             saveModifications: function() {
                 console.log("save user profile modifications");
-                var formData = this.$el.find('form').serializeJSON();
+                var formData = JSON.stringify(this.$el.find('form').serializeObject());
                 var $saveButton = this.$el.find('button.save_modification');
                 $saveButton.addClass('disabled');
                 var $passwordSaveResult = this.$el.find('.save-result');
@@ -63,19 +63,21 @@ define(
                     var errorCode = error.responseJSON.code;
                     switch (errorCode) {
                         case Config.constants.changePasswordErrorsCode.INVALID_CURRENT_PASSWORD:
+                            $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.CURRENT_PASSWORD_ERROR);
                             self.$el.find("form input#current_password+img.success-icon").attr('src', Config.imagesDict.wrongRed);
                             break;
                         case Config.constants.changePasswordErrorsCode.INVALID_NEW_PASSWORD:
+                            $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.ERROR_NEW_PASSWORD);
                             self.$el.find("form input#current_password+img.success-icon").attr('src', Config.imagesDict.greenCheck);
                             self.$el.find("form input#new_password+img.success-icon").attr('src', Config.imagesDict.wrongRed);
                             break;
                         case Config.constants.changePasswordErrorsCode.INVALID_CONFIRM_PASSWORD:
+                            $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.ERROR_CONFIRM_NEW_PASSWORD);
                             self.$el.find("form input#current_password+img.success-icon").attr('src', Config.imagesDict.greenCheck);
                             self.$el.find("form input#new_password+img.success-icon").attr('src', Config.imagesDict.greenCheck);
                             self.$el.find("form input#confirm_new_password+img.success-icon").attr('src', Config.imagesDict.wrongRed);
                             break;
                     }
-                    $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.SAVE_FAIL_MESSAGE);
                     $passwordSaveResult.addClass('fail');
                     $saveButton.removeClass('disabled');
                 });
