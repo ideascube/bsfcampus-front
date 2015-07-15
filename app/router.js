@@ -7,6 +7,7 @@ define(
         'app/config',
 
         'pods/user/models/current',
+        'app/misc-analytic-model',
         'pods/track/model',
         'pods/track/collection',
         'pods/skill/model',
@@ -29,7 +30,7 @@ define(
         'less!app/styles/common'
     ],
     function ($, _, Backbone, VM, Config,
-              currentUser, TrackModel, TrackCollection, SkillModel,
+              currentUser, MiscAnalyticsModel, TrackModel, TrackCollection, SkillModel,
               LessonModel, ResourceModel,
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView,
@@ -95,6 +96,8 @@ define(
             },
 
             home: function () {
+                var visitHomeAnalytics = new MiscAnalyticsModel({type: "visit_home_page"});
+                visitHomeAnalytics.save();
                 if (currentUser.isLoggedIn())
                 {
                     this.navigate('user/profile', {trigger: true});
@@ -171,6 +174,8 @@ define(
             },
 
             logout: function () {
+                var logoutAnalytics = new MiscAnalyticsModel({type: "user_logout", title: currentUser.get('username')});
+                logoutAnalytics.save();
                 currentUser.logOut();
                 Backbone.history.navigate('', {trigger: true});
             },
@@ -271,6 +276,8 @@ define(
             },
 
             promptTrackValidation: function (track_id) {
+                var promptTrackValidationAnalytics = new MiscAnalyticsModel({type: "prompt_track_validation_test", title: track_id});
+                promptTrackValidationAnalytics.save();
                 this.clearModal();
                 var promptTrackValidationView = new PromptTrackValidationView({
                     el: this.$modalDialog
