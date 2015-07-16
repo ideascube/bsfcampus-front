@@ -278,6 +278,22 @@ define(
 				              // Not sure if useful
 			},
 
+			submitStartNextQuestion: function() {
+
+                console.log('submitStartNextQuestion');
+                var formData = {form_data: JSON.stringify({question_id: this.currentQuestionAnswer.get('question_id')})};
+
+				$.ajax({
+						type: 'POST',
+						url: this.model.postStartNextQuestionUrl(),
+						data: formData,
+						dataType: 'json'
+					});
+
+				return false; // Also prevents from submitting the form
+				              // Not sure if useful
+			},
+
 			renderEndOfExercise: function() {
 				var recapModelJSON = this.model.forRecapTemplate();
 				var html = this.recapTemplate({
@@ -343,6 +359,7 @@ define(
 			continueExercise: function() {
 				this.updateCurrentQuestionAnswer();
 				if (this.currentQuestionAnswer != null && this.model.getNumberOfMistakesMade() <= this.model.get('max_mistakes')) {
+                    this.submitStartNextQuestion();
 					this.renderCurrentQuestionAnswerForm();
 				} else {
 					this.renderEndOfExercise();

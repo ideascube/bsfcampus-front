@@ -45,6 +45,10 @@ define(
 				return this.url() + '/answer';
 			},
 
+			postStartNextQuestionUrl: function() {
+				return this.url() + '/start_next_question';
+			},
+
 			getCurrentQuestionAnswer: function() {
 				var models = this.getCollection().models;
 				var nextQuestionUnanswered = _.find(models, function (questionAnswer) {
