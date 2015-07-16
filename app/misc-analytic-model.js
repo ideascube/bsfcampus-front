@@ -27,7 +27,7 @@ define(
             },
 
             urlRoot: function () {
-                return Config.constants.serverGateway + "/misc_analytics";
+                return Config.constants.serverGateway + "/activity/misc_analytics";
             }
         });
     }

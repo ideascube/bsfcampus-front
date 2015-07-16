@@ -96,7 +96,8 @@ define(
             },
 
             home: function () {
-                var visitHomeAnalytics = new MiscAnalyticsModel({type: "visit_home_page"});
+                var visitHomeAnalytics = new MiscAnalyticsModel();
+                visitHomeAnalytics.type = "visit_home_page";
                 visitHomeAnalytics.save();
                 if (currentUser.isLoggedIn())
                 {
@@ -174,7 +175,9 @@ define(
             },
 
             logout: function () {
-                var logoutAnalytics = new MiscAnalyticsModel({type: "user_logout", title: currentUser.get('username')});
+                var logoutAnalytics = new MiscAnalyticsModel();
+                logoutAnalytics.type = "user_logout";
+                logoutAnalytics.title = currentUser.get('username');
                 logoutAnalytics.save();
                 currentUser.logOut();
                 Backbone.history.navigate('', {trigger: true});
@@ -276,7 +279,9 @@ define(
             },
 
             promptTrackValidation: function (track_id) {
-                var promptTrackValidationAnalytics = new MiscAnalyticsModel({type: "prompt_track_validation_test", title: track_id});
+                var promptTrackValidationAnalytics = new MiscAnalyticsModel();
+                promptTrackValidationAnalytics.type = "prompt_track_validation_test";
+                promptTrackValidationAnalytics.title = track_id;
                 promptTrackValidationAnalytics.save();
                 this.clearModal();
                 var promptTrackValidationView = new PromptTrackValidationView({
