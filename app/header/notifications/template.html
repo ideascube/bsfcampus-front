@@ -1,0 +1,7 @@
+<% if (isTutorRequest) { %>
+<p><%= requestingUser.full_name %><%= config.stringsDict.HEADER.NOTIFICATIONS.TUTORED_STUDENT_REQUEST_MESSAGE%></p>
+<% } else { %>
+<p><%= requestingUser.full_name %><%= config.stringsDict.HEADER.NOTIFICATIONS.TUTOR_REQUEST_MESSAGE  %></p>
+<% } %>
+<button class="btn accept"><%= config.stringsDict.HEADER.NOTIFICATIONS.ACCEPT %></button>
+<button class="btn decline"><%= config.stringsDict.HEADER.NOTIFICATIONS.DECLINE %></button>

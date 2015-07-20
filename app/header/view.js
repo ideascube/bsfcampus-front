@@ -7,10 +7,13 @@ define(
 
         'pods/user/models/current',
 
+        'app/header/notifications/view',
+
         'text!app/header/template.html'
     ],
     function ($, _, Backbone, Config,
               currentUser,
+              NotificationView,
               template) {
 
         return Backbone.View.extend({
@@ -31,7 +34,106 @@ define(
                 var html = this.template({currentUser: currentUser.forTemplate(), config: Config});
                 this.$el.html(html);
 
+                this.$notificationsList = this.$el.find("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");
+                this.$notificationsList.html('');
+                var awaitingTutorRequests = currentUser.get('awaiting_tutor_requests');
+                _.each(awaitingTutorRequests, this.renderTutorRequestNotification, this);
+                var awaitingStudentRequests = currentUser.get('awaiting_student_requests');
+                _.each(awaitingStudentRequests, this.renderTutoredStudentRequestNotification, this);
+
                 this.updateHeaderButtonFocus(this.currentFocusedElement);
+            },
+
+            renderTutorRequestNotification: function(requestingUser) {
+                var notificationView = new NotificationView();
+                notificationView.requestingUser = requestingUser;
+                notificationView.isTutorRequest = true;
+
+                this.$notificationsList.append(notificationView.render());
+
+                this.listenTo(notificationView, 'accept', this.acceptTutorRequest);
+                this.listenTo(notificationView, 'decline', this.declineTutorRequest);
+            },
+
+            acceptTutorRequest: function(notification, requestingUserId) {
+                var self = this;
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/tutoring/accept/tutor/" + requestingUserId,
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the tutor request has been successfully accepted");
+                    if (response['error_code'] == 0) {
+                        currentUser.set(currentUser.parse(response['data']));
+                    }
+                }).fail(function (error) {
+                    console.log("Error while accepting the tutor request:", error );
+                });
+            },
+
+            declineTutorRequest: function(notification, requestingUserId) {
+                var self = this;
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/tutoring/decline/tutor/" + requestingUserId,
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the tutor request has been successfully accepted");
+                    currentUser.set(currentUser.parse(response));
+                }).fail(function (error) {
+                    console.log("Error while accepting the tutor request:", error.responseJSON.data.error_message );
+                });
+            },
+
+            renderTutoredStudentRequestNotification: function(requestingUser) {
+                var notificationView = new NotificationView();
+                notificationView.requestingUser = requestingUser;
+                notificationView.isTutorRequest = false;
+
+                this.$notificationsList.append(notificationView.render());
+
+                this.listenTo(notificationView, 'accept', this.acceptTutoredStudentRequest);
+                this.listenTo(notificationView, 'decline', this.declineTutoredStudentRequest);
+            },
+
+            acceptTutoredStudentRequest: function(notification, requestingUserId) {
+                var self = this;
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/tutoring/accept/student/" + requestingUserId,
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the tutored student request has been successfully accepted");
+                    if (response['error_code'] == 0) {
+                        currentUser.set(currentUser.parse(response['data']));
+                    }
+                }).fail(function (error) {
+                    console.log("Error while accepting the tutored student request:", error );
+                });
+            },
+
+            declineTutoredStudentRequest: function(notification, requestingUserId) {
+                var self = this;
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/tutoring/decline/student/" + requestingUserId,
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the tutored student request has been successfully declined");
+                    if (response['error_code'] == 0) {
+                        currentUser.set(currentUser.parse(response['data']));
+                    }
+                }).fail(function (error) {
+                    console.log("Error while declining the tutored student request:", error );
+                });
             },
 
             login: function (e) {

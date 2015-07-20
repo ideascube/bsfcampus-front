@@ -71,7 +71,14 @@ define([],
                 LOGIN: 'Connexion',
                 ALL_TRACKS: 'Parcours',
                 HOME_PAGE: 'Accueil',
-                USER: 'Profil'
+                USER: 'Profil',
+
+                NOTIFICATIONS: {
+                    TUTOR_REQUEST_MESSAGE: " souhaite devenir votre tuteur",
+                    TUTORED_STUDENT_REQUEST_MESSAGE: " souhaite que vous deveniez son tuteur",
+                    ACCEPT: "Accepter",
+                    DECLINE: "Refuser"
+                }
             },
 
             HOME: {

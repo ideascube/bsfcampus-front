@@ -76,10 +76,6 @@ define(
                 } else {
                     return false;
                 }
-            },
-
-            update: function(data) {
-
             }
 
         });

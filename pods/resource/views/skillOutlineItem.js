@@ -52,7 +52,7 @@ define(
 				this.$el.find('.lesson-outline').append(lessonOutlineItemView.$el);
 
 				return this;
-			},
+			}
 
 		});
 		
