@@ -1,18 +1,24 @@
 define(['config'],
 	function (config) {
 
-		var port = 5000;
-		if (config.hasOwnProperty('server_port')) {
-			port = config.server_port;
-		} else if (config.hasOwnProperty('server_type')) {
-			if (config.server_type == 'local') {
-				port = 5001;
+		var serverGateway;
+		if (config.hasOwnProperty('api_root_url')) {
+			serverGateway = config.api_root_url;
+		} else {
+			var port = 5000;
+			if (config.hasOwnProperty('server_port')) {
+				port = config.server_port;
+			} else if (config.hasOwnProperty('server_type')) {
+				if (config.server_type == 'local') {
+					port = 5001;
+				}
 			}
-		}
+			var api_path = '';
+			if (config.hasOwnProperty('api_path')) {
+				api_path = config.api_path;
+			}
 
-		var api_path = '';
-		if (config.hasOwnProperty('api_path')) {
-			api_path = config.api_path;
+			serverGateway = window.location.protocol + '//' + window.location.hostname  + ':' + port + api_path;
 		}
 
 		return {
@@ -21,7 +27,7 @@ define(['config'],
                 HOME: "HOME_VIEW"
             },
 
-			serverGateway: window.location.protocol + '//' + window.location.hostname  + ':' + port + api_path,
+			serverGateway: serverGateway,
 
 			imagesPath: 'assets/images/',
 
