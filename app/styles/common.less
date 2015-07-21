@@ -25,6 +25,10 @@ a, a:hover {
   text-decoration: none;
 }
 
+.btn:active:focus, .btn:focus {
+  outline: none;
+}
+
 #body-container {
   min-height: 100vh;
   position: relative;
@@ -60,6 +64,97 @@ a, a:hover {
     border : none;
     > li > a {
       font-weight: 600;
+    }
+  }
+  .dropdown-notifications {
+    #navbar-notifications-btn {
+      background-color: #FFFFFF;
+      padding-bottom: 8px;
+      padding-top: 10px;
+      position: relative;
+      .notification-count {
+        color: #FFFFFF;
+        background-color: #B7241C;
+        border-radius: 20px;
+        float: right;
+        margin-left: 25px;
+        padding: 0 6px;
+      }
+      .notification-icon-open {
+        height: auto;
+        padding-top: 5px;
+        position: absolute;
+        visibility: hidden;
+      }
+      .notification-icon {
+        height: auto;
+        padding-top: 5px;
+        position: absolute;
+        visibility: visible;
+      }
+    }
+  }
+  .dropdown-notifications.open {
+    #navbar-notifications-btn {
+      background-color: #FFFFFF;
+      padding-bottom: 8px;
+      padding-top: 10px;
+      position: relative;
+      .notification-count {
+        color: #FFFFFF;
+        background-color: #B7241C;
+        border-radius: 20px;
+        float: right;
+        margin-left: 25px;
+        padding: 0 6px;
+      }
+      .notification-icon-open {
+        height: auto;
+        padding-top: 5px;
+        position: absolute;
+        visibility: visible;
+      }
+      .notification-icon {
+        height: auto;
+        padding-top: 5px;
+        position: absolute;
+        visibility: hidden;
+      }
+    }
+    #notifications-list {
+      border-radius: 0 0 15px 15px;
+      margin-left: -300px;
+      max-height: 175px;
+      overflow-y: auto;
+      padding: 10px 20px;
+      width: 400px;
+      box-shadow: 0px 2px 3px #A8A8A8 inset, 0px 4px 3px #A8A8A8;
+      div {
+        border-bottom: 1px solid #7B7B7B;
+        width: 100%;
+        p {
+          margin: 0;
+        }
+        .btn {
+          background-color: #FFFFFF;
+          border-radius: 15px;
+          border: 1px solid #7B7B7B;
+          color: #7B7B7B;
+          height: 30px;
+          padding: 0;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+        .btn.accept {
+          background-color: #00AEEF;
+          border: none;
+          color: #FFF;
+        }
+      }
+
+      @media (max-width: 768px) {
+        box-shadow: 0px 4px 3px #A8A8A8;
+      }
     }
   }
 }

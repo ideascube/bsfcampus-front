@@ -30,6 +30,7 @@
                 <li class="dropdown dropdown-notifications">
                     <a href="#"  id="navbar-notifications-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <img class="notification-icon" src="<%= config.imagesDict.bell %>">
+                        <img class="notification-icon-open" src="<%= config.imagesDict.bellRed %>">
                         <div class="notification-count"><%= (currentUser.awaiting_tutor_requests.length + currentUser.awaiting_student_requests.length) %></div>
                     </a>
                     <ul id="notifications-list" class="dropdown-menu" role="menu" aria-labelledby="navbar-notifications-btn">

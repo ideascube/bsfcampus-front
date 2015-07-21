@@ -15,7 +15,7 @@ define(
 
             template: _.template(template),
 
-            classNames: 'notification',
+            className: 'container',
 
             events: {
                 'click button.accept': 'accept',

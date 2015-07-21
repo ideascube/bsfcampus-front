@@ -12,6 +12,7 @@ define(
 			logo_bsf_campus: Constants.imagesPath + 'BSF_logo_header.png',
 			logo_bsf: Constants.imagesPath + 'BSF_logo_footer.png',
 			bell: Constants.imagesPath + 'bell.png',
+			bellRed: Constants.imagesPath + 'bellRed.png',
 
 			arrow: Constants.imagesPath + 'arrow.png',
 			arrowInCircle: Constants.imagesPath + 'iconmonstr-arrow-28-icon-256.png',
