@@ -14,11 +14,10 @@ define(
 
         'less!pods/user/profile/pages/styles/tutoring'
     ],
-    function($, _, Backbone, Config,
-             currentUser, User,
-             UserSearchResultLineView,
-             tutoringTemplate
-    ) {
+    function ($, _, Backbone, Config,
+              currentUser, User,
+              UserSearchResultLineView,
+              tutoringTemplate) {
 
         return Backbone.View.extend({
 
@@ -39,7 +38,7 @@ define(
                 return this;
             },
 
-            searchUser: function(e) {
+            searchUser: function (e) {
                 e.preventDefault();
 
                 var $form = $(e.currentTarget);
@@ -52,23 +51,30 @@ define(
                     url: endpointUrl,
                     dataType: 'json'
                 })
-                .done(function(result) {
-                    console.log("user search is successful:", result.data);
-                    self.renderSearchResults(result.data);
-                })
-                .fail(function(error) {
-                    console.log("user search has failed:", error['responseJSON']['error_message']);
-                });
+                    .done(function (result) {
+                        console.log("user search is successful:", result.data);
+                        self.renderSearchResults(result.data);
+                    })
+                    .fail(function (error) {
+                        console.log("user search has failed:", error['responseJSON']['error_message']);
+                    });
 
             },
 
             renderSearchResults: function (usersList) {
                 this.$searchResultList = this.$el.find('#tutoring-user-search-results');
-                this.$searchResultList.html('');
-                _.each(usersList, this.renderSingleUserResult, this);
+                if (usersList.length > 0)
+                {
+                    this.$searchResultList.html('');
+                    _.each(usersList, this.renderSingleUserResult, this);
+                }
+                else
+                {
+                    this.$searchResultList.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_NO_RESULT);
+                }
             },
 
-            renderSingleUserResult: function(userSON) {
+            renderSingleUserResult: function (userSON) {
                 var user = new User({data: userSON}, {parse: true});
                 var userSearchResultLineView = new UserSearchResultLineView({model: user});
                 this.addSearchedUserListeners(userSearchResultLineView);
@@ -84,100 +90,118 @@ define(
                 this.listenTo(userSearchResultLineView, 'removeStudent', this.removeStudent);
             },
 
-            addTutor: function(userId) {
+            addTutor: function (userId) {
                 var endpointUrl = Config.constants.serverGateway + "/tutoring/request/tutor/" + userId;
 
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
                 })
-                .done(function(result) {
-                    console.log("add tutor request successful:", result.data);
-                })
-                .fail(function(error) {
-                    console.log("add tutor request failed:", error['responseJSON']['error_message']);
-                });
+                    .done(function (result) {
+                        console.log("add tutor request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$el.find('form').submit();
+                    })
+                    .fail(function (error) {
+                        console.log("add tutor request failed:", error['responseJSON']['error_message']);
+                    });
             },
 
-            cancelTutorRequest: function(userId) {
+            cancelTutorRequest: function (userId) {
                 var endpointUrl = Config.constants.serverGateway + "/tutoring/cancel/tutor/" + userId;
 
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
                 })
-                .done(function(result) {
-                    console.log("cancel tutor request successful:", result.data);
-                })
-                .fail(function(error) {
-                    console.log("cancel tutor request failed:", error['responseJSON']['error_message']);
-                });
+                    .done(function (result) {
+                        console.log("cancel tutor request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$el.find('form').submit();
+                    })
+                    .fail(function (error) {
+                        console.log("cancel tutor request failed:", error['responseJSON']['error_message']);
+                    });
             },
 
-            removeTutor: function(userId) {
+            removeTutor: function (userId) {
                 var endpointUrl = Config.constants.serverGateway + "/tutoring/remove/tutor/" + userId;
 
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
                 })
-                .done(function(result) {
-                    console.log("remove tutor request successful:", result.data);
-                })
-                .fail(function(error) {
-                    console.log("remove tutor request failed:", error['responseJSON']['error_message']);
-                });
+                    .done(function (result) {
+                        console.log("remove tutor request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$el.find('form').submit();
+                    })
+                    .fail(function (error) {
+                        console.log("remove tutor request failed:", error['responseJSON']['error_message']);
+                    });
             },
 
-            addStudent: function(userId) {
+            addStudent: function (userId) {
                 var endpointUrl = Config.constants.serverGateway + "/tutoring/request/student/" + userId;
 
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
                 })
-                .done(function(result) {
-                    console.log("add student request successful:", result.data);
-                })
-                .fail(function(error) {
-                    console.log("add student request failed:", error['responseJSON']['error_message']);
-                });
+                    .done(function (result) {
+                        console.log("add student request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$el.find('form').submit();
+                    })
+                    .fail(function (error) {
+                        console.log("add student request failed:", error['responseJSON']['error_message']);
+                    });
             },
 
-            cancelStudentRequest: function(userId) {
+            cancelStudentRequest: function (userId) {
                 var endpointUrl = Config.constants.serverGateway + "/tutoring/cancel/student/" + userId;
 
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
                 })
-                .done(function(result) {
-                    console.log("cancel student request successful:", result.data);
-                })
-                .fail(function(error) {
-                    console.log("cancel student request failed:", error['responseJSON']['error_message']);
-                });
+                    .done(function (result) {
+                        console.log("cancel student request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$el.find('form').submit();
+                    })
+                    .fail(function (error) {
+                        console.log("cancel student request failed:", error['responseJSON']['error_message']);
+                    });
             },
 
-            removeStudent: function(userId) {
+            removeStudent: function (userId) {
                 var endpointUrl = Config.constants.serverGateway + "/tutoring/remove/student/" + userId;
 
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
                 })
-                .done(function(result) {
-                    console.log("remove student request successful:", result.data);
-                })
-                .fail(function(error) {
-                    console.log("remove student request failed:", error['responseJSON']['error_message']);
-                });
+                    .done(function (result) {
+                        console.log("remove student request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$el.find('form').submit();
+                    })
+                    .fail(function (error) {
+                        console.log("remove student request failed:", error['responseJSON']['error_message']);
+                    });
             }
 
         });
