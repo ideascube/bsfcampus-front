@@ -56,8 +56,6 @@ define(
             },
 
             acceptTutorRequest: function(notification, requestingUserId) {
-                var self = this;
-
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
@@ -65,17 +63,13 @@ define(
                     dataType: 'json'
                 }).done(function(response) {
                     console.log("the tutor request has been successfully accepted");
-                    if (response['error_code'] == 0) {
-                        currentUser.set(currentUser.parse(response['data']));
-                    }
+                    currentUser.set(currentUser.parse(response));
                 }).fail(function (error) {
                     console.log("Error while accepting the tutor request:", error );
                 });
             },
 
             declineTutorRequest: function(notification, requestingUserId) {
-                var self = this;
-
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
@@ -101,8 +95,6 @@ define(
             },
 
             acceptTutoredStudentRequest: function(notification, requestingUserId) {
-                var self = this;
-
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
@@ -110,17 +102,13 @@ define(
                     dataType: 'json'
                 }).done(function(response) {
                     console.log("the tutored student request has been successfully accepted");
-                    if (response['error_code'] == 0) {
-                        currentUser.set(currentUser.parse(response['data']));
-                    }
+                    currentUser.set(currentUser.parse(response));
                 }).fail(function (error) {
                     console.log("Error while accepting the tutored student request:", error );
                 });
             },
 
             declineTutoredStudentRequest: function(notification, requestingUserId) {
-                var self = this;
-
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
@@ -128,9 +116,7 @@ define(
                     dataType: 'json'
                 }).done(function(response) {
                     console.log("the tutored student request has been successfully declined");
-                    if (response['error_code'] == 0) {
-                        currentUser.set(currentUser.parse(response['data']));
-                    }
+                    currentUser.set(currentUser.parse(response));
                 }).fail(function (error) {
                     console.log("Error while declining the tutored student request:", error );
                 });

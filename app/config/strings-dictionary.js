@@ -121,7 +121,8 @@ define([],
                         DASHBOARD: "Mon tableau de bord",
                         ACCOUNT: "Mon compte",
                         PASSWORD: "Mon mot de passe",
-                        PARAMETERS: "Paramètres"
+                        PARAMETERS: "Paramètres",
+                        TUTORING: "Tutorat"
                     },
                     SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
                     ACCOUNT: {
@@ -146,6 +147,17 @@ define([],
                     DASHBOARD: {
                         TITLE: 'MON TABLEAU DE BORD',
                         TABLET_ALL_TRACKS_LIST: "LISTE DES PARCOURS"
+                    },
+                    TUTORING: {
+                        SEARCH_USER_TITLE: "RECHERCHE D'UTILISATEUR",
+                        SEARCHED_USERNAME: "Identifiant de l'utilisateur recherché",
+                        SEARCH_BUTTON: "Rechercher",
+                        SEARCH_RESULT_ADD_TUTOR: "Ajouter comme tuteur",
+                        SEARCH_RESULT_CANCEL_TUTOR: "Annuler la demande de tutorat",
+                        SEARCH_RESULT_REMOVE_TUTOR: "Retirer ce tuteur",
+                        SEARCH_RESULT_ADD_STUDENT: "Devenir tuteur",
+                        SEARCH_RESULT_CANCEL_STUDENT: "Ne plus être tuteur",
+                        SEARCH_RESULT_REMOVE_STUDENT: "Retirer cet étudiant"
                     }
                 }
             }

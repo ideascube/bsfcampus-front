@@ -35,7 +35,8 @@ define(['config'],
 				DASHBOARD: "dashboard",
 				ACCOUNT: "my_account",
 				PASSWORD: "my_password",
-				PARAMETERS: "settings"
+				PARAMETERS: "settings",
+                TUTORING: "tutoring"
 			},
 
 			registerErrorsCode: {

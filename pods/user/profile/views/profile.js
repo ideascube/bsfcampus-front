@@ -12,6 +12,7 @@ define(
         'pods/user/profile/pages/views/dashboard',
         'pods/user/profile/pages/views/password',
         'pods/user/profile/pages/views/parameters',
+        'pods/user/profile/pages/views/tutoring',
 
         'text!pods/user/profile/templates/profile.html',
 
@@ -19,7 +20,7 @@ define(
     ],
     function($, _, Backbone, Config,
              currentUser,
-             NavMenuView, AccountView, DashboardView, PasswordView, ParametersView,
+             NavMenuView, AccountView, DashboardView, PasswordView, ParametersView, TutoringView,
              profileTemplate
     ) {
 
@@ -64,6 +65,9 @@ define(
                         break;
                     case Config.constants.userProfile.PARAMETERS:
                         profileDetailPageView = new ParametersView();
+                        break;
+                    case Config.constants.userProfile.TUTORING:
+                        profileDetailPageView = new TutoringView();
                         break;
                     default:
                         return;
