@@ -31,6 +31,8 @@ define(
 
             id: "user-profile",
 
+            className: "row",
+
             template: _.template(profileTemplate),
 
             navMenuView: null,

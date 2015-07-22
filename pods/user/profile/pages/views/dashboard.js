@@ -23,8 +23,6 @@ define(
 
             id: 'user-profile-dashboard-container',
 
-            className: 'border_radius',
-
             template: _.template(dashboardTemplate),
 
             'events': {

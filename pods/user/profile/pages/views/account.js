@@ -21,12 +21,10 @@ define(
 
             id: 'user-profile-account-container',
 
-            className: 'border_radius',
-
             template: _.template(accountTemplate),
 
             events: {
-                'click button.save_modification': 'saveModifications'
+                'submit form': 'saveModifications'
             },
 
             initialize: function () {
@@ -41,12 +39,13 @@ define(
                 return this;
             },
 
-            saveModifications: function() {
-                console.log("save user profile modifications");
-                var formData = JSON.stringify(this.$el.find('form').serializeObject());
-                var $saveButton = this.$el.find('button.save_modification');
+            saveModifications: function(e) {
+                e.preventDefault();
+
+                var formData = JSON.stringify(this.$('form').serializeObject());
+                var $saveButton = this.$('button.btn-save-modification');
                 $saveButton.addClass('disabled');
-                var $accountSaveResult = this.$el.find('.save-result');
+                var $accountSaveResult = this.$('.save-result');
                 $accountSaveResult.removeClass('success');
                 $accountSaveResult.removeClass('fail');
                 $.ajax({

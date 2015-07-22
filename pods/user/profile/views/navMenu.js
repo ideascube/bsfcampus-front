@@ -19,8 +19,6 @@ define(
 
             tagName: 'div',
 
-            className: 'row',
-
             id: "user-profile-menu",
 
             'events': {

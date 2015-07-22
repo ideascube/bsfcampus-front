@@ -18,7 +18,7 @@ define(
 
             template: _.template(template),
 
-            classNames: 'user-search-result-line',
+            className: 'user-search-result-line row',
 
             events: {
                 'click button.tutor': 'tutorAction',
@@ -35,7 +35,7 @@ define(
                     return (user._id == currentUser.id);
                 });
 
-                var $tutorButton = this.$el.find('button.tutor');
+                var $tutorButton = this.$el.find('button.btn-add-tutor');
                 if (isAlreadyTutor) {
                     $tutorButton.addClass('remove');
                     $tutorButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_REMOVE_TUTOR);
@@ -60,7 +60,7 @@ define(
                     return (user._id == currentUser.id);
                 });
 
-                var $studentButton = this.$el.find('button.student');
+                var $studentButton = this.$el.find('button.btn-add-student');
                 if (isAlreadyStudent) {
                     $studentButton.addClass('remove');
                     $studentButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_REMOVE_STUDENT);
@@ -85,7 +85,7 @@ define(
                 this.updateTutorButton();
                 this.updateStudentButton();
 
-                return this.$el;
+                return this;
             },
 
             tutorAction: function (e) {

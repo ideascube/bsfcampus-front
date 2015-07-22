@@ -2,189 +2,27 @@
 
   margin-top: 60px;
 
-  .right {
-    margin-left: 22px;
-
-    @media (max-width: 991px) {
-      margin-top: 15px;
-      margin-left: 0;
-    }
-  }
-
-  .border_radius {
-    border-radius: 12px;
-    background-color: white;
-  }
-
-  /* ----- "Save" Button ----- */
-
-  .save_modification {
-    color: #ffffff;
-    background-color: #9bbe16;
-    border-radius: 5px;
-    width: 225px;
-    height: 32px;
-    margin: 5px 0 20px 20px;
-  }
-
-  .save_modification:hover {
-    color: #ffffff;
-    background-color: #bce51f;
-    border-radius: 5px;
-    width: 225px;
-    height: 32px;
-  }
-
   .save-result {
     display: inline-block;
     margin: 0 0 30px 0;
-    //padding-right: 110px;
-    //&.success {
-    //  color: #BCE520;
-    //}
     &.fail {
       color: #E53720;
     }
   }
 
-  /* ----- Modifications Bootstrap ----- */
-
-  .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
-  .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2,
-  .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
-  .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4,
-  .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5,
-  .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
-  .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7,
-  .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8,
-  .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
-  .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10,
-  .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11,
-  .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-    padding-right: 0;
-    padding-left: 0;
-  }
-
-  .row {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .btn-primary {
-    color: #2f2d2e;
-    background-color: #f7f5f5;
-    border-color: #f7f5f5;
-    border-radius: 5px;
-    width: 200px;
-    font-weight: 600;
-  }
-
-  .btn-primary:hover,
-  .btn-primary:focus,
-  .btn-primary.focus,
-  .btn-primary:active,
-  .btn-primary.active,
-  .open > .dropdown-toggle.btn-primary {
-    color: #fff;
-    background-color: #1caff5;
-    border-color: #1caff5;
-    border-radius: 5px;
-  }
-
-  .btn {
-    display: block;
-    margin-bottom: 30px;
-  }
-
-  h2,
-  .h2 {
+  h2 {
     font-size: 20px;
     font-weight: bold;
     color: #5e5e5e;
+    &.title{
+      margin: 0 30px 50px;
+    }
   }
 
-  h3,
-  .h3 {
+  h3 {
     font-size: 18px;
     font-weight: 600;
     color: #7f7e7e;
-    padding-top: 20px;
   }
 
-  label {
-    margin: 0 0 30px 90px;
-  }
-
-  input,
-  button,
-  select,
-  textarea {
-    background: #fafafb;
-  }
-
-  /* ----- Modif Bootstrap Media Queries */
-
-  @media (min-width: 1200px) {
-    .col-lg-3 {
-      width: 23%;
-      text-align: right;
-    }
-  }
-
-  @media (min-width: 992px) {
-    .col-md-9 {
-      width: 72%;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .col-sm-8 {
-      width: 63%;
-    }
-  }
-
-  @media all and (min-width: 992px) and (max-width: 1199px) {
-    .save_modification {
-      margin: 0 0 20px 0;
-    }
-
-    .save_modification:hover {
-      margin: 0 0 20px 0;
-    }
-
-    .save-result {
-      margin: 0 0 30px;
-      padding-right: 30px;
-    }
-  }
-
-  @media screen and (max-width: 991px) {
-
-    .save_modification {
-      margin: 30px 0 30px 190px;
-    }
-
-    /*.save_modification:hover {
-      margin: 10px 0 30px 190px;
-    }*/
-    .save-result {
-      //margin: 0 0 30px 190px;
-      padding-right: 0;
-    }
-  }
-
-  @media (max-width: 768px) {
-
-    .save_modification {
-      margin: 10px auto 15px auto;
-    }
-
-    .save_modification:hover {
-      margin: 10px auto 15px auto;
-    }
-
-    .save-result {
-      margin: 10px auto 30px auto;
-    }
-  }
 }

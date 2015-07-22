@@ -84,23 +84,24 @@ define(
             },
 
             renderSearchResults: function (usersList) {
-                this.$searchResultList = this.$el.find('#tutoring-user-search-results');
+                this.$searchResultsList = this.$('#tutoring-user-search-results');
                 if (usersList.length > 0)
                 {
-                    this.$searchResultList.html('');
+                    this.$searchResultsList.empty();
                     _.each(usersList, this.renderSingleUserResult, this);
                 }
                 else
                 {
-                    this.$searchResultList.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_NO_RESULT);
+                    this.$searchResultsList.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_NO_RESULT);
                 }
             },
 
             renderSingleUserResult: function (userSON) {
                 var user = new User({data: userSON}, {parse: true});
                 var userSearchResultLineView = new UserSearchResultLineView({model: user});
+                userSearchResultLineView.render();
                 this.addSearchedUserListeners(userSearchResultLineView);
-                this.$searchResultList.append(userSearchResultLineView.render());
+                this.$searchResultsList.append(userSearchResultLineView.$el);
             },
 
             addSearchedUserListeners: function (userSearchResultLineView) {
