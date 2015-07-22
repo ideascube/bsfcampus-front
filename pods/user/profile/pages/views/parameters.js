@@ -21,6 +21,8 @@ define(
 
             id: 'user-profile-container',
 
+            className: 'border_radius',
+
             template: _.template(parametersTemplate),
 
             events: {

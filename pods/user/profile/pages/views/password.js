@@ -21,6 +21,8 @@ define(
 
             id: 'user-profile-password-container',
 
+            className: 'border_radius',
+
             template: _.template(accountTemplate),
 
             events: {
