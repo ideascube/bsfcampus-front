@@ -36,7 +36,7 @@ define(
             currentTrackIndex: 0,
 
             render: function() {
-                var html = this.template({user: this.model.forTemplate().user, config: Config});
+                var html = this.template({config: Config});
                 this.$el.html(html);
 
                 var tracks = this.model.get('tracks');

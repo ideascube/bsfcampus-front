@@ -16,7 +16,6 @@ define(
         'text!pods/user/profile/pages/templates/tutoring-student-dropdown-line.html',
 
         'less!pods/user/profile/pages/styles/tutoring',
-
         'less!pods/user/profile/pages/styles/dashboard'
     ],
     function ($, _, Backbone, Config,
@@ -231,7 +230,7 @@ define(
 
                 var $userLine = $(e.currentTarget);
                 var selectedUserId = $userLine.attr('data-user-id');
-                this.$el.find('#dropdown-selected-student').html($userLine.html());
+                this.$el.find('#dropdown-student-menu > p').html($userLine.html());
 
                 var dashboardUserModel = new DashboardModel({_id: selectedUserId});
                 this.$el.find('.dashboard-details').remove();
