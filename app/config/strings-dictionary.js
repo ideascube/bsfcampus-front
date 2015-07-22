@@ -67,6 +67,8 @@ define([],
             },
 
             HEADER: {
+                SEARCH_FIELD_DEFAULT: "Rechercher une ressource",
+                SEARCH_BUTTON_LABEL: "Rechercher",
                 LOG_OUT: 'Déconnexion',
                 LOGIN: 'Connexion',
                 ALL_TRACKS: 'Parcours',

@@ -66,10 +66,11 @@ define(
                 var searchedUsername = $form.find('#user_search').val();
 
                 var self = this;
-                var endpointUrl = Config.constants.serverGateway + "/users/search/" + searchedUsername;
+                var endpointUrl = Config.constants.serverGateway + "/search/user";
                 $.ajax({
                     type: 'GET',
                     url: endpointUrl,
+                    data: {username: searchedUsername},
                     dataType: 'json'
                 })
                     .done(function (result) {

@@ -23,7 +23,8 @@ define(
             template: _.template(template),
 
             events: {
-                'click #navbar-login-btn': 'login'
+                'click #navbar-login-btn': 'login',
+                'submit form.navbar-form': 'search'
             },
 
             initialize: function () {
@@ -153,8 +154,27 @@ define(
                 {
                     this.$el.find(buttonId).addClass('focus');
                 }
-            }
+            },
 
+            search: function(e) {
+                e.preventDefault();
+
+                var $form = $(e.currentTarget);
+                var searchedString = $form.find('input').val();
+
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/search",
+                    data: {searched_string: searchedString},
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the search has been proceeded with no error");
+                    console.log(JSON.stringify(response.data));
+                }).fail(function (error) {
+                    console.log("the search has failed with the following error:\n\t", error );
+                });
+            }
         });
 
     }
