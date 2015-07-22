@@ -1,17 +1,22 @@
 define(['config'],
 	function (config) {
 
+		var server_type;
+		if (config.hasOwnProperty('server_type')) {
+			if (config.server_type == 'local') {
+				server_type = 'local';
+			} else {
+				server_type = 'central';
+			}
+		}
+
 		var serverGateway;
 		if (config.hasOwnProperty('api_root_url')) {
 			serverGateway = config.api_root_url;
 		} else {
-			var port = 5000;
+			var port = server_type == 'local' ? 5001 : 5000;
 			if (config.hasOwnProperty('server_port')) {
 				port = config.server_port;
-			} else if (config.hasOwnProperty('server_type')) {
-				if (config.server_type == 'local') {
-					port = 5001;
-				}
 			}
 			var api_path = '';
 			if (config.hasOwnProperty('api_path')) {
@@ -26,6 +31,8 @@ define(['config'],
             VIEWS_ID: {
                 HOME: "HOME_VIEW"
             },
+
+			server_type: server_type,
 
 			serverGateway: serverGateway,
 
