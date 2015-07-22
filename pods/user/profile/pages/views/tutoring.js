@@ -11,13 +11,14 @@ define(
         'pods/user/profile/pages/views/tutoring-user-search-result-line',
 
         'text!pods/user/profile/pages/templates/tutoring.html',
+        'text!pods/user/profile/pages/templates/tutoring-student-dropdown-line.html',
 
         'less!pods/user/profile/pages/styles/tutoring'
     ],
     function ($, _, Backbone, Config,
               currentUser, User,
               UserSearchResultLineView,
-              tutoringTemplate) {
+              tutoringTemplate, tutoringDropdownLineTemplate) {
 
         return Backbone.View.extend({
 
@@ -28,14 +29,31 @@ define(
             template: _.template(tutoringTemplate),
 
             events: {
-                'submit form': 'searchUser'
+                'submit form': 'searchUser',
+                'click #tutoring-student-dashboard > .dropdown > ul.dropdown-menu > li': 'selectStudent'
             },
 
             render: function () {
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
+                var tutoredStudents = this.model.get('tutored_students');
+                if (tutoredStudents.length == 0)
+                {
+                    this.$el.find('#tutoring-student-dashboard').hide();
+                }
+                else
+                {
+                    this.$el.find('#tutoring-student-dashboard').show();
+                    _.each(tutoredStudents, this.addStudentToDropdown, this);
+                }
+
                 return this;
+            },
+
+            addStudentToDropdown: function(user) {
+                var $studentUserHtml = _.template(tutoringDropdownLineTemplate)({user: user});
+                this.$el.find('#tutoring-student-dashboard > .dropdown > ul.dropdown-menu').append($studentUserHtml);
             },
 
             searchUser: function (e) {
@@ -202,6 +220,16 @@ define(
                     .fail(function (error) {
                         console.log("remove student request failed:", error['responseJSON']['error_message']);
                     });
+            },
+
+            selectStudent: function(e) {
+                e.preventDefault();
+
+                var $userLine = $(e.currentTarget);
+                var selectedUserId = $userLine.getAttribute('data-user-id');
+
+                profileDetailPageView = new DashboardView();
+
             }
 
         });

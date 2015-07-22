@@ -158,7 +158,10 @@ define([],
                         SEARCH_RESULT_ADD_STUDENT: "Devenir tuteur",
                         SEARCH_RESULT_CANCEL_STUDENT: "Ne plus être tuteur",
                         SEARCH_RESULT_REMOVE_STUDENT: "Retirer cet étudiant",
-                        SEARCH_NO_RESULT: "Aucun utilisateur n'a été trouvé"
+                        SEARCH_NO_RESULT: "Aucun utilisateur n'a été trouvé",
+
+                        STUDENT_ANALYTICS_TITLE: "Statistiques de l'élèves",
+                        DROPDOWN_STUDENT_DEFAULT: "Choisissez un élève"
                     }
                 }
             }

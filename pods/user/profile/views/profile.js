@@ -6,6 +6,7 @@ define(
         'app/config',
 
         'pods/user/models/current',
+        'pods/user/models/dashboard',
 
         'pods/user/profile/views/navMenu',
         'pods/user/profile/pages/views/account',
@@ -19,7 +20,7 @@ define(
         'less!pods/user/profile/styles/profile'
     ],
     function($, _, Backbone, Config,
-             currentUser,
+             currentUser, DashboardModel,
              NavMenuView, AccountView, DashboardView, PasswordView, ParametersView, TutoringView,
              profileTemplate
     ) {
@@ -55,7 +56,8 @@ define(
                 switch (pageId)
                 {
                     case Config.constants.userProfile.DASHBOARD:
-                        profileDetailPageView = new DashboardView();
+                        var dashboardUserModel = new DashboardModel({_id: currentUser.id});
+                        profileDetailPageView = new DashboardView({model: dashboardUserModel});
                         break;
                     case Config.constants.userProfile.ACCOUNT:
                         profileDetailPageView = new AccountView();
