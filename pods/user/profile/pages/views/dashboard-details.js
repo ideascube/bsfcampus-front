@@ -25,8 +25,6 @@ define(
 
             tagName: 'div',
 
-            id: 'user-profile-dashboard-container',
-
             className: 'row dashboard-details',
 
             template: _.template(dashboardDetailsTemplate),
@@ -38,7 +36,7 @@ define(
             currentTrackIndex: 0,
 
             render: function() {
-                var html = this.template({config: Config});
+                var html = this.template({user: this.model.forTemplate().user, config: Config});
                 this.$el.html(html);
 
                 var tracks = this.model.get('tracks');

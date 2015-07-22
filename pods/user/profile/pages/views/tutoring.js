@@ -7,17 +7,21 @@ define(
 
         'pods/user/models/current',
         'pods/user/models/user',
+        'pods/user/models/dashboard',
 
         'pods/user/profile/pages/views/tutoring-user-search-result-line',
+        'pods/user/profile/pages/views/dashboard-details',
 
         'text!pods/user/profile/pages/templates/tutoring.html',
         'text!pods/user/profile/pages/templates/tutoring-student-dropdown-line.html',
 
-        'less!pods/user/profile/pages/styles/tutoring'
+        'less!pods/user/profile/pages/styles/tutoring',
+
+        'less!pods/user/profile/pages/styles/dashboard'
     ],
     function ($, _, Backbone, Config,
-              currentUser, User,
-              UserSearchResultLineView,
+              currentUser, User, DashboardModel,
+              UserSearchResultLineView, DashboardDetailsView,
               tutoringTemplate, tutoringDropdownLineTemplate) {
 
         return Backbone.View.extend({
@@ -30,14 +34,14 @@ define(
 
             events: {
                 'submit form': 'searchUser',
-                'click #tutoring-student-dashboard > .dropdown > ul.dropdown-menu > li': 'selectStudent'
+                'click #tutoring-student-dashboard > .dropdown > ul.dropdown-menu > li > a': 'selectStudent'
             },
 
             render: function () {
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
-                var tutoredStudents = this.model.get('tutored_students');
+                var tutoredStudents = currentUser.get('tutored_students');
                 if (tutoredStudents.length == 0)
                 {
                     this.$el.find('#tutoring-student-dashboard').hide();
@@ -226,9 +230,16 @@ define(
                 e.preventDefault();
 
                 var $userLine = $(e.currentTarget);
-                var selectedUserId = $userLine.getAttribute('data-user-id');
+                var selectedUserId = $userLine.attr('data-user-id');
+                this.$el.find('#dropdown-selected-student').html($userLine.html());
 
-                profileDetailPageView = new DashboardView();
+                var dashboardUserModel = new DashboardModel({_id: selectedUserId});
+                this.$el.find('.dashboard-details').remove();
+                var self = this;
+                dashboardUserModel.fetch().done(function(data){
+                    var dashboardDetailsView = new DashboardDetailsView({model: dashboardUserModel});
+                    self.$el.find('#tutoring-student-dashboard').append(dashboardDetailsView.render());
+                });
 
             }
 
