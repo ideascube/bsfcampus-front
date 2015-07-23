@@ -26,7 +26,7 @@ define(
             template: _.template(accountTemplate),
 
             events: {
-                'click button.save_modification': 'saveModifications'
+                'submit form': 'saveModifications'
             },
 
             render: function() {
@@ -36,7 +36,9 @@ define(
                 return this;
             },
 
-            saveModifications: function() {
+            saveModifications: function(e) {
+                e.preventDefault();
+
                 console.log("save user profile modifications");
                 var formData = JSON.stringify(this.$el.find('form').serializeObject());
                 var $saveButton = this.$el.find('button.save_modification');
