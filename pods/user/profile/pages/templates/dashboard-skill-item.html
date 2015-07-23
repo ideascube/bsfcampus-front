@@ -10,6 +10,13 @@
                     <span class="sr-only"><%= skill.progress.current*100/skill.progress.max %>% <%= config.stringsDict.COMPLETED %></span>
                 </div>
             </div>
+            <p><%= analytics.nbVisitsMessage %></p>
+            <% if (analytics.lastAttempt != null) { %>
+            <p><%= analytics.lastAttempt.score %> / <%= analytics.lastAttempt.nb_questions %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_LAST_ATTEMPT_SCORE %></p>
+            <% } %>
+            <% if (analytics.averageTime != null) { %>
+            <p><%= analytics.averageTime %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_TEST_AVERAGE_TIME %></p>
+            <% } %>
         </div>
     </a>
     <div class="dashboard-skill-resources">

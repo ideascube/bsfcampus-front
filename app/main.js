@@ -3,7 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'app/router',
+		'app/router'
 
 	],
 	function($, _, Backbone, AppRouter) {

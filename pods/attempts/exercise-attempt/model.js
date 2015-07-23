@@ -49,6 +49,10 @@ define(
 				return this.url() + '/start_next_question';
 			},
 
+            postEndExerciseUrl: function() {
+				return this.url() + '/end';
+			},
+
 			getCurrentQuestionAnswer: function() {
 				var models = this.getCollection().models;
 				var nextQuestionUnanswered = _.find(models, function (questionAnswer) {

@@ -294,6 +294,20 @@ define(
 				              // Not sure if useful
 			},
 
+            recordEndOfExercise: function() {
+
+                console.log('recordEndOfExercise');
+
+				$.ajax({
+						type: 'POST',
+						url: this.model.postEndExerciseUrl(),
+						dataType: 'json'
+					});
+
+				return false; // Also prevents from submitting the form
+				              // Not sure if useful
+			},
+
 			renderEndOfExercise: function() {
 				var recapModelJSON = this.model.forRecapTemplate();
 				var html = this.recapTemplate({
@@ -362,6 +376,7 @@ define(
                     this.submitStartNextQuestion();
 					this.renderCurrentQuestionAnswerForm();
 				} else {
+                    this.recordEndOfExercise();
 					this.renderEndOfExercise();
 				}
 			},

@@ -148,7 +148,16 @@ define([],
                     },
                     DASHBOARD: {
                         TITLE: 'MON TABLEAU DE BORD',
-                        TABLET_ALL_TRACKS_LIST: "LISTE DES PARCOURS"
+                        TABLET_ALL_TRACKS_LIST: "LISTE DES PARCOURS",
+                        ANALYTICS: {
+                            NB_VISITS: "Vu [%NB_VISIT%] fois",
+                            TRACK_LAST_ATTEMPT_SCORE: "au dernier test",
+                            SKILL_LAST_ATTEMPT_SCORE: "au dernier test",
+                            EXERCISE_LAST_ATTEMPT_SCORE: "à la dernière tentative",
+                            TRACK_TEST_AVERAGE_TIME: "en moyenne sur le test de validation",
+                            SKILL_TEST_AVERAGE_TIME: "en moyenne sur le test de validation",
+                            EXERCISE_TEST_AVERAGE_TIME: "passé en moyenne sur l'exercice"
+                        }
                     },
                     TUTORING: {
                         SEARCH_USER_TITLE: "RECHERCHE D'UTILISATEUR",

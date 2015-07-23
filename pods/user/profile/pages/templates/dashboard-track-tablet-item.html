@@ -1,5 +1,12 @@
 <a href="<%= track.route %>" class="track <%= track.validatedStatus %>" index="<%= index %>">
     <div class="title">
         <h4 class="<%= track.validationClass %>"><%= track.title %><img src="<%= config.imagesDict.checkFull %>" class="circle check"></h4>
+        <p><%= analytics.nbVisitsMessage %></p>
+        <% if (analytics.lastAttempt != null) { %>
+        <p><%= analytics.lastAttempt.score %> / <%= analytics.lastAttempt.nb_questions %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_LAST_ATTEMPT_SCORE %></p>
+        <% } %>
+        <% if (analytics.averageTime != null) { %>
+        <p><%= analytics.averageTime %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_TEST_AVERAGE_TIME %></p>
+        <% } %>
     </div>
 </a>

@@ -3,4 +3,13 @@
 </div>
 <div class="media-body">
 	<h4 class="media-heading"><%= resource.title %></h4>
+    <% if (analytics != null) { %>
+    <p><%= analytics.nbVisitsMessage %></p>
+    <% if (analytics.lastAttempt != null) { %>
+    <p><%= analytics.lastAttempt.score %> / <%= analytics.lastAttempt.nb_questions %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_LAST_ATTEMPT_SCORE %></p>
+    <% } %>
+    <% if (analytics.averageTime != null) { %>
+    <p><%= analytics.averageTime %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_TEST_AVERAGE_TIME %></p>
+    <% } %>
+    <% } %>
 </div>
