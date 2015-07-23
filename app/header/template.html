@@ -33,12 +33,12 @@
                         <li><a href="#/logout"><%= config.stringsDict.HEADER.LOG_OUT %></a></li>
                     </ul>
                 </li>
-                <% if (currentUser.awaiting_tutor_requests.length > 0 || currentUser.awaiting_student_requests.length > 0) { %>
+                <% if (currentUser.awaiting_tutors.length > 0 || currentUser.awaiting_students.length > 0) { %>
                 <li class="dropdown dropdown-notifications">
                     <a href="#"  id="navbar-notifications-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <img class="notification-icon" src="<%= config.imagesDict.bell %>">
                         <img class="notification-icon-open" src="<%= config.imagesDict.bellRed %>">
-                        <div class="notification-count"><%= (currentUser.awaiting_tutor_requests.length + currentUser.awaiting_student_requests.length) %></div>
+                        <div class="notification-count"><%= (currentUser.awaiting_tutors.length + currentUser.awaiting_students.length) %></div>
                     </a>
                     <ul id="notifications-list" class="dropdown-menu" role="menu" aria-labelledby="navbar-notifications-btn">
                         Loading notifications...

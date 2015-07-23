@@ -37,9 +37,9 @@ define(
 
                 this.$notificationsList = this.$el.find("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");
                 this.$notificationsList.html('');
-                var awaitingTutorRequests = currentUser.get('awaiting_tutor_requests');
+                var awaitingTutorRequests = currentUser.get('awaiting_tutors');
                 _.each(awaitingTutorRequests, this.renderTutorRequestNotification, this);
-                var awaitingStudentRequests = currentUser.get('awaiting_student_requests');
+                var awaitingStudentRequests = currentUser.get('awaiting_students');
                 _.each(awaitingStudentRequests, this.renderTutoredStudentRequestNotification, this);
 
                 this.updateHeaderButtonFocus(this.currentFocusedElement);
