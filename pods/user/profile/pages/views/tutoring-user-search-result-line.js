@@ -26,7 +26,7 @@ define(
             },
 
             updateTutorButton: function () {
-                var list = this.model.get('tutored_students');
+                var list = this.model.get('students');
                 var isAlreadyTutor = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
@@ -55,7 +55,7 @@ define(
                 var isAlreadyStudent = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
-                list = this.model.get('awaiting_student_requests');
+                list = this.model.get('awaiting_students');
                 var isStudentRequestAwaiting = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });

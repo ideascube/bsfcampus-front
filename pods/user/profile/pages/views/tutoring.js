@@ -40,14 +40,14 @@ define(
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
-                var tutoredStudents = currentUser.get('tutored_students');
+                var tutoredStudents = currentUser.get('students');
                 if (tutoredStudents.length == 0)
                 {
-                    this.$el.find('#tutoring-student-dashboard').hide();
+                    this.$('#tutoring-student-dashboard').hide();
                 }
                 else
                 {
-                    this.$el.find('#tutoring-student-dashboard').show();
+                    this.$('#tutoring-student-dashboard').show();
                     _.each(tutoredStudents, this.addStudentToDropdown, this);
                 }
 

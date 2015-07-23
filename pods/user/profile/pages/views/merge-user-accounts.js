@@ -28,13 +28,18 @@ define(
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
+                this.$localServerSelect = this.$('select#local_server');
+                this.$('form button[type="submit"]').prop('disabled', true);
+
+                this.loadLocalServers();
+
                 return this;
             },
 
             submitMerge: function (e) {
                 e.preventDefault();
 
-                var formData = JSON.stringify(this.$el.find('form').serializeObject());
+                var formData = JSON.stringify(this.$('form').serializeObject());
                 var self = this;
                 $.ajax({
                     type: 'POST',
@@ -43,11 +48,31 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
-                    console.log("Yeah!");
+                    alert("Successfuly absorbed user account :)");
                 }).fail(function(error){
-                    console.log("Oh :(");
+                    alert("Could not absorb user account :(");
+                    console.log(error);
                 });
+            },
+
+            loadLocalServers: function() {
+                var self = this;
+                $.get(Config.constants.serverGateway + "/local_servers").done(
+                    function(result) {
+                        _.each(result.data, function(localServer){
+                            // FIXME This way of getting the id is not clean.
+                            // Use a Backbone Model instead, in order to use the parse method.
+                            var html = "<option value=\"" + localServer['_id']['$oid'] + "\">"
+                                + localServer['name']
+                                + " [" + localServer['key'] + "]"
+                                + "</option>\n";
+                            self.$localServerSelect.append(html);
+                        });
+                        self.$('form button[type="submit"]').prop('disabled', false);
+                    }
+                )
             }
+
         });
     }
 );
