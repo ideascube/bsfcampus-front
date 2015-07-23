@@ -1,9 +1,3 @@
-<div class="col-md-4">
-    <p><%= user.full_name %></p>
-</div>
-<div class="col-md-4">
-    <button class="btn btn-default btn-block tutor"></button>
-</div>
-<div class="col-md-4">
-    <button class="btn btn-default btn-block student"></button>
-</div>
+<p class="result-user"><%= user.full_name %><!-- <span><%= user.user_name %></span> --></p>
+<button class="btn tutor"><%= config.stringsDict.USER.PROFILE.TUTORING.TUTOR_BUTTON %></button>
+<button class="btn student"><%= config.stringsDict.USER.PROFILE.TUTORING.STUDENT_BUTTON %></button>

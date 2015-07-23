@@ -1,0 +1,205 @@
+#user-profile-tutoring-container {
+  margin-left: 0;
+
+  p {
+    /*width: 35%;
+    text-align: right;*/
+    width: 30%;
+    display: inline-block;
+    float:left;
+    margin: 8px 74px 0 0;
+    text-align: left;
+  }
+
+  .result-user {
+
+    // no local_server and username for now
+    /*span {
+      font-style: italic;
+      color: #AEADAD;
+      font-size: 12px;
+    }*/
+  }
+
+  #tutoring-search-user-block {
+    header {
+      margin-bottom:20px;
+    }
+
+    #label_user_search {
+      margin-top:6px;
+    }
+
+    form {
+      input {
+        border-radius: 5px;
+        border: solid 1px lightgrey;
+        margin-top:6px;
+      }
+
+      .search-user {
+        margin-left:20px;
+        background-color: #F2F2F2 ;
+        color: black;
+      }
+    }
+    .user-search-result-line {
+      border-bottom: solid 1px lightgrey;
+      padding-bottom: 30px ;
+      padding-top: 30px;
+
+      .result-user {
+        font-weight: 600;
+      }
+
+      button {
+
+        &.cancel {
+          position: relative;
+          float: left;
+          background-color: #1CAFF5;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          margin: 0 0 0 30px;
+          padding: 5px 40px 5px 7px;
+        }
+        &.cancel::after{
+          content:"demande en cours";
+          position:absolute;
+          bottom: -20px;
+          left: 17px;
+          font-size:11px;
+          color: #AEADAD;
+          font-style: italic;
+        }
+
+
+        &.remove {
+          float: left;
+          background-color: #9BBE16;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          margin: 0 0 0 30px;
+          padding: 5px 40px 5px 7px;
+        }
+
+        &.add {
+          float: left;
+          color: black;
+          background-color: white;
+          border-radius: 5px;
+          border: 2px solid #1CAFF5;
+          margin: 0 0 0 30px;
+          padding: 2px 36px 2px 3px;
+        }
+
+        span {
+          &.remove {
+            display: inline-block;
+            background-color: red;
+            border: none;
+            border-radius: 50%;
+            padding: 0 7px;
+            margin: 1px 20px 1px 0;
+            font-size: 17px;
+          }
+
+          &.add {
+            display: inline-block;
+            background-color: transparent;
+            border: 2px solid #1CAFF5 ;
+            margin: 1px 20px 1px 0;
+            font-size: 17px;
+            padding: 0 7px;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  #tutoring-student-dashboard {
+    margin-top: 50px;
+
+    h2.title {
+      margin-bottom: 30px;
+    }
+    .dropdown {
+      padding: 0;
+
+      button {
+        border: 2px solid #39637c;
+        width: 100%;
+        padding: 2px 20px 2px 10px;
+        background-color: white;
+        p {
+          margin: 5px;
+          font-weight: 600;
+          color: #39637c;
+          text-align: center;
+        }
+        .caret {
+          position: absolute;
+          color: #39637c;
+          right: 10px;
+          top: 50%;
+        }
+      }
+
+      .dropdown-menu {
+        min-width: 100%;
+      }
+    }
+  }
+
+  @media all and (min-width: 992px) and (max-width: 1199px) {
+    .right{
+      margin-left: 65px;
+    }
+
+    .user-search-result-line p {
+      width: 37%;
+      margin: 8px 30px 0 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #label_user_search {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .user-search-result-line {
+      padding-bottom: 25px;
+      padding-top: 25px;
+    }
+
+    #user_search {
+      display:block;
+      margin:0 auto;
+    }
+    #tutoring-search-user-block .search-user {
+      margin: 20px 29.45% 10px;
+    }
+
+    .user-search-result-line {
+      p {
+        margin: 0 10px 10px 0;
+        width: 100%;
+        text-align: center
+      }
+      button {
+        &.cancel, &.remove {
+          margin: 0 0 0 5px;
+          padding: 5px 20px 5px 7px;
+        }
+        &.add {
+          margin: 0 0 0 5px;
+          padding: 3px 18px 3px 5px;
+        }
+      }
+    }
+  }
+}

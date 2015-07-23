@@ -18,7 +18,7 @@ define(
 
             template: _.template(template),
 
-            className: 'user-search-result-line row',
+            className: 'user-search-result-line col-sm-12 text-center ',
 
             events: {
                 'click button.tutor': 'tutorAction',
@@ -38,15 +38,15 @@ define(
                 var $tutorButton = this.$el.find('button.tutor');
                 if (isAlreadyTutor) {
                     $tutorButton.addClass('remove');
-                    $tutorButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_REMOVE_TUTOR);
+                    $tutorButton.append('<span class="remove">x</span>');
                 }
                 else if (isTutorRequestAwaiting) {
                     $tutorButton.addClass('cancel');
-                    $tutorButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_CANCEL_TUTOR);
+                    $tutorButton.prepend('<span class="remove">x</span>');
                 }
                 else {
                     $tutorButton.addClass('add');
-                    $tutorButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_ADD_TUTOR);
+                    $tutorButton.prepend('<span class="add">+</span>');
                 }
             },
 
@@ -63,15 +63,15 @@ define(
                 var $studentButton = this.$el.find('button.student');
                 if (isAlreadyStudent) {
                     $studentButton.addClass('remove');
-                    $studentButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_REMOVE_STUDENT);
+                    $studentButton.prepend('<span class="remove">x</span>');
                 }
                 else if (isStudentRequestAwaiting) {
                     $studentButton.addClass('cancel');
-                    $studentButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_CANCEL_STUDENT);
+                    $studentButton.prepend('<span class="remove">x</span>');
                 }
                 else {
                     $studentButton.addClass('add');
-                    $studentButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_ADD_STUDENT);
+                    $studentButton.prepend('<span class="add">+</span>');
                 }
             },
 
