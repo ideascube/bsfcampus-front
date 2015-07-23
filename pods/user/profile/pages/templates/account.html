@@ -26,8 +26,10 @@
     </div>
 </form>
 
+<% if(config.constants.server_type == 'central') { %>
 <p class="text-center">
     <button class="btn btn-primary btn-lg btn-rounded btn-merge-user-account">
         Fusionner des comptes utilisateur
     </button>
 </p>
+<% } %>
