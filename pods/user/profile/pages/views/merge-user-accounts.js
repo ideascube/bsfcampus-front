@@ -48,9 +48,10 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
-                    console.log("Yeah!");
+                    alert("Successfuly absorbed user account :)");
                 }).fail(function(error){
-                    console.log("Oh :(");
+                    alert("Could not absorb user account :(");
+                    console.log(error);
                 });
             },
 
