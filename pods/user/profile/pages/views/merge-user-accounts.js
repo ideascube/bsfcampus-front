@@ -28,6 +28,11 @@ define(
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
+                this.$localServerSelect = this.$('select#local_server');
+                this.$('form button[type="submit"]').prop('disabled', true);
+
+                this.loadLocalServers();
+
                 return this;
             },
 
@@ -47,7 +52,24 @@ define(
                 }).fail(function(error){
                     console.log("Oh :(");
                 });
+            },
+
+            loadLocalServers: function() {
+                var self = this;
+                $.get(Config.constants.serverGateway + "/local_servers").done(
+                    function(result) {
+                        _.each(result.data, function(localServer){
+                            var html = "<option value=\"" + localServer['_id'] + "\">"
+                                + localServer['name']
+                                + " [" + localServer['key'] + "]"
+                                + "</option>\n";
+                            self.$localServerSelect.append(html);
+                        });
+                        self.$('form button[type="submit"]').prop('disabled', false);
+                    }
+                )
             }
+
         });
     }
 );
