@@ -1,0 +1,69 @@
+#search_page {
+  background-color: red;
+  margin-top: 60px;
+  #central_box {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    margin-top: 20px;
+    #search-results-container {
+      #title_and_search {
+        border-bottom: 1px solid #DBDBDB;
+        #title_of_search {
+          color: #333333;
+          font-weight: 800;
+          font-size: 22px;
+          margin-bottom: 0;
+          padding: 2% 2% 0px 4%;
+          width: auto;
+        }
+        #words_search {
+          color: #333333;
+          font-weight: 600;
+          font-size: 22px;
+          line-height: 1.2em;
+          max-width: inherit;
+          padding: 2% 0px 0px 4%;
+        }
+      }
+      #search-results {
+        padding: 20px 20px;
+        a.search-result-item {
+          display: block;
+          border: 2px solid #37B8F6;
+          border-radius: 20px;
+          margin: 10px;
+          .breadcrumb {
+            padding: 15px 15px 0;
+            li {
+              color: #5E5E5E;
+              font-size: 11px;
+              font-weight: 800;
+              text-transform: uppercase;
+              font-style: italic;
+            }
+            li.active {
+              color: #333333;
+              font-size: 18px;
+              font-weight: 600;
+              text-transform: none;
+              display: block;
+              font-style: normal;
+            }
+            li.active::before {
+              color: #333333;
+              content: "-";
+              font-size: 1em;
+              font-weight: 600;
+            }
+          }
+          p {
+            color: #333333;
+            font-size: 16px;
+            font-weight: 400;
+            padding: 15px 0 0 35px;
+          }
+        }
+      }
+    }
+  }
+}

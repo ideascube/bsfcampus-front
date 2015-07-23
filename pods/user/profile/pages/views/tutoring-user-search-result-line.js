@@ -55,7 +55,7 @@ define(
                 var isAlreadyStudent = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
-                list = this.model.get('awaiting_students');
+                list = this.model.get('awaiting_student_requests');
                 var isStudentRequestAwaiting = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });

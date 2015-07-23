@@ -5,12 +5,15 @@ define(
         'backbone',
         'app/config',
 
+        'model',
+
         'text!pods/search/templates/search.html',
         'text!pods/search/templates/search-result.html',
 
         'less!pods/search/style'
     ],
     function($, _, Backbone, Config,
+             AbstractModel,
              searchTemplate, searchResultTemplate
     ) {
 
@@ -18,7 +21,7 @@ define(
 
             tagName: 'div',
 
-            id: 'search-results-container',
+            id: 'search_page',
 
             template: _.template(searchTemplate),
             resultTemplate: _.template(searchResultTemplate),
@@ -33,7 +36,9 @@ define(
             },
 
             renderResult: function(result) {
-                var $result = $(this.resultTemplate({result: result, config: Config}));
+                var model = new AbstractModel({data: result.document}, {parse: true});
+                var route = "#/" + result.type + "/" + model.id;
+                var $result = $(this.resultTemplate({route: route, result: result, config: Config}));
                 var document = result['document'];
                 var breadcrumbArray = document['breadcrumb'];
                 var $breadcrumb = $result.find('ol.breadcrumb');
