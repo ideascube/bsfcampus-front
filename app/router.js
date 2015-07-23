@@ -26,6 +26,7 @@ define(
         'pods/resource/views/detail',
         'pods/breadcrumb/views/breadcrumbContainer',
         'pods/track/views/promptValidation',
+        'pods/search/view',
 
         'less!app/styles/common'
     ],
@@ -34,7 +35,7 @@ define(
               LessonModel, ResourceModel,
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView,
-              ResourceDetailView, ResourceHierarchyBreadcrumbView, PromptTrackValidationView
+              ResourceDetailView, ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView
               ) {
 
         var AppRouter = Backbone.Router.extend({
@@ -92,7 +93,9 @@ define(
                 'skill/:id': 'skillDetail',
                 'lesson/:id': 'lessonDetail',
                 'resource/:id': 'resourceDetail',
-                'prompt_track_validation/:track_id': 'promptTrackValidation'
+                'prompt_track_validation/:track_id': 'promptTrackValidation',
+
+                'search': 'search'
             },
 
             home: function () {
@@ -291,6 +294,37 @@ define(
                 promptTrackValidationView.render();
                 this.listenTo(promptTrackValidationView, 'close', this.clearModal);
                 this.$modal.modal('show');
+            },
+
+            search: function(params) {
+                var paramsDict = this.getQueryParameters(params);
+                var searchedString = paramsDict['search_string'];
+
+                var self = this;
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/search",
+                    data: {searched_string: searchedString},
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the search has been proceeded with no error");
+                    console.log(JSON.stringify(response.data));
+                    self.clearHome();
+                    self.clearContainer();
+                    self.clearModal();
+
+                    var searchResultsView = new SearchResultsView();
+                    searchResultsView.searchedString = searchedString;
+                    searchResultsView.results = response.data;
+                    $('#container').append(searchResultsView.render());
+                }).fail(function (error) {
+                    console.log("the search has failed with the following error:\n\t", error );
+                });
+            },
+
+            getQueryParameters : function(str) {
+                return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
             }
 
         });

@@ -161,19 +161,7 @@ define(
 
                 var $form = $(e.currentTarget);
                 var searchedString = $form.find('input').val();
-
-                $.ajax({
-                    type: 'GET',
-                    contentType: 'application/json',
-                    url: Config.constants.serverGateway + "/search",
-                    data: {searched_string: searchedString},
-                    dataType: 'json'
-                }).done(function(response) {
-                    console.log("the search has been proceeded with no error");
-                    console.log(JSON.stringify(response.data));
-                }).fail(function (error) {
-                    console.log("the search has failed with the following error:\n\t", error );
-                });
+                Backbone.history.navigate('search?search_string=' + searchedString, {trigger: true});
             }
         });
 

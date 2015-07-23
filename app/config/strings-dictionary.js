@@ -4,8 +4,6 @@ define([],
         return {
 
             SITE_TITLE: 'BSF Campus',
-            SEARCH: 'Chercher',
-            SEARCH_HINT: 'Recherche',
             QUIT: 'Quitter',
             START_EXERCISE: 'Commencer l\'exercice',
             EXERCISE_VALIDATED: 'Exercice validé',
@@ -175,6 +173,10 @@ define([],
                         DROPDOWN_STUDENT_DEFAULT: "Choisissez un élève"
                     }
                 }
+            },
+
+            SEARCH: {
+                RESULTS_FOR: "RESULTATS DE LA RECHERCHE POUR "
             }
 
         };
