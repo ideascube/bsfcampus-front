@@ -133,41 +133,49 @@ define(
             },
 
             cancelTutorRequest: function (userId) {
-                var endpointUrl = Config.constants.serverGateway + "/tutoring/cancel/tutor/" + userId;
 
-                var self = this;
-                $.ajax({
-                    type: 'POST',
-                    url: endpointUrl,
-                    dataType: 'json'
-                })
-                    .done(function (result) {
-                        console.log("cancel tutor request successful:", result.data);
-                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                        self.$el.find('form').submit();
+                var r = confirm(Config.stringsDict.USER.PROFILE.TUTORING.CONFIRM_CANCEL_TUTOR);
+
+                if (r) {
+                    var endpointUrl = Config.constants.serverGateway + "/tutoring/cancel/tutor/" + userId;
+                    var self = this;
+                    $.ajax({
+                        type: 'POST',
+                        url: endpointUrl,
+                        dataType: 'json'
                     })
-                    .fail(function (error) {
-                        console.log("cancel tutor request failed:", error['responseJSON']['error_message']);
-                    });
+                        .done(function (result) {
+                            console.log("cancel tutor request successful:", result.data);
+                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                            self.$el.find('form').submit();
+                        })
+                        .fail(function (error) {
+                            console.log("cancel tutor request failed:", error['responseJSON']['error_message']);
+                        });
+                }
             },
 
             removeTutor: function (userId) {
-                var endpointUrl = Config.constants.serverGateway + "/tutoring/remove/tutor/" + userId;
 
-                var self = this;
-                $.ajax({
-                    type: 'POST',
-                    url: endpointUrl,
-                    dataType: 'json'
-                })
-                    .done(function (result) {
-                        console.log("remove tutor request successful:", result.data);
-                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                        self.$el.find('form').submit();
+                var r = confirm(Config.stringsDict.USER.PROFILE.TUTORING.CONFIRM_REMOVE_TUTOR);
+
+                if (r) {
+                    var endpointUrl = Config.constants.serverGateway + "/tutoring/remove/tutor/" + userId;
+                    var self = this;
+                    $.ajax({
+                        type: 'POST',
+                        url: endpointUrl,
+                        dataType: 'json'
                     })
-                    .fail(function (error) {
-                        console.log("remove tutor request failed:", error['responseJSON']['error_message']);
-                    });
+                        .done(function (result) {
+                            console.log("remove tutor request successful:", result.data);
+                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                            self.$el.find('form').submit();
+                        })
+                        .fail(function (error) {
+                            console.log("remove tutor request failed:", error['responseJSON']['error_message']);
+                        });
+                }
             },
 
             addStudent: function (userId) {
@@ -190,41 +198,48 @@ define(
             },
 
             cancelStudentRequest: function (userId) {
-                var endpointUrl = Config.constants.serverGateway + "/tutoring/cancel/student/" + userId;
+                var r = confirm(Config.stringsDict.USER.PROFILE.TUTORING.CONFIRM_CANCEL_STUDENT);
 
-                var self = this;
-                $.ajax({
-                    type: 'POST',
-                    url: endpointUrl,
-                    dataType: 'json'
-                })
-                    .done(function (result) {
-                        console.log("cancel student request successful:", result.data);
-                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                        self.$el.find('form').submit();
+                if (r) {
+                    var endpointUrl = Config.constants.serverGateway + "/tutoring/cancel/student/" + userId;
+                    var self = this;
+                    $.ajax({
+                        type: 'POST',
+                        url: endpointUrl,
+                        dataType: 'json'
                     })
-                    .fail(function (error) {
-                        console.log("cancel student request failed:", error['responseJSON']['error_message']);
-                    });
+                        .done(function (result) {
+                            console.log("cancel student request successful:", result.data);
+                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                            self.$el.find('form').submit();
+                        })
+                        .fail(function (error) {
+                            console.log("cancel student request failed:", error['responseJSON']['error_message']);
+                        });
+                }
             },
 
             removeStudent: function (userId) {
-                var endpointUrl = Config.constants.serverGateway + "/tutoring/remove/student/" + userId;
+                var r = confirm(Config.stringsDict.USER.PROFILE.TUTORING.CONFIRM_REMOVE_STUDENT);
 
-                var self = this;
-                $.ajax({
-                    type: 'POST',
-                    url: endpointUrl,
-                    dataType: 'json'
-                })
-                    .done(function (result) {
-                        console.log("remove student request successful:", result.data);
-                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                        self.$el.find('form').submit();
+                if (r) {
+                    var endpointUrl = Config.constants.serverGateway + "/tutoring/remove/student/" + userId;
+
+                    var self = this;
+                    $.ajax({
+                        type: 'POST',
+                        url: endpointUrl,
+                        dataType: 'json'
                     })
-                    .fail(function (error) {
-                        console.log("remove student request failed:", error['responseJSON']['error_message']);
-                    });
+                        .done(function (result) {
+                            console.log("remove student request successful:", result.data);
+                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                            self.$el.find('form').submit();
+                        })
+                        .fail(function (error) {
+                            console.log("remove student request failed:", error['responseJSON']['error_message']);
+                        });
+                }
             },
 
             selectStudent: function(e) {

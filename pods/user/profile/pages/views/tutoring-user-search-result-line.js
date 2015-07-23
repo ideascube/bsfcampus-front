@@ -35,7 +35,7 @@ define(
                     return (user._id == currentUser.id);
                 });
 
-                var $tutorButton = this.$el.find('button.btn-add-tutor');
+                var $tutorButton = this.$el.find('button.tutor');
                 if (isAlreadyTutor) {
                     $tutorButton.addClass('remove');
                     $tutorButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_REMOVE_TUTOR);
@@ -60,7 +60,7 @@ define(
                     return (user._id == currentUser.id);
                 });
 
-                var $studentButton = this.$el.find('button.btn-add-student');
+                var $studentButton = this.$el.find('button.student');
                 if (isAlreadyStudent) {
                     $studentButton.addClass('remove');
                     $studentButton.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_REMOVE_STUDENT);
