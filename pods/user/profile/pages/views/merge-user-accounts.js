@@ -39,7 +39,7 @@ define(
             submitMerge: function (e) {
                 e.preventDefault();
 
-                var formData = JSON.stringify(this.$el.find('form').serializeObject());
+                var formData = JSON.stringify(this.$('form').serializeObject());
                 var self = this;
                 $.ajax({
                     type: 'POST',
@@ -59,7 +59,9 @@ define(
                 $.get(Config.constants.serverGateway + "/local_servers").done(
                     function(result) {
                         _.each(result.data, function(localServer){
-                            var html = "<option value=\"" + localServer['_id'] + "\">"
+                            // FIXME This way of getting the id is not clean.
+                            // Use a Backbone Model instead, in order to use the parse method.
+                            var html = "<option value=\"" + localServer['_id']['$oid'] + "\">"
                                 + localServer['name']
                                 + " [" + localServer['key'] + "]"
                                 + "</option>\n";
