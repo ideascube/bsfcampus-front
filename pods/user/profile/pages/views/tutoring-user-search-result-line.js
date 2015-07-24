@@ -30,7 +30,7 @@ define(
                 var isAlreadyTutor = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
-                list = this.model.get('awaiting_tutors');
+                list = this.model.get('awaiting_students');
                 var isTutorRequestAwaiting = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
@@ -38,7 +38,7 @@ define(
                 var $tutorButton = this.$el.find('button.tutor');
                 if (isAlreadyTutor) {
                     $tutorButton.addClass('remove');
-                    $tutorButton.append('<span class="remove">x</span>');
+                    $tutorButton.prepend('<span class="remove">x</span>');
                 }
                 else if (isTutorRequestAwaiting) {
                     $tutorButton.addClass('cancel');
@@ -55,7 +55,7 @@ define(
                 var isAlreadyStudent = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
-                list = this.model.get('awaiting_students');
+                list = this.model.get('awaiting_tutors');
                 var isStudentRequestAwaiting = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });

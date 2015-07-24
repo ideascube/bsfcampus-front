@@ -33,7 +33,7 @@ define(
 
             events: {
                 'submit form': 'searchUser',
-                'click #tutoring-student-dashboard > .dropdown > ul.dropdown-menu > li > a': 'selectStudent'
+                'click #tutoring-student-dashboard .dropdown > ul.dropdown-menu > li > a': 'selectStudent'
             },
 
             render: function () {
@@ -56,7 +56,7 @@ define(
 
             addStudentToDropdown: function(user) {
                 var $studentUserHtml = _.template(tutoringDropdownLineTemplate)({user: user});
-                this.$el.find('#tutoring-student-dashboard > .dropdown > ul.dropdown-menu').append($studentUserHtml);
+                this.$el.find('#tutoring-student-dashboard .dropdown > ul.dropdown-menu').append($studentUserHtml);
             },
 
             searchUser: function (e) {
