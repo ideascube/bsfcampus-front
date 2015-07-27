@@ -4,15 +4,18 @@ define(
         'underscore',
         'backbone',
         'viewmanager',
+        'ds',
         'app/config',
 
         'pods/user/models/current',
         'app/misc-analytic-model',
-        'pods/track/model',
         'pods/track/collection',
+        'pods/track/model',
         'pods/skill/model',
         'pods/lesson/model',
         'pods/resource/model',
+        'pods/static-page/collection',
+        'pods/static-page/model',
 
         'app/header/view',
         'app/footer/view',
@@ -30,9 +33,9 @@ define(
 
         'less!app/styles/common'
     ],
-    function ($, _, Backbone, VM, Config,
-              currentUser, MiscAnalyticsModel, TrackModel, TrackCollection, SkillModel,
-              LessonModel, ResourceModel,
+    function ($, _, Backbone, VM, DS, Config,
+              currentUser, MiscAnalyticsModel, TrackCollection, TrackModel, SkillModel,
+              LessonModel, ResourceModel, StaticPageCollection, StaticPageModel,
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView,
               ResourceDetailView, ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView
@@ -43,6 +46,19 @@ define(
             initialize: function() {
                 this.$modal = $('#modal');
                 this.$modalDialog = this.$modal.find('.modal-dialog');
+                this.initDataStore();
+            },
+
+            initDataStore: function() {
+                // Static pages
+                DS.defineResource({
+                    name: 'static-page',
+                    idAttribute: 'id',
+                    collection: StaticPageCollection
+                });
+                DS.findAll('static-page').done(function(collection) {
+                    console.log('static pages fetched: ', collection.toJSON());
+                });
             },
 
             // Global views
@@ -362,7 +378,6 @@ define(
                         }
                     );
                 }
-
 
                 var app_router = new AppRouter();
                 app_router.renderHeader();
