@@ -76,8 +76,11 @@ define([],
                 NOTIFICATIONS: {
                     TUTOR_REQUEST_MESSAGE: " souhaite devenir votre tuteur",
                     TUTORED_STUDENT_REQUEST_MESSAGE: " souhaite que vous deveniez son tuteur",
+                    ACKNOWLEDGE_TUTOR_MESSAGE: " a accepté d'être votre tuteur",
+                    ACKNOWLEDGE_STUDENT_MESSAGE: " a accepté que vous soyiez son tuteur",
                     ACCEPT: "Accepter",
-                    DECLINE: "Refuser"
+                    DECLINE: "Refuser",
+                    ACKNOWLEDGE: "OK"
                 }
             },
 
@@ -159,7 +162,7 @@ define([],
                     },
                     TUTORING: {
                         SEARCH_USER_TITLE: "TUTORAT",
-                        SEARCHED_USERNAME: "Trouver un coach ou un élève",
+                        SEARCHED_USERNAME: "Trouver un tuteur ou un élève",
                         SEARCH_BUTTON: "Rechercher",
                         TUTOR_BUTTON: "Tuteur",
                         STUDENT_BUTTON: "Elève",

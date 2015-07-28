@@ -19,14 +19,16 @@ define(
 
             events: {
                 'click button.accept': 'accept',
-                'click button.decline': 'decline'
+                'click button.decline': 'decline',
+                'click button.acknowledge': 'acknowledge'
             },
 
             render: function () {
                 var html = this.template({
-                    requestingUser: this.requestingUser,
+                    user: this.user,
                     config: Config,
-                    isTutorRequest: this.isTutorRequest
+                    isTutorRequest: this.isTutorRequest,
+                    isAcknowledgeNotification: this.isAcknowledgeNotification
                 });
                 this.$el.html(html);
 
@@ -34,11 +36,15 @@ define(
             },
 
             accept: function (e) {
-                this.trigger('accept', this, this.requestingUser["_id"]);
+                this.trigger('accept', this, this.user["_id"]);
             },
 
             decline: function (e) {
-                this.trigger('decline', this, this.requestingUser["_id"]);
+                this.trigger('decline', this, this.user["_id"]);
+            },
+
+            acknowledge: function (e) {
+                this.trigger('acknowledge', this, this.user["_id"]);
             }
 
         });

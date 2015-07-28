@@ -66,8 +66,8 @@ define(
                 var seconds = duration - (minutes * 60);
 
                 if (seconds < 10) {seconds = "0"+seconds;}
-                var time = (minutes > 0) ? minutes+'\' ' : '';
-                time += seconds+'\"';
+                var time = (minutes > 0) ? minutes+'m et ' : '';
+                time += seconds+'s';
                 return time;
             }
 

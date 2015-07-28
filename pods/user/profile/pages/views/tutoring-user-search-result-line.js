@@ -30,7 +30,7 @@ define(
                 var isAlreadyTutor = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
-                list = this.model.get('awaiting_students');
+                list = this.model.get('awaiting_tutor_requests');
                 var isTutorRequestAwaiting = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
@@ -55,7 +55,7 @@ define(
                 var isAlreadyStudent = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });
-                list = this.model.get('awaiting_tutors');
+                list = this.model.get('awaiting_student_requests');
                 var isStudentRequestAwaiting = _.some(list, function (user) {
                     return (user._id == currentUser.id);
                 });

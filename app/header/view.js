@@ -37,18 +37,73 @@ define(
 
                 this.$notificationsList = this.$el.find("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");
                 this.$notificationsList.html('');
-                var awaitingTutorRequests = currentUser.get('awaiting_tutors');
+                var notAcknowledgedTutorRequests = currentUser.get('not_acknowledged_tutors');
+                _.each(notAcknowledgedTutorRequests, this.renderNotAcknowledgedTutorNotification, this);
+                var notAcknowledgedStudentRequests = currentUser.get('not_acknowledged_students');
+                _.each(notAcknowledgedStudentRequests, this.renderNotAcknowledgedStudentNotification, this);
+                var awaitingTutorRequests = currentUser.get('awaiting_tutor_requests');
                 _.each(awaitingTutorRequests, this.renderTutorRequestNotification, this);
-                var awaitingStudentRequests = currentUser.get('awaiting_students');
+                var awaitingStudentRequests = currentUser.get('awaiting_student_requests');
                 _.each(awaitingStudentRequests, this.renderTutoredStudentRequestNotification, this);
 
                 this.updateHeaderButtonFocus(this.currentFocusedElement);
             },
 
-            renderTutorRequestNotification: function(requestingUser) {
+            renderNotAcknowledgedTutorNotification: function(user) {
                 var notificationView = new NotificationView();
-                notificationView.requestingUser = requestingUser;
+                notificationView.user = user;
                 notificationView.isTutorRequest = true;
+                notificationView.isAcknowledgeNotification = true;
+
+                this.$notificationsList.append(notificationView.render());
+
+                this.listenTo(notificationView, 'acknowledge', this.acknowledgeTutorNotification);
+            },
+
+            acknowledgeTutorNotification: function(notification, userId) {
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/tutoring/acknowledge/tutor/" + userId,
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the notification has been successfully acknowledged");
+                    currentUser.set(currentUser.parse(response));
+                }).fail(function (error) {
+                    console.log("Error while acknowledging the tutor notification:", error );
+                });
+            },
+
+            renderNotAcknowledgedStudentNotification: function(user) {
+                var notificationView = new NotificationView();
+                notificationView.user = user;
+                notificationView.isTutorRequest = false;
+                notificationView.isAcknowledgeNotification = true;
+
+                this.$notificationsList.append(notificationView.render());
+
+                this.listenTo(notificationView, 'acknowledge', this.acknowledgeStudentNotification);
+            },
+
+            acknowledgeStudentNotification: function(notification, userId) {
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/tutoring/acknowledge/student/" + userId,
+                    dataType: 'json'
+                }).done(function(response) {
+                    console.log("the notification has been successfully acknowledged");
+                    currentUser.set(currentUser.parse(response));
+                }).fail(function (error) {
+                    console.log("Error while acknowledging the student notification:", error );
+                });
+            },
+
+            renderTutorRequestNotification: function(user) {
+                var notificationView = new NotificationView();
+                notificationView.user = user;
+                notificationView.isTutorRequest = true;
+                notificationView.isAcknowledgeNotification = false;
 
                 this.$notificationsList.append(notificationView.render());
 
@@ -84,10 +139,11 @@ define(
                 });
             },
 
-            renderTutoredStudentRequestNotification: function(requestingUser) {
+            renderTutoredStudentRequestNotification: function(user) {
                 var notificationView = new NotificationView();
-                notificationView.requestingUser = requestingUser;
+                notificationView.user = user;
                 notificationView.isTutorRequest = false;
+                notificationView.isAcknowledgeNotification = false;
 
                 this.$notificationsList.append(notificationView.render());
 
