@@ -30,6 +30,7 @@ define(
         'pods/breadcrumb/views/breadcrumbContainer',
         'pods/track/views/promptValidation',
         'pods/search/view',
+        'pods/static-page/view',
 
         'less!app/styles/common'
     ],
@@ -37,8 +38,8 @@ define(
               currentUser, MiscAnalyticsModel, TrackCollection, TrackModel, SkillModel,
               LessonModel, ResourceModel, StaticPageCollection, StaticPageModel,
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
-              TrackListView, TrackDetailView, SkillDetailView,
-              ResourceDetailView, ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView
+              TrackListView, TrackDetailView, SkillDetailView, ResourceDetailView,
+              ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView
               ) {
 
         var AppRouter = Backbone.Router.extend({
@@ -52,11 +53,11 @@ define(
             initDataStore: function() {
                 // Static pages
                 DS.defineResource({
-                    name: 'static-page',
+                    name: Config.constants.dsResourceNames.STATIC_PAGE,
                     idAttribute: 'id',
                     collection: StaticPageCollection
                 });
-                DS.findAll('static-page').done(function(collection) {
+                DS.findAll(Config.constants.dsResourceNames.STATIC_PAGE).done(function(collection) {
                     console.log('static pages fetched: ', collection.toJSON());
                 });
             },
@@ -111,7 +112,8 @@ define(
                 'resource/:id': 'resourceDetail',
                 'prompt_track_validation/:track_id': 'promptTrackValidation',
 
-                'search': 'search'
+                'search': 'search',
+                'static_page/:page_id': 'staticPage'
             },
 
             home: function () {
@@ -337,6 +339,17 @@ define(
                 }).fail(function (error) {
                     console.log("the search has failed with the following error:\n\t", error );
                 });
+            },
+
+            staticPage: function(page_id) {
+                this.clearHome();
+                this.clearContainer();
+                this.clearModal();
+
+                var staticPageView = new StaticPageView();
+                staticPageView.pageId = page_id;
+
+                $('#container').append(staticPageView.render());
             },
 
             getQueryParameters : function(str) {

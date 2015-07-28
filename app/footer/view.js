@@ -19,13 +19,13 @@ define(
 			staticPageLinkTemplate: _.template(staticPageLinkTemplate),
 
             initialize: function () {
-                var staticPages = DS.getAll('static-page');
+                var staticPages = DS.getAll(Config.constants.dsResourceNames.STATIC_PAGE);
                 this.listenTo(staticPages, "change", this.render);
                 this.listenTo(staticPages, "add", this.render);
             },
 
 			render: function() {
-                var staticPages = DS.getAll('static-page');
+                var staticPages = DS.getAll(Config.constants.dsResourceNames.STATIC_PAGE);
                 this.$el.html(this.template({config: Config}));
                 var $staticPagesList = this.$el.find('#static-pages-link-list');
                 $staticPagesList.html('');

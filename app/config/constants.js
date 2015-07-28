@@ -58,6 +58,10 @@ define(['config'],
                 INVALID_CURRENT_PASSWORD: 1,
                 INVALID_NEW_PASSWORD: 2,
                 INVALID_CONFIRM_PASSWORD: 3
+            },
+
+            dsResourceNames: {
+                STATIC_PAGE: 'static-page'
             }
 
 		};
