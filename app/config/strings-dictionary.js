@@ -85,8 +85,8 @@ define([],
             },
 
             FOOTER: {
-                A_PROGRAM_BY: "Un programme de :",
-                SUPPORTED_BY: "Soutenu par :",
+                A_PROGRAM_BY: "Un programme de",
+                SUPPORTED_BY: "Soutenu par",
                 QUICK_ACCESS: "Accès rapide",
                 JOIN_THE_COMMUNITY: "Rejoignez la communauté",
                 FACEBOOK_LINK: "https://www.facebook.com/bibliosansfrontieres",

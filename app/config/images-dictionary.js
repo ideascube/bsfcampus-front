@@ -10,7 +10,7 @@ define(
 			default_background_image: Constants.imagesPath + 'city.png',
 			logo_gates_foundation: Constants.imagesPath + 'gatesfound.png',
 			logo_bsf_campus: Constants.imagesPath + 'BSF_logo_header.png',
-			logo_bsf: Constants.imagesPath + 'BSF_logo_footer.png',
+			logo_bsf: Constants.imagesPath + 'Logo-BSF_small.png',
 			bell: Constants.imagesPath + 'bell.png',
 			bellRed: Constants.imagesPath + 'bellRed.png',
 
@@ -31,8 +31,8 @@ define(
 			inkDropOn: Constants.imagesPath + 'iconmonstr-drop-7-on.png',
 			inkDropOff: Constants.imagesPath + 'iconmonstr-drop-7-off.png',
 			orderingExerciseBg: Constants.imagesPath + 'carre_ligne.png',
-            facebookLogo: Constants.imagesPath + 'facebook_2000px_icon.svg.png',
-            twitterLogo: Constants.imagesPath + 'Twitter-icon.png',
+            facebookLogo: Constants.imagesPath + 'facebook.png',
+            twitterLogo: Constants.imagesPath + 'twitter.png',
             home: {
                 bsfHomeImage: Constants.imagesPath + 'bsf_home_image.jpg',
                 bsfHomeImage3: Constants.imagesPath + 'bsf_home_image_3.jpg',

@@ -221,7 +221,7 @@ a, a:hover {
 
 #container {
   padding-top: 50px;
-  padding-bottom: 60px;
+  padding-bottom: 180px;
 }
 
 #footer {
@@ -231,16 +231,49 @@ a, a:hover {
   background-color: #F3F3F3;
   .container{
     height: 100%;
-    padding: 10px;
+    padding: 20px 0 10px;
+    h4 {
+      font-size: 1em;
+      text-align: center;
+      font-weight: 600;
+    }
     img {
       height: 100%;
-      margin: auto 20px;
+      margin: 10px 30px;
+    }
+    ul {
+      list-style-type: none;
+      text-align: center;
+      padding: 0;
+    }
+
+    #footer-program-by, #footer-supported-by {
+      img {
+        width: 75%;
+      }
     }
 
     #footer-community {
       img {
-        height: 20px;
+        height: 32px;
       }
+    }
+
+    @media (max-width: 768px) {
+      padding: 20px;
+
+      #footer-program-by {
+        margin-bottom: 30px;
+      }
+
+      #footer-supported-by {
+        margin-bottom: 50px;
+      }
+
+      img {
+        margin: 10px 20px;
+      }
+
     }
   }
 }
