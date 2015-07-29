@@ -84,6 +84,15 @@ define([],
                 }
             },
 
+            FOOTER: {
+                A_PROGRAM_BY: "Un programme de :",
+                SUPPORTED_BY: "Soutenu par :",
+                QUICK_ACCESS: "Accès rapide",
+                JOIN_THE_COMMUNITY: "Rejoignez la communauté",
+                FACEBOOK_LINK: "https://www.facebook.com/bibliosansfrontieres",
+                TWITTER_LINK: "https://twitter.com/BSFontheweb"
+            },
+
             HOME: {
                 BSF_HOME_PUNCHLINE: 'Bienvenue sur BSF Campus !',
                 BSF_HOME_TEXT: '<p>En 2015, l\'ONG Bibliothèques Sans Frontières lance, avec le soutien de la '

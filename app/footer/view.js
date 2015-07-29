@@ -27,7 +27,7 @@ define(
 			render: function() {
                 var staticPages = DS.getAll(Config.constants.dsResourceNames.STATIC_PAGE);
                 this.$el.html(this.template({config: Config}));
-                var $staticPagesList = this.$el.find('#static-pages-link-list');
+                var $staticPagesList = this.$el.find('#footer-static-pages-link-list ul');
                 $staticPagesList.html('');
                 _.each(staticPages.models, function(page) {
                     var pageSON = page.forTemplate();

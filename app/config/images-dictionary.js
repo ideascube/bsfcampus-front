@@ -31,6 +31,8 @@ define(
 			inkDropOn: Constants.imagesPath + 'iconmonstr-drop-7-on.png',
 			inkDropOff: Constants.imagesPath + 'iconmonstr-drop-7-off.png',
 			orderingExerciseBg: Constants.imagesPath + 'carre_ligne.png',
+            facebookLogo: Constants.imagesPath + 'facebook_2000px_icon.svg.png',
+            twitterLogo: Constants.imagesPath + 'Twitter-icon.png',
             home: {
                 bsfHomeImage: Constants.imagesPath + 'bsf_home_image.jpg',
                 bsfHomeImage3: Constants.imagesPath + 'bsf_home_image_3.jpg',
