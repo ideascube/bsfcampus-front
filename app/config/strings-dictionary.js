@@ -188,7 +188,10 @@ define([],
                         CONFIRM_REMOVE_TUTOR: "Êtes-vous sûr de vouloir retirer ce tuteur ?",
                         CONFIRM_REMOVE_STUDENT: "Êtes-vous sûr de vouloir retirer cet étudiant ?",
                         CONFIRM_CANCEL_TUTOR: "Êtes-vous sûr de vouloir annuler cette demande ?",
-                        CONFIRM_CANCEL_STUDENT: "Êtes-vous sûr de vouloir annuler cette demande ?"
+                        CONFIRM_CANCEL_STUDENT: "Êtes-vous sûr de vouloir annuler cette demande ?",
+
+                        TUTORS_LIST: "Liste de mes tuteurs",
+                        REMOVE_TUTOR: "Retirer"
                     }
                 }
             },

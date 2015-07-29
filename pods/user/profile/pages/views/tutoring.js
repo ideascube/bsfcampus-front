@@ -10,6 +10,7 @@ define(
         'pods/user/models/dashboard',
 
         'pods/user/profile/pages/views/tutoring-user-search-result-line',
+        'pods/user/profile/pages/views/tutoring-tutor-group-line',
         'pods/user/profile/pages/views/dashboard-details',
 
         'text!pods/user/profile/pages/templates/tutoring.html',
@@ -20,7 +21,7 @@ define(
     ],
     function ($, _, Backbone, Config,
               currentUser, User, DashboardModel,
-              UserSearchResultLineView, DashboardDetailsView,
+              UserSearchResultLineView, TutorLineView, DashboardDetailsView,
               tutoringTemplate, tutoringDropdownLineTemplate) {
 
         return Backbone.View.extend({
@@ -33,6 +34,7 @@ define(
 
             events: {
                 'submit form': 'searchUser',
+                'click #tutoring-tutors-list #tutors-list-collapse a': 'removeTutorFromGroup',
                 'click #tutoring-student-dashboard .dropdown > ul.dropdown-menu > li > a': 'selectStudent'
             },
 
@@ -40,18 +42,53 @@ define(
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
+                var tutors = currentUser.get('tutors');
+                if (tutors.length == 0)
+                {
+                    this.$('#tutoring-search-user-block').removeClass('border-bottom');
+                    this.$('#tutoring-tutors-list').hide();
+                }
+                else
+                {
+                    this.$('#tutoring-search-user-block').addClass('border-bottom');
+                    this.$('#tutoring-tutors-list').show();
+                    _.each(tutors, this.addTutorToGroup, this);
+                }
                 var tutoredStudents = currentUser.get('students');
                 if (tutoredStudents.length == 0)
                 {
+                    if (tutors.length == 0)
+                    {
+                        this.$('#tutoring-search-user-block').removeClass('border-bottom');
+                    }
+                    else
+                    {
+                        this.$('#tutoring-tutors-list').removeClass('border-bottom');
+                    }
                     this.$('#tutoring-student-dashboard').hide();
                 }
                 else
                 {
+                    if (tutors.length == 0)
+                    {
+                        this.$('#tutoring-search-user-block').addClass('border-bottom');
+                    }
+                    else
+                    {
+                        this.$('#tutoring-tutors-list').addClass('border-bottom');
+                    }
                     this.$('#tutoring-student-dashboard').show();
                     _.each(tutoredStudents, this.addStudentToDropdown, this);
                 }
 
                 return this;
+            },
+
+            addTutorToGroup: function(userSON) {
+                var user = new User({data: userSON}, {parse: true});
+                var tutorLineView = new TutorLineView({model: user});
+                tutorLineView.render();
+                this.$el.find('#tutoring-tutors-list #tutors-list-collapse').append(tutorLineView.$el);
             },
 
             addStudentToDropdown: function(user) {
@@ -111,6 +148,12 @@ define(
                 this.listenTo(userSearchResultLineView, 'addStudent', this.addStudent);
                 this.listenTo(userSearchResultLineView, 'cancelStudentRequest', this.cancelStudentRequest);
                 this.listenTo(userSearchResultLineView, 'removeStudent', this.removeStudent);
+            },
+
+            removeTutorFromGroup: function(e) {
+                e.preventDefault();
+
+
             },
 
             addTutor: function (userId) {

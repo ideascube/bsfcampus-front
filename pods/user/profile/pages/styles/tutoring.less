@@ -1,6 +1,10 @@
 #user-profile-tutoring-container {
   margin-left: 0;
 
+  .border-bottom {
+    border-bottom: solid 1px lightgrey;
+  }
+
   p {
     /*width: 35%;
     text-align: right;*/
@@ -44,7 +48,6 @@
       }
     }
     .user-search-result-line {
-      border-bottom: solid 1px lightgrey;
       padding-bottom: 30px ;
       padding-top: 30px;
 
@@ -114,6 +117,61 @@
             font-size: 17px;
             padding: 0 7px;
             border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+
+  #tutoring-tutors-list {
+    a[role="button"] {
+      &[aria-expanded="true"] img {
+        -ms-transform: rotate(90deg); /* IE 9 */
+        -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+        -webkit-transition: webkit-transform 300ms;
+        transform: rotate(90deg);
+        transition: transform 300ms;
+      }
+
+      &[aria-expanded="false"] img {
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        -webkit-transition: webkit-transform 300ms;
+        transform: rotate(0deg);
+        transition: transform 300ms;
+      }
+      img {
+        height: 30px;
+      }
+    }
+
+    #tutors-list-collapse {
+      .tutor-line{
+        display: block;
+        .tutor-user {
+          display: block;
+          font-weight: 600;
+        }
+        button {
+          &.remove {
+            float: none;
+            background-color: #9BBE16;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 0 0 0 30px;
+            padding: 5px 40px 5px 7px;
+            span {
+              &.remove {
+                display: inline-block;
+                background-color: red;
+                border: none;
+                border-radius: 50%;
+                padding: 0 7px;
+                margin: 1px 20px 1px 0;
+                font-size: 17px;
+              }
+            }
           }
         }
       }

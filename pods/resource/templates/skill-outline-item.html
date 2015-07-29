@@ -1,26 +1,26 @@
-<div 
-	class="panel-heading"
-	role="tab"
-	id="heading-lesson-<%= lesson._id %>"
->
-	<a 
-			data-toggle="collapse"
-			data-parent="#resource-skill-outline"
-			data-target="#collapse-lesson-<%= lesson._id %>"
-			aria-expanded="<%= lesson.active ? 'true' : 'false' %>"
-			aria-controls="collapse-lesson-<%= lesson._id %>"
-			href="<%= lesson.route %>"
-		>
-		<img src="<%= config.imagesDict.arrowInCircle %>">
-		<h4 class="panel-title"><%= lesson.title %></h4>
-	</a>
+<div
+        class="panel-heading"
+        role="tab"
+        id="heading-lesson-<%= lesson._id %>"
+        >
+    <a
+            data-toggle="collapse"
+            data-parent="#resource-skill-outline"
+            data-target="#collapse-lesson-<%= lesson._id %>"
+            aria-expanded="<%= lesson.active ? 'true' : 'false' %>"
+            aria-controls="collapse-lesson-<%= lesson._id %>"
+            href="<%= lesson.route %>"
+            >
+        <img src="<%= config.imagesDict.arrowInCircle %>">
+        <h4 class="panel-title"><%= lesson.title %></h4>
+    </a>
 </div>
 
 <div
-	id="collapse-lesson-<%= lesson._id %>"
-	class="panel-collapse collapse <%= lesson.active ? 'in' : '' %>"
-	role="tabpanel"
-	aria-labelledby="heading-lesson-<%= lesson._id %>"
->
-	<div class="lesson-outline list-group"></div>
+        id="collapse-lesson-<%= lesson._id %>"
+        class="panel-collapse collapse <%= lesson.active ? 'in' : '' %>"
+        role="tabpanel"
+        aria-labelledby="heading-lesson-<%= lesson._id %>"
+        >
+    <div class="lesson-outline list-group"></div>
 </div>
