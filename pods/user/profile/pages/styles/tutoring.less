@@ -6,9 +6,6 @@
   }
 
   p {
-    /*width: 35%;
-    text-align: right;*/
-    width: 30%;
     display: inline-block;
     float:left;
     margin: 8px 74px 0 0;
@@ -32,9 +29,18 @@
 
     #label_user_search {
       margin-top:6px;
+      margin-left: 30px;
+
+      @media (max-width: 767px) {
+        #label_user_search {
+          margin-left: 0px;
+        }
+      }
     }
 
     form {
+      margin-bottom: 10px;
+
       input {
         border-radius: 5px;
         border: solid 1px lightgrey;
@@ -46,13 +52,34 @@
         background-color: #F2F2F2 ;
         color: black;
       }
+
+      @media (max-width: 767px){
+        .search-user{
+          margin: 30px 29.45% 10px;
+        }
+      }
     }
+
+    @media (max-width: 767px) {
+      #tutoring-user-search-results{
+        padding-bottom: 30px;
+      }
+    }
+
     .user-search-result-line {
       padding-bottom: 30px ;
       padding-top: 30px;
 
       .result-user {
         font-weight: 600;
+        margin-left: 30px;
+      }
+
+      @media (max-width: 519px){
+        .result-user {
+          font-weight: 600;
+          margin-left: 0;
+        }
       }
 
       button {
@@ -88,6 +115,12 @@
           padding: 5px 40px 5px 7px;
         }
 
+        @media (max-width: 535px){
+          &.remove{
+            margin: 0 0 0 10px;
+          }
+        }
+
         &.add {
           float: left;
           color: black;
@@ -96,6 +129,18 @@
           border: 2px solid #1CAFF5;
           margin: 0 0 0 30px;
           padding: 2px 36px 2px 3px;
+        }
+
+        @media (max-width: 1199px){
+          &.add{
+            margin: 0 0 0 43px;
+          }
+        }
+
+        @media (max-width: 767px){
+          &.add{
+            margin: 0 0 10px 29px;
+          }
         }
 
         span {
@@ -124,6 +169,9 @@
   }
 
   #tutoring-tutors-list {
+    padding-bottom: 20px;
+    padding-top: 30px;
+
     a[role="button"] {
       &[aria-expanded="true"] img {
         -ms-transform: rotate(90deg); /* IE 9 */
@@ -142,15 +190,20 @@
       }
       img {
         height: 30px;
+        margin: 0 10px 0 30px;
       }
     }
 
     #tutors-list-collapse {
+      margin-bottom: 10px;
+
       .tutor-line{
         display: block;
         .tutor-user {
           display: block;
           font-weight: 600;
+          margin-left: 30px;
+          margin-top: 20px;
         }
         button {
           &.remove {
@@ -159,7 +212,7 @@
             color: white;
             border: none;
             border-radius: 5px;
-            margin: 0 0 0 30px;
+            margin: 10px 0 0 30px;
             padding: 5px 40px 5px 7px;
             span {
               &.remove {
@@ -179,7 +232,8 @@
   }
 
   #tutoring-student-dashboard {
-    margin-top: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
 
     h2.title {
       margin-bottom: 30px;
@@ -218,20 +272,15 @@
     }
 
     .user-search-result-line p {
-      width: 37%;
+      width: 22%;
       margin: 8px 30px 0 0;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     #label_user_search {
       margin-bottom: 20px;
       text-align: center;
-    }
-
-    .user-search-result-line {
-      padding-bottom: 25px;
-      padding-top: 25px;
     }
 
     #user_search {
@@ -243,9 +292,11 @@
     }
 
     .user-search-result-line {
+      padding-bottom: 25px;
+      padding-top: 25px;
+
       p {
-        margin: 0 10px 10px 0;
-        width: 100%;
+        margin: 10px 10px 10px 0;
         text-align: center
       }
       button {
