@@ -57,11 +57,13 @@ define(
 				var self = this;
 
 				var trackModel = new TrackModel(this.model.get('track'));
-				trackModel.fetch().done(function(){
+				trackModel.fetch().then(function(){
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
 					$('#track-title').html(backToTrackView.$el);
-				});
+                }, function (error) {
+                    // error
+                });
 
 				var lessonsCollection = new LessonSkillCollection();
 				lessonsCollection.meta('skill_id', this.model.id);

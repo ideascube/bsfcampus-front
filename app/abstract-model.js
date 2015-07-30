@@ -3,9 +3,10 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+        'ds',
 		'app/config',
 	],
-	function($, _, Backbone, Config) {
+	function($, _, Backbone, DS, Config) {
 
 		return Backbone.Model.extend({
 
@@ -25,6 +26,25 @@ define(
 
 				return response;
 			},
+
+            fetch: function() {
+                var self = this;
+                return new Promise(function (resolve, reject) {
+                    var modelInDS = DS.get(self.dsResourceName, self._id);
+                    if (modelInDS != null) {
+                        resolve(modelInDS);
+                    }
+                    else {
+                        Backbone.Model.prototype.fetch.call(self).done(function (result) {
+                            var model = new self.constructor(result, {parse: true});
+                            DS.add(self.dsResourceName, model);
+                            resolve(model);
+                        }).fail(function (err) {
+                            reject(err);
+                        });
+                    }
+                });
+            },
 
 			recursiveNormalize: function(obj) {
 

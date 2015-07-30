@@ -13,7 +13,9 @@ define(
 
         return AbstractModel.extend({
 
-            serverPath: '/users'
+            serverPath: '/users',
+
+            dsResourceName: Config.constants.dsResourceNames.USER
 
         });
 

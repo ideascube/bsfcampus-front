@@ -18,6 +18,8 @@ define(
 
 			model: TrackModel,
 
+            dsResourceName: Config.constants.dsResourceNames.TRACK,
+
 			serverPath: '/hierarchy/tracks'
 
 		});

@@ -18,6 +18,8 @@ define(
 
 			model: ResourceModel,
 
+            dsResourceName: 'lesson',
+
 			serverPath: function() {
 				return '/resources/lesson/' + this.meta('lesson_id');
 			}

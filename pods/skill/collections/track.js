@@ -18,6 +18,8 @@ define(
 
 			model: SkillModel,
 
+            dsResourceName: Config.constants.dsResourceNames.TRACK,
+
 			serverPath: function() {
 				return '/hierarchy/skills/track/' + this.meta('track_id');
 			}

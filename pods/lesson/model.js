@@ -15,6 +15,8 @@ define(
 
 			serverPath: '/hierarchy/lessons',
 
+            dsResourceName: Config.constants.dsResourceNames.LESSON,
+
 			route: function() {
 				return '#/lesson/' + this.id;
 			}

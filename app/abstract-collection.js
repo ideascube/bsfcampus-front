@@ -13,6 +13,25 @@ define(
 				this._meta = {};
 			},
 
+            fetch: function() {
+                var self = this;
+                return new Promise(function (resolve, reject) {
+                    var collectionInDS = DS.getAll(self.dsResourceName);
+                    if (collectionInDS != null) {
+                        resolve(collectionInDS);
+                    }
+                    else {
+                        Backbone.Collection.prototype.fetch.call(self).done(function (result) {
+                            var collection = new self.constructor(result, {parse: true});
+                            DS.inject(self.dsResourceName, collection.models);
+                            resolve(collection);
+                        }).fail(function (err) {
+                            reject(err);
+                        });
+                    }
+                });
+            },
+
 			 meta: function(prop, value) {
 				if (value === undefined) {
 					return this._meta[prop];

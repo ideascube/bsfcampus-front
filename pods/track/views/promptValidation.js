@@ -25,9 +25,11 @@ define(
             render: function () {
                 var trackModel = new TrackModel({_id: this.trackId});
                 var self = this;
-                trackModel.fetch().done(function () {
+                trackModel.fetch().then(function () {
                     var html = self.template({track: trackModel.forTemplate(), config: Config});
                     self.$el.html(html);
+                }, function (error) {
+                    // error
                 });
 
                 return this;

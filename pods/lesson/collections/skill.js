@@ -18,6 +18,8 @@ define(
 
 			model: LessonModel,
 
+            dsResourceName: 'skill',
+
 			serverPath: function() {
 				return '/hierarchy/lessons/skill/' + this.meta('skill_id');
 			}

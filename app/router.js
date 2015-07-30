@@ -8,11 +8,15 @@ define(
         'app/config',
 
         'pods/user/models/current',
+        'pods/user/collections/user',
         'app/misc-analytic-model',
         'pods/track/collection',
         'pods/track/model',
+        'pods/skill/collection',
         'pods/skill/model',
+        'pods/lesson/collection',
         'pods/lesson/model',
+        'pods/resource/collection',
         'pods/resource/model',
         'pods/static-page/collection',
         'pods/static-page/model',
@@ -35,8 +39,8 @@ define(
         'less!app/styles/common'
     ],
     function ($, _, Backbone, VM, DS, Config,
-              currentUser, MiscAnalyticsModel, TrackCollection, TrackModel, SkillModel,
-              LessonModel, ResourceModel, StaticPageCollection, StaticPageModel,
+              currentUser, UserCollection, MiscAnalyticsModel, TrackCollection, TrackModel, SkillCollection, SkillModel,
+              LessonCollection, LessonModel, ResourceCollection, ResourceModel, StaticPageCollection, StaticPageModel,
               AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView, ResourceDetailView,
               ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView
@@ -54,11 +58,46 @@ define(
                 // Static pages
                 DS.defineResource({
                     name: Config.constants.dsResourceNames.STATIC_PAGE,
-                    idAttribute: 'id',
+                    idAttribute: '_id',
                     collection: StaticPageCollection
                 });
                 DS.findAll(Config.constants.dsResourceNames.STATIC_PAGE).done(function(collection) {
                     console.log('static pages fetched: ', collection.toJSON());
+                });
+
+                // Tracks
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.TRACK,
+                    idAttribute: '_id',
+                    collection: TrackCollection
+                });
+
+                // Skills
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.SKILL,
+                    idAttribute: '_id',
+                    collection: SkillCollection
+                });
+
+                // Lessons
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.LESSON,
+                    idAttribute: '_id',
+                    collection: LessonCollection
+                });
+
+                // Resources
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.RESOURCE,
+                    idAttribute: '_id',
+                    collection: ResourceCollection
+                });
+
+                // Users
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.USER,
+                    idAttribute: '_id',
+                    collection: UserCollection
                 });
             },
 
@@ -206,7 +245,7 @@ define(
 
             userProfile: function () {
                 var self = this;
-                currentUser.fetch().done(function () {
+                currentUser.fetch().then(function(result) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -222,7 +261,7 @@ define(
             trackList: function () {
                 var collection = new TrackCollection();
                 var self = this;
-                collection.fetch().done(function () {
+                collection.fetch().then(function (response) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -230,6 +269,8 @@ define(
                     var trackListView = new TrackListView({collection: collection});
                     trackListView.render();
                     $('#container').append(trackListView.$el);
+                }, function (error) {
+                    // error
                 });
 
                 this.appHeaderView.updateHeaderButtonFocus('hierarchy');
@@ -238,7 +279,7 @@ define(
             trackDetail: function (id) {
                 var model = new TrackModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                model.fetch().then(function () {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -246,13 +287,15 @@ define(
                     var trackDetailView = new TrackDetailView({model: model});
                     trackDetailView.render();
                     $('#container').append(trackDetailView.$el);
+                }, function (error) {
+                    // error
                 });
             },
 
             skillDetail: function (id) {
                 var model = new SkillModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                model.fetch().then(function () {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -261,13 +304,15 @@ define(
                     var skillDetailView = new SkillDetailView({model: model});
                     skillDetailView.render();
                     $('#container').append(skillDetailView.$el);
+                }, function (error) {
+                    // error
                 });
             },
 
             lessonDetail: function (id) {
                 var model = new LessonModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                model.fetch().then(function () {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -275,13 +320,15 @@ define(
 
                     var skillId = model.get('skill')._id;
                     Backbone.history.navigate('skill/' + skillId, {trigger: true});
+                }, function (error) {
+                    // error
                 });
             },
 
             resourceDetail: function (id) {
                 var model = new ResourceModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                model.fetch().then(function () {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -290,6 +337,8 @@ define(
                     var resourceDetailView = new ResourceDetailView({model: model});
                     resourceDetailView.render();
                     $('#container').append(resourceDetailView.$el);
+                }, function (error) {
+                    // error
                 });
             },
 
@@ -336,9 +385,13 @@ define(
                     searchResultsView.searchedString = searchedString;
                     searchResultsView.results = response.data;
                     $('#container').append(searchResultsView.render());
-                }).fail(function (error) {
-                    console.log("the search has failed with the following error:\n\t", error );
-                });
+                }).then(
+                    function(result) {
+                        // nothing
+                    }, function(err) {
+                        console.log("the search has failed with the following error:\n\t", error );
+                    }
+                );
             },
 
             staticPage: function(page_id) {
@@ -385,8 +438,10 @@ define(
                 });
 
                 if (currentUser.isLoggedIn()) {
-                    currentUser.fetch().fail(
-                        function() {
+                    currentUser.fetch().then(
+                        function(result) {
+                            console.log('current user has been fetched');
+                        }, function(err) {
                             currentUser.logOut();
                         }
                     );
