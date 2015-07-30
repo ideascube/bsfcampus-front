@@ -17,7 +17,7 @@ define(
 
 			route: function() {
                 var externalLink = this.get('external_link');
-                if (externalLink != null)
+                if (externalLink != null && externalLink != "")
                 {
                     return externalLink;
                 }
