@@ -64,7 +64,8 @@ define(
 
 				var self = this;
 
-				var skillsCollection = new SkillTrackCollection();
+                // TODO: optimize these requests with DataStore
+                var skillsCollection = new SkillTrackCollection();
 				skillsCollection.meta('track_id', this.model.id);
 				skillsCollection.fetch().then(function(){
 					self.$el.find('#track-outline').empty();

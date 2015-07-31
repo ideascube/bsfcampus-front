@@ -7,7 +7,7 @@ define(
 		
 		'collection',
 		
-		'pods/user/models/user',
+		'pods/user/models/user'
 	],
 	function($, _, Backbone, Config,
 		AbstractCollection,

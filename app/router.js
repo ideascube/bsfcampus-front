@@ -259,9 +259,8 @@ define(
             },
 
             trackList: function () {
-                var collection = new TrackCollection();
                 var self = this;
-                collection.fetch().then(function (response) {
+                DS.findAll(Config.constants.dsResourceNames.TRACK).done(function (collection) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -269,17 +268,14 @@ define(
                     var trackListView = new TrackListView({collection: collection});
                     trackListView.render();
                     $('#container').append(trackListView.$el);
-                }, function (error) {
-                    // error
                 });
 
                 this.appHeaderView.updateHeaderButtonFocus('hierarchy');
             },
 
             trackDetail: function (id) {
-                var model = new TrackModel({_id: id});
                 var self = this;
-                model.fetch().then(function () {
+                DS.find(Config.constants.dsResourceNames.TRACK, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -287,15 +283,12 @@ define(
                     var trackDetailView = new TrackDetailView({model: model});
                     trackDetailView.render();
                     $('#container').append(trackDetailView.$el);
-                }, function (error) {
-                    // error
                 });
             },
 
             skillDetail: function (id) {
-                var model = new SkillModel({_id: id});
                 var self = this;
-                model.fetch().then(function () {
+                DS.find(Config.constants.dsResourceNames.SKILL, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -304,15 +297,12 @@ define(
                     var skillDetailView = new SkillDetailView({model: model});
                     skillDetailView.render();
                     $('#container').append(skillDetailView.$el);
-                }, function (error) {
-                    // error
                 });
             },
 
             lessonDetail: function (id) {
-                var model = new LessonModel({_id: id});
                 var self = this;
-                model.fetch().then(function () {
+                DS.find(Config.constants.dsResourceNames.LESSON, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -320,15 +310,13 @@ define(
 
                     var skillId = model.get('skill')._id;
                     Backbone.history.navigate('skill/' + skillId, {trigger: true});
-                }, function (error) {
-                    // error
                 });
             },
 
             resourceDetail: function (id) {
                 var model = new ResourceModel({_id: id});
                 var self = this;
-                model.fetch().then(function () {
+                DS.find(Config.constants.dsResourceNames.RESOURCE, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();

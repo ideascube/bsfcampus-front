@@ -23,13 +23,10 @@ define(
             template: _.template(promptValidationTemplate),
 
             render: function () {
-                var trackModel = new TrackModel({_id: this.trackId});
                 var self = this;
-                trackModel.fetch().then(function () {
+                DS.find(Config.constants.dsResourceNames.TRACK, this.trackId).then(function (trackModel) {
                     var html = self.template({track: trackModel.forTemplate(), config: Config});
                     self.$el.html(html);
-                }, function (error) {
-                    // error
                 });
 
                 return this;

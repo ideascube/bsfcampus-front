@@ -34,7 +34,8 @@ define(
 				
 				var self = this;
 
-				var resourcesCollection = new ResourceLessonCollection();
+                // TODO: optimize these requests with DataStore
+                var resourcesCollection = new ResourceLessonCollection();
 				resourcesCollection.meta('lesson_id', this.model.id);
 				resourcesCollection.fetch().then(function(){
 					self.$el.find('.lesson-outline').html('');

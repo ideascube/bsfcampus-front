@@ -56,15 +56,13 @@ define(
 
 				var self = this;
 
-				var trackModel = new TrackModel(this.model.get('track'));
-				trackModel.fetch().then(function(){
+                DS.find(Config.constants.dsResourceNames.SKILL, this.model.get('track')).then(function (trackModel) {
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
 					$('#track-title').html(backToTrackView.$el);
-                }, function (error) {
-                    // error
                 });
 
+                // TODO: optimize these requests with DataStore
 				var lessonsCollection = new LessonSkillCollection();
 				lessonsCollection.meta('skill_id', this.model.id);
 				lessonsCollection.fetch().then(function(){
