@@ -59,7 +59,7 @@ define(
                 DS.find(Config.constants.dsResourceNames.SKILL, this.model.get('track')).then(function (trackModel) {
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
-					this.$el.find('#track-title').html(backToTrackView.$el);
+					self.$el.find('#track-title').html(backToTrackView.$el);
                 });
 
                 var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSON, function(model) {
