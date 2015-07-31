@@ -37,7 +37,7 @@ define(
                 'click .btn-validate-track': 'startTrackValidation'
             },
 
-			render: function() {
+            render: function() {
 				var trackModel = this.model.forTemplate();
                 if (this.model.get('is_validated'))
                 {
@@ -64,18 +64,32 @@ define(
 
 				var self = this;
 
-                // TODO: optimize these requests with DataStore
-                var skillsCollection = new SkillTrackCollection();
-				skillsCollection.meta('track_id', this.model.id);
-				skillsCollection.fetch().then(function(){
-					self.$el.find('#track-outline').empty();
-					_.each(skillsCollection.models, self.renderOne, self);
-				});
+                var skillsCollection = DS.filter(Config.constants.dsResourceNames.SKILL, function(model) {
+                    return model.get('track')._id === self.model.id;
+                });
+                if (skillsCollection.length > 0)
+                {
+                    this.renderSkills(skillsCollection);
+                }
+                else
+                {
+                    skillsCollection = new SkillTrackCollection();
+                    skillsCollection.meta('track_id', this.model.id);
+                    skillsCollection.fetch().then(function(){
+                        DS.inject(Config.constants.dsResourceNames.SKILL, skillsCollection.models);
+                        self.renderSkills(skillsCollection);
+                    });
+                }
 
 				return this;
 			},
 
-			renderOne: function(skill) {
+            renderSkills: function (skillsCollection) {
+                this.$el.find('#track-outline').empty();
+                _.each(skillsCollection.models, this.renderOne, this);
+            },
+
+            renderOne: function(skill) {
 				var trackOutlineItem = new TrackOutlineItem({model: skill});
 				trackOutlineItem.render();
 				this.$el.find('#track-outline').append(trackOutlineItem.$el);
