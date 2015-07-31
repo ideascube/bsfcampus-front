@@ -56,7 +56,7 @@ define(
 
 				var self = this;
 
-                DS.find(Config.constants.dsResourceNames.SKILL, this.model.get('track')).then(function (trackModel) {
+                DS.find(Config.constants.dsResourceNames.TRACK, this.model.get('track')['_id']).then(function (trackModel) {
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
 					self.$el.find('#track-title').html(backToTrackView.$el);
