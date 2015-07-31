@@ -39,12 +39,12 @@ define(
 				backToSkillView.render();
 				this.$el.find('#resource-skill-title').html(backToSkillView.$el);
 
-				_.each(this.model.get('lessons').models, this.renderLesson, this);
+				_.each(this.model.get('lessons').models, this.renderSingleLesson, this);
 
 				return this;
 			},
 
-			renderLesson: function(lesson) {
+			renderSingleLesson: function(lesson) {
 				var itemView = new SkillOutlineItemView({model: lesson});
 				itemView.currentResource = this.currentResource;
 				itemView.render();

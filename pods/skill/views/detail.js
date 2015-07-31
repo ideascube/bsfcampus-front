@@ -35,7 +35,7 @@ define(
 				'click .btn-validate-skill': 'startSkillValidation'
 			},
 
-			render: function() {
+            render: function() {
 				
 				var skillModel = this.model.forTemplate();
 				if (skillModel.is_validated)
@@ -59,30 +59,45 @@ define(
                 DS.find(Config.constants.dsResourceNames.SKILL, this.model.get('track')).then(function (trackModel) {
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
-					$('#track-title').html(backToTrackView.$el);
+					this.$el.find('#track-title').html(backToTrackView.$el);
                 });
 
-                // TODO: optimize these requests with DataStore
-				var lessonsCollection = new LessonSkillCollection();
-				lessonsCollection.meta('skill_id', this.model.id);
-				lessonsCollection.fetch().then(function(){
-					$('#skill-outline').empty();
+                var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSON, function(model) {
+                    return model.get('skill')._id === self.model.id;
+                });
+                if (lessonsCollection.length > 0)
+                {
+                    this.renderLessons(lessonsCollection);
+                }
+                else
+                {
+                    lessonsCollection = new LessonSkillCollection();
+                    lessonsCollection.meta('skill_id', this.model.id);
+                    lessonsCollection.fetch().then(function(){
+                        DS.inject(Config.constants.dsResourceNames.LESSON, lessonsCollection.models);
+                        self.renderLessons(lessonsCollection);
+                    });
+                }
 
-					lessonsCollection.each(function(lesson, index, list){
-						self.renderLesson(lesson);
-						if (index < list.length - 1) {
-							$('#skill-outline').append('<hr>');
-						}
-					})
-				});
-			
 				return this;
 			},
 
-			renderLesson: function(lesson) {
+            renderLessons: function (lessonsCollection) {
+                this.$el.find('#skill-outline').empty();
+
+                var self =this;
+                lessonsCollection.each(function (lesson, index, list) {
+                    self.renderSingleLesson(lesson);
+                    if (index < list.length - 1) {
+                        self.$el.find('#skill-outline').append('<hr>');
+                    }
+                })
+            },
+
+			renderSingleLesson: function(lesson) {
 				var skillOutlineItemView = new SkillOutlineItemView({model: lesson});
 				skillOutlineItemView.render();
-				$('#skill-outline').append(skillOutlineItemView.$el);
+                this.$el.find('#skill-outline').append(skillOutlineItemView.$el);
 			},
 
 			startSkillValidation: function(e) {
