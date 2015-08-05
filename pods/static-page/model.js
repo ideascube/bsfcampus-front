@@ -15,6 +15,8 @@ define(
 
 			serverPath: '/static_page',
 
+            dsResourceName: Config.constants.dsResourceNames.STATIC_PAGE,
+
 			route: function() {
                 var externalLink = this.get('external_link');
                 if (externalLink != null && externalLink != "")

@@ -7,20 +7,20 @@ define(
 		
 		'collection',
 		
-		'pods/static-page/model'
+		'pods/user/models/user'
 	],
 	function($, _, Backbone, Config,
 		AbstractCollection,
-		StaticPageModel
+		UserModel
 		) {
 
 		return AbstractCollection.extend({
 
-			model: StaticPageModel,
+			model: UserModel,
 
-            dsResourceName: Config.constants.dsResourceNames.STATIC_PAGE,
+            dsResourceName: Config.constants.dsResourceNames.USER,
 
-			serverPath: '/static_page'
+			serverPath: '/users'
 
 		});
 

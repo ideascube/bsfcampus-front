@@ -15,6 +15,8 @@ define(
 
 			serverPath: '/hierarchy/tracks',
 
+            dsResourceName: Config.constants.dsResourceNames.TRACK,
+
 			route: function() {
 				return '#/track/' + this.id;
 			},

@@ -44,7 +44,9 @@ require.config({
 
 	less: {
 		async: true
-	}
+	},
+
+    waitSeconds: 0
 
 });
 

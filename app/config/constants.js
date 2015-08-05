@@ -29,7 +29,8 @@ define(['config'],
 		return {
 
             VIEWS_ID: {
-                HOME: "HOME_VIEW"
+                HOME: "HOME_VIEW",
+                CONNECTED_HOME: "CONNECTED_HOME_VIEW"
             },
 
 			server_type: server_type,
@@ -61,7 +62,12 @@ define(['config'],
             },
 
             dsResourceNames: {
-                STATIC_PAGE: 'static-page'
+                STATIC_PAGE: 'static-page',
+                TRACK: 'track',
+                SKILL: 'skill',
+                LESSON: 'lesson',
+                RESOURCE: 'resource',
+                USER: 'user'
             }
 
 		};

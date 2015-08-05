@@ -3,9 +3,10 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+        'ds',
 		'app/config',
 	],
-	function($, _, Backbone, Config) {
+	function($, _, Backbone, DS, Config) {
 
 		return Backbone.Model.extend({
 

@@ -48,6 +48,7 @@ define(
 
 				var self = this;
 
+                // TODO: optimize with DataStore (DS)
 				$.get(this.model.hierarchyUrl()).done(function(data){
 					var skillModel = new SkillModel({data: data.skill}, {parse: true});
 					
@@ -86,7 +87,7 @@ define(
 				contentView.render();
 				this.$el.find('#resource-content').html(contentView.$el);
 
-			},
+			}
 
 		});
 		

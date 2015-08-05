@@ -66,11 +66,12 @@ define(
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/acknowledge/tutor/" + userId,
                     dataType: 'json'
-                }).done(function(response) {
-                    console.log("the notification has been successfully acknowledged");
-                    currentUser.set(currentUser.parse(response));
-                }).fail(function (error) {
-                    console.log("Error while acknowledging the tutor notification:", error );
+                }).then(
+                    function(result) {
+                        console.log("the notification has been successfully acknowledged");
+                        currentUser.set(currentUser.parse(response));
+                    }, function(error) {
+                        console.log("Error while acknowledging the tutor notification:", error );
                 });
             },
 
@@ -91,10 +92,10 @@ define(
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/acknowledge/student/" + userId,
                     dataType: 'json'
-                }).done(function(response) {
+                }).then(function(response) {
                     console.log("the notification has been successfully acknowledged");
                     currentUser.set(currentUser.parse(response));
-                }).fail(function (error) {
+                }, function (error) {
                     console.log("Error while acknowledging the student notification:", error );
                 });
             },
@@ -117,10 +118,10 @@ define(
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/accept/tutor/" + requestingUserId,
                     dataType: 'json'
-                }).done(function(response) {
+                }).then(function(response) {
                     console.log("the tutor request has been successfully accepted");
                     currentUser.set(currentUser.parse(response));
-                }).fail(function (error) {
+                }, function (error) {
                     console.log("Error while accepting the tutor request:", error );
                 });
             },
@@ -131,10 +132,10 @@ define(
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/decline/tutor/" + requestingUserId,
                     dataType: 'json'
-                }).done(function(response) {
+                }).then(function(response) {
                     console.log("the tutor request has been successfully accepted");
                     currentUser.set(currentUser.parse(response));
-                }).fail(function (error) {
+                }, function (error) {
                     console.log("Error while accepting the tutor request:", error.responseJSON.data.error_message );
                 });
             },
@@ -157,10 +158,10 @@ define(
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/accept/student/" + requestingUserId,
                     dataType: 'json'
-                }).done(function(response) {
+                }).then(function(response) {
                     console.log("the tutored student request has been successfully accepted");
                     currentUser.set(currentUser.parse(response));
-                }).fail(function (error) {
+                }, function (error) {
                     console.log("Error while accepting the tutored student request:", error );
                 });
             },
@@ -171,10 +172,10 @@ define(
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/decline/student/" + requestingUserId,
                     dataType: 'json'
-                }).done(function(response) {
+                }).then(function(response) {
                     console.log("the tutored student request has been successfully declined");
                     currentUser.set(currentUser.parse(response));
-                }).fail(function (error) {
+                }, function (error) {
                     console.log("Error while declining the tutored student request:", error );
                 });
             },

@@ -18,6 +18,8 @@ define(
 
 			model: ResourceModel,
 
+            dsResourceName: Config.constants.dsResourceNames.LESSON,
+
 			serverPath: function() {
 				return '/resources/lesson/' + this.meta('lesson_id');
 			}

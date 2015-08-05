@@ -18,6 +18,8 @@ define(
 
 			model: ResourceModel,
 
+            dsResourceName: Config.constants.dsResourceNames.SKILL,
+
 			serverPath: function() {
 				return '/resources/skill/' + this.meta('skill_id');
 			}

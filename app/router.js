@@ -8,11 +8,15 @@ define(
         'app/config',
 
         'pods/user/models/current',
+        'pods/user/collections/user',
         'app/misc-analytic-model',
         'pods/track/collection',
         'pods/track/model',
+        'pods/skill/collection',
         'pods/skill/model',
+        'pods/lesson/collection',
         'pods/lesson/model',
+        'pods/resource/collection',
         'pods/resource/model',
         'pods/static-page/collection',
         'pods/static-page/model',
@@ -20,6 +24,7 @@ define(
         'app/header/view',
         'app/footer/view',
         'pods/home/view',
+        'pods/home-connected/view',
         'pods/user/connection/views/register',
         'pods/user/connection/views/login',
         'pods/user/profile/views/profile',
@@ -35,9 +40,9 @@ define(
         'less!app/styles/common'
     ],
     function ($, _, Backbone, VM, DS, Config,
-              currentUser, MiscAnalyticsModel, TrackCollection, TrackModel, SkillModel,
-              LessonModel, ResourceModel, StaticPageCollection, StaticPageModel,
-              AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
+              currentUser, UserCollection, MiscAnalyticsModel, TrackCollection, TrackModel, SkillCollection, SkillModel,
+              LessonCollection, LessonModel, ResourceCollection, ResourceModel, StaticPageCollection, StaticPageModel,
+              AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView, ResourceDetailView,
               ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView
               ) {
@@ -54,11 +59,46 @@ define(
                 // Static pages
                 DS.defineResource({
                     name: Config.constants.dsResourceNames.STATIC_PAGE,
-                    idAttribute: 'id',
+                    idAttribute: '_id',
                     collection: StaticPageCollection
                 });
                 DS.findAll(Config.constants.dsResourceNames.STATIC_PAGE).done(function(collection) {
                     console.log('static pages fetched: ', collection.toJSON());
+                });
+
+                // Tracks
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.TRACK,
+                    idAttribute: '_id',
+                    collection: TrackCollection
+                });
+
+                // Skills
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.SKILL,
+                    idAttribute: '_id',
+                    collection: SkillCollection
+                });
+
+                // Lessons
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.LESSON,
+                    idAttribute: '_id',
+                    collection: LessonCollection
+                });
+
+                // Resources
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.RESOURCE,
+                    idAttribute: '_id',
+                    collection: ResourceCollection
+                });
+
+                // Users
+                DS.defineResource({
+                    name: Config.constants.dsResourceNames.USER,
+                    idAttribute: '_id',
+                    collection: UserCollection
                 });
             },
 
@@ -104,6 +144,7 @@ define(
                 'login/redirect': 'loginRedirect',
                 'logout': 'logout',
                 'user/profile': 'userProfile',
+                'user/profile/:page': 'userProfile',
 
                 'track': 'trackList',
                 'track/:id': 'trackDetail',
@@ -120,25 +161,27 @@ define(
                 var visitHomeAnalytics = new MiscAnalyticsModel();
                 visitHomeAnalytics.type = "visit_home_page";
                 visitHomeAnalytics.save();
+
+                this.clearHome();
+                this.clearContainer();
+                this.hideContainer();
+                this.clearModal();
+                var homeView = null;
                 if (currentUser.isLoggedIn())
                 {
-                    this.navigate('user/profile', {trigger: true});
+                    homeView = VM.createView(Config.constants.VIEWS_ID.CONNECTED_HOME, function() {
+                        return new ConnectedHomeView();
+                    });
                 }
-                else
-                {
-                    this.clearHome();
-                    this.clearContainer();
-                    this.hideContainer();
-                    this.clearModal();
-
-                    var homeView = VM.createView(Config.constants.VIEWS_ID.HOME, function() {
+                else {
+                    homeView = VM.createView(Config.constants.VIEWS_ID.HOME, function () {
                         return new HomeView();
                     });
-                    homeView.render();
-                    $('#home').append(homeView.$el);
-
-                    this.appHeaderView.updateHeaderButtonFocus('home');
                 }
+                homeView.render();
+                $('#home').append(homeView.$el);
+
+                this.appHeaderView.updateHeaderButtonFocus('home');
             },
 
             register: function () {
@@ -204,14 +247,19 @@ define(
                 Backbone.history.navigate('', {trigger: true});
             },
 
-            userProfile: function () {
+            userProfile: function (page) {
+                if (page == null)
+                {
+                    page = Config.constants.userProfile.DASHBOARD;
+                }
                 var self = this;
-                currentUser.fetch().done(function () {
+                currentUser.fetch().then(function(result) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
 
                     var userProfileView = new UserProfileView({model: currentUser});
+                    userProfileView.page = page;
                     userProfileView.render();
                     $('#container').append(userProfileView.$el);
 
@@ -220,9 +268,8 @@ define(
             },
 
             trackList: function () {
-                var collection = new TrackCollection();
                 var self = this;
-                collection.fetch().done(function () {
+                DS.findAll(Config.constants.dsResourceNames.TRACK).done(function (collection) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -236,9 +283,8 @@ define(
             },
 
             trackDetail: function (id) {
-                var model = new TrackModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                DS.find(Config.constants.dsResourceNames.TRACK, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -250,9 +296,8 @@ define(
             },
 
             skillDetail: function (id) {
-                var model = new SkillModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                DS.find(Config.constants.dsResourceNames.SKILL, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -265,9 +310,8 @@ define(
             },
 
             lessonDetail: function (id) {
-                var model = new LessonModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                DS.find(Config.constants.dsResourceNames.LESSON, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -281,7 +325,7 @@ define(
             resourceDetail: function (id) {
                 var model = new ResourceModel({_id: id});
                 var self = this;
-                model.fetch().done(function () {
+                DS.find(Config.constants.dsResourceNames.RESOURCE, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -290,6 +334,8 @@ define(
                     var resourceDetailView = new ResourceDetailView({model: model});
                     resourceDetailView.render();
                     $('#container').append(resourceDetailView.$el);
+                }, function (error) {
+                    // error
                 });
             },
 
@@ -336,9 +382,13 @@ define(
                     searchResultsView.searchedString = searchedString;
                     searchResultsView.results = response.data;
                     $('#container').append(searchResultsView.render());
-                }).fail(function (error) {
-                    console.log("the search has failed with the following error:\n\t", error );
-                });
+                }).then(
+                    function(result) {
+                        // nothing
+                    }, function(err) {
+                        console.log("the search has failed with the following error:\n\t", error );
+                    }
+                );
             },
 
             staticPage: function(page_id) {
@@ -385,8 +435,10 @@ define(
                 });
 
                 if (currentUser.isLoggedIn()) {
-                    currentUser.fetch().fail(
-                        function() {
+                    currentUser.fetch().then(
+                        function(result) {
+                            console.log('current user has been fetched');
+                        }, function(err) {
                             currentUser.logOut();
                         }
                     );

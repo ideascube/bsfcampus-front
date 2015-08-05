@@ -42,7 +42,7 @@ define(
                 this.$el.html(html);
 
                 this.renderNavMenu();
-                this.navMenuView.changeSelectedPage(Config.constants.userProfile.DASHBOARD);
+                this.navMenuView.changeSelectedPage(this.page);
             },
 
             renderNavMenu: function() {

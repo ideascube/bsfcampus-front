@@ -7,9 +7,9 @@ define(
 
         'pods/user/models/current',
 
-        'text!pods/home/template.html',
+        'text!pods/home-connected/template.html',
 
-        'less!pods/home/style'
+        'less!pods/home-connected/style'
     ],
     function($, _, Backbone, Config,
              currentUser,
@@ -23,9 +23,13 @@ define(
             template: _.template(homeTemplate),
 
             events: {
-                'click a.btn.connection': 'login',
-                'click a.btn.subscribe': 'register',
+                'click button#button_formations': 'goToTracks',
+                'click button#button_tutorat': 'goToProfile',
                 'click #arrow_center': 'scrollTo'
+            },
+
+            initialize: function () {
+                this.listenTo(currentUser, "change", this.render);
             },
 
             render: function() {
@@ -34,21 +38,20 @@ define(
                 this.$el.html(this.template({currentUser: currentUser.forTemplate(), config: Config}));
                 this.$el.find("#first_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
                 this.$el.find("#second_window").css('background-image', 'url(' + Config.imagesDict.default_background_image + ')');
-                this.$el.find("#third_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage3 + ')');
 
                 return this;
             },
 
-            login: function(e) {
+            goToTracks: function(e) {
                 e.preventDefault();
 
-                Backbone.history.loadUrl("/login");
+                Backbone.history.navigate("/track", {trigger:true});
             },
 
-            register: function(e) {
+            goToProfile: function(e) {
                 e.preventDefault();
 
-                Backbone.history.loadUrl("/register");
+                Backbone.history.navigate("/user/profile/" + Config.constants.userProfile.TUTORING, {trigger:true});
             },
 
             scrollTo: function (e) {
