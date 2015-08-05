@@ -24,6 +24,7 @@ define(
         'app/header/view',
         'app/footer/view',
         'pods/home/view',
+        'pods/home-connected/view',
         'pods/user/connection/views/register',
         'pods/user/connection/views/login',
         'pods/user/profile/views/profile',
@@ -41,7 +42,7 @@ define(
     function ($, _, Backbone, VM, DS, Config,
               currentUser, UserCollection, MiscAnalyticsModel, TrackCollection, TrackModel, SkillCollection, SkillModel,
               LessonCollection, LessonModel, ResourceCollection, ResourceModel, StaticPageCollection, StaticPageModel,
-              AppHeaderView, AppFooterView, HomeView, RegisterUserView, LoginUserView, UserProfileView,
+              AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView, ResourceDetailView,
               ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView
               ) {
@@ -143,6 +144,7 @@ define(
                 'login/redirect': 'loginRedirect',
                 'logout': 'logout',
                 'user/profile': 'userProfile',
+                'user/profile/:page': 'userProfile',
 
                 'track': 'trackList',
                 'track/:id': 'trackDetail',
@@ -159,25 +161,27 @@ define(
                 var visitHomeAnalytics = new MiscAnalyticsModel();
                 visitHomeAnalytics.type = "visit_home_page";
                 visitHomeAnalytics.save();
+
+                this.clearHome();
+                this.clearContainer();
+                this.hideContainer();
+                this.clearModal();
+                var homeView = null;
                 if (currentUser.isLoggedIn())
                 {
-                    this.navigate('user/profile', {trigger: true});
+                    homeView = VM.createView(Config.constants.VIEWS_ID.CONNECTED_HOME, function() {
+                        return new ConnectedHomeView();
+                    });
                 }
-                else
-                {
-                    this.clearHome();
-                    this.clearContainer();
-                    this.hideContainer();
-                    this.clearModal();
-
-                    var homeView = VM.createView(Config.constants.VIEWS_ID.HOME, function() {
+                else {
+                    homeView = VM.createView(Config.constants.VIEWS_ID.HOME, function () {
                         return new HomeView();
                     });
-                    homeView.render();
-                    $('#home').append(homeView.$el);
-
-                    this.appHeaderView.updateHeaderButtonFocus('home');
                 }
+                homeView.render();
+                $('#home').append(homeView.$el);
+
+                this.appHeaderView.updateHeaderButtonFocus('home');
             },
 
             register: function () {
@@ -243,7 +247,11 @@ define(
                 Backbone.history.navigate('', {trigger: true});
             },
 
-            userProfile: function () {
+            userProfile: function (page) {
+                if (page == null)
+                {
+                    page = Config.constants.userProfile.DASHBOARD;
+                }
                 var self = this;
                 currentUser.fetch().then(function(result) {
                     self.clearHome();
@@ -251,6 +259,7 @@ define(
                     self.clearModal();
 
                     var userProfileView = new UserProfileView({model: currentUser});
+                    userProfileView.page = page;
                     userProfileView.render();
                     $('#container').append(userProfileView.$el);
 

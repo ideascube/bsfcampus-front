@@ -1,0 +1,275 @@
+#home-connected-content {
+  padding-top: 50px;
+  padding-bottom: 120px;
+
+  /* ----- Premiere Fenêtre ----- */
+
+  #first_window{
+    -webkit-background-size: cover; /* pour Chrome et Safari */
+    -moz-background-size: cover; /* pour Firefox */
+    -o-background-size: cover; /* pour Opera */
+    background-size: cover; /* version standardisée */
+    padding-bottom: 150px;
+    border-radius: 0;
+    height: 380px;
+  }
+
+  #title_1{
+    text-align: center;
+    margin: 60px 0 60px 0;
+    color: white;
+    font-size: 3.1em;
+    font-weight: 700;
+  }
+
+  .button_center_1{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #arrow_center{
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  #bsf_information{
+    text-align: center;
+    color: white;
+    font-weight: 700;
+  }
+
+  /* ----- Deuxième Fenêtre ----- */
+
+  #second_window{
+    background: #f8f6f7 no-repeat bottom;
+    background-size: contain;
+    height:820px;
+    border-radius: 0;
+  }
+
+  .title_second_window{
+    text-align: center;
+    margin: 50px 0 20px 0;
+    font-weight: 700;
+  }
+
+  .black_line{
+    border-bottom: solid 1px #b0b0b0;
+    width: 550px;
+    margin: 0 auto 30px;
+  }
+
+  .text_block{
+    text-align: center;
+    width: 450px;
+    font-size: 0.9em;
+    font-weight: 400;
+    margin: 0 auto 30px;
+  }
+
+  .bold_text{
+    font-size: 1em;
+    font-weight: 600;
+    color: black;
+  }
+
+  #button_formations{
+    color: white;
+    background-color: #3498db;
+    border-color: #3498db;
+    border-radius: 20px;
+    width: 375px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 60px;
+
+    &:hover{
+      background-color: #42befa;
+      border-color: #42befa;
+    }
+  }
+
+  #button_tutorat{
+    color: white;
+    background-color: #3498db;
+    border-color: #3498db;
+    border-radius: 20px;
+    width: 375px;
+    margin-bottom: 20px;
+    font-size: 1em;
+    font-weight: 400;
+    margin-top: 40px;
+
+    &:hover{
+      background-color: #42befa;
+      border-color: #42befa;
+    }
+  }
+
+  .button_center_2{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .social_center{
+    text-align: center;
+  }
+
+  #btn_facebook, #btn_twitter{
+    margin-right: 50px;
+    width: 78px;
+  }
+
+  /* ----- Modification Bootstrap ----- */
+
+  input,
+  button,
+  select,
+  textarea {
+    background: #fcfcfc;
+  }
+
+  .btn-primary {
+    background-color: #3498db;
+    border-color: #3498db;
+
+    &:hover {
+      color: #fff;
+      background-color: #42befa;
+      border-color: #42befa;
+    }
+  }
+
+  p {
+    color: #636363;
+    font-weight: 400;
+  }
+
+  /* ------ Modification Media Queries ----- */
+
+  @media (min-width: 1200px){
+    .container {
+      width: 100%;
+    }
+
+    .col-md-offset-3 {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 1199px){
+    #first_window{
+      height: 380px;
+    }
+
+    #title_1{
+      font-size: 2.2em;
+      margin-top: 80px;
+    }
+
+    #bsf_information{
+      font-size: 1.25em;
+      margin-bottom: 30px;
+    }
+
+    .title_second_window{
+      font-size: 1.25em;
+    }
+
+    .black_line{
+      width: 360px;
+    }
+
+    #button_formations, #button_formations:hover{
+      margin-top: 20px;
+    }
+
+    #button_tutorat, #button_tutorat:hover{
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: 991px){
+    #title_1 {
+      font-size: 1.6em;
+    }
+
+    #bsf_information{
+      font-size: 1.25em;
+    }
+
+    .title_second_window {
+      font-size: 1.1em;
+    }
+
+    .black_line {
+      width: 280px;
+    }
+
+    .text_block{
+      width: 345px;
+      font-size: 0.75em;
+    }
+
+    .bold_text {
+      font-size: 0.81em;
+    }
+
+    #button_formations, #button_formations:hover{
+      width: 300px;
+      font-size: 0.81em;
+    }
+
+    #button_tutorat, #button_tutorat:hover{
+      width: 300px;
+      font-size: 0.81em;
+    }
+  }
+
+  @media (max-width: 767px){
+    #second_window {
+      height: 100%;
+      padding-bottom: 100px;
+    }
+
+    .title_second_window {
+      font-size: 1.25em;
+    }
+
+    #title_1 {
+      font-size: 1.25em;
+    }
+
+    #bsf_information{
+      font-size: 1em;
+    }
+
+    .black_line {
+      width: 70%;
+    }
+
+    .text_block {
+      width: 90%;
+      font-size: 0.95em;
+      margin: 0 auto 0;
+    }
+
+    .bold_text {
+      font-size: 1em;
+    }
+
+    #button_formations, #button_formations:hover {
+      width: 330px;
+      font-size: 0.95em;
+    }
+
+    #button_tutorat, #button_tutorat:hover {
+      margin-top: 20px;
+    }
+
+    .social_center {
+      margin-top: 20px;
+    }
+  }
+}

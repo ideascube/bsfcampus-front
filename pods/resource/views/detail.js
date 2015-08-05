@@ -87,7 +87,7 @@ define(
 				contentView.render();
 				this.$el.find('#resource-content').html(contentView.$el);
 
-			},
+			}
 
 		});
 		

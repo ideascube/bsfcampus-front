@@ -103,8 +103,23 @@ define([],
                     + 'professionnels en poste dans la région. La plateforme sera également accessible sans '
                     + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>',
                 LOGIN: 'Connexion',
-                REGISTER: 'Inscription',
-                WELCOME: 'Bienvenue '
+                REGISTER: 'Inscription'
+            },
+
+            CONNECTED_HOME: {
+                WELCOME_MESSAGE: 'Bienvenue sur BSF Campus Online, ',
+                INFORMATION_MESSAGE: 'BSF Campus, c\'est une plateforme d\'e-learning, gratuite, certifiante et ouverte à tous.',
+                TRACKS_HEADER: 'PARCOURS DE FORMATIONS',
+                TRACKS_MESSAGE_MAIN: 'Retrouvez dès à présent les parcours de formation destinés aux professionnels des bibliothèques.',
+                TRACKS_MESSAGE_TEXT: 'La plateforme sera également accessible sans internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.',
+                TRACKS_BUTTON_LABEL: 'Découvrez les parcours de la formation',
+                TUTORING_HEADER: 'TUTORAT',
+                TUTORING_MESSAGE_MAIN: 'BSF Campus, c\'est aussi une plateforme d\'apprentissage personnalisé.',
+                TUTORING_MESSAGE_TEXT: 'Suivez vos progrès sur chaque parcours de formation sur votre profil, et coachez d\'autres apprenants grâce aux fonctionnalités de tutorat.',
+                TUTORING_BUTTON_LABEL: 'Accédez à votre profil',
+                NETWORK_HEADER: 'COMMUNAUTÉ',
+                NETWORK_MESSAGE_MAIN: 'BSF Campus, c\'est aussi une communauté.',
+                NETWORK_MESSAGE_TEXT: 'N\'hésitez pas à nous rejoindre sur nos réseaux sociaux.'
             },
 
             USER: {
