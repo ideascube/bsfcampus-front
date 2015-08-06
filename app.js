@@ -14,7 +14,7 @@ require.config({
 		normalize: 'vendor/require-less/normalize',
 		bootstrap: 'vendor/bootstrap/dist/js/bootstrap',
         projekktor: 'vendor/projekktor/dist/projekktor',
-        ds: 'vendor/backbone-data/dist/backbone-ds',
+        ds: 'lib/backbone-ds',
 
 		collection: 'app/abstract-collection',
 		model: 'app/abstract-model'
