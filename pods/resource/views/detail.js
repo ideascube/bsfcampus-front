@@ -35,6 +35,8 @@ define(
 			model: ResourceModel,
 
 			tagName: 'div',
+
+            id: 'resource-detail',
 			
 			template: _.template(detailTemplate),
             render: function() {
