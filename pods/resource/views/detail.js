@@ -8,6 +8,7 @@ define(
 		'pods/resource/model',
 		'pods/resource/collections/skill',
 		'pods/resource/collections/lesson',
+		'pods/resource/views/backToMainResourceNav',
 		'pods/resource/views/skillNav',
 		'text!pods/resource/templates/detail.html',
 
@@ -23,7 +24,7 @@ define(
 		'less!pods/resource/style'
 	],
 	function($, _, Backbone, Config,
-		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, SkillNavView, detailTemplate,
+		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, BackToMainResourceNav, SkillNavView, detailTemplate,
 		ResourceContentModel, ResourceContentView, LessonOutlineItemView,
 		SkillModel,
 		LessonModel, LessonsSkillCollection
@@ -40,10 +41,26 @@ define(
 				var html = this.template({resource: this.model.forTemplate(), config: Config});
 				this.$el.html(html);
 
-				this.renderHierarchy();
-				this.renderContent();
-                this.renderAdditionalResources();
+                if (this.model.get('is_additional'))
+                {
+                    this.renderBackToMainResource();
+                    this.$el.find('#additional-resources-block').hide();
+                }
+                else
+                {
+                    this.renderHierarchy();
+                    this.renderAdditionalResources();
+                }
+                this.renderContent();
 			},
+
+            renderBackToMainResource: function() {
+                var parentResourceModel = new ResourceModel({data: this.model.get('parent_resource')}, {parse: true});
+                var backToMainResourceNav = new BackToMainResourceNav({model: parentResourceModel});
+                backToMainResourceNav.render();
+                this.$el.find('#skill-nav').html(backToMainResourceNav.$el);
+
+            },
 
 			renderHierarchy: function() {
 
