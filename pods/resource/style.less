@@ -80,41 +80,45 @@
 
     }
 
-    .lesson-outline {
+  }
 
-      border-bottom: 1px solid #DDD;
+}
 
-      a.media {
+.lesson-outline {
 
-        border: none;
-        border-radius: 0;
-        margin: 0;
-        padding: 10px 10px 10px 50px;
+  border-bottom: 1px solid #DDD;
 
-        img {
-          width: 42px;
-          height: 42px;
-          margin-right: 5px;
-        }
+  a.media.active {
+    background-color: #e0e0e0;
+    color: inherit;
+  }
 
-        .media-body {
-          padding: 10px;
-          vertical-align: middle;
-        }
+}
 
-        .media-body .media-heading {
-          font-size: 1.0em;
-          font-weight: 400;
-          color: #252525;
-        }
+.lesson-outline, #additional-resources {
 
-      }
+  a.media {
 
-      a.media.active {
-        background-color: #e0e0e0;
-        color: inherit;
-      }
+    border: none;
+    border-radius: 0;
+    margin: 0;
+    padding: 10px 10px 10px 50px;
 
+    img {
+      width: 42px;
+      height: 42px;
+      margin-right: 5px;
+    }
+
+    .media-body {
+      padding: 10px;
+      vertical-align: middle;
+    }
+
+    .media-body .media-heading {
+      font-size: 1.0em;
+      font-weight: 400;
+      color: #252525;
     }
 
   }
@@ -143,6 +147,12 @@
       margin-bottom: 30px;
     }
 
+    h2 {
+      font-size: 1.2em;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
     p {
       margin: 30px 0px 30px 0px;
       font-size: 0.85em;
@@ -152,6 +162,12 @@
 
     hr {
       border-width: 2px;
+    }
+
+    #additional-resources {
+      a.list-group-item {
+        border: none;
+      }
     }
 
   }

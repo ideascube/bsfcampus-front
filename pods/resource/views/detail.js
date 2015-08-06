@@ -13,6 +13,7 @@ define(
 
 		'pods/resource/content/model',
 		'pods/resource/content/view',
+        'pods/resource/views/lessonOutlineItem',
 
 		'pods/skill/model',
 
@@ -23,7 +24,7 @@ define(
 	],
 	function($, _, Backbone, Config,
 		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, SkillNavView, detailTemplate,
-		ResourceContentModel, ResourceContentView,
+		ResourceContentModel, ResourceContentView, LessonOutlineItemView,
 		SkillModel,
 		LessonModel, LessonsSkillCollection
 		) {
@@ -35,13 +36,13 @@ define(
 			tagName: 'div',
 			
 			template: _.template(detailTemplate),
-
-			render: function() {
-				var html = this.template({resource: this.model.forTemplate()});
+            render: function() {
+				var html = this.template({resource: this.model.forTemplate(), config: Config});
 				this.$el.html(html);
 
 				this.renderHierarchy();
 				this.renderContent();
+                this.renderAdditionalResources();
 			},
 
 			renderHierarchy: function() {
@@ -87,7 +88,29 @@ define(
 				contentView.render();
 				this.$el.find('#resource-content').html(contentView.$el);
 
-			}
+			},
+
+            renderAdditionalResources: function () {
+                var additionalResourcesRefs = this.model.get('additional_resources_refs');
+
+                if (additionalResourcesRefs.length > 0)
+                {
+                    this.$el.find('#additional-resources-block').show();
+                    this.$el.find('#additional-resources').empty();
+                    _.each(additionalResourcesRefs, this.renderSingleAdditionalResource, this);
+                }
+                else
+                {
+                    this.$el.find('#additional-resources-block').hide();
+                }
+            },
+
+            renderSingleAdditionalResource: function(additionalResource) {
+                var additionalResourceModel = new ResourceModel({data: additionalResource}, {parse: true});
+                var additionalResourcesView = new LessonOutlineItemView({model: additionalResourceModel});
+                additionalResourcesView.render();
+                this.$el.find('#additional-resources').append(additionalResourcesView.$el);
+            }
 
 		});
 		

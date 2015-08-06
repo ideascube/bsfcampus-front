@@ -17,6 +17,7 @@ define([],
             SKILL_TEST_VALIDATED: 'Compétence Validée',
             SKILL_TEST_VALIDATION_ALLOWED: 'Passer le test de compétence',
             DOWNLOAD_FILE: 'Télécharger le fichier',
+            ADDITIONAL_RESOURCES: 'Ressources complémentaires',
 
             EXERCISES: {
                 CHECK_RIGHT_ANSWERS: 'Cochez la ou les bonne(s) réponse(s)',
