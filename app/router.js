@@ -426,9 +426,14 @@ define(
                             // Redirect the to the login page.
                             console.log("error 401 detected");
                             console.log(Backbone.history.getFragment());
+                            currentUser.logOut();
                             if (Backbone.history.getFragment() != '')
                             {
                                 Backbone.history.loadUrl("/login/redirect");
+                            }
+                            else
+                            {
+                                Backbone.history.loadUrl('', {trigger: true, replace: true});
                             }
                         }
                     }
@@ -439,7 +444,7 @@ define(
                         function(result) {
                             console.log('current user has been fetched');
                         }, function(err) {
-                            currentUser.logOut();
+                            console.log("current user doesn't exist");
                         }
                     );
                 }
