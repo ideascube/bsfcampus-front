@@ -244,6 +244,7 @@ define(
                 logoutAnalytics.title = currentUser.get('username');
                 logoutAnalytics.save();
                 currentUser.logOut();
+                DS.reset();
                 Backbone.history.navigate('', {trigger: true});
             },
 
@@ -427,6 +428,7 @@ define(
                             console.log("error 401 detected");
                             console.log(Backbone.history.getFragment());
                             currentUser.logOut();
+                            DS.reset();
                             if (Backbone.history.getFragment() != '')
                             {
                                 Backbone.history.loadUrl("/login/redirect");
