@@ -27,6 +27,7 @@ define(
         'pods/home-connected/view',
         'pods/user/connection/views/register',
         'pods/user/connection/views/login',
+        'pods/user/connection/views/resetPassword',
         'pods/user/profile/views/profile',
         'pods/track/views/list',
         'pods/track/views/detail',
@@ -42,7 +43,7 @@ define(
     function ($, _, Backbone, VM, DS, Config,
               currentUser, UserCollection, MiscAnalyticsModel, TrackCollection, TrackModel, SkillCollection, SkillModel,
               LessonCollection, LessonModel, ResourceCollection, ResourceModel, StaticPageCollection, StaticPageModel,
-              AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, UserProfileView,
+              AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, ResetPasswordView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView, ResourceDetailView,
               ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView
               ) {
@@ -143,6 +144,7 @@ define(
                 'login': 'login',
                 'login/redirect': 'loginRedirect',
                 'logout': 'logout',
+                'reset_password': 'resetPassword',
                 'user/profile': 'userProfile',
                 'user/profile/:page': 'userProfile',
 
@@ -245,6 +247,20 @@ define(
                 logoutAnalytics.save();
                 currentUser.logOut();
                 Backbone.history.navigate('', {trigger: true});
+            },
+
+            resetPassword: function() {
+                this.clearModal();
+                var self = this;
+                this.$modal.on('hidden.bs.modal', function() {
+                    var resetPasswordView = new ResetPasswordView({
+                        el: self.$modalDialog
+                    });
+                    resetPasswordView.render();
+                    self.$modal.on('shown.bs.modal', function() {
+                        resetPasswordView.$('form input#email').focus();
+                    }).modal('show');
+                });
             },
 
             userProfile: function (page) {
