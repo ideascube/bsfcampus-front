@@ -55,6 +55,12 @@ define(['config'],
 				ACCEPT_CGU: 6
 			},
 
+			resetPasswordErrorsCode: {
+				LOCAL_SERVER: 1,
+				INVALID_EMAIL_ADDRESS: 2,
+				INVALID_USERNAME: 3
+			},
+
             changePasswordErrorsCode: {
                 INVALID_CURRENT_PASSWORD: 1,
                 INVALID_NEW_PASSWORD: 2,

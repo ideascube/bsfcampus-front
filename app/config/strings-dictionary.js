@@ -144,6 +144,14 @@ define([],
                     ACCEPT_CGU: "vous devez accepter les Conditions générales d'utilisation",
                     DEFAULT_ERROR: "une erreur est survenue lors de l'inscription"
                 },
+                RESET_PASSWORD: 'Réinitialiser le mot de passe',
+                RESET_PASSWORD_MESSAGE: {
+                    PASSWORD_SENT: "Un nouveau mot de passe a été envoyé par email",
+                    LOCAL_SERVER: "Il faut se connecter à la plateforme centrale pour réinitialiser le mot de passe",
+                    INVALID_EMAIL_ADDRESS: "Aucun utilisateur trouvé avec cette adresse email",
+                    INVALID_USERNAME: "L'identifiant ne correspond pas à l'adresse email",
+                    DEFAULT_ERROR: "Une erreur est survenue"
+                },
                 PROFILE: {
                     MENU: {
                         DASHBOARD: "Mon tableau de bord",
