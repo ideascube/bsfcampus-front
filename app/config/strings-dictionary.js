@@ -34,7 +34,7 @@ define([],
                 SUCCESS_MESSAGE: 'Vous pouvez désormais passer à un nouveau contenu et parfaire votre apprentissage.<br>Bonne continuation !',
                 FAILURE_MESSAGE_HEADER: 'Dommage !',
                 FAILURE_MESSAGE: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ? Renforcez vos connaissances en consultant la ressource suivante.',
-                OBJECTIVE_MESSAGE: '<i><b>Objectif : </b>Réussir au moins [%NB_SUCCESS_MIN%] questions</i>'
+                OBJECTIVE_MESSAGE: '<em><strong>Objectif : </strong>Réussir au moins [%NB_SUCCESS_MIN%] questions</em>'
             },
 
             SKILL_VALIDATION: {
