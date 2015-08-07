@@ -188,6 +188,7 @@ define([],
                     TUTORING: {
                         SEARCH_USER_TITLE: "TUTORAT",
                         SEARCHED_USERNAME: "Trouver un tuteur ou un élève",
+                        SEARCHED_USERNAME_PLACEHOLDER: "Entrer l'identifiant exact",
                         SEARCH_BUTTON: "Rechercher",
                         TUTOR_BUTTON: "Tuteur",
                         STUDENT_BUTTON: "Elève",
