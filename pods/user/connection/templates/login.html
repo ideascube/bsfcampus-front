@@ -18,8 +18,10 @@
                 <%= config.stringsDict.USER.LOG_IN %>
             </button>
         </form>
+        <% if(config.constants.server_type == 'central') { %>
         <div class="text-center">
             <p class="help-block"><a href="#/reset_password" id="reset-password"><%= config.stringsDict.USER.PWD_FORGOTTEN %></a></p>
         </div>
+        <% } %>
     </div>
 </div>
