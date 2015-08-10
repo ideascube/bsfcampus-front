@@ -53,10 +53,12 @@ define(
             initialize: function() {
                 this.$modal = $('#modal');
                 this.$modalDialog = this.$modal.find('.modal-dialog');
-                this.initDataStore();
+                this.resetDataStore();
             },
 
-            initDataStore: function() {
+            resetDataStore: function() {
+                DS.reset();
+
                 // Static pages
                 DS.defineResource({
                     name: Config.constants.dsResourceNames.STATIC_PAGE,
@@ -194,7 +196,8 @@ define(
                 registerUserView.render();
                 var self = this;
                 this.listenTo(registerUserView, 'close', function() {
-                    self.returnFromAuthenticationPopup(registerUserView);
+                    var fragment = Backbone.history.getFragment();
+                    self.afterSuccessfulLogin(registerUserView, fragment);
                 });
                 this.$modal.on('shown.bs.modal', function() {
                     registerUserView.$('form input#full_name').focus();
@@ -209,7 +212,8 @@ define(
                 loginUserView.render();
                 var self = this;
                 this.listenTo(loginUserView, 'close', function() {
-                    self.returnFromAuthenticationPopup(loginUserView);
+                    var fragment = Backbone.history.getFragment();
+                    self.afterSuccessfulLogin(loginUserView, fragment);
                 });
                 this.$modal.on('shown.bs.modal', function() {
                     loginUserView.$('form input#username').focus();
@@ -225,19 +229,19 @@ define(
                 loginUserView.render();
                 this.listenTo(loginUserView, 'close', function () {
                     self.clearModal();
-                    Backbone.history.loadUrl(next);
+                    self.afterSuccessfulLogin(loginUserView, next);
                 });
                 this.$modal.on('shown.bs.modal', function() {
                     loginUserView.$('form input#username').focus();
                 }).modal('show');
             },
 
-            returnFromAuthenticationPopup: function (authView) {
-                console.log("returnFromAuthenticationPopup");
+            afterSuccessfulLogin: function (authView, nextFragment) {
+                console.log("afterSuccessfulLogin");
+                // TODO : after successfully logging/registering, load the resource-hierarchy light structure in DS
                 this.clearModal();
                 authView.undelegateEvents();
-                var fragment = Backbone.history.getFragment();
-                this.navigate(fragment, {trigger:true, replace:true});
+                this.navigate(nextFragment, {trigger:true, replace:true});
             },
 
             logout: function () {
@@ -428,6 +432,8 @@ define(
         return {
             initialize: function () {
 
+                var app_router = new AppRouter();
+
                 currentUser.findSession();
 
                 $(document).ajaxSend(function(event, jqxhr, settings) {
@@ -444,7 +450,7 @@ define(
                             console.log("error 401 detected");
                             console.log(Backbone.history.getFragment());
                             currentUser.logOut();
-                            DS.reset();
+                            app_router.resetDataStore();
                             if (Backbone.history.getFragment() != '')
                             {
                                 Backbone.history.loadUrl("/login/redirect");
@@ -467,7 +473,6 @@ define(
                     );
                 }
 
-                var app_router = new AppRouter();
                 app_router.renderHeader();
                 app_router.renderFooter();
                 Backbone.history.start();
