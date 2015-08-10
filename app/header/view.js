@@ -67,7 +67,7 @@ define(
                     url: Config.constants.serverGateway + "/tutoring/acknowledge/tutor/" + userId,
                     dataType: 'json'
                 }).then(
-                    function(result) {
+                    function(response) {
                         console.log("the notification has been successfully acknowledged");
                         currentUser.set(currentUser.parse(response));
                     }, function(error) {
