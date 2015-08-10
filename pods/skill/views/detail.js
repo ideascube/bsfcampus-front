@@ -62,10 +62,15 @@ define(
 					self.$el.find('#track-title').html(backToTrackView.$el);
                 });
 
-                var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSON, function(model) {
-                    return model.get('skill')._id === self.model.id;
+                var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSON, function(lessonModel) {
+                    return _.some(skillModel.lessons, function (lesson) {
+                        return lesson._id == lessonModel.id;
+                    })
                 });
-                if (lessonsCollection.length > 0)
+                var areLessonsIncomplete = _.some(lessonsCollection.models, function(lessonModel) {
+                    return DS.isIncomplete(Config.constants.dsResourceNames.LESSON, lessonModel.id);
+                });
+                if (!areLessonsIncomplete && lessonsCollection.length > 0)
                 {
                     this.renderLessons(lessonsCollection);
                 }

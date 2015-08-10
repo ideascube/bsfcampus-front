@@ -7,6 +7,9 @@ define(
         'ds',
         'app/config',
 
+        'collection',
+        'model',
+
         'pods/user/models/current',
         'pods/user/collections/user',
         'app/misc-analytic-model',
@@ -41,6 +44,7 @@ define(
         'less!app/styles/common'
     ],
     function ($, _, Backbone, VM, DS, Config,
+              AbstractCollection, AbstractModel,
               currentUser, UserCollection, MiscAnalyticsModel, TrackCollection, TrackModel, SkillCollection, SkillModel,
               LessonCollection, LessonModel, ResourceCollection, ResourceModel, StaticPageCollection, StaticPageModel,
               AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, ResetPasswordView, UserProfileView,
@@ -103,6 +107,51 @@ define(
                     idAttribute: '_id',
                     collection: UserCollection
                 });
+            },
+
+            getDataStoreSkeletonData: function () {
+                var self = this;
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    url: Config.constants.serverGateway + "/hierarchy",
+                    dataType: 'json'
+                }).done(function (response) {
+                    console.log("the hierarchy skeleton has been returned");
+                    console.log(JSON.stringify(response.data));
+
+                    self.initDataStoreSkeletonContent(response.data);
+                }).fail(function (error) {
+                    console.log("the hierarchy skeleton could not be gotten:", error);
+
+                });
+            },
+
+            getCollectionFromJSONData: function (data) {
+                var models = [];
+                _.each(data, function (modelData) {
+                    var model = new AbstractModel({data: modelData}, {parse: true});
+                    models.push(model);
+                });
+                return new AbstractCollection(models);
+            },
+
+            initDataStoreSkeletonContent: function(data) {
+                // init the values of all
+                var tracksCollectionSON = this.getCollectionFromJSONData(data).toJSON();
+                DS.inject(Config.constants.dsResourceNames.TRACK, tracksCollectionSON, {incomplete: true});
+
+                var skillsCollectionSON = _.flatten(_.pluck(tracksCollectionSON, 'skills'));
+                DS.inject(Config.constants.dsResourceNames.SKILL, skillsCollectionSON, {incomplete: true});
+
+                var lessonsCollectionSON = _.flatten(_.pluck(skillsCollectionSON, 'lessons'));
+                DS.inject(Config.constants.dsResourceNames.LESSON, lessonsCollectionSON, {incomplete: true});
+
+                var resourcesCollectionSON = _.flatten(_.pluck(lessonsCollectionSON, 'resources'));
+                DS.inject(Config.constants.dsResourceNames.RESOURCE, resourcesCollectionSON, {incomplete: true});
+
+                var additionalResourcesCollectionSON = _.flatten(_.pluck(resourcesCollectionSON, 'additional_resources'));
+                DS.inject(Config.constants.dsResourceNames.RESOURCE, additionalResourcesCollectionSON, {incomplete: true});
             },
 
             // Global views
@@ -238,9 +287,10 @@ define(
 
             afterSuccessfulLogin: function (authView, nextFragment) {
                 console.log("afterSuccessfulLogin");
-                // TODO : after successfully logging/registering, load the resource-hierarchy light structure in DS
                 this.clearModal();
                 authView.undelegateEvents();
+
+                this.getDataStoreSkeletonData();
                 this.navigate(nextFragment, {trigger:true, replace:true});
             },
 
@@ -467,6 +517,7 @@ define(
                     currentUser.fetch().then(
                         function(result) {
                             console.log('current user has been fetched');
+                            app_router.getDataStoreSkeletonData();
                         }, function(err) {
                             console.log("current user doesn't exist");
                         }

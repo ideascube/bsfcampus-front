@@ -110,7 +110,7 @@ define(
 			},
 
             renderAdditionalResources: function () {
-                var additionalResourcesRefs = this.model.get('additional_resources_refs');
+                var additionalResourcesRefs = this.model.get('additional_resources');
 
                 if (additionalResourcesRefs.length > 0)
                 {

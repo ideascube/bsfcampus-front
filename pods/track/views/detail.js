@@ -62,12 +62,17 @@ define(
                     this.$el.find(".btn-validate-track").hide();
                 }
 
-				var self = this;
+                var self = this;
 
-                var skillsCollection = DS.filter(Config.constants.dsResourceNames.SKILL, function(model) {
-                    return model.get('track')._id === self.model.id;
+                var skillsCollection = DS.filter(Config.constants.dsResourceNames.SKILL, function(skillModel) {
+                    return _.some(trackModel.skills, function (skill) {
+                        return skill._id == skillModel.id;
+                    })
                 });
-                if (skillsCollection.length > 0)
+                var areSkillsIncomplete = _.some(skillsCollection.models, function(skillModel) {
+                    return DS.isIncomplete(Config.constants.dsResourceNames.SKILL, skillModel.id);
+                });
+                if (!areSkillsIncomplete && skillsCollection.length > 0)
                 {
                     this.renderSkills(skillsCollection);
                 }

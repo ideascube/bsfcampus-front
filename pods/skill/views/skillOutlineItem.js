@@ -29,22 +29,22 @@ define(
 			template: _.template(skillOutlineItemTemplate),
 
             render: function() {
-				var html = this.template({lesson: this.model.forTemplate()});
+                var lessonModel = this.model.forTemplate();
+                var html = this.template({lesson: lessonModel});
 				this.$el.html(html);
 				
 				var self = this;
 
-                var resourcesCollection = DS.filter(Config.constants.dsResourceNames.RESOURCE, function(model) {
-                    if (model.get('parent')._cls == 'Lesson')
-                    {
-                        return model.get('parent')._id === self.model.id;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                var resourcesCollection = DS.filter(Config.constants.dsResourceNames.RESOURCE, function(resourceModel) {
+                    return _.some(lessonModel.resources, function (resource) {
+                        return resource._id == resourceModel.id;
+                    });
                 });
-                if (resourcesCollection.length > 0)
+                var areResourcesIncomplete = _.some(resourcesCollection.models, function(resourceModel) {
+                    return DS.isIncomplete(Config.constants.dsResourceNames.RESOURCE, resourceModel.id);
+                });
+
+                if (!areResourcesIncomplete && resourcesCollection.length > 0)
                 {
                     this.renderResources(resourcesCollection);
                 }
