@@ -21,10 +21,8 @@ define(
 		return Backbone.View.extend({
 
 			model: LessonModel,
-			
-			tagName: 'div',
-			
-			className: 'lesson clearfix',
+
+			className: 'lesson list-group-item container-fluid',
 
 			template: _.template(skillOutlineItemTemplate),
 
@@ -62,14 +60,14 @@ define(
 			},
 
             renderResources: function (resourcesCollection) {
-                this.$el.find('.lesson-outline').html('');
+                this.$('.lesson-outline').empty();
                 _.each(resourcesCollection.models, this.renderResource, this);
             },
 
             renderResource: function(resource) {
 				var lessonOutlineItemView = new LessonOutlineItemView({model: resource});
 				lessonOutlineItemView.render();
-				this.$el.find('.lesson-outline').append(lessonOutlineItemView.$el);
+				this.$('.lesson-outline').append(lessonOutlineItemView.$el);
 			
 				return this;
 			},

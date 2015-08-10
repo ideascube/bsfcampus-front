@@ -29,7 +29,7 @@ define(
             render: function() {
                 $("body").removeAttr("style");
                 this.$el.html(this.template({searchedString: this.searchedString, config: Config}));
-                this.$el.find('#search-results').html('');
+                this.$('#search-results').empty();
                 _.each(this.results, this.renderResult, this);
 
                 return this.$el;
@@ -47,7 +47,7 @@ define(
                     $breadcrumb.append('<li>' + breadcrumbArray[i].title + '</li>');
                 }
                 $breadcrumb.append('<li class="active">' + breadcrumbArray[i].title + '</li>');
-                this.$el.find('#search-results').append($result);
+                this.$('#search-results').append($result);
                 console.log(this.$el.html());
             }
 

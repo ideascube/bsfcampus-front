@@ -34,11 +34,11 @@ define(
 				
 				if (this.model.questionModel().get('question_image_url') != null)
 				{
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+					this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
 				}
 				else
 				{
-					this.$el.find('.question-image-media').hide();
+					this.$('.question-image-media').hide();
 				}
 
 				var text = this.model.questionModel().get('text');
@@ -49,7 +49,7 @@ define(
 				dropdownHtmlText = '';
 				for (var i=0; i < splittedText.length; i++)
 				{
-					this.$el.find('.dropdowns-feedback').append(splittedText[i]);
+					this.$('.dropdowns-feedback').append(splittedText[i]);
 					if (i < splittedText.length-1)
 					{
 						// We add the dropdown here
@@ -71,11 +71,11 @@ define(
 						{
 							$dropdown.addClass('wrong-answer');
 						}
-						this.$el.find('.dropdowns-feedback').append($dropdown);
+						this.$('.dropdowns-feedback').append($dropdown);
 					}
 				}
 
-				var answerExplanationEl = this.$el.find('.answer-explanation');
+				var answerExplanationEl = this.$('.answer-explanation');
 				if (this.model.get('is_answered_correctly') === true)
 				{
 					answerExplanationEl.addClass('right-answer');
@@ -91,7 +91,7 @@ define(
 				}
 				else
 				{
-					answerExplanationEl.html('');
+					answerExplanationEl.empty();
 				}
 
 				return this;
@@ -107,7 +107,7 @@ define(
 				if (proposition.is_correct_answer) {
 					$proposition.addClass('proposition_correct');
 				}
-				this.$el.find('.dropdowns-propositions').append($proposition);
+				this.$('.dropdowns-propositions').append($proposition);
 			},
 
 		});

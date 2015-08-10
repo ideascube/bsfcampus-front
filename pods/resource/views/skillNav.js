@@ -8,26 +8,22 @@ define(
 		'pods/resource/model',
 		'pods/resource/collections/lesson',
 		'pods/resource/views/skillOutlineItem',
-		'pods/resource/views/back-to-skill',
+		'pods/resource/views/backToSkill',
 		'text!pods/resource/templates/skill-nav.html',
 
-		'pods/skill/model',
-
-		'pods/lesson/model',
-		'pods/lesson/collections/skill',
+		'pods/skill/model'
 		
 	],
 	function($, _, Backbone, Config,
 		ResourceModel, ResourcesLessonCollection, SkillOutlineItemView, BackToSkillView, skillNavTemplate,
-		SkillModel,
-		LessonModel, LessonsSkillCollection
+		SkillModel
 		) {
 
 		return Backbone.View.extend({
 
 			model: SkillModel,
 
-			tagName: 'div',
+			className: 'panel panel-default',
 			
 			template: _.template(skillNavTemplate),
 
@@ -37,8 +33,9 @@ define(
 					
 				var backToSkillView = new BackToSkillView({model: this.model});
 				backToSkillView.render();
-				this.$el.find('#resource-skill-title').html(backToSkillView.$el);
+				this.$('#resource-skill-title').html(backToSkillView.$el);
 
+				this.$('#resource-hierarchy-accordion').empty();
 				_.each(this.model.get('lessons').models, this.renderSingleLesson, this);
 
 				return this;
@@ -48,10 +45,10 @@ define(
 				var itemView = new SkillOutlineItemView({model: lesson});
 				itemView.currentResource = this.currentResource;
 				itemView.render();
-				this.$el.find('#resource-skill-outline').append(itemView.$el);
+				this.$('#resource-hierarchy-accordion').append(itemView.$el);
 			
 				return this;
-			},
+			}
 
 		});
 		

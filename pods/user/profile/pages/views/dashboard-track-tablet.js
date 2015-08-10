@@ -14,6 +14,14 @@ define(
 
             tagName: 'li',
 
+            className: 'track',
+
+            attributes: function () {
+                return {
+                    'data-track': this.model.id
+                }
+            },
+
             template: _.template(trackItemTemplate),
 
             generateAnalyticsObject: function (modelSON) {

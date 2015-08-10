@@ -34,19 +34,21 @@ define(
 
 			model: ResourceModel,
 
-			tagName: 'div',
-
-            id: 'resource-detail',
+			className: 'resource-detail row gutter-sm',
 			
 			template: _.template(detailTemplate),
+
             render: function() {
-				var html = this.template({resource: this.model.forTemplate(), config: Config});
+				var html = this.template({
+					resource: this.model.forTemplate(),
+					config: Config
+				});
 				this.$el.html(html);
 
                 if (this.model.get('is_additional'))
                 {
                     this.renderBackToMainResource();
-                    this.$el.find('#additional-resources-block').hide();
+                    this.$('#additional-resources-block').hide();
                 }
                 else
                 {
@@ -60,7 +62,7 @@ define(
                 var parentResourceModel = new ResourceModel({data: this.model.get('parent_resource')}, {parse: true});
                 var backToMainResourceNav = new BackToMainResourceNav({model: parentResourceModel});
                 backToMainResourceNav.render();
-                this.$el.find('#skill-nav').html(backToMainResourceNav.$el);
+                this.$('#skill-nav').html(backToMainResourceNav.$el);
 
             },
 
@@ -96,17 +98,17 @@ define(
 					var skillNavView = new SkillNavView({model: skillModel});
 					skillNavView.currentResource = self.model;
 					skillNavView.render();
-					self.$el.find('#skill-nav').html(skillNavView.$el);
+					self.$('#skill-nav').html(skillNavView.$el);
 				});
 
 			},
 
 			renderContent: function() {
-
-				var contentView = new ResourceContentView({model: this.model});
+				var contentView = new ResourceContentView({
+					model: this.model,
+					el: this.$('#resource-content')
+				});
 				contentView.render();
-				this.$el.find('#resource-content').html(contentView.$el);
-
 			},
 
             renderAdditionalResources: function () {
@@ -114,13 +116,13 @@ define(
 
                 if (additionalResourcesRefs.length > 0)
                 {
-                    this.$el.find('#additional-resources-block').show();
-                    this.$el.find('#additional-resources').empty();
+                    this.$('#additional-resources-block').show();
+                    this.$('#additional-resources').empty();
                     _.each(additionalResourcesRefs, this.renderSingleAdditionalResource, this);
                 }
                 else
                 {
-                    this.$el.find('#additional-resources-block').hide();
+                    this.$('#additional-resources-block').hide();
                 }
             },
 
@@ -128,7 +130,7 @@ define(
                 var additionalResourceModel = new ResourceModel({data: additionalResource}, {parse: true});
                 var additionalResourcesView = new LessonOutlineItemView({model: additionalResourceModel});
                 additionalResourcesView.render();
-                this.$el.find('#additional-resources').append(additionalResourcesView.$el);
+                this.$('#additional-resources').append(additionalResourcesView.$el);
             }
 
 		});

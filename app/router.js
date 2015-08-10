@@ -56,7 +56,6 @@ define(
 
             initialize: function() {
                 this.$modal = $('#modal');
-                this.$modalDialog = this.$modal.find('.modal-dialog');
                 this.resetDataStore();
             },
 
@@ -167,21 +166,21 @@ define(
             },
 
             clearHome: function () {
-                $('#home').html('');
+                $('#home').empty();
             },
 
             clearContainer: function () {
-                var $container = $('#container');
-                $container.show();
-                $container.html('');
+                var $main = $('#main');
+                $main.show();
+                $main.empty();
             },
 
             hideContainer: function () {
-                $('#container').hide();
+                $('#main').hide();
             },
 
             clearModal: function () {
-                this.$modalDialog.empty();
+                this.$modal.empty();
                 this.$modal.modal('hide');
                 $('body').removeClass('modal-open');
                 $('.modal-backdrop').remove();
@@ -223,16 +222,19 @@ define(
                 if (currentUser.isLoggedIn())
                 {
                     homeView = VM.createView(Config.constants.VIEWS_ID.CONNECTED_HOME, function() {
-                        return new ConnectedHomeView();
+                        return new ConnectedHomeView({
+                            el: $('#home')
+                        });
                     });
                 }
                 else {
                     homeView = VM.createView(Config.constants.VIEWS_ID.HOME, function () {
-                        return new HomeView();
+                        return new HomeView({
+                            el: $('#home')
+                        });
                     });
                 }
                 homeView.render();
-                $('#home').append(homeView.$el);
 
                 this.appHeaderView.updateHeaderButtonFocus('home');
             },
@@ -240,7 +242,7 @@ define(
             register: function () {
                 this.clearModal();
                 var registerUserView = new RegisterUserView({
-                    el: this.$modalDialog
+                    el: this.$modal
                 });
                 registerUserView.render();
                 var self = this;
@@ -254,9 +256,12 @@ define(
             },
 
             login: function () {
+                $('body').on('shown.bs.modal', function() {
+                    console.log('a');
+                });
                 this.clearModal();
                 var loginUserView = new LoginUserView({
-                    el: this.$modalDialog
+                    el: this.$modal
                 });
                 loginUserView.render();
                 var self = this;
@@ -273,7 +278,7 @@ define(
                 var self = this;
                 var next = Backbone.history.getFragment();
                 var loginUserView = new LoginUserView({
-                    el: this.$modalDialog
+                    el: this.$modal
                 });
                 loginUserView.render();
                 this.listenTo(loginUserView, 'close', function () {
@@ -309,7 +314,7 @@ define(
                 var self = this;
                 this.$modal.on('hidden.bs.modal', function() {
                     var resetPasswordView = new ResetPasswordView({
-                        el: self.$modalDialog
+                        el: self.$modal
                     });
                     resetPasswordView.render();
                     self.$modal.on('shown.bs.modal', function() {
@@ -332,7 +337,7 @@ define(
                     var userProfileView = new UserProfileView({model: currentUser});
                     userProfileView.page = page;
                     userProfileView.render();
-                    $('#container').append(userProfileView.$el);
+                    $('#main').append(userProfileView.$el);
 
                     self.appHeaderView.updateHeaderButtonFocus('user');
                 });
@@ -347,7 +352,7 @@ define(
 
                     var trackListView = new TrackListView({collection: collection});
                     trackListView.render();
-                    $('#container').append(trackListView.$el);
+                    $('#main').append(trackListView.$el);
                 });
 
                 this.appHeaderView.updateHeaderButtonFocus('hierarchy');
@@ -362,7 +367,7 @@ define(
 
                     var trackDetailView = new TrackDetailView({model: model});
                     trackDetailView.render();
-                    $('#container').append(trackDetailView.$el);
+                    $('#main').append(trackDetailView.$el);
                 });
             },
 
@@ -376,7 +381,7 @@ define(
 
                     var skillDetailView = new SkillDetailView({model: model});
                     skillDetailView.render();
-                    $('#container').append(skillDetailView.$el);
+                    $('#main').append(skillDetailView.$el);
                 });
             },
 
@@ -404,7 +409,7 @@ define(
 
                     var resourceDetailView = new ResourceDetailView({model: model});
                     resourceDetailView.render();
-                    $('#container').append(resourceDetailView.$el);
+                    $('#main').append(resourceDetailView.$el);
                 }, function (error) {
                     // error
                 });
@@ -413,7 +418,7 @@ define(
             renderResourceHierarchyBreadcrumb: function (breadcrumbModel) {
                 var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
                 breadcrumbView.render();
-                $('#container').append(breadcrumbView.$el);
+                $('#main').append(breadcrumbView.$el);
             },
 
             promptTrackValidation: function (track_id) {
@@ -423,7 +428,7 @@ define(
                 promptTrackValidationAnalytics.save();
                 this.clearModal();
                 var promptTrackValidationView = new PromptTrackValidationView({
-                    el: this.$modalDialog
+                    el: this.$modal
                 });
                 promptTrackValidationView.trackId = track_id;
                 promptTrackValidationView.render();
@@ -452,7 +457,7 @@ define(
                     var searchResultsView = new SearchResultsView();
                     searchResultsView.searchedString = searchedString;
                     searchResultsView.results = response.data;
-                    $('#container').append(searchResultsView.render());
+                    $('#main').append(searchResultsView.render());
                 }).then(
                     function(result) {
                         // nothing
@@ -470,7 +475,7 @@ define(
                 var staticPageView = new StaticPageView();
                 staticPageView.pageId = page_id;
 
-                $('#container').append(staticPageView.render());
+                $('#main').append(staticPageView.render());
             },
 
             getQueryParameters : function(str) {

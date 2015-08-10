@@ -16,9 +16,9 @@ define(
 
 		return Backbone.View.extend({
 
-			tagName: 'div',
-
 			id: 'track-list-container',
+
+			className: 'row',
 
 			template: _.template(listTemplate),
 
@@ -33,7 +33,7 @@ define(
 			renderTrack: function(track) {
 				var listItemView = new ListItemView({model: track});
 				listItemView.render();
-				this.$el.find('#track-list').append(listItemView.$el);
+				this.$('#track-list').append(listItemView.$el);
 				
 				return this;
 			}

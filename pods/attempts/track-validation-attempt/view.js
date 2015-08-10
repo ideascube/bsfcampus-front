@@ -39,7 +39,7 @@ define (
                 this.renderObjective();
                 this.renderFeedbackAndResult(questionId);
                 // we enable the continue button until we get the response
-                this.$el.find('.btn-continue').removeClass('disabled');
+                this.$('.btn-continue').removeClass('disabled');
             },
 
             renderEndOfExercise: function() {
@@ -49,8 +49,8 @@ define (
                     config: Config
                 });
 
-                this.$el.find('.modal-body').html(html);
-                var $exerciseRecap = this.$el.find('.modal-body .exercise-recap');
+                this.$('.modal-body').html(html);
+                var $exerciseRecap = this.$('.modal-body .exercise-recap');
                 $exerciseRecap.addClass("track-validation");
                 var $exerciseRecapDetails = $exerciseRecap.find('.recap-details');
                 if (recapModelJSON.number_mistakes <= recapModelJSON.max_mistakes)
@@ -91,7 +91,7 @@ define (
                 html = this.recapFooterTemplate({
                     config:Config
                 });
-                this.$el.find('.exercise-attempt-footer').html(html);
+                this.$('.exercise-attempt-footer').html(html);
 
             }
 

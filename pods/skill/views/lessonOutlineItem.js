@@ -18,9 +18,7 @@ define(
 
 			model: ResourceModel,
 			
-			tagName: 'div',
-			
-			className: 'resource clearfix',
+			className: 'resource row',
 
 			template: _.template(lessonOutlineItemTemplate),
 

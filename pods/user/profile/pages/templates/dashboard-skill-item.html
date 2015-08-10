@@ -1,13 +1,24 @@
-<div class="row">
-    <a href="<%= skill.route %>" class="skill media">
-        <div class="media-left media-middle">
-            <img src="<%= skill.icon_url %>" class="media-object <%= skill.validationClass %>"/>
+<div class="panel-heading skill">
+    <a href="<%= skill.route %>" class="media">
+        <div class="media-left media-top skill-icon">
+            <div class="skill-icon-wrapper">
+                <img src="<%= skill.icon_url %>" class="media-object img-responsive center-block"/>
+            </div>
         </div>
-        <div class="title media-body">
-            <h4 class="media-heading <%= skill.validationClass %>"><%= skill.title %><img src="<%= config.imagesDict.checkFull %>" class="circle check"></h4>
+        <div class="media-body">
+            <h4 class="media-heading skill-title">
+                <%= skill.title %>
+            </h4>
             <div class="progress">
-                <div class="progress-bar <%= skill.validationClass %>" role="progressbar" aria-valuenow="<%= skill.progress.current*100/skill.progress.max %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= skill.progress.current*100/skill.progress.max %>%;">
-                    <span class="sr-only"><%= skill.progress.current*100/skill.progress.max %>% <%= config.stringsDict.COMPLETED %></span>
+                <div class="progress-bar progress-bar-success"
+                     role="progressbar"
+                     aria-valuenow="<%= skill.progress.current*100/skill.progress.max %>"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width: <%= skill.progress.current*100/skill.progress.max %>%;">
+                    <span class="sr-only">
+                        <%= skill.progress.current*100/skill.progress.max %>% <%= config.stringsDict.COMPLETED %>
+                    </span>
                 </div>
             </div>
             <p><%= analytics.nbVisitsMessage %></p>
@@ -19,8 +30,5 @@
             <% } %>
         </div>
     </a>
-    <div class="dashboard-skill-resources">
-
-    </div>
-    <div class="link_border_bottom col-lg-10 col-lg-offset-1"></div>
 </div>
+<div class="list-group dashboard-skill-resources"></div>

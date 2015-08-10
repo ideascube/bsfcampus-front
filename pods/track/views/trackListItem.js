@@ -6,7 +6,7 @@ define(
 		'app/config',
 
 		'pods/track/model',
-		'text!pods/track/templates/list-item.html',
+		'text!pods/track/templates/list-item.html'
 	],
 	function($, _, Backbone, Config,
 		TrackModel, listItemTemplate
@@ -16,33 +16,32 @@ define(
 
 			model: TrackModel,
 
-			tagName: 'div',
-
-			id: function() {
-				return 'track-' + this.model.id;
-			},
+			className: 'col-sm-6',
 
 			template: _.template(listItemTemplate),
 
 			render: function() {
                 var trackSon = this.model.forTemplate();
-                var trackStatusClass = '';
-                var btnText = Config.stringsDict.START_TRACK;
-                if (trackSon.is_validated)
-                {
-                    trackStatusClass = 'validated';
-                    btnText = Config.stringsDict.TRACK_VALIDATED;
-                }
-                else if (trackSon.is_started)
-                {
-                    trackStatusClass = 'started';
-                    btnText = Config.stringsDict.RESUME_TRACK;
-                }
-				var html = this.template({track: trackSon, trackStatusClass: trackStatusClass, btnText: btnText, config: Config});
+				var html = this.template({
+					track: this.model.forTemplate(),
+					config: Config
+				});
 				this.$el.html(html);
-				
+
+				if (this.model.get('is_validated'))
+				{
+					this.$('.track-thumbnail').addClass('track-validated panel-info');
+					this.$('.track-thumbnail .panel-heading').addClass('golden-effect');
+					this.$('.track-thumbnail .btn-start').removeClass('btn-bordered').addClass('btn-info golden-effect');
+				}
+				else if (this.model.get('is_started'))
+				{
+					this.$('.track-thumbnail').addClass('track-started panel-primary');
+					this.$('.track-thumbnail .btn-start').removeClass('btn-bordered').addClass('btn-primary');
+				}
+
 				return this;
-			},
+			}
 
 		});
 		

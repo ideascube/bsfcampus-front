@@ -8,39 +8,41 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="#/" class="navbar-brand"><img src="<%= config.imagesDict.logo_bsf_campus %>"></a>
+			<a href="#/" class="navbar-brand"><img src="<%= config.imagesDict.logo_bsf_campus %>" /></a>
 		</div>
-
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="<%= config.stringsDict.HEADER.SEARCH_FIELD_DEFAULT %>">
-            </div>
-            <button type="submit" class="btn btn-default"><%= config.stringsDict.HEADER.SEARCH_BUTTON_LABEL %></button>
-        </form>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav pull-right">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="<%= config.stringsDict.HEADER.SEARCH_FIELD_DEFAULT %>">
+                </div>
+                <button type="submit" class="btn btn-default">
+                    <%= config.stringsDict.HEADER.SEARCH_BUTTON_LABEL %>
+                </button>
+            </form>
+
+			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#/" id="navbar-home-btn"><%= config.stringsDict.HEADER.HOME_PAGE %></a></li>
 				<li><a href="#/track" id="navbar-tracks-btn"><%= config.stringsDict.HEADER.ALL_TRACKS %></a></li>
 				<% if (currentUser.id == null) { %>
                 <li><a href="#/login" id="navbar-login-btn"><%= config.stringsDict.HEADER.LOGIN %></a></li>
 				<% } else { %>
-                <li class="dropdown">
+                <li class="dropdown" id="dropdown-user">
                     <a href="#"  id="navbar-user-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= currentUser.full_name %> <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="navbar-user-btn">
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="navbar-user-btn">
                         <li><a href="#/user/profile"><%= config.stringsDict.HEADER.USER %></a></li>
+                        <li class="divider"></li>
                         <li><a href="#/logout"><%= config.stringsDict.HEADER.LOG_OUT %></a></li>
                     </ul>
                 </li>
                 <% if (currentUser.awaiting_tutor_requests.length > 0 || currentUser.awaiting_student_requests.length > 0 || currentUser.not_acknowledged_tutors.length > 0 || currentUser.not_acknowledged_students.length > 0) { %>
-                <li class="dropdown dropdown-notifications">
-                    <a href="#"  id="navbar-notifications-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <img class="notification-icon" src="<%= config.imagesDict.bell %>">
-                        <img class="notification-icon-open" src="<%= config.imagesDict.bellRed %>">
-                        <div class="notification-count"><%= (currentUser.awaiting_tutor_requests.length + currentUser.awaiting_student_requests.length + currentUser.not_acknowledged_tutors.length + currentUser.not_acknowledged_students.length) %></div>
+                <li class="dropdown" id="dropdown-notifications">
+                    <a href="" id="navbar-notifications-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="glyphicon glyphicon-bell" id="bell-icon"></span>
+                        <span class="badge badge-notifications-count"><%= (currentUser.awaiting_tutor_requests.length + currentUser.awaiting_student_requests.length + currentUser.not_acknowledged_tutors.length + currentUser.not_acknowledged_students.length) %></span>
                     </a>
-                    <ul id="notifications-list" class="dropdown-menu" role="menu" aria-labelledby="navbar-notifications-btn">
+                    <ul id="notifications-list" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="navbar-notifications-btn">
                         Loading notifications...
                     </ul>
                 </li>

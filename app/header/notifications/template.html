@@ -1,16 +1,28 @@
-<% if (isAcknowledgeNotification) { %>
+<div class="container-fluid">
+    <% if (isAcknowledgeNotification) { %>
     <% if (isTutorRequest) { %>
     <p><%= user.full_name %><%= config.stringsDict.HEADER.NOTIFICATIONS.ACKNOWLEDGE_TUTOR_MESSAGE%></p>
     <% } else { %>
     <p><%= user.full_name %><%= config.stringsDict.HEADER.NOTIFICATIONS.ACKNOWLEDGE_STUDENT_MESSAGE  %></p>
     <% } %>
-    <button class="btn acknowledge col-xs-offset-4 col-xs-4"><%= config.stringsDict.HEADER.NOTIFICATIONS.ACKNOWLEDGE %></button>
-<% } else { %>
+    <div class="row">
+        <div class="col-xs-offset-4 col-xs-4">
+            <button class="btn btn-primary border-radius-lg btn-acknowledge"><%= config.stringsDict.HEADER.NOTIFICATIONS.ACKNOWLEDGE %></button>
+        </div>
+    </div>
+    <% } else { %>
     <% if (isTutorRequest) { %>
     <p><%= user.full_name %><%= config.stringsDict.HEADER.NOTIFICATIONS.TUTORED_STUDENT_REQUEST_MESSAGE%></p>
     <% } else { %>
     <p><%= user.full_name %><%= config.stringsDict.HEADER.NOTIFICATIONS.TUTOR_REQUEST_MESSAGE  %></p>
     <% } %>
-    <button class="btn accept col-xs-offset-1 col-xs-4"><%= config.stringsDict.HEADER.NOTIFICATIONS.ACCEPT %></button>
-    <button class="btn decline col-xs-offset-2 col-xs-4"><%= config.stringsDict.HEADER.NOTIFICATIONS.DECLINE %></button>
-<% } %>
+    <div class="row">
+        <div class="col-xs-offset-1 col-xs-4">
+            <button class="btn btn-block btn-primary border-radius-lg btn-accept"><%= config.stringsDict.HEADER.NOTIFICATIONS.ACCEPT %></button>
+        </div>
+        <div class="col-xs-offset-2 col-xs-4">
+            <button class="btn btn-block btn-default border-radius-lg btn-decline"><%= config.stringsDict.HEADER.NOTIFICATIONS.DECLINE %></button>
+        </div>
+    </div>
+    <% } %>
+</div>

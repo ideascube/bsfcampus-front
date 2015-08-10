@@ -1,8 +1,6 @@
-<div  id="resource-audio-player">
-	<h1><%= resource.title %></h1>
-
+<div class="resource-audio-player">
 	<% if (resource.resource_content.image_url != undefined) { %>
-		<img src="<%= resource.resource_content.image_url %>">
+		<img src="<%= resource.resource_content.image_url %>" class="img-responsive">
 	<% } %>
 	<audio controls="controls" src="<%= resource.resource_content.content_file_url %>">
 	    Your browser does not support the HTML5 Audio element.

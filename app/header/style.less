@@ -1,0 +1,45 @@
+#navbar {
+    border: none;
+    margin-bottom: 0;
+    box-shadow: 0 4px 3px #a8a8a8;
+    li a {
+        font-weight: 600;
+        &.focus {
+            border-bottom: 2px solid #e74c3c;
+        }
+    }
+    .navbar-brand {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        img {
+            height: 100%;
+        }
+    }
+
+    .dropdown-menu {
+        border : none;
+        li a {
+            font-weight: 600;
+        }
+    }
+
+    #dropdown-notifications {
+        #bell-icon {
+            font-size: 16px;
+        }
+        .badge-notifications-count {
+            margin-top: -.5em;
+            background-color: #e74c3c;
+        }
+        #notifications-list {
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            max-height: 175px;
+            overflow-y: auto;
+            width: 400px;
+            .notification {
+                padding: 10px 0;
+            }
+        }
+    }
+}

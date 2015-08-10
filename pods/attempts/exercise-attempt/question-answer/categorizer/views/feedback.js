@@ -34,11 +34,11 @@ define(
 				this.$el.html(html);
 
 				if (this.model.questionModel().get('question_image_url') != null) {
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+					this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
                 }
                 else
                 {
-                    this.$el.find('.question-image-media').hide();
+                    this.$('.question-image-media').hide();
                 }
 
 				var correctAnswerCategories = this.model.questionModel().get('categories');
@@ -116,11 +116,11 @@ define(
                     var answeredItem = _.findWhere(allItems, {_id: itemId});
                     var parentCorrectCategoryId = this.getCorrectCategoryIdByItemId(itemId);
                     var isItemFailed = (parentCorrectCategoryId != answeredCategory._id);
-                    $item = this.renderItem(answeredItem, isItemFailed);
+                    var $item = this.renderItem(answeredItem, isItemFailed);
                     $category.find(".categorizer-category-items").append($item);
                 }
 
-                this.$el.find("#categorizer-groups").append($category);
+                this.$("#categorizer-groups").append($category);
 			},
 
 			renderItem: function(item, isFailed) {
@@ -140,7 +140,7 @@ define(
 
             renderCorrectAnswerItem: function(item) {
 				var $html = $(this.categorizerItemTemplate({item: item}));
-				this.$el.find("#categorizer-items-answer-feedback").append($html);
+				this.$("#categorizer-items-answer-feedback").append($html);
 			}
 
 		});

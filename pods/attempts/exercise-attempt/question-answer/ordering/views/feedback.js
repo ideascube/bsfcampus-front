@@ -33,11 +33,11 @@ define(
 
 				if (this.model.questionModel().get('question_image_url') != null)
 				{
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+					this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
 				}
 				else
 				{
-					this.$el.find('.question-image-media').hide();
+					this.$('.question-image-media').hide();
 				}
 
 				correctAnswerItems = this.model.questionModel().get('items');
@@ -77,12 +77,12 @@ define(
 				{
 					$html.addClass('right-answer');
 				}
-				this.$el.find("#ordering-items-target-feedback").append($html);
+				this.$("#ordering-items-target-feedback").append($html);
 			},
 
             renderCorrectAnswerItem: function(item) {
 				var $html = $(this.orderingTemplate({item: item}));
-				this.$el.find("#ordering-items-answer-feedback").append($html);
+				this.$("#ordering-items-answer-feedback").append($html);
 			}
 
 		});

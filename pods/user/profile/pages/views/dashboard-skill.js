@@ -9,55 +9,66 @@ define(
 
         'pods/resource/views/lessonOutlineItem',
 
-        'text!pods/user/profile/pages/templates/dashboard-skill-item.html'
+        'text!pods/user/profile/pages/templates/dashboard-skill-item.html',
+        'text!pods/skill/templates/validation-badge.html'
     ],
     function ($, _, Backbone, Config,
               ResourceModel,
               DashboardSkillResourceItemView,
-              skillItemTemplate) {
+              skillItemTemplate, badgeHTML) {
 
         return Backbone.View.extend({
 
-            tagName: 'div',
+            className: 'panel panel-default skill-resources-block',
 
             template: _.template(skillItemTemplate),
 
-            generateAnalyticsObject: function (modelSON) {
+            analytics: function () {
+                var analytics = this.model.get('analytics');
                 var averageTime = null;
-                if (modelSON.analytics.average_time_on_exercise > 0)
+                if (analytics.average_time_on_exercise > 0)
                 {
-                    averageTime = this.durationToMMSS(modelSON.analytics.average_time_on_exercise);
+                    averageTime = this.durationToMMSS(analytics.average_time_on_exercise);
                 }
-                var lastAttempt = (modelSON.analytics.last_attempts_scores.length > 0) ? modelSON.analytics.last_attempts_scores[0] : null;
-                var analytics = {
-                    nbVisitsMessage: Config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.NB_VISITS.replace("[%NB_VISIT%]", modelSON.analytics.nb_visit),
+                var lastAttempt = (analytics.last_attempts_scores.length > 0)
+                    ? analytics.last_attempts_scores[0]
+                    : null;
+                return {
+                    nbVisitsMessage: Config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.NB_VISITS.replace("[%NB_VISIT%]", analytics.nb_visit),
                     lastAttempt: lastAttempt,
                     averageTime: averageTime
                 };
-                return analytics;
             },
 
             render: function () {
-                var modelSON = this.model.forTemplate();
-                modelSON.validationClass = (modelSON.is_validated) ? "validated" : "";
-                var html = this.template({skill: modelSON,
-                    analytics: this.generateAnalyticsObject(modelSON),
+                var html = this.template({
+                    skill: this.model.forTemplate(),
+                    analytics: this.analytics(),
                     config: Config
                 });
                 this.$el.html(html);
 
-                var self = this;
+                if (this.model.get('is_validated')) {
+                    this.$el.addClass('skill-validated');
+                    this.$('.skill-title').append(badgeHTML);
+                    this.$('.progress-bar')
+                        .removeClass('progress-bar-success')
+                        .addClass('progress-bar-info golden-effect');
+                }
+
                 _.each(this.model.get('lessons'), function (lesson) {
-                    _.each(lesson.resources, self.renderResource, self);
-                });
+                    _.each(lesson.resources, this.renderResource, this);
+                }, this);
 
                 return this;
             },
 
             renderResource: function (resource) {
-                var skillResourceItemView = new DashboardSkillResourceItemView({model: new ResourceModel({data: resource}, {parse: true})});
+                var skillResourceItemView = new DashboardSkillResourceItemView({
+                    model: new ResourceModel({data: resource}, {parse: true})
+                });
                 skillResourceItemView.render();
-                this.$el.find('.dashboard-skill-resources').append(skillResourceItemView.$el);
+                this.$('.dashboard-skill-resources').append(skillResourceItemView.$el);
             },
 
             // This is a helper function to help display a duration (in seconds) in string format

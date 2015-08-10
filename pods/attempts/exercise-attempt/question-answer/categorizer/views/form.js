@@ -24,8 +24,6 @@ define(
 
             model: QuestionAnswerModel,
 
-            tagName: 'div',
-
             id: 'categorizer',
 
             template: _.template(formTemplate),
@@ -37,19 +35,19 @@ define(
                 this.$el.html(html);
 
                 if (this.model.questionModel().get('question_image_url') != null) {
-                    this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+                    this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
                 }
                 else
                 {
-                    this.$el.find('.question-image-media').hide();
+                    this.$('.question-image-media').hide();
                 }
 
                 _.each(this.model.questionModel().get('categories'), this.renderCategory, this);
 
                 _.each(this.model.questionModel().get('items'), this.renderItem, this);
 
-                self = this;
-                this.$el.find(".connectedSortable").sortable({
+                var self = this;
+                this.$(".connectedSortable").sortable({
                     connectWith: ".connectedSortable",
                     placeholder: "item-draggable-placeholder",
                     receive: function (event, ui) {
@@ -62,12 +60,12 @@ define(
 
             renderCategory: function (category) {
                 var html = this.categorizerCategoryTemplate({category: category});
-                this.$el.find("#categorizer-groups").append(html);
+                this.$("#categorizer-groups").append(html);
             },
 
             renderItem: function (item) {
                 var html = this.categorizerItemTemplate({item: item});
-                this.$el.find("#categorizer-items-source").append(html);
+                this.$("#categorizer-items-source").append(html);
             },
 
             serializeForm: function () {
@@ -95,4 +93,4 @@ define(
         })
 
     }
-)
+);

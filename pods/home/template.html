@@ -1,54 +1,68 @@
-<div id="home-content" class="container-fluid">
-    <div class="row"> <!-- First Window -->
-        <div id="first_window" class="col-sm-12 col-md-12 col-lg-12">
-            <h1 id="title_1" class="col-sm-12 col-md-12 col-lg-12"><%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %></h1>
-            <% if (currentUser.id == null) { %>
-            <div class="col-sm-12 col-md-12 col-lg-12 button_center_1">
-                <a class="btn connection" href="#/login"><%= config.stringsDict.HOME.LOGIN %></a>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-12 button_center_1">
-                <a class="btn subscribe" href="#/register"><%= config.stringsDict.HOME.REGISTER %></a>
-            </div>
-            <% } else { %>
-            <div class="home-msg-welcome">
-                <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
-            </div>
-            <% } %>
-            <div class="col-sm-12 col-md-12 col-lg-12" id="arrow_center">
-                <a href="#second_window"><img src="<%= config.imagesDict.home.downArrow %>" alt="scroll_arrow"></a>
+<div id="home-content">
+    <div id="first-window" class="container-fluid">
+        <h1 id="greeting" class="text-center">
+            <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
+        </h1>
+        <% if (currentUser.id == null) { %>
+        <div class="row">
+            <div class="col-sm-3 col-center">
+                <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
+                    <%= config.stringsDict.HOME.LOGIN %>
+                </a>
             </div>
         </div>
-    </div>
-    <div class="row"><!-- Second Window -->
-        <div id="second_window" class="col-sm-12 col-md-12 col-lg-12">
-            <h1 id="title_2"><%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %></h1>
-            <div class="row">
-                <div class="col-sm-5 col-sm-offset-1 col-md-5 col-md-offset-1 col-lg-5 col-lg-offset-1">
-                    <p class="text_justify"><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
-                </div>
-                <div class="col-sm-5 col-md-5 col-lg-5">
-                    <p class="text_justify"><%= config.stringsDict.HOME.BSF_HOME_TEXT %></p>
-                </div>
+        <div class="row">
+            <div class="col-sm-3 col-center">
+                <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
+                    <%= config.stringsDict.HOME.REGISTER %>
+                </a>
             </div>
-            <% if (currentUser.id == null) { %>
-            <div id="button_window_2">
-                <div class="col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-2 col-lg-12 button_center_2">
-                    <a class="btn btn-primary connection" href="#/login"><%= config.stringsDict.HOME.LOGIN %></a>
-                </div>
-                <div class="col-sm-4 col-md-4 col-lg-12 button_center_2">
-                    <a class="btn btn-primary subscribe" href="#/register"><%= config.stringsDict.HOME.REGISTER %></a>
-                </div>
-            </div>
-            <% } else { %>
-            <div class="home-msg-welcome">
-                <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
-            </div>
-            <% } %>
         </div>
-    </div>
-    <div class="row"> <!-- Third Window -->
-        <div id="third_window" class="col-sm-12 col-md-12 col-lg-12">
+        <% } else { %>
+        <div class="home-msg-welcome">
+            <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
+        </div>
+        <% } %>
 
+        <div class="text-center">
+            <a class="block-center" id="scroll-arrow" href="#second-window">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
         </div>
     </div>
+    <div id="second-window" class="container-fluid">
+        <h1 id="second-greeting" class="text-center">
+            <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
+        </h1>
+
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-4 text-justify">
+                <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+            </div>
+            <div class="col-sm-4 text-justify">
+                <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+            </div>
+        </div>
+        <% if (currentUser.id == null) { %>
+        <div class="row">
+            <div class="col-sm-3 col-center">
+                <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
+                    <%= config.stringsDict.HOME.LOGIN %>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3 col-center">
+                <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
+                    <%= config.stringsDict.HOME.REGISTER %>
+                </a>
+            </div>
+        </div>
+        <% } else { %>
+        <h4 class="text-center" id="home-msg-welcome">
+            <%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %>
+        </h4>
+        <% } %>
+    </div>
+    <div id="third-window" class="container-fluid"></div>
 </div>

@@ -36,11 +36,11 @@ define(
 
 				if (this.model.questionModel().get('question_image_url') != null)
 				{
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+					this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
 				}
 				else
 				{
-					this.$el.find('.question-image-media').hide();
+					this.$('.question-image-media').hide();
 				}
 
 				var text = this.model.questionModel().get('text');
@@ -50,16 +50,16 @@ define(
 				dropdownHtmlText = '';
 				for (var i=0; i < splittedText.length; i++)
 				{
-					this.$el.find('.dropdowns-text').append(splittedText[i]);
+					this.$('.dropdowns-text').append(splittedText[i]);
 					if (i < splittedText.length-1)
 					{
 						// We add the dropdown here
 						dropdown = dropdowns[i];
 						console.log('dropdown' + JSON.stringify(dropdown));
 						var html = this.dropdownTemplate({dropdown: dropdown, index: i});
-						this.$el.find('.dropdowns-text').append(html);
+						this.$('.dropdowns-text').append(html);
 						self = this;
-						this.$el.find(".dropdown-menu li a").click(function(e){
+						this.$(".dropdown-menu li a").click(function(e){
                             e.preventDefault();
 							self.onPropositionSelected($(this));
 						});

@@ -33,11 +33,11 @@ define(
 				
 				if (this.model.questionModel().get('question_image_url') != null)
 				{
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+					this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
 				}
 				else
 				{
-					this.$el.find('.question-image-media').hide();
+					this.$('.question-image-media').hide();
 				}
 
 				var propositions = this.model.questionModel().get('propositions');
@@ -47,7 +47,7 @@ define(
 					this.renderProposition(proposition, i);
 				}
 
-				var answerExplanationEl = this.$el.find('.answer-explanation');
+				var answerExplanationEl = this.$('.answer-explanation');
 				if (this.model.get('is_answered_correctly') === true)
 				{
 					answerExplanationEl.addClass('right-answer');
@@ -63,7 +63,7 @@ define(
 				}
 				else
 				{
-					answerExplanationEl.html('');
+					answerExplanationEl.empty();
 				}
 
 				return this;
@@ -79,7 +79,7 @@ define(
 				if (proposition.is_correct_answer) {
 					$proposition.addClass('proposition_correct');
 				}
-				this.$el.find('.unique-answer-mcq-propositions').append($proposition);
+				this.$('.unique-answer-mcq-propositions').append($proposition);
 			},
 
 		});

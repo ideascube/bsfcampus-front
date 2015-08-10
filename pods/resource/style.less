@@ -1,253 +1,220 @@
-#resource-detail {
+.resource-detail {
 
-  #skill-nav {
+    #skill-nav {
 
-    #resource-skill-title, #back-to-resource-title {
+        #resource-skill-title, #back-to-resource-title {
 
-      background-color: #39637c;
-      border-bottom: 1px solid white;
+            background-color: #39637c;
+            border-bottom: 1px solid white;
 
-      .panel-title {
+            .back-to-skill-link, .back-to-main-resource-link {
+                display: block;
 
-        color: white;
-        font-size: 0.85em;
-        font-weight: 600;
-        padding: 10px;
-        text-align: left;
+                .panel-title {
+                    color: white;
+                    font-size: 0.85em;
+                    padding: 10px;
+                }
+            }
 
-        img {
-          height: 12px;
-          padding-bottom: 2px;
-          margin: 0px 10px 0px 0px;
         }
 
-      }
+        #resource-skill-outline {
 
-    }
+            padding: 0;
 
-  }
+            #resource-hierarchy-accordion {
 
-  #resource-skill-outline {
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    border: none;
+                margin: 0;
 
-    .panel {
+                .panel {
 
-      margin: 0;
-      border: none;
-      border-radius: 0;
+                    .panel-heading {
 
-      .panel-heading {
+                        padding: 10px;
+                        background-color: transparent;
 
-        background-color: white;
-        text-align: center;
-        padding: 10px 10px 15px 10px;
+                        a {
 
-        h4 {
-          color: #39627c;
-          font-size: 1.0em;
-          font-weight: 600;
-          padding: 0 10px 0 40px;
+                            h4 {
+                                color: #39627c;
+                                font-size: 1.0em;
+                                padding-left: 30px;
+
+                                &:before {
+                                    content: '>';
+                                    color: #39627c;
+                                    font-weight: bold;
+                                    margin-left: -30px;
+                                    border: 2px solid #39627c;
+                                    height: 20px;
+                                    width: 20px;
+                                    display: inline-block;
+                                    line-height: 16px;
+                                    border-radius: 10px;
+                                    text-align: center;
+                                    transition: all 300ms;
+                                }
+
+                                span.lesson-title {
+                                    display: inline-block;
+                                    width: 100%;
+                                    padding: 0 10px;
+                                }
+                            }
+
+                            &[aria-expanded=true] {
+                                h4:before {
+                                    -webkit-transform: rotate(90deg);
+                                    -moz-transform: rotate(90deg);
+                                    -ms-transform: rotate(90deg);
+                                    -o-transform: rotate(90deg);
+                                    transform: rotate(90deg);
+                                }
+                            }
+
+                        }
+
+                        img {
+                            height: 24px;
+                            padding-bottom: 2px;
+                            margin: 0 10px 0 0;
+                            position: absolute;
+                            left: 20px;
+                        }
+
+                        a:focus {
+                            outline: none;
+                        }
+
+                        a[aria-expanded="true"] img {
+                            -ms-transform: rotate(90deg);
+                            -webkit-transform: rotate(90deg);
+                            -webkit-transition: webkit-transform 300ms;
+                            transform: rotate(90deg);
+                            transition: transform 300ms;
+                        }
+
+                        a[aria-expanded="false"] img {
+                            -ms-transform: rotate(0deg);
+                            -webkit-transform: rotate(0deg);
+                            -webkit-transition: webkit-transform 300ms;
+                            transform: rotate(0deg);
+                            transition: transform 300ms;
+                        }
+
+                    }
+
+                    .lesson-outline {
+
+                        border-bottom: 1px solid #DDD;
+
+                        .active {
+                            background-color: #e0e0e0;
+                        }
+
+                    }
+
+                }
+            }
+
         }
 
-        img {
-          height: 24px;
-          padding-bottom: 2px;
-          margin: 0 10px 0 0;
-          position: absolute;
-          left: 20px;
+    }
+
+    #resource {
+
+        .panel-heading, .panel-body, .panel-footer {
+            padding-left: 80px;
+            padding-right: 80px;
         }
 
-        a:focus {
-          outline: none;
+        .panel-heading {
+            padding-top: 20px;
+            padding-bottom: 20px;
+            .panel-title {
+                font-size: 1.25em;
+                font-weight: bold;
+                color: #1caff6;
+            }
         }
 
-        a[aria-expanded="true"] img {
-          -ms-transform: rotate(90deg); /* IE 9 */
-          -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
-          -webkit-transition: webkit-transform 300ms;
-          transform: rotate(90deg);
-          transition: transform 300ms;
+        .panel-body {
+            p {
+                font-size: 0.85em;
+            }
+            padding-bottom: 80px;
         }
 
-        a[aria-expanded="false"] img {
-          -ms-transform: rotate(0deg); /* IE 9 */
-          -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
-          -webkit-transition: webkit-transform 300ms;
-          transform: rotate(0deg);
-          transition: transform 300ms;
+        .panel-footer {
+            background-color: #fff;
+            h2 {
+                font-size: 1.2em;
+            }
         }
 
-      }
-
-    }
-
-  }
-
-  .lesson-outline {
-
-    border-bottom: 1px solid #DDD;
-
-    a.media.active {
-      background-color: #e0e0e0;
-      color: inherit;
-    }
-
-  }
-
-  .lesson-outline, #additional-resources {
-
-    a.media {
-
-      border: none;
-      border-radius: 0;
-      margin: 0;
-      padding: 10px 10px 10px 50px;
-
-      img {
-        width: 42px;
-        height: 42px;
-        margin-right: 5px;
-      }
-
-      .media-body {
-        padding: 10px;
-        vertical-align: middle;
-      }
-
-      .media-body .media-heading {
-        font-size: 1.0em;
-        font-weight: 400;
-        color: #252525;
-      }
-
-    }
-
-  }
-
-  #resource {
-
-    background-color: white;
-    border-radius: 5px;
-    overflow: hidden;
-    padding-top: 20px;
-    padding-bottom: 50px;
-    min-height: 80vh;
-
-    #resource-inner-box {
-
-      margin-left: auto;
-      margin-right: auto;
-      float: none;
-
-      h1 {
-        font-size: 1.25em;
-        font-weight: 700;
-        color: #1caff6;
-        margin-bottom: 30px;
-      }
-
-      h2 {
-        font-size: 1.2em;
-        font-weight: 600;
-        margin-bottom: 20px;
-      }
-
-      p {
-        margin: 30px 0px 30px 0px;
-        font-size: 0.85em;
-        font-weight: 400;
-        color: #252525;
-      }
-
-      hr {
-        border-width: 2px;
-      }
-
-      #additional-resources {
-        a.list-group-item {
-          border: none;
+        .resource-audio-player {
+            audio {
+                display: block;
+                width: 100%;
+            }
         }
-      }
+        .btn-resource-download-link {
+
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 20px;
+            font-size: 1.25em;
+
+            img.download-arrow {
+                height: 30px;
+                margin-right: 20px;
+            }
+
+        }
+
+        .btn-start-exercise {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            padding: 20px;
+            font-size: 1.25em;
+
+            img.quill {
+                height: 40px;
+                margin-right: 20px;
+            }
+        }
 
     }
 
-  }
+    .lesson-outline, #additional-resources {
 
-  #resource-audio-player {
+        a.media {
 
-    audio {
-      display: block;
-      width: 100%;
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            padding-left: 50px;
+
+            img {
+                width: 42px;
+                height: 42px;
+                margin-right: 5px;
+            }
+
+            .media-body {
+                padding: 10px;
+                vertical-align: middle;
+
+                .media-heading {
+                    font-size: 1.0em;
+                    font-weight: 400;
+                    color: #252525;
+                }
+            }
+
+        }
+
     }
 
-    img {
-      display: block;
-      width: 100%;
-      margin-bottom: 0px;
-    }
-
-  }
-
-  #resource-download-link {
-
-    display: block;
-    margin: 50px 40px 50px 40px;
-    padding: 20px;
-    text-align: center;
-    color: white;
-    background-color: #1caff6;
-    border-radius: 5px;
-    border: none;
-    font-size: 1.25em;
-
-    img.download-arrow {
-      height: 30px;
-      margin-right: 20px;
-    }
-
-  }
-
-  #resource-exercise-button {
-    display: block;
-    margin: 50px 40px 50px 40px;
-    padding: 20px;
-    text-align: center;
-    color: white;
-    background-color: #bce520;
-    border-radius: 5px;
-    border: none;
-    font-size: 1.25em;
-
-    img.quill {
-      height: 40px;
-      margin-right: 20px;
-    }
-
-    img.check {
-      display: none;
-      height: 20px;
-      margin-left: 40px;
-    }
-
-    &.validated {
-      background: #f6d01c url("../../assets/images/gold_effect.png");
-      background-size: 100% 100%;
-      box-shadow: inset 0 -2px 1px #E4B640,
-      inset 2px 0 1px #F9DD6F,
-      inset 0 2px 1px #FBE979,
-        inset -2px 0 1px #F1DE82;
-
-      img.quill {
-        margin-right: 40px;
-      }
-
-      img.check {
-        display: inline-block;
-      }
-    }
-  }
 }
-

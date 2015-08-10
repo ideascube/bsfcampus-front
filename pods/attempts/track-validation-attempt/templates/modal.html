@@ -1,26 +1,28 @@
-<div class="modal-content modal-content-exercise-attempt track-validation">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		<h4 class="modal-title track-validation"><img src="<%= config.imagesDict.trackValidation.CERTIFICATE %>"><%= resource.title %></h4>
-	</div>
-	<div class="modal-body">
-		<div class="exercise-attempt-progress track-validation">
-            <div class="question-icon-table">
+<div class="modal-dialog modal-fluid">
+	<div class="modal-content modal-content-exercise-attempt track-validation">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title track-validation"><img src="<%= config.imagesDict.trackValidation.CERTIFICATE %>"><%= resource.title %></h4>
+		</div>
+		<div class="modal-body">
+			<div class="exercise-attempt-progress track-validation">
+				<div class="question-icon-table">
 
-            </div>
-        </div>
-        <div class="exercise-objective"></div>
-		<form class="exercise-attempt-form" id="question-form">
-			<input type="hidden" name="question_id" id="current_question_id_input" value="" />
-			<div class="exercise-attempt-question"></div>
-		</form>
-		<div class="exercise-attempt-question-answer-feedback">
+				</div>
+			</div>
+			<div class="exercise-objective"></div>
+			<form class="exercise-attempt-form" id="question-form">
+				<input type="hidden" name="question_id" id="current_question_id_input" value="" />
+				<div class="exercise-attempt-question"></div>
+			</form>
+			<div class="exercise-attempt-question-answer-feedback">
+			</div>
+			<div class="answer-explanation text-center">
+			</div>
 		</div>
-		<div class="answer-explanation text-center">
+		<div class="modal-footer exercise-attempt-footer">
+			<div class="pull-left exercise-attempt-question-answer-result"></div>
+			<button type="button" class="btn btn-success btn-continue track-validation"><%= config.stringsDict.EXERCISES.VALIDATE %></button>
 		</div>
-	</div>
-	<div class="modal-footer exercise-attempt-footer">
-		<div class="pull-left exercise-attempt-question-answer-result"></div>
-		<button type="button" class="btn btn-success btn-continue track-validation"><%= config.stringsDict.EXERCISES.VALIDATE %></button>
 	</div>
 </div>

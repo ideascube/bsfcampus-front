@@ -1,24 +1,30 @@
 <div class="container">
     <div class="row">
-        <div id="footer-program-by" class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <h4><%= config.stringsDict.FOOTER.A_PROGRAM_BY %></h4>
-            <a href="http://www.bibliosansfrontieres.org/"><img src="<%= config.imagesDict.logo_bsf %>"></a>
+        <div id="footer-program-by" class="col-xs-6 col-sm-3">
+            <h4 class="text-center"><%= config.stringsDict.FOOTER.A_PROGRAM_BY %></h4>
+            <a href="http://www.bibliosansfrontieres.org/">
+                <img src="<%= config.imagesDict.logo_bsf %>">
+            </a>
         </div>
-        <div id="footer-supported-by" class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <h4><%= config.stringsDict.FOOTER.SUPPORTED_BY %></h4>
-            <a href="http://www.gatesfoundation.org/fr"><img src="<%= config.imagesDict.logo_gates_foundation %>"></a>
+        <div id="footer-supported-by" class="col-xs-6 col-sm-3">
+            <h4 class="text-center"><%= config.stringsDict.FOOTER.SUPPORTED_BY %></h4>
+            <a href="http://www.gatesfoundation.org/fr">
+                <img src="<%= config.imagesDict.logo_gates_foundation %>">
+            </a>
         </div>
-        <div id="footer-static-pages-link-list" class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <h4><%= config.stringsDict.FOOTER.QUICK_ACCESS %></h4>
+        <div id="footer-static-pages-link-list" class="col-xs-6 col-sm-3">
+            <h4 class="text-center"><%= config.stringsDict.FOOTER.QUICK_ACCESS %></h4>
+            <ul></ul>
+        </div>
+        <div id="footer-community" class="col-xs-6 col-sm-3">
+            <h4 class="text-center"><%= config.stringsDict.FOOTER.JOIN_THE_COMMUNITY %></h4>
             <ul>
-
-            </ul>
-        </div>
-        <div id="footer-community" class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
-            <h4><%= config.stringsDict.FOOTER.JOIN_THE_COMMUNITY %></h4>
-            <ul>
-                <li><a href="<%= config.stringsDict.FOOTER.FACEBOOK_LINK %>"><img src="<%= config.imagesDict.facebookLogo %>"></a></li>
-                <li><a href="<%= config.stringsDict.FOOTER.TWITTER_LINK %>"><img src="<%= config.imagesDict.twitterLogo %>"></a></li>
+                <li><a href="<%= config.stringsDict.FOOTER.FACEBOOK_LINK %>">
+                    <img src="<%= config.imagesDict.facebookLogo %>">
+                </a></li>
+                <li><a href="<%= config.stringsDict.FOOTER.TWITTER_LINK %>">
+                    <img src="<%= config.imagesDict.twitterLogo %>">
+                </a></li>
             </ul>
         </div>
     </div>

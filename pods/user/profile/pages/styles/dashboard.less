@@ -1,453 +1,134 @@
-#user-profile-dashboard-container, #user-profile-tutoring-container {
+#user-profile-dashboard-container {
 
-  #menu{
-    height:38px;
-    width: 100%;
-    padding: 0;
-    text-align: center;
-  }
-
-  #menu_bg{
-    background-color: #f6f6f6;
-    -webkit-box-shadow: 0 8px 6px -6px black;
-    -moz-box-shadow: 0 8px 6px -6px black;
-    box-shadow: 0 8px 6px -6px black;
-    border-radius: 0;
-  }
-
-  nav ul#menu li {
-    list-style: none;
-    display: inline-block;
-    margin-left: 30px;
-    margin-top: 15px;
-    padding: 0 0 0 0;
-    text-align: center;
-    background-color: initial;
-  }
-
-  nav ul#menu li a{
-    font-weight: 600;
-    color: #2f2d2e;
-    text-decoration: none;
-  }
-
-  nav ul#menu li a:hover{
-    font-weight: 600;
-    color: #e74c3c;
-    text-decoration: none;
-    border-bottom: 3px solid #e74c3c;
-    padding-bottom: 11px;
-  }
-
-  #dashboard-tracks {
-    border-top: 1px #ececec solid;
-  }
-
-  #dashboard-track-skills{
-    margin-bottom: 11px;
-    border-left: 1px #ececec solid;
-  }
-
-  .div_theme {
-    padding: 0;
-  }
-
-  /* ----- Left side ----- */
-
-  .icon_track{
-    margin-left: 30px;
-  }
-
-  .link_border_bottom{
-    border-bottom: 1px solid #e6e6e6;
-  }
-
-  .border_right{
-    border-right: 1px solid #e6e6e6;
-    margin-top: 30px;
-    margin-bottom: 15px;
-  }
-
-  /* ----- Right side ----- */
-
-  a.skill, a.track {
-
-    color: black;
-    text-decoration: none;
-    display: block;
-
-    &:hover, &.link_selected{
-      color: #5e5e5e;
-      background-color: #e0e0e0;
+    .panel-heading {
+        background-color: transparent;
     }
 
-    .title{
-      font-weight: 600;
-      padding-left: 5px;
+}
 
-      img.check {
-        display: none;
-        height: 20px;
-        margin-left: 20px;
-      }
+#dashboard-details, #student-dashboard-details {
+    padding-left: 0;
+    padding-right: 0;
 
-      .validated {
-        img.check {
-          display: inline;
+    #dashboard-tracks-md-lg {
+
+        .media.track {
+
+            display: block;
+            margin: 0;
+            padding-top: 20px;
+            padding-bottom: 20px;
+
+            .track-icon {
+                padding: 0;
+                .track-icon-wrapper {
+                    width: 100px;
+                    max-height: 100px;
+                    img {
+                        padding: 0 20px;
+                    }
+                }
+            }
+            .media-body {
+
+                .media-heading {
+                    color: #252525;
+                    font-size: 1.2em;
+                }
+
+                p {
+                    font-style: italic;
+                    visibility: hidden;
+                }
+            }
+
+            &:hover {
+                background-color: #e5e5e5;
+                .media-body p {
+                    color: #fff;
+                    visibility: visible;
+                }
+            }
+
+            &.active {
+                background-color: #e0e0e0;
+                .media-body p {
+                    color: #252525;
+                    visibility: visible;
+                }
+            }
         }
-      }
     }
 
-    &.media {
+    #dashboard-tracks-xs-sm {
 
-      margin: 0;
-      display: block;
-      position: relative;
 
-      .media-body {
-        padding: 10px;
-        vertical-align: middle;
-      }
-      .media-heading {
-        font-weight: 600;
-        margin-bottom: 8px;
-        font-size: 1.0em;
-        color: #252525;
-      }
-      img {
-        height: 60px;
-      }
-      .progress .progress-bar {
-        background-color: #bbe41a;
-      }
-      .progress .progress-bar.validated {
-        background-color: #f6d01c;
-        background-image: url("../../../../../assets/images/gold_effect.png");
-        background-size: 100% 100%;
-      }
-      .media-text {
-        font-size: .85em;
-        color: #737373;
-      }
 
     }
 
-    &.media:hover {
+    #dashboard-track-skills {
 
-      background-color: #F5F5F5;
-      color: white;
+        .panel.skill-resources-block {
 
-      p {
-        color: #333;
-      }
+            .skill.panel-heading {
+                background-color: transparent;
+                padding: 0;
 
-      .media-text {
-        color: #DDDDDD;
-      }
-    }
-  }
+                .media {
+                    display: block;
+                    margin: 0;
+                    padding: 15px;
 
-  a.track {
-    &.media {
-      padding: 0 30px;
-      .media-heading {
-        margin-top: 0;
-        padding: 0;
-      }
-      .media-body {
-        padding: 30px 0 0 0;
-        vertical-align: middle;
-      }
-      p {
-        color: #FFF;
-        font-style: italic;
-        font-weight: 200;
-      }
-    }
-    .title h4.validated {
-      color: #978032;
-    }
-  }
+                    .skill-icon {
+                        padding: 0;
+                        .skill-icon-wrapper {
+                            width: 100px;
+                            max-height: 100px;
+                        }
+                    }
 
-  a.skill {
-    &.media {
-      padding: 0 30px 15px 30px;
-      .media-body {
-        .progress {
-          margin-bottom: 10px;
+                    .media-body {
+                        padding: 10px;
+                        vertical-align: middle;
+
+                        .media-heading {
+                            color: #252525;
+                            font-size: 1.1em;
+                        }
+
+                        p {
+                            font-style: italic;
+                            color: #a5a5a5;
+                        }
+                    }
+
+                }
+
+                &:hover {
+                    background-color: #e5e5e5;
+                }
+
+            }
+
+            .list-group.dashboard-skill-resources {
+                .list-group-item {
+                    padding-left: 80px;
+
+                    .media-body {
+                        .media-heading {
+                            font-size: 1em;
+                        }
+                        p {
+                            font-style: italic;
+                            color: #a5a5a5;
+                            margin: 0 0 5px
+                        }
+                    }
+                }
+            }
+
         }
-        p {
-          color: #A5A5A5;
-          font-weight: 200;
-          font-style: italic;
-          line-height: 1.3em;
-          margin-bottom: 0px;
-          padding: 0 0 0 5px;
-        }
-      }
-    }
-    .title h4.validated {
-      color: #978032;
-    }
-  }
 
-  .left_text{
-    margin-left: 5px;
-  }
-
-  .dashboard-skill-resources {
-
-    a.list-group-item {
-      border: none;
-
-      &.media {
-        margin-top: 0;
-        padding-left: 27%;
-        padding-top: 0;
-        padding-bottom: 20px;
-      }
-
-      .media-body {
-        img {
-          height: 20px;
-        }
-        .media-heading {
-          padding-top: 20px;
-          padding-bottom: 8px;
-        }
-        p {
-          color: #A5A5A5;
-          font-style: italic;
-          font-weight: 200;
-          margin: 0;
-        }
-      }
-    }
-    a.list-group-item:hover {
-      .media-body {
-        p {
-          color: #333;
-        }
-      }
-    }
-  }
-
-  .progress_bar{
-    margin-bottom: 20px;
-    margin-top: 10px;
-  }
-
-  a.ressources_no_selected{
-    color: black;
-    text-decoration: none;
-    display: block;
-    height: 35px;
-  }
-
-  a.ressources_no_selected:hover{
-    color: #5e5e5e;
-    text-decoration: none;
-    background-color: #e0e0e0;
-    display: block;
-    height: 35px;
-  }
-
-  .ressource_border_bottom{
-    border-bottom: 1px solid #e6e6e6;
-    padding-top: 15px;
-    margin-bottom: 15px;
-  }
-
-  /* ----- Media Queries ----- */
-
-  @media (min-width: 1200px) {
-    .title {
-      margin: 40px 0 30px 30px;
-    }
-  }
-
-  @media (min-width: 991px){
-    .tablet_version{
-      display: none;
     }
 
-    .dashboard-skill-resources {
-
-      a.list-group-item {
-
-        &.media {
-          margin-top: 0;
-          padding-left: 20%;
-        }
-      }
-    }
-  }
-
-  @media (min-width: 768px) and (max-width: 1199px){
-
-    h4,
-    .h4 {
-      font-size: 0.9em;
-    }
-
-    .progress_bar{
-      width: 150px;
-      height: 7px;
-    }
-
-    .dashboard-skill-resources {
-
-      a.list-group-item {
-
-        &.media {
-          margin-top: 0;
-          padding-left: 12%;
-        }
-      }
-    }
-  }
-
-  @media (max-width: 991px){
-    .computer_version{
-      display: none;
-    }
-
-    .right{
-      margin-top: 15px;
-      margin-left: 0px;
-    }
-
-    .btn-primary{
-      width: 169px;
-    }
-
-    .border_right{
-      border-right: none;
-      margin-top: 30px;
-      margin-bottom: 15px;
-    }
-  }
-
-  @media (max-width: 768px){
-
-    nav ul#menu li {
-      margin-left: 0;
-      text-align: initial;
-    }
-
-    #menu .col-xs-6{
-      text-align: center;
-    }
-
-    .dashboard-skill-resources {
-
-      a.list-group-item {
-
-        &.media {
-          margin-top: 0;
-          padding-left: 7em;
-        }
-      }
-    }
-  }
-
-  /* ----- Bootstrap Modification ----- */
-
-  .media:first-child {
-    margin-top: 0;
-  }
-
-  .media-right, .media-body {
-    vertical-align: middle;
-  }
-
-  .media-left {
-    vertical-align: top;
-    padding-top: 5px;
-  }
-
-  h4,
-  .h4 {
-    font-size: 1.0em;
-    font-weight: 600;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-
-  .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-    color: #333;
-    background-color: rgb(231, 231, 231);
-  }
-
-  /* ----- Modif Bootstrap Media Queries ----- */
-
-  @media (min-width: 992px){
-    .col-md-9 {
-      width: 72%;
-      padding-left: 15px;
-    }
-  }
-
-  @media (min-width: 768px){
-    .col-sm-8 {
-      width: 63%;
-      background-color: white;
-    }
-
-    .col-xs-offset-2 {
-      margin-left: 0;
-    }
-  }
-
-  @media (max-width: 990px) {
-    .navbar-header {
-      float: none;
-    }
-    .navbar-toggle {
-      display: block;
-    }
-    .navbar-collapse {
-      border-top: 1px solid transparent;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    }
-    .navbar-collapse.collapse {
-      display: none!important;
-    }
-    .navbar-nav {
-      float: none!important;
-      margin: 7.5px -15px;
-    }
-    .navbar-nav>li {
-      float: none;
-    }
-    .navbar-nav>li>a {
-      padding-top: 10px;
-      padding-bottom: 10px;
-    }
-    .navbar-text {
-      float: none;
-      margin: 15px 0;
-    }
-    /* since 3.1.0 */
-    .navbar-collapse.collapse.in {
-      display: block!important;
-    }
-    .collapsing {
-      overflow: hidden!important;
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 991px){
-    .col-sm-3 {
-      width: 24%;
-      padding-left: 3px;
-      margin-left: 5px;
-    }
-  }
-
-  @media (max-width: 768px){
-    .col-xs-4 {
-      text-align: right;
-    }
-  }
 }

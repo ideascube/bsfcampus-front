@@ -1,186 +1,125 @@
-#skill-info {
+.skill-detail {
 
-  border-radius: 5px;
+  #skill-info {
 
-  .panel {
-    min-height: 75vh;
-    border: none;
-    background-color: #39637c;
-  }
+    border-radius: 5px;
 
-  .panel-heading {
-    border-bottom: 1px solid white;
+    .panel {
+      background-color: #39637c;
 
-    .panel-title {
-      color: white;
-      font-size: 1.0em;
-      font-weight: 600;
-      padding: 10px;
-      text-align: left;
+      .panel-heading {
+        border-bottom: 1px solid white;
 
+        .panel-title {
+          color: white;
+          font-size: 1.0em;
+          padding: 10px;
+          text-align: left;
+        }
+      }
+
+      .panel-body {
+        padding: 20px 50px;
+
+        .skill-title {
+          color: white;
+          text-transform: uppercase;
+          font-size: 1.5em;
+        }
+      }
+    }
+
+    .skill-icon-wrapper {
+      margin: 50px auto;
+      padding: 0;
+      width: 150px;
       img {
-        height: 14px;
-        padding-bottom: 2px;
-        margin: 0px 10px 0px 0px;
+        padding: 0 30px;
       }
     }
-  }
 
-  .panel-body {
-    background-color: #39637c;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-    padding: 20px 50px;
-  }
-
-  #skill-title {
-    color: white;
-    text-transform: uppercase;
-    font-weight: 600;
-    margin-bottom: 30px;
-    font-size: 1.5em;
-  }
-
-  &.validated {
-    #skill-title {
-      color: #f6d01c;
-    }
-  }
-
-  img {
-    margin: 30px auto 30px auto;
-    max-width: 50%;
-    max-height: 100px;
-  }
-
-  .progress {
-    background-color: #cdcdcd;
-    margin-bottom: 30px;
-    .progress-bar {
-      background-color: #bce520;
-    }
-    .progress-bar.validated {
-      background-color: #f6d01c;
-      background-image: url("../../assets/images/gold_effect.png");
-      background-size: 100% 100%;
-      box-shadow: none;
-    }
-  }
-
-  #skill-description {
-    color: white;
-    font-size: 1em;
-  }
-
-}
-
-a.btn-validate-skill {
-
-  padding: 20px;
-  color: white;
-  background-color: #bce520;
-  border-radius: 5px;
-  margin-bottom: 5px;
-
-  img.certificate {
-    height: 40px;
-    margin-right: 40px;
-  }
-
-  img.check {
-    height: 20px;
-    margin-left: 20px;
-  }
-
-  &.disabled {
-    opacity: 1.00;
-  }
-
-  &.validate-allowed {
-    color: #ffffff;
-    background-color: #bce520;
-    font-size: 1.25em;
-    img.check {
-      display: none;
-    }
-  }
-
-  &.validated {
-    color: #ffffff;
-    background-color: #f6d01c;
-    background-image: url("../../assets/images/gold_effect.png");
-    background-size: 100% 100%;
-    box-shadow: inset 0 -2px 1px #E4B640,
-                inset 2px 0 1px #F9DD6F,
-                inset 0 2px 1px #FBE979,
-                inset -2px 0 1px #F1DE82;
-    font-size: 1.25em;
-  }
-}
-
-#skill-outline {
-
-  background-color: white;
-  border-radius: 5px;
-  border: none;
-  padding-top: 20px;
-  padding-bottom: 20px;
-
-  .lesson {
-
-    padding-left: 5%;
-
-    div[class^="col-md-"] {
-      padding-right: 20px;
-      padding-left: 20px;
-    }
-
-    .lesson-title {
+    #skill-description {
+      color: white;
       font-size: 1em;
-      font-weight: 600;
-      margin-bottom: 25px;
-      color: #252525;
-    }
-
-    .lesson-description {
-      font-size: .75em;
-      color: #737373;
-    }
-
-    div.lesson-outline {
-
-      padding-right: 0px;
-
-      a:hover {
-        background-color: #ececec;
-      }
-
-      .media {
-
-        margin: 0;
-        padding: 15px 10px 15px 25px;
-        display: block;
-        position: relative;
-
-        .media-body {
-          padding: 0px 10px;
-          vertical-align: middle;
-        }
-
-        .media-heading {
-          font-size: 1em;
-          font-weight: 600;
-          color: #252525;
-        }
-
-        img {
-          width: 48px;
-          height: 48px;
-        }
-      }
-
     }
 
   }
 
+  .btn-validate-skill {
+    padding: 20px;
+    margin-bottom: 5px;
+
+    #skill-hat-icon {
+      font-size: 40px;
+      margin-right: 20px;
+    }
+    #skill-status-icon {
+      margin-left: 10px;
+    }
+  }
+
+  #skill-outline {
+
+    .lesson {
+
+      padding-top: 20px;
+      padding-bottom: 20px;
+
+      .lesson-title {
+        font-size: 1em;
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #252525;
+      }
+
+      .lesson-description {
+        font-size: .75em;
+        color: #737373;
+      }
+
+      div.lesson-outline {
+
+        a:hover {
+          background-color: #ececec;
+        }
+
+        .media {
+
+          padding: 15px;
+          display: block;
+
+          .media-left {
+            .resource-icon-wrapper {
+              width: 64px;
+              height: 64px;
+            }
+          }
+
+          .media-body {
+            padding: 10px;
+            vertical-align: middle;
+
+            .media-heading {
+              font-size: 1em;
+              color: #252525;
+              margin: 0;
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+    .lesson + .lesson {
+      border-top-color: #ddd;
+    }
+
+  }
+
+}
+
+.badge-skill-validated {
+  margin-left: 10px;
 }

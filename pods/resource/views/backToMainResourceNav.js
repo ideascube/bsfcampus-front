@@ -17,7 +17,7 @@ define(
 
 			model: ResourceModel,
 
-			tagName: 'div',
+			className: 'panel',
 			
 			template: _.template(backToResourceNavTemplate),
 

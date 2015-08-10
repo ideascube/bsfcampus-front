@@ -5,23 +5,32 @@ define(
 		'backbone',
 		'app/config',
 
-		'text!pods/track/templates/track-outline-item.html'
+		'text!pods/track/templates/track-outline-item.html',
+		'text!pods/skill/templates/validation-badge.html'
 	],
 	function($, _, Backbone, Config,
-		trackOutlineItemTemplate
+		trackOutlineItemTemplate, badgeHTML
 		) {
 
 		return Backbone.View.extend({
-			
-			tagName: 'div',
 
+			tagName: 'a',
+			className: 'skill media',
+			
 			template: _.template(trackOutlineItemTemplate),
 
 			render: function() {
-				var skillModel = this.model.forTemplate();
-				skillModel.validationClass = (skillModel.is_validated) ? 'validated' : '';
-				var html = this.template({skill: skillModel, config: Config});
+				var html = this.template({
+					skill: this.model.forTemplate(),
+					config: Config
+				});
 				this.$el.html(html);
+				this.$el.attr('href', this.model.route());
+				if (this.model.get('is_validated')) {
+					this.$el.addClass('skill-validated');
+					this.$('.progress-bar').removeClass('progress-bar-success').addClass('progress-bar-info golden-effect');
+					this.$('.skill-title').append(badgeHTML);
+				}
 				
 				return this;
 			}

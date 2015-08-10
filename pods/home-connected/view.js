@@ -18,14 +18,12 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
-
             template: _.template(homeTemplate),
 
             events: {
-                'click button#button_formations': 'goToTracks',
-                'click button#button_tutorat': 'goToProfile',
-                'click #arrow_center': 'scrollTo'
+                'click #button_formations': 'goToTracks',
+                'click #button_tutorat': 'goToProfile',
+                'click #scroll-arrow': 'scrollTo'
             },
 
             initialize: function () {
@@ -33,11 +31,13 @@ define(
             },
 
             render: function() {
-                $("body").removeAttr("style");
+                var html = this.template({
+                    currentUser: currentUser.forTemplate(),
+                    config: Config
+                });
+                this.$el.html(html);
 
-                this.$el.html(this.template({currentUser: currentUser.forTemplate(), config: Config}));
-                this.$el.find("#first_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
-                this.$el.find("#second_window").css('background-image', 'url(' + Config.imagesDict.default_background_image + ')');
+                this.$("#first-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
 
                 return this;
             },
@@ -57,8 +57,8 @@ define(
             scrollTo: function (e) {
                 e.preventDefault();
 
-                var the_id = $(e.currentTarget).find('a').attr("href");
-                var $target = this.$el.find(the_id);
+                var the_id = $(e.currentTarget).attr("href");
+                var $target = this.$(the_id);
 
                 $('html, body').stop().animate({
                     'scrollTop': $target.offset().top

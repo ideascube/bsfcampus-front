@@ -13,14 +13,16 @@ define(
 
         return Backbone.View.extend({
 
+            tagName: 'li',
+
+            className: 'notification',
+
             template: _.template(template),
 
-            className: 'container',
-
             events: {
-                'click button.accept': 'accept',
-                'click button.decline': 'decline',
-                'click button.acknowledge': 'acknowledge'
+                'click .btn-accept': 'accept',
+                'click .btn-decline': 'decline',
+                'click .btn-acknowledge': 'acknowledge'
             },
 
             render: function () {
@@ -32,7 +34,7 @@ define(
                 });
                 this.$el.html(html);
 
-                return this.$el;
+                return this;
             },
 
             accept: function (e) {

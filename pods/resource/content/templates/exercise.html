@@ -1,13 +1,17 @@
-<h1><%= resource.title %></h1>
-
 <p><%= resource.description %></p>
 
-<a href="" class="btn btn-default btn-start-exercise <% if (resource.is_validated) { %> validated <% } %>" id="resource-exercise-button">
-    <img src="<%= config.imagesDict.quill %>" class="quill">
-    <% if (resource.is_validated) { %>
-        <%= config.stringsDict.EXERCISE_VALIDATED %>
-    <% } else { %>
-        <%= config.stringsDict.START_EXERCISE %>
-    <% } %>
-    <img src="<%= config.imagesDict.checkStroke %>" class="check">
-</a>
+<div class="row">
+    <div class="col-md-9 col-center">
+        <button
+           class="btn btn-success btn-lg btn-block btn-start-exercise">
+            <img src="<%= config.imagesDict.quill %>" class="quill">
+            <% if (resource.is_validated) { %>
+            <%= config.stringsDict.EXERCISE_VALIDATED %>
+            <span class="glyphicon glyphicon-ok-circle"></span>
+            <% } else { %>
+            <%= config.stringsDict.START_EXERCISE %>
+            <% } %>
+
+        </button>
+    </div>
+</div>

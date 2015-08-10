@@ -23,75 +23,68 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
-
-            className: 'row dashboard-details',
-
             template: _.template(dashboardDetailsTemplate),
 
             'events': {
-                'click a.track': 'onTrackSelected'
+                'click .track': 'onTrackSelected'
             },
 
-            currentTrackIndex: 0,
+            currentTrack: null,
 
             render: function() {
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
                 var tracks = this.model.get('tracks');
-                for (var i = 0; i < tracks.length; i++) {
-                    this.renderTrack(tracks[i], i, (i >= tracks.length - 1));
-                }
-                this.renderTrackOutline(this.currentTrackIndex);
+                _.each(tracks, function(track) {
+                    this.renderTrack(track);
+                }, this);
 
-                return this.$el;
+                this.currentTrack = tracks[0]._id;
+
+                this.renderTrackOutline(this.currentTrack);
+
+                return this;
             },
 
-            renderTrack: function(track, index, doRemoveBottomBorder) {
+            renderTrack: function(track) {
                 var trackModel = new TrackModel({data: track}, {parse: true});
-                var trackComputerItemView = new DashboardTrackComputerItemView({model: trackModel});
-                trackComputerItemView.index = index;
-                trackComputerItemView.render();
-                if (doRemoveBottomBorder) {
-                    trackComputerItemView.$el.find('.link_border_bottom').remove();
-                }
-                this.$el.find('#dashboard-tracks .computer_version').append(trackComputerItemView.$el);
 
-                var trackTabletItemView = new DashboardTrackTabletItemView({model: trackModel, index: index});
-                trackTabletItemView.index = index;
+                var trackComputerItemView = new DashboardTrackComputerItemView({model: trackModel});
+                trackComputerItemView.render();
+                this.$('#dashboard-tracks-md-lg-list').append(trackComputerItemView.$el);
+
+                var trackTabletItemView = new DashboardTrackTabletItemView({model: trackModel});
                 trackTabletItemView.render();
-                this.$el.find('#dashboard-tracks .tablet_version .navbar-nav').append(trackTabletItemView.$el);
+                this.$('#dashboard-tracks-xs-sm-list').append(trackTabletItemView.$el);
             },
 
-            renderTrackOutline: function (index) {
-                var currentTrackNode = this.$el.find("a.track[index='" + this.currentTrackIndex + "']");
-                currentTrackNode.removeClass('link_selected');
-                this.$el.find("a.track[index='" + index + "']").addClass('link_selected');
-                this.currentTrackIndex = index;
-                var track = this.model.get('tracks')[index];
-                var $dashboardTrackSkills = this.$el.find('#dashboard-track-skills');
-                $dashboardTrackSkills.html('');
-                for (var i = 0; i < track.skills.length; i++) {
-                    var skill = track.skills[i];
-                    var skillOutlineItemView = new DashboardSkillItemView({model: new SkillModel({data: skill}, {parse: true})});
+            renderTrackOutline: function (track) {
+                this.$(".track").removeClass('active');
+                this.$(".track[data-track='" + track + "']").addClass('active');
+                this.currentTrack = track;
+
+                var trackModel = _.find(this.model.get('tracks'), function(trackFromList) {
+                    return trackFromList._id == track;
+                });
+
+                var $dashboardTrackSkills = this.$('#dashboard-track-skills');
+                $dashboardTrackSkills.empty();
+                _.each(trackModel.skills, function(skill) {
+                    var skillOutlineItemView = new DashboardSkillItemView({
+                        model: new SkillModel({data: skill}, {parse: true})
+                    });
                     skillOutlineItemView.render();
-                    if (i >= track.skills.length - 1)
-                    {
-                        skillOutlineItemView.$el.find('.link_border_bottom').remove();
-                    }
                     $dashboardTrackSkills.append(skillOutlineItemView.$el);
-                }
+                });
             },
 
             onTrackSelected: function(e) {
-                var $a = $(e.currentTarget);
-                var index = parseInt($a.attr('index'));
-                if (index != this.currentTrackIndex)
+                var newTrack = $(e.currentTarget).data('track');
+                if (newTrack != this.currentTrack)
                 {
-                    // we will change the list of resources displayed, so we prevent the default behavior (i.e. open the track page)
                     e.preventDefault();
-                    this.renderTrackOutline(index);
+                    this.renderTrackOutline(newTrack);
                 }
                 else
                 {

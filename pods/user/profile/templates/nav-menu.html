@@ -1,31 +1,30 @@
-<h3><%= user.full_name %></h3>
+<div class="panel-heading">
+    <h3 class="panel-title menu-title text-center"><%= user.full_name %></h3>
+</div>
 
-<nav id="navigation" class="row">
-    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
-        <button id="dashboard" type="button" class="btn btn-default btn-block">
-            <%= config.stringsDict.USER.PROFILE.MENU.DASHBOARD %>
-        </button>
+<div class="panel-body">
+    <div class="container-fluid">
+        <nav id="navigation" class="row">
+            <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
+                <button id="dashboard" type="button" class="btn btn-default btn-block btn-user-profile-nav">
+                    <%= config.stringsDict.USER.PROFILE.MENU.DASHBOARD %>
+                </button>
+            </div>
+            <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
+                <button id="my_account" type="button" class="btn btn-default btn-block btn-user-profile-nav">
+                    <%= config.stringsDict.USER.PROFILE.MENU.ACCOUNT %>
+                </button>
+            </div>
+            <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
+                <button id="my_password" type="button" class="btn btn-default btn-block btn-user-profile-nav">
+                    <%= config.stringsDict.USER.PROFILE.MENU.PASSWORD %>
+                </button>
+            </div>
+            <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
+                <button id="tutoring" type="button" class="btn btn-default btn-block btn-user-profile-nav">
+                    <%= config.stringsDict.USER.PROFILE.MENU.TUTORING %>
+                </button>
+            </div>
+        </nav>
     </div>
-    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
-        <button id="my_account" type="button" class="btn btn-default btn-block">
-            <%= config.stringsDict.USER.PROFILE.MENU.ACCOUNT %>
-        </button>
-    </div>
-    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
-        <button id="my_password" type="button" class="btn btn-default btn-block">
-            <%= config.stringsDict.USER.PROFILE.MENU.PASSWORD %>
-        </button>
-    </div>
-    <div class="col-xs-4 col-xs-offset-4 col-sm-12 col-sm-offset-0 col-md-12">
-        <button id="tutoring" type="button" class="btn btn-default btn-block">
-            <%= config.stringsDict.USER.PROFILE.MENU.TUTORING %>
-        </button>
-    </div>
-    <!--
-    <div class="col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-0 col-md-12">
-        <button id="settings" type="button" class="btn btn-default btn-block">
-            <%= config.stringsDict.USER.PROFILE.MENU.PARAMETERS %>
-        </button>
-    </div>
-    -->
-</nav>
+</div>

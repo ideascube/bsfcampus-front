@@ -1,67 +1,93 @@
-<div id="home-connected-content" class="container-fluid">
-    <div class="row"> <!-- Première fenêtre -->
-        <div id="first_window" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <h1 id="title_1" class="col-sm-12 col-md-12 col-lg-12"><%= config.stringsDict.CONNECTED_HOME.WELCOME_MESSAGE %><%= currentUser.full_name %></h1>
-            <h3 id="bsf_information"><%= config.stringsDict.CONNECTED_HOME.INFORMATION_MESSAGE %></h3>
-            <div class="col-sm-12 col-md-12 col-lg-12" id="arrow_center">
-                <a href="#second_window" alt="fleche_scroll"><img src="<%= config.imagesDict.home.downArrow %>"></a>
-            </div>
+<div id="home-connected-content">
+    <div id="first-window" class="container-fluid">
+        <h1 id="greeting" class="text-center">
+            <%= config.stringsDict.CONNECTED_HOME.WELCOME_MESSAGE %><%= currentUser.full_name %>
+        </h1>
+
+        <h3 id="bsf-information" class="text-center">
+            <%= config.stringsDict.CONNECTED_HOME.INFORMATION_MESSAGE %>
+        </h3>
+
+        <div class="text-center">
+            <a class="block-center" id="scroll-arrow" href="#second-window">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
         </div>
     </div>
-    <div class="row"><!-- Deuxième fenêtre -->
-        <div id="second_window" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="row">
-                <div id="formations_lessons" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2 class="title_second_window"><%= config.stringsDict.CONNECTED_HOME.TRACKS_HEADER %></h2>
-                            <div class="black_line"></div>
+    <div id="second-window" class="container-fluid">
+        <div class="row">
+            <div id="formations_lessons" class="second-window-block col-sm-6">
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <h2 class="text-center">
+                            <%= config.stringsDict.CONNECTED_HOME.TRACKS_HEADER %>
+                        </h2>
+
+                        <hr class="black_line"/>
+                        <div class="text_block text-center">
+                            <p class="text-center"><strong>
+                                <%= config.stringsDict.CONNECTED_HOME.TRACKS_MESSAGE_MAIN %>
+                            </strong></p>
+
+                            <p class="text-center">
+                                <%= config.stringsDict.CONNECTED_HOME.TRACKS_MESSAGE_TEXT %>
+                            </p>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="text_block">
-                                <p class="bold_text"><%= config.stringsDict.CONNECTED_HOME.TRACKS_MESSAGE_MAIN %></p>
-                                <p><%= config.stringsDict.CONNECTED_HOME.TRACKS_MESSAGE_TEXT %></p>
-                            </div>
-                            <div class="col-sm-12 col-md-4 col-lg-12 button_center_2">
-                                <button id="button_formations" type="button" class="btn btn-primary"><%= config.stringsDict.CONNECTED_HOME.TRACKS_BUTTON_LABEL %></button>
-                            </div>
-                        </div>
+                        <button id="button_formations" type="button" class="btn btn-primary btn-block border-radius-lg">
+                            <%= config.stringsDict.CONNECTED_HOME.TRACKS_BUTTON_LABEL %>
+                        </button>
                     </div>
                 </div>
-                <div id="tutorat" class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2 class="title_second_window"><%= config.stringsDict.CONNECTED_HOME.TUTORING_HEADER %></h2>
-                            <div class="black_line"></div>
+            </div>
+            <div id="tutorat" class="second-window-block col-sm-6">
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <h2 class="text-center">
+                            <%= config.stringsDict.CONNECTED_HOME.TUTORING_HEADER %>
+                        </h2>
+
+                        <hr class="black_line"/>
+                        <div class="text_block">
+                            <p class="text-center"><strong>
+                                <%= config.stringsDict.CONNECTED_HOME.TUTORING_MESSAGE_MAIN %>
+                            </strong></p>
+
+                            <p class="text-center">
+                                <%= config.stringsDict.CONNECTED_HOME.TUTORING_MESSAGE_TEXT %>
+                            </p>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="text_block">
-                                <p class="bold_text"><%= config.stringsDict.CONNECTED_HOME.TUTORING_MESSAGE_MAIN %></p>
-                                <p><%= config.stringsDict.CONNECTED_HOME.TUTORING_MESSAGE_TEXT %></p>
-                            </div>
-                            <div class="col-sm-12 col-md-4 col-lg-12 button_center_2">
-                                <button id="button_tutorat" type="button" class="btn btn-primary"><%= config.stringsDict.CONNECTED_HOME.TUTORING_BUTTON_LABEL %></button>
-                            </div>
-                        </div>
+                        <button id="button_tutorat" type="button" class="btn btn-primary btn-block border-radius-lg">
+                            <%= config.stringsDict.CONNECTED_HOME.TUTORING_BUTTON_LABEL %>
+                        </button>
                     </div>
                 </div>
-                <div id="community" class="col-xs-12 col-sm-12 col-md-12 col-md-12 col-lg-12">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <h2 class="title_second_window"><%= config.stringsDict.CONNECTED_HOME.NETWORK_HEADER %></h2>
-                            <div class="black_line"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="community" class="second-window-block col-sm-offset-3 col-sm-6">
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <h2 class="text-center">
+                            <%= config.stringsDict.CONNECTED_HOME.NETWORK_HEADER %>
+                        </h2>
+
+                        <hr class="black_line"/>
+                        <div class="text_block">
+                            <p class="text-center"><strong>
+                                <%= config.stringsDict.CONNECTED_HOME.NETWORK_MESSAGE_MAIN %>
+                            </strong></p>
+
+                            <p class="text-center">
+                                <%= config.stringsDict.CONNECTED_HOME.NETWORK_MESSAGE_TEXT %>
+                            </p>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                            <div class="text_block">
-                                <p class="bold_text"><%= config.stringsDict.CONNECTED_HOME.NETWORK_MESSAGE_MAIN %></p>
-                                <p><%= config.stringsDict.CONNECTED_HOME.NETWORK_MESSAGE_TEXT %></p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 social_center">
-                            <a href="<%= config.stringsDict.FOOTER.FACEBOOK_LINK %>"><img src="<%= config.imagesDict.facebookLogo %>" id="btn_facebook" alt="Facebook"></a>
-                            <a href="<%= config.stringsDict.FOOTER.TWITTER_LINK %>"><img src="<%= config.imagesDict.twitterLogo %>" id="btn_twitter" alt="Twitter"></a>
+                        <div class="text-center">
+                            <a href="<%= config.stringsDict.FOOTER.FACEBOOK_LINK %>" class="btn-social">
+                                <img src="<%= config.imagesDict.facebookLogo %>" title="Facebook"/>
+                            </a>
+                            <a href="<%= config.stringsDict.FOOTER.TWITTER_LINK %>" class="btn-social">
+                                <img src="<%= config.imagesDict.twitterLogo %>" title="Twitter"/>
+                            </a>
                         </div>
                     </div>
                 </div>

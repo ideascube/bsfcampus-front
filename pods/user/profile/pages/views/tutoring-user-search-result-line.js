@@ -18,11 +18,11 @@ define(
 
             template: _.template(template),
 
-            className: 'user-search-result-line col-sm-12 text-center ',
+            className: 'user-search-result row',
 
             events: {
-                'click button.tutor': 'tutorAction',
-                'click button.student': 'studentAction'
+                'click .btn-tutor-action': 'tutorAction',
+                'click .btn-student-action': 'studentAction'
             },
 
             updateTutorButton: function () {
@@ -35,18 +35,29 @@ define(
                     return (user._id == currentUser.id);
                 });
 
-                var $tutorButton = this.$el.find('button.tutor');
+                var $tutorButton = this.$('.btn-tutor-action');
+                var $icon = $('<span/>')
+                        .addClass('btn-action-icon')
+                        .addClass('glyphicon-status')
+                        .addClass('glyphicon');
                 if (isAlreadyTutor) {
-                    $tutorButton.addClass('remove');
-                    $tutorButton.prepend('<span class="remove">x</span>');
+                    $tutorButton
+                        .removeClass('btn-bordered').addClass('btn-success btn-remove')
+                        .prepend($icon.addClass('glyphicon-remove glyphicon-status-danger'));
                 }
                 else if (isTutorRequestAwaiting) {
-                    $tutorButton.addClass('cancel');
-                    $tutorButton.prepend('<span class="remove">x</span>');
+                    var $pending = $('<div/>')
+                        .addClass('pending-request text-center')
+                        .html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_PENDING_REQUEST);
+                    $tutorButton
+                        .removeClass('btn-bordered').addClass('btn-primary btn-cancel')
+                        .prepend($icon.addClass('glyphicon-remove glyphicon-status-danger'))
+                        .after($pending);
                 }
                 else {
-                    $tutorButton.addClass('add');
-                    $tutorButton.prepend('<span class="add">+</span>');
+                    $tutorButton
+                        .addClass('btn-add')
+                        .prepend($icon.addClass('glyphicon-plus glyphicon-status-bordered'));
                 }
             },
 
@@ -60,18 +71,29 @@ define(
                     return (user._id == currentUser.id);
                 });
 
-                var $studentButton = this.$el.find('button.student');
+                var $studentButton = this.$('.btn-student-action');
+                var $icon = $('<span/>')
+                    .addClass('btn-action-icon')
+                    .addClass('glyphicon-status')
+                    .addClass('glyphicon');
                 if (isAlreadyStudent) {
-                    $studentButton.addClass('remove');
-                    $studentButton.prepend('<span class="remove">x</span>');
+                    $studentButton
+                        .removeClass('btn-bordered').addClass('btn-success btn-remove')
+                        .prepend($icon.addClass('glyphicon-remove glyphicon-status-danger'));
                 }
                 else if (isStudentRequestAwaiting) {
-                    $studentButton.addClass('cancel');
-                    $studentButton.prepend('<span class="remove">x</span>');
+                    var $pending = $('<div/>')
+                        .addClass('pending-request text-center')
+                        .html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_RESULT_PENDING_REQUEST);
+                    $studentButton
+                        .removeClass('btn-bordered').addClass('btn-primary btn-cancel')
+                        .prepend($icon.addClass('glyphicon-remove glyphicon-status-danger'))
+                        .after($pending);
                 }
                 else {
-                    $studentButton.addClass('add');
-                    $studentButton.prepend('<span class="add">+</span>');
+                    $studentButton
+                        .addClass('btn-add')
+                        .prepend($icon.addClass('glyphicon-plus glyphicon-status-bordered'));
                 }
             },
 
@@ -92,13 +114,13 @@ define(
                 e.preventDefault();
                 var $button = $(e.currentTarget);
 
-                if ($button.hasClass('add')) {
+                if ($button.hasClass('btn-add')) {
                     this.trigger('addTutor', this.model.id);
                 }
-                else if ($button.hasClass('cancel')) {
+                else if ($button.hasClass('btn-cancel')) {
                     this.trigger('cancelTutorRequest', this.model.id);
                 }
-                else if ($button.hasClass('remove')) {
+                else if ($button.hasClass('btn-remove')) {
                     this.trigger('removeTutor', this.model.id);
                 }
             },
@@ -107,13 +129,13 @@ define(
                 e.preventDefault();
                 var $button = $(e.currentTarget);
 
-                if ($button.hasClass('add')) {
+                if ($button.hasClass('btn-add')) {
                     this.trigger('addStudent', this.model.id);
                 }
-                else if ($button.hasClass('cancel')) {
+                else if ($button.hasClass('btn-cancel')) {
                     this.trigger('cancelStudentRequest', this.model.id);
                 }
-                else if ($button.hasClass('remove')) {
+                else if ($button.hasClass('btn-remove')) {
                     this.trigger('removeStudent', this.model.id);
                 }
             }

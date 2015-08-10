@@ -12,14 +12,22 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
+            tagName: 'a',
+
+            className: 'track media',
+
+            attributes: function () {
+                return {
+                    href: this.model.route(),
+                    'data-track': this.model.id
+                }
+            },
 
             template: _.template(trackItemTemplate),
 
             generateAnalyticsObject: function (modelSON) {
                 var averageTime = null;
-                if (modelSON.analytics.average_time_on_exercise > 0)
-                {
+                if (modelSON.analytics.average_time_on_exercise > 0) {
                     averageTime = this.durationToMMSS(modelSON.analytics.average_time_on_exercise);
                 }
                 var lastAttempt = (modelSON.analytics.last_attempts_scores.length > 0) ? modelSON.analytics.last_attempts_scores[0] : null;
@@ -50,9 +58,11 @@ define(
                 var minutes = Math.floor(duration / 60);
                 var seconds = duration - (minutes * 60);
 
-                if (seconds < 10) {seconds = "0"+seconds;}
-                var time = (minutes > 0) ? minutes+'\' ' : '';
-                time += seconds+'\"';
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
+                var time = (minutes > 0) ? minutes + '\' ' : '';
+                time += seconds + '\"';
                 return time;
             }
 

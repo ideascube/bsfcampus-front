@@ -1,22 +1,16 @@
-<div class="col-md-4 thin-gutter" id="skill-nav"></div>
+<div class="col-sm-4" id="skill-nav"></div>
 
-<div class="col-md-8 thin-gutter" id="resource">
+<div class="col-sm-8">
 
-	<div class="col-md-9" id="resource-inner-box">
-
-		<div id="resource-content">
-			<p>Loading...</p>
+	<div class="panel" id="resource">
+		<div class="panel-heading">
+			<h1 class="panel-title" id="resource-title"><%= resource.title %></h1>
 		</div>
-
-		<hr>
-
-        <div id="additional-resources-block">
-            <h2><%= config.stringsDict.ADDITIONAL_RESOURCES %></h2>
-            <div id="additional-resources">
-
-            </div>
-        </div>
-	
+		<div class="panel-body" id="resource-content"></div>
+		<div class="panel-footer" id="additional-resources-block">
+			<h2><%= config.stringsDict.ADDITIONAL_RESOURCES %></h2>
+			<div id="additional-resources"></div>
+		</div>
 	</div>
 
 </div>

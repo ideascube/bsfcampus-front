@@ -1,25 +1,30 @@
-<div class="col-md-6 thin-gutter <%= track.validateButtonStatus %>" id="track-info">
+<div class="col-sm-6 <%= track.validateButtonStatus %>" id="track-info">
 
-    <div class="text-center track-icon">
-        <img src="<%= track.icon_url %>">
+    <div class="track-icon-wrapper">
+        <img src="<%= track.icon_url %>" class="img-responsive center-block" />
     </div>
 
-    <h2 class="text-center" id="track-title"><%= track.title %></h2>
+    <h3 class="text-center" id="track-title"><%= track.title %></h3>
 
     <div id="track-description"><%= track.description %></div>
 
 
 </div>
 
-<div class="col-md-6 thin-gutter">
+<div class="col-sm-6">
 
-    <a href="" class="btn <%= track.validateButtonClass %> btn-validate-track <%= track.validateButtonStatus %>">
-        <img src="<%= config.imagesDict.certificateValidated %>" class="certificate-validated"/>
-        <img src="<%= config.imagesDict.certificateLocked %>" class="certificate-locked"/>
-        <%= track.validateButtonText %>
-        <img src="<%= config.imagesDict.lock %>" class="lock"/>
-        <img src="<%= config.imagesDict.checkStroke %>" class="check"/>
-    </a>
+    <button class="btn btn-block btn-lg btn-success btn-validate-track">
+        <span id="track-certificate-icon" class="icon-certificate"></span>
+        <% if (track.is_validated) { %>
+        <%= config.stringsDict.TRACK_TEST_VALIDATED %>
+        <span id="track-status-icon" class="glyphicon glyphicon-ok-circle"></span>
+        <% } else if (track.progress.current >= track.progress.max) { %>
+        <%= config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED %>
+        <% } else { %>
+        <%= config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED %>
+        <span id="track-status-icon" class="glyphicon glyphicon-lock"></span>
+        <% } %>
+    </button>
 
     <div id="track-outline" class="media-list">
         <div class="skill media">

@@ -71,8 +71,17 @@ define(
                 return cls == Config.stringsDict.RESOURCE_TYPE.VIDEO;
             },
 
+			isExercise: function() {
+				var content = this.model.get('resource_content');
+				var cls = content._cls.split('.').pop();
+				return cls == Config.stringsDict.RESOURCE_TYPE.EXERCISE;
+			},
+
             render: function() {
-				var html = this.template({resource: this.model.forTemplate(), config: Config});
+				var html = this.template({
+					resource: this.model.forTemplate(),
+					config: Config
+				});
 				this.$el.html(html);
 
                 if (this.isVideo()) {
@@ -84,6 +93,11 @@ define(
                         playerFlashMP3:		'../../../lib/StrobeMediaPlayback.swf'
                     });
                 }
+				else if (this.isExercise()) {
+					if (this.model.get('is_validated')) {
+						this.$('.btn-start-exercise').removeClass('btn-success').addClass('btn-info golden-effect');
+					}
+				}
 			},
 
 			events: {
@@ -98,18 +112,25 @@ define(
 				var attempt = new ExerciseAttemptModel();
 				attempt.set('exercise', this.model.id);
 				attempt.save().done(function(result) {
-					var exerciseAttemptView = new ExerciseAttemptView({model: attempt});
+					var $modal = $('#modal');
+					var exerciseAttemptView = new ExerciseAttemptView({
+						model: attempt,
+						el: $modal
+					});
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
 
-					var $modal = $('#modal');
-					var $modalDialog = $modal.find('.modal-dialog');
-					$modalDialog.html(exerciseAttemptView.$el);
-					$modal.modal({show: true});
+					// FIXME Do this when the modal is shown
+					// (The event is not fired for some reason)
+					//$modal.on('shown.bs.modal', function () {
+						exerciseAttemptView.continueExercise();
+					//});
+
+					$modal.modal('show');
+					exerciseAttemptView.continueExercise();
 
                     $modal.on('hidden.bs.modal', function () {
-                        var validated = self.model.get('is_validated');
-                        if (!validated && exerciseAttemptView.isExerciseCompleted)
+                        if (!self.model.get('is_validated') && exerciseAttemptView.isExerciseCompleted)
                         {
                             self.model.set('is_validated', true);
                         }
@@ -118,10 +139,6 @@ define(
                             Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
                         }
                         $modal.unbind('hidden.bs.modal');
-                    });
-
-                    $modal.on('shown.bs.modal', function () {
-                        exerciseAttemptView.continueExercise();
                     });
 				}).fail(function(error) {
 

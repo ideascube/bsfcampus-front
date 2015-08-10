@@ -16,18 +16,19 @@ define(
 		'pods/attempts/skill-validation-attempt/view',
 
 		'text!pods/skill/templates/detail.html',
+		'text!pods/skill/templates/validation-badge.html',
 
 		'less!pods/skill/style'
 	],
 	function($, _, Backbone, Config,
 		TrackModel, LessonSkillCollection, ResourceLessonCollection, SkillValidationAttemptModel,
 		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView, SkillValidationAttemptView,
-	 	detailTemplate
+	 	detailTemplate, badgeHTML
 		) {
 
 		return Backbone.View.extend({
 
-			tagName: 'div',
+			className: 'skill-detail row gutter-sm',
 			
 			template: _.template(detailTemplate),
 
@@ -37,29 +38,24 @@ define(
 
             render: function() {
 				
-				var skillModel = this.model.forTemplate();
-				if (skillModel.is_validated)
-				{
-					skillModel.validateButtonText = Config.stringsDict.SKILL_TEST_VALIDATED;
-					skillModel.validateButtonStatus = "validated";
-                    skillModel.validationClass = 'validated';
-				}
-				else
-				{
-					skillModel.validateButtonText = Config.stringsDict.SKILL_TEST_VALIDATION_ALLOWED;
-					skillModel.validateButtonStatus = "validate-allowed";
-                    skillModel.validationClass = '';
-                }
-				
-				var html = this.template({skill: skillModel, config:Config});
+				var html = this.template({
+					skill: this.model.forTemplate(),
+					config:Config
+				});
 				this.$el.html(html);
+				if (this.model.get('is_validated')) {
+					this.$el.addClass('skill-validated');
+					this.$('.skill-title').append(badgeHTML);
+					this.$('.progress-bar').removeClass('progress-bar-success').addClass('progress-bar-info golden-effect');
+					this.$('.btn-validate-skill').removeClass('btn-success').addClass('btn-info golden-effect');
+				}
 
 				var self = this;
 
                 DS.find(Config.constants.dsResourceNames.TRACK, this.model.get('track')['_id']).then(function (trackModel) {
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
-					self.$el.find('#track-title').html(backToTrackView.$el);
+					self.$('#track-title').html(backToTrackView.$el);
                 });
 
                 var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSON, function(lessonModel) {
@@ -88,21 +84,18 @@ define(
 			},
 
             renderLessons: function (lessonsCollection) {
-                this.$el.find('#skill-outline').empty();
+                this.$('#skill-outline').empty();
 
                 var self =this;
                 lessonsCollection.each(function (lesson, index, list) {
                     self.renderSingleLesson(lesson);
-                    if (index < list.length - 1) {
-                        self.$el.find('#skill-outline').append('<hr>');
-                    }
                 })
             },
 
 			renderSingleLesson: function(lesson) {
 				var skillOutlineItemView = new SkillOutlineItemView({model: lesson});
 				skillOutlineItemView.render();
-                this.$el.find('#skill-outline').append(skillOutlineItemView.$el);
+                this.$('#skill-outline').append(skillOutlineItemView.$el);
 			},
 
 			startSkillValidation: function(e) {
@@ -117,8 +110,7 @@ define(
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
 					var $modal = $('#modal');
-					var $modalDialog = $modal.find('.modal-dialog');
-					$modalDialog.html(exerciseAttemptView.$el);
+					$modal.html(exerciseAttemptView.$el);
 					$modal.modal({show: true});
 					$modal.on('hidden.bs.modal', function () {
 						var validated = self.model.get('is_validated');

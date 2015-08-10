@@ -18,7 +18,7 @@ define(
 
             template: _.template(template),
 
-            className: 'tutor-line',
+            className: 'list-group-item container-fluid',
 
             events: {
                 'click button.remove': 'removeTutor'
@@ -38,7 +38,7 @@ define(
                 e.preventDefault();
 
                 this.trigger('removeTutor', this.model.id);
-            },
+            }
 
         });
 

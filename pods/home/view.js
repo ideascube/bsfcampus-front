@@ -23,18 +23,15 @@ define(
             template: _.template(homeTemplate),
 
             events: {
-                'click a.btn.connection': 'login',
-                'click a.btn.subscribe': 'register',
-                'click #arrow_center': 'scrollTo'
+                'click .btn-login': 'login',
+                'click .btn-register': 'register',
+                'click #scroll-arrow': 'scrollTo'
             },
 
             render: function() {
-                $("body").removeAttr("style");
-
                 this.$el.html(this.template({currentUser: currentUser.forTemplate(), config: Config}));
-                this.$el.find("#first_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
-                this.$el.find("#second_window").css('background-image', 'url(' + Config.imagesDict.default_background_image + ')');
-                this.$el.find("#third_window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage3 + ')');
+                this.$("#first-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
+                this.$("#third-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage3 + ')');
 
                 return this;
             },
@@ -54,8 +51,8 @@ define(
             scrollTo: function (e) {
                 e.preventDefault();
 
-                var the_id = $(e.currentTarget).find('a').attr("href");
-                var $target = this.$el.find(the_id);
+                var the_id = $(e.currentTarget).attr("href");
+                var $target = this.$(the_id);
 
                 $('html, body').stop().animate({
                     'scrollTop': $target.offset().top

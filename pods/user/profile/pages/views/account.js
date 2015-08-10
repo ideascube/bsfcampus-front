@@ -20,9 +20,9 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
+            id: 'user-profile-dashboard-container',
 
-            id: 'user-profile-account-container',
+            className: 'panel panel-default',
 
             template: _.template(accountTemplate),
 
@@ -49,9 +49,8 @@ define(
                 var formData = JSON.stringify(this.$('form').serializeObject());
                 var $saveButton = this.$('button.btn-save-modification');
                 $saveButton.addClass('disabled');
-                var $accountSaveResult = this.$('.save-result');
-                $accountSaveResult.removeClass('success');
-                $accountSaveResult.removeClass('fail');
+                var $accountSaveResult = this.$('#save-result');
+                $accountSaveResult.removeClass('text-success text-danger');
                 $.ajax({
                     type: 'PATCH',
                     contentType: 'application/json',
@@ -62,12 +61,12 @@ define(
                     console.log(JSON.stringify(result));
                     currentUser.set(currentUser.parse(result));
                     $accountSaveResult.html(Config.stringsDict.USER.PROFILE.ACCOUNT.SAVE_SUCCESS_MESSAGE);
-                    $accountSaveResult.addClass('success');
+                    $accountSaveResult.addClass('text-success');
                     $saveButton.removeClass('disabled');
                 }).fail(function(error){
                     console.log("Could not post user modifications", error);
                     $accountSaveResult.html(Config.stringsDict.USER.PROFILE.ACCOUNT.SAVE_FAIL_MESSAGE);
-                    $accountSaveResult.addClass('fail');
+                    $accountSaveResult.addClass('text-danger');
                     $saveButton.removeClass('disabled');
                 });
             },
@@ -77,8 +76,7 @@ define(
                 mergeAccountModalView.render();
 
                 var $modal = $('#modal');
-                var $modalDialog = $modal.find('.modal-dialog');
-                $modalDialog.html(mergeAccountModalView.$el);
+                $modal.html(mergeAccountModalView.$el);
                 $modal.modal({show: true});
             }
 

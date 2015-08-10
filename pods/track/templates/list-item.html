@@ -1,21 +1,32 @@
-<div class="col-md-6">
-	<div class="text-center track-thumbnail <%= trackStatusClass %>">
-		<div class="hierarchy-title">
-			<h3><%= track.title %></h3>
-		</div>
-		<div class="hierarchy-text">
-			<div class="media media-middle">
-				<div class="media-left media-middle track-icon">
-					<img src="<%= track.icon_url %>">
-				</div>
-				<div class="media-body media-middle">
-					<p><%= track.progress.current %>/<%= track.progress.max %> <%= config.stringsDict.SKILLS_ACQUIRED %></p>
-					<a href="<%= track.route %>" class="btn btn-info start">
-                        <p><%= btnText %></p>
-                        <img src="<%= config.imagesDict.checkStroke %>" class="check pull-right" />
-                    </a>
-				</div>
+<div class="track-thumbnail panel border-radius-md">
+	<div class="panel-heading">
+		<h3 class="panel-title text-center"><%= track.title %></h3>
+	</div>
+	<div class="panel-body">
+		<div class="media media-middle">
+			<div class="media-left media-middle track-icon">
+			    <div class="track-icon-wrapper">
+				    <img src="<%= track.icon_url %>" class="media-object img-responsive block-center" />
+			    </div>
 			</div>
+			<div class="media-body media-middle container-fluid">
+				<p class="text-center"><%= track.progress.current %>/<%= track.progress.max %> <%= config.stringsDict.SKILLS_ACQUIRED %></p>
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <a href="<%= track.route %>" class="btn btn-block btn-bordered btn-lg border-radius-lg btn-start">
+                            <%
+                            if (track.is_validated) {
+                                print(config.stringsDict.TRACK_VALIDATED);
+                            } else if (track.is_started) {
+                                print(config.stringsDict.RESUME_TRACK);
+                            } else {
+                                print(config.stringsDict.START_TRACK);
+                            }
+                            %>
+                        </a>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</div>
 </div>

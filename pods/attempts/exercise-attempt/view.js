@@ -18,7 +18,7 @@ define(
 		'pods/attempts/exercise-attempt/question-answer/views/feedback',
 
 		'pods/resource/model',
-		'pods/resource/views/button-link-to-resource',
+		'pods/resource/views/linkToResource',
 
 		'less!pods/attempts/exercise-attempt/style.less'
 	],
@@ -33,8 +33,6 @@ define(
 		return Backbone.View.extend({
 
 			model: ExerciseAttemptModel,
-
-			tagName: 'div',
 
 			isQuestionVerified: false,
 
@@ -53,8 +51,8 @@ define(
 					config: Config
 				});
 				this.$el.html(html);
-				this.$el.find('.exercise-attempt-form').hide();
-				this.$el.find('.exercise-attempt-question-answer-feedback').hide();
+				this.$('.exercise-attempt-form').hide();
+				this.$('.exercise-attempt-question-answer-feedback').hide();
 
 				return this;
 			},
@@ -69,14 +67,13 @@ define(
 
             renderProgression: function() {
                 var questionsCollection = this.model.getCollection();
-                var $progress = this.$el.find('.exercise-attempt-progress');
+                var $progress = this.$('.exercise-attempt-progress');
                 var $table = $progress.find('.question-icon-table');
-                $table.html('');
+                $table.empty();
 
                 var progressWidth = $progress.width();
                 console.log("renderProgression : progressWidth =", progressWidth);
                 var singleWidth = Math.floor(progressWidth/(this.model.getNumberOfQuestions()*2));
-                var singleMarginRightLeft = Math.floor(singleWidth / 4);
 
                 for (var i=0; i < questionsCollection.length; i++)
                 {
@@ -105,7 +102,6 @@ define(
                     var $questionHtml = $(questionIconHtml);
                     $questionHtml.css("width", singleWidth);
                     $questionHtml.css("height", singleWidth);
-                    //$questionHtml.css("margin", "auto " + singleMarginRightLeft + "px");
                     $table.append($questionHtml);
                 }
             },
@@ -114,7 +110,7 @@ define(
                 var objectiveMessage = Config.stringsDict.EXERCISES.OBJECTIVE_MESSAGE;
                 var maxMistakes = this.model.get('max_mistakes');
                 objectiveMessage = objectiveMessage.replace("[%NB_SUCCESS_MIN%]", "" + (this.model.getNumberOfQuestions() - maxMistakes));
-                this.$el.find(".exercise-objective").html(objectiveMessage);
+                this.$(".exercise-objective").html(objectiveMessage);
             },
 
 			renderCurrentQuestionAnswerForm: function() {
@@ -122,53 +118,53 @@ define(
                 this.renderObjective();
 				var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
 				this.listenTo(formView, 'onAnswerRadioSelected', function () {
-					this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
+					this.$('.exercise-attempt-footer button').removeClass('disabled');
 				});
 				this.listenTo(formView, 'onDropdownSelected', function (dropdownId, propositionId) {
 					this.currentQuestionAnswer.setDropdownSelection(dropdownId, propositionId);
 					if (this.currentQuestionAnswer.areAllDropdownsSelected())
 					{
-						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
+						this.$('.exercise-attempt-footer button').removeClass('disabled');
 					}
 				});
 				this.listenTo(formView, 'onOrderingSortableItemReceived', function () {
-					if (this.$el.find('#ordering-items-source').children().length == 0)
+					if (this.$('#ordering-items-source').children().length == 0)
 					{
-						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
+						this.$('.exercise-attempt-footer button').removeClass('disabled');
 					}
-					else if (!this.$el.find('.exercise-attempt-footer button').hasClass('disabled'))
+					else if (!this.$('.exercise-attempt-footer button').hasClass('disabled'))
 					{
-						this.$el.find('.exercise-attempt-footer button').addClass('disabled');
+						this.$('.exercise-attempt-footer button').addClass('disabled');
 					}
 				});
 				this.listenTo(formView, 'onCategorizerSortableItemReceived', function () {
-					if (this.$el.find('#categorizer-items-source').children().length == 0)
+					if (this.$('#categorizer-items-source').children().length == 0)
 					{
-						this.$el.find('.exercise-attempt-footer button').removeClass('disabled');
+						this.$('.exercise-attempt-footer button').removeClass('disabled');
 					}
-					else if (!this.$el.find('.exercise-attempt-footer button').hasClass('disabled'))
+					else if (!this.$('.exercise-attempt-footer button').hasClass('disabled'))
 					{
-						this.$el.find('.exercise-attempt-footer button').addClass('disabled');
+						this.$('.exercise-attempt-footer button').addClass('disabled');
 					}
 				});
 				formView.render();
 
-				this.$el.find('#current_question_id_input').val(this.currentQuestionAnswer.get('question_id'));
-				this.$el.find('.exercise-attempt-question').html(formView.$el);
+				this.$('#current_question_id_input').val(this.currentQuestionAnswer.get('question_id'));
+				this.$('.exercise-attempt-question').html(formView.$el);
 				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion'
 					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'DropdownExerciseQuestion'
 					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'OrderingExerciseQuestion'
 					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'CategorizeExerciseQuestion')
 				{
-					this.$el.find('.exercise-attempt-footer button').addClass('disabled');
+					this.$('.exercise-attempt-footer button').addClass('disabled');
 				}
-				this.$el.find('.exercise-attempt-form').show();
+				this.$('.exercise-attempt-form').show();
 
-				this.$el.find('.answer-explanation').empty().hide();
+				this.$('.answer-explanation').empty().hide();
 
-				this.$el.find('.exercise-attempt-question-answer-feedback').empty().hide();
+				this.$('.exercise-attempt-question-answer-feedback').empty().hide();
 
-				this.$el.find('.exercise-attempt-question-answer-result').empty();
+				this.$('.exercise-attempt-question-answer-result').empty();
 			
 				return this;
 			},
@@ -179,7 +175,7 @@ define(
 				var feedbackView = ExerciseAttemptQuestionAnswerFeedbackView.initialize(currentQuestionAnswer);
 				feedbackView.render();
 
-				var answerExplanationEl = this.$el.find('.answer-explanation');
+				var answerExplanationEl = this.$('.answer-explanation');
 				answerExplanationEl.removeClass('right-answer').removeClass('wrong-answer');
 				if (currentQuestionAnswer.get('is_answered_correctly') === true)
 				{
@@ -197,7 +193,7 @@ define(
 				}
 				else
 				{
-					answerExplanationEl.html('');
+					answerExplanationEl.empty();
 				}
 				
 				var $result = $('<p></p>').html('?');
@@ -221,11 +217,11 @@ define(
 					$result.addClass('text-danger');
 				}
 
-				this.$el.find('.exercise-attempt-form').hide();
+				this.$('.exercise-attempt-form').hide();
 
-				this.$el.find('.exercise-attempt-question-answer-feedback').html(feedbackView.$el).show();
+				this.$('.exercise-attempt-question-answer-feedback').html(feedbackView.$el).show();
 
-				this.$el.find('.exercise-attempt-question-answer-result').html($result);
+				this.$('.exercise-attempt-question-answer-result').html($result);
 			},
 
             handleAlert: function (alert) {
@@ -245,7 +241,7 @@ define(
 				this.renderObjective();
 				this.renderFeedbackAndResult(questionId);
 				// we enable the continue button until we get the response
-				this.$el.find('.btn-continue').removeClass('disabled');
+				this.$('.btn-continue').removeClass('disabled');
 			},
 
 			onAnswerError: function(error){
@@ -258,7 +254,7 @@ define(
                 var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
 				var formData = formView.serializeForm();
 				// we disable the continue button until we get the response
-				this.$el.find('.btn-continue').addClass('disabled');
+				this.$('.btn-continue').addClass('disabled');
 
 				var self = this;
 				$.ajax({
@@ -315,8 +311,8 @@ define(
 					config: Config
 				});
 
-				this.$el.find('.modal-body').html(html);
-				var $exerciseRecap = this.$el.find('.modal-body .exercise-recap');
+				this.$('.modal-body').html(html);
+				var $exerciseRecap = this.$('.modal-body .exercise-recap');
 				var $exerciseRecapDetails = $exerciseRecap.find('.recap-details');
 				if (recapModelJSON.number_mistakes <= recapModelJSON.max_mistakes)
 				{
@@ -352,19 +348,19 @@ define(
 				html = this.recapFooterTemplate({
 					config:Config
 				});
-				this.$el.find('.exercise-attempt-footer').html(html);
+				this.$('.exercise-attempt-footer').html(html);
 
 			},
 
 			nextStep: function() {
 				if (this.isQuestionVerified)
 				{
-					this.$el.find('.exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.VALIDATE);
+					this.$('.exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.VALIDATE);
 					this.continueExercise();
 				}
 				else
 				{
-					this.$el.find('.exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.CONTINUE);
+					this.$('.exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.CONTINUE);
 					this.submitAnswer();
 				}
 				this.isQuestionVerified = !this.isQuestionVerified;

@@ -6,7 +6,9 @@ define(
         'ds',
 		'app/config',
         'text!app/footer/template.html',
-        'text!app/footer/static-page-link-template.html'
+        'text!app/footer/static-page-link-template.html',
+
+        'less!app/footer/style'
     ],
 	function($, _, Backbone, DS, Config,
              template, staticPageLinkTemplate) {
@@ -27,8 +29,8 @@ define(
 			render: function() {
                 var staticPages = DS.getAll(Config.constants.dsResourceNames.STATIC_PAGE);
                 this.$el.html(this.template({config: Config}));
-                var $staticPagesList = this.$el.find('#footer-static-pages-link-list ul');
-                $staticPagesList.html('');
+                var $staticPagesList = this.$('#footer-static-pages-link-list ul');
+                $staticPagesList.empty();
                 _.each(staticPages.models, function(page) {
                     var pageSON = page.forTemplate();
                     $staticPagesList.append(this.staticPageLinkTemplate({page: pageSON}));

@@ -1,144 +1,36 @@
-#track-list-container {
-  margin-top: 30px;
-}
-
 .track-thumbnail {
 
-  position: relative;
-  background-color: white;
-  padding: 0px;
-  border-radius: 10px;
-  color: #39637c;
-  margin-bottom: 20px;
-  height: 200px;
+    color: #39637c;
+    height: 200px;
 
-  .hierarchy-title {
-
-    position: absolute;
-    top: 0;
-    width: 100%;
-    text-align: center;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    padding: 10px;
-
-    h3 {
-      font-size: 1.5em;
-      font-weight: 600;
-      margin: 0px;
-      color: #39637c;
+    .panel-title {
+        font-size: 1.5em;
     }
 
-  }
+    .panel-body {
 
-  .hierarchy-text {
-    text-align: center;
-    font-weight: 400;
-    font-size: 1.25em;
-    position: absolute;
-    bottom: 0;
-    margin: auto 5px;
-
-    .track-icon {
-      padding: 10px;
-      height: 120px;
-      img {
-        height: 100%;
-      }
-    }
-
-    a {
-      width: 80%;
-      font-size: 1.1em;
-      margin: 5px auto 20px auto;
-
-      &.start {
-        color: #39637c;
-        background-color: white;
-        font-weight: 600;
-        border-radius: 25px;
-        border: solid 3px #1CAEF7;
-
-        p {
-          text-align: center;
-          display: inline-block;
-          margin: auto;
+        .track-icon {
+            padding: 0;
+            .track-icon-wrapper {
+                width: 120px;
+                max-height: 120px;
+                img {
+                    padding: 0 24px;
+                }
+            }
         }
 
-        img.check {
-          display: none;
-        }
-      }
     }
 
-  }
+    &.track-validated {
 
-  &.started {
-    .hierarchy-title {
-      background-color: #1CAEF7;
-
-      h3 {
-        color: white;
-      }
-    }
-
-    .hierarchy-text {
-      a.start {
-        background-color: #1CAEF7;
-        color: white;
-      }
-    }
-  }
-
-  &.validated {
-
-    .hierarchy-title {
-      background-color: #f6d01c;
-      background-image: url("../../../assets/images/gold_effect.png");
-      background-size: 100% 100%;
-      box-shadow: inset 0 -2px 1px #E4B640,
-      inset 2px 0 1px #F9DD6F,
-      inset 0 2px 1px #FBE979,
-        inset -2px 0 1px #F1DE82;
-
-      h3 {
-        color: white;
-      }
-    }
-
-    .hierarchy-text {
-      .track-icon {
-        background: url('../../../assets/images/laurel.png') no-repeat center center !important;
-        background-size: contain !important;
-
-        img {
-          padding: 20px;
-        }
-      }
-
-      a.start {
-        background-color: #f6d01c;
-        background-image: url("../../../assets/images/gold_effect.png");
-        background-size: 100% 100%;
-        box-shadow: inset 0 -2px 1px #E4B640,
-        inset 2px 0 1px #F9DD6F,
-        inset 0 2px 1px #FBE979,
-          inset -2px 0 1px #F1DE82;
-        color: white;
-        border: none;
-
-        p {
-          margin: 0 0 0 40px;
+        .panel-title {
+            color: #fff;
         }
 
-        img.check {
-          display: inline-block;
-          height:20px;
-          margin: 5px 20px;
-          vertical-align: middle;
+        .track-icon-wrapper {
+            background: url('../../../assets/images/laurel.png') no-repeat center center !important;
+            background-size: contain !important;
         }
-      }
     }
-  }
-
 }

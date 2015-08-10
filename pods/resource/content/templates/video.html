@@ -1,10 +1,11 @@
-<h1><%= resource.title %></h1>
-
 <div class="embed-responsive embed-responsive-16by9">
-    <video id="resource-video-player" class="projekktor" src="<%= resource.resource_content.content_file_url %>" title="<%= resource.title %>" width="640" height="360" controls>
+    <video id="resource-video-player"
+           class="projekktor"
+           src="<%= resource.resource_content.content_file_url %>"
+           title="<%= resource.title %>"
+           controls>
         Your browser does not support the HTML5 Video element.
     </video>
 </div>
-
 
 <p><%= resource.description %></p>

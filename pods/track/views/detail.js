@@ -23,14 +23,8 @@ define(
 
 		return Backbone.View.extend({
 
-			tagName: 'div',
+			className: 'row gutter-sm track-detail',
 
-			className: 'track-info-container',
-
-			id: function() {
-				return 'track-info-' + this.model.id;
-			},
-			
 			template: _.template(detailTemplate),
 
             events: {
@@ -39,27 +33,28 @@ define(
 
             render: function() {
 				var trackModel = this.model.forTemplate();
+
+                var html = this.template({track: trackModel, config: Config});
+                this.$el.html(html);
+
+                this.$validateButton = this.$('.btn-validate-track');
+
                 if (this.model.get('is_validated'))
                 {
-                    trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATED;
-                    trackModel.validateButtonStatus = "validated";
+                    this.$el.addClass('track-validated');
+                    this.$validateButton.removeClass('btn-success').addClass('btn-info golden-effect');
                 }
                 else if (this.model.get('progress').current >= this.model.get('progress').max)
                 {
-                    trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
-                    trackModel.validateButtonStatus = "validate-allowed";
+
                 }
                 else
                 {
-                    trackModel.validateButtonText = Config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED;
-                    trackModel.validateButtonStatus = "validate-disabled";
-                    trackModel.validateButtonClass = "disabled";
+                    this.$validateButton.prop('disabled', true);
                 }
 
-				var html = this.template({track: trackModel, config: Config});
-				this.$el.html(html);
-                if (trackModel.validation_test == null) {
-                    this.$el.find(".btn-validate-track").hide();
+                if (this.model.get('validation_test') == null) {
+                    //this.$validateButton.hide();
                 }
 
                 var self = this;
@@ -90,14 +85,14 @@ define(
 			},
 
             renderSkills: function (skillsCollection) {
-                this.$el.find('#track-outline').empty();
+                this.$('#track-outline').empty();
                 _.each(skillsCollection.models, this.renderOne, this);
             },
 
             renderOne: function(skill) {
 				var trackOutlineItem = new TrackOutlineItem({model: skill});
 				trackOutlineItem.render();
-				this.$el.find('#track-outline').append(trackOutlineItem.$el);
+				this.$('#track-outline').append(trackOutlineItem.$el);
 			
 				return this;
 			},
@@ -111,15 +106,16 @@ define(
                 var validationTest = this.model.get('validation_test')._id;
                 attempt.set('exercise', validationTest);
                 attempt.save().done(function(result) {
-                    var exerciseAttemptView = new TrackValidationAttemptView({model: attempt});
+                    var $modal = $('#modal');
+                    var exerciseAttemptView = new TrackValidationAttemptView({
+                        model: attempt,
+                        el: $modal
+                    });
                     exerciseAttemptView.resource = self.model;
                     exerciseAttemptView.render();
-                    $("#container").hide();
+                    exerciseAttemptView.continueExercise();
+                    $("#main").hide();
                     $("body").css('background-color', '#36404A');
-                    var $modal = $('#modal');
-                    var $modalDialog = $modal.find('.modal-dialog');
-					$modalDialog.html(exerciseAttemptView.$el);
-                    $modal.modal({show: true});
                     $modal.on('hidden.bs.modal', function () {
                         var validated = self.model.get('is_validated');
                         if (!validated && exerciseAttemptView.isExerciseCompleted)
@@ -131,13 +127,10 @@ define(
                             Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
                         }
                         $modal.unbind('hidden.bs.modal');
-                        $("#container").show();
+                        $("#main").show();
                         $("body").css('background-color', '');
                     });
-
-                    $modal.on('shown.bs.modal', function () {
-                        exerciseAttemptView.continueExercise();
-                    });
+                    $modal.modal('show');
                 }).fail(function(error) {
 
                 });

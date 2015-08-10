@@ -44,11 +44,11 @@ define(
 
 				if (this.model.questionModel().get('question_image_url') != null)
 				{
-					this.$el.find('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+					this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
 				}
 				else
 				{
-					this.$el.find('.question-image-media').hide();
+					this.$('.question-image-media').hide();
 				}
 
 				var propositions = this.model.questionModel().get('propositions');
@@ -56,7 +56,7 @@ define(
 				{
 					proposition = propositions[i];
 					var html = this.propositionTemplate({proposition: proposition, index: i});
-					var el = this.$el.find('.unique-answer-mcq-propositions');
+					var el = this.$('.unique-answer-mcq-propositions');
 					el.append(html);
 				}
 			},

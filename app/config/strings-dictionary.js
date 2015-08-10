@@ -12,9 +12,9 @@ define([],
             START_TRACK: 'Commencer',
             RESUME_TRACK: 'Continuer',
             TRACK_VALIDATED: 'Validé',
-            TRACK_TEST_VALIDATED: 'Parcours Validé',
+            TRACK_TEST_VALIDATED: 'Parcours validé',
             TRACK_TEST_VALIDATION_ALLOWED: 'Passer le test du parcours',
-            SKILL_TEST_VALIDATED: 'Compétence Validée',
+            SKILL_TEST_VALIDATED: 'Compétence validée',
             SKILL_TEST_VALIDATION_ALLOWED: 'Passer le test de compétence',
             DOWNLOAD_FILE: 'Télécharger le fichier',
             ADDITIONAL_RESOURCES: 'Ressources complémentaires',
@@ -124,25 +124,25 @@ define([],
             },
 
             USER: {
-                REGISTER: 'S\'inscrire',
-                LOG_IN: 'Se connecter',
-                FULL_NAME: 'Nom complet',
-                USERNAME: 'Identifiant',
-                EMAIL: 'E-mail',
-                PASSWORD: 'Mot de pase',
-                CONFIRM_PASSWORD: 'Confirmer le mot de passe',
-                CGU: 'j\'accepte les <a href="#" tabindex="-1">conditions d\'utilisation</a> du site.',
-                SUBMIT: 'Créer le compte',
-                GOT_AN_ACCOUNT: 'Déjà un compte ?',
-                PWD_FORGOTTEN: 'Mot de passe oublié ?',
-                LOG_IN_ERROR: 'l\'identifiant et/ou le mot de passe n\'existe pas',
+                REGISTER: "S'inscrire",
+                LOG_IN: "Se connecter",
+                FULL_NAME: "Nom complet",
+                USERNAME: "Identifiant",
+                EMAIL: "E-mail",
+                PASSWORD: "Mot de passe",
+                CONFIRM_PASSWORD: "Confirmer le mot de passe",
+                CGU: "J'accepte les <a href=\"\" tabindex=\"-1\">conditions d'utilisation</a> du site.",
+                SUBMIT: "Créer le compte",
+                GOT_AN_ACCOUNT: "Déjà un compte ?",
+                PWD_FORGOTTEN: "Mot de passe oublié ?",
+                LOG_IN_ERROR: "L'identifiant et/ou le mot de passe n'existe pas",
                 REGISTER_ERROR: {
-                    INVALID_EMAIL_ADDRESS: "l'adresse e-mail est incorrecte",
-                    USERNAME_ALREADY_EXISTS: "l'identifiant est déjà utilisé",
-                    PASSWORD: "le mot de passe est trop court",
-                    PASSWORD_MATCH: "les mots de passe ne correspondent pas",
-                    ACCEPT_CGU: "vous devez accepter les Conditions générales d'utilisation",
-                    DEFAULT_ERROR: "une erreur est survenue lors de l'inscription"
+                    INVALID_EMAIL_ADDRESS: "L'adresse e-mail est incorrecte",
+                    USERNAME_ALREADY_EXISTS: "L'identifiant est déjà utilisé",
+                    PASSWORD: "Le mot de passe est trop court",
+                    PASSWORD_MATCH: "Les mots de passe ne correspondent pas",
+                    ACCEPT_CGU: "Vous devez accepter les Conditions générales d'utilisation",
+                    DEFAULT_ERROR: "Une erreur est survenue lors de l'inscription"
                 },
                 RESET_PASSWORD: 'Réinitialiser le mot de passe',
                 RESET_PASSWORD_MESSAGE: {
@@ -157,19 +157,18 @@ define([],
                         DASHBOARD: "Mon tableau de bord",
                         ACCOUNT: "Mon compte",
                         PASSWORD: "Mon mot de passe",
-                        PARAMETERS: "Paramètres",
                         TUTORING: "Tutorat"
                     },
                     SAVE_MODIFICATIONS: 'Sauvegarder les modifications',
                     ACCOUNT: {
-                        PROFILE_TITLE: 'RÉGLAGES DU COMPTE',
+                        PROFILE_TITLE: 'Réglages du compte',
                         INSERT_IMG: 'Insérez un fichier',
                         PROFILE_PICTURE: 'Photo de profil',
                         SAVE_SUCCESS_MESSAGE: 'Vos modifications ont été enregistrées',
-                        SAVE_FAIL_MESSAGE: 'Erreur lors de l\'enregistrement : Merci de vérifier les données'
+                        SAVE_FAIL_MESSAGE: "Erreur lors de l'enregistrement : Merci de vérifier les données"
                     },
                     PASSWORD: {
-                        TITLE: "MON MOT DE PASSE",
+                        TITLE: "Mon mot de passe",
                         CURRENT_PASSWORD: "Mot de passe actuel",
                         NEW_PASSWORD: "Nouveau mot de passe",
                         CONFIRM_NEW_PASSWORD: "Confirmer le nouveau mot de passe",
@@ -178,10 +177,10 @@ define([],
                         CURRENT_PASSWORD_ERROR: 'Le mot de passe actuel est erroné',
                         ERROR_NEW_PASSWORD: 'Le nouveau mot de passe ne peut être vide',
                         ERROR_CONFIRM_NEW_PASSWORD: 'La confirmation du mot de passe ne correspond pas au nouveau mot de passe',
-                        SAVE_FAIL_MESSAGE: 'Erreur lors de l\'enregistrement : Merci de vérifier les données'
+                        SAVE_FAIL_MESSAGE: "Erreur lors de l'enregistrement : Merci de vérifier les données"
                     },
                     DASHBOARD: {
-                        TITLE: 'MON TABLEAU DE BORD',
+                        TITLE: 'Mon tableau de bord',
                         TABLET_ALL_TRACKS_LIST: "LISTE DES PARCOURS",
                         ANALYTICS: {
                             NB_VISITS: "Vu [%NB_VISIT%] fois",
@@ -194,12 +193,13 @@ define([],
                         }
                     },
                     TUTORING: {
-                        SEARCH_USER_TITLE: "TUTORAT",
+                        TITLE: "Tutorat",
                         SEARCHED_USERNAME: "Trouver un tuteur ou un élève",
                         SEARCHED_USERNAME_PLACEHOLDER: "Entrer l'identifiant exact",
                         SEARCH_BUTTON: "Rechercher",
                         TUTOR_BUTTON: "Tuteur",
                         STUDENT_BUTTON: "Elève",
+                        SEARCH_RESULT_PENDING_REQUEST: "Demande en attente",
                         SEARCH_RESULT_ADD_TUTOR: "Ajouter comme tuteur",
                         SEARCH_RESULT_CANCEL_TUTOR: "Annuler la demande de tutorat",
                         SEARCH_RESULT_REMOVE_TUTOR: "Retirer ce tuteur",
@@ -216,13 +216,14 @@ define([],
                         CONFIRM_CANCEL_STUDENT: "Êtes-vous sûr de vouloir annuler cette demande ?",
 
                         TUTORS_LIST: "Liste de mes tuteurs",
+                        SHOW_TUTORS_LIST: "Afficher la liste",
                         REMOVE_TUTOR: "Retirer"
                     }
                 }
             },
 
             SEARCH: {
-                RESULTS_FOR: "RESULTATS DE LA RECHERCHE POUR "
+                RESULTS_FOR: "Résultats de la recherche pour "
             }
 
         };

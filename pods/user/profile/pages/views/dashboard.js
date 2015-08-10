@@ -19,15 +19,11 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
-
             id: 'user-profile-dashboard-container',
 
-            template: _.template(dashboardTemplate),
+            className: 'panel panel-default',
 
-            'events': {
-                'click a.track': 'onTrackSelected'
-            },
+            template: _.template(dashboardTemplate),
 
             currentTrackIndex: 0,
 
@@ -37,8 +33,11 @@ define(
 
                 var self = this;
                 this.model.fetch().done(function(data){
-                    var dashboardDetailsView = new DashboardDetailsView({model: self.model});
-                    self.$el.append(dashboardDetailsView.render());
+                    var dashboardDetailsView = new DashboardDetailsView({
+                        model: self.model,
+                        el: self.$('#dashboard-details')
+                    });
+                    dashboardDetailsView.render();
                 });
 
                 return this;

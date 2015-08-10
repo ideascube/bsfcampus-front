@@ -1,5 +1,12 @@
-<h1><%= resource.title %></h1>
-
 <p><%= resource.description %></p>
 
-<a href="<%= resource.resource_content.content_file_url %>" download="<%= resource.resource_content.content_file_name %>" id="resource-download-link"><img src="<%= config.imagesDict.download %>" class="download-arrow"><%= config.stringsDict.DOWNLOAD_FILE %></a>
+<div class="row">
+    <div class="col-md-9 col-center">
+        <a href="<%= resource.resource_content.content_file_url %>"
+           download="<%= resource.resource_content.content_file_name %>"
+           class="btn btn-primary btn-lg btn-block btn-resource-download-link">
+            <img src="<%= config.imagesDict.download %>" class="download-arrow">
+            <%= config.stringsDict.DOWNLOAD_FILE %>
+        </a>
+    </div>
+</div>

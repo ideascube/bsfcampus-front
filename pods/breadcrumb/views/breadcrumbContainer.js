@@ -33,7 +33,7 @@ define(
 					var renderedElement = this.getRenderedElement(element);
 					if (index == list.length - 1)
 					{
-						var currentHTML = renderedElement.$el.find('a').html();
+						var currentHTML = renderedElement.$('a').html();
 						renderedElement.$el.html(currentHTML);
 						renderedElement.$el.addClass('active');
 					}

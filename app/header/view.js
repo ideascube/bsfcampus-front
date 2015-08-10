@@ -9,7 +9,9 @@ define(
 
         'app/header/notifications/view',
 
-        'text!app/header/template.html'
+        'text!app/header/template.html',
+
+        'less!app/header/style'
     ],
     function ($, _, Backbone, Config,
               currentUser,
@@ -35,8 +37,10 @@ define(
                 var html = this.template({currentUser: currentUser.forTemplate(), config: Config});
                 this.$el.html(html);
 
-                this.$notificationsList = this.$el.find("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");
-                this.$notificationsList.html('');
+                this.$notificationsList = this.$("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");
+                this.$notificationsList.empty();
+
+                this.firstNotificationRendered = false;
                 var notAcknowledgedTutorRequests = currentUser.get('not_acknowledged_tutors');
                 _.each(notAcknowledgedTutorRequests, this.renderNotAcknowledgedTutorNotification, this);
                 var notAcknowledgedStudentRequests = currentUser.get('not_acknowledged_students');
@@ -49,15 +53,44 @@ define(
                 this.updateHeaderButtonFocus(this.currentFocusedElement);
             },
 
-            renderNotAcknowledgedTutorNotification: function(user) {
+            renderNotification: function(user, isTutorRequest, isAcknowledged) {
                 var notificationView = new NotificationView();
                 notificationView.user = user;
-                notificationView.isTutorRequest = true;
-                notificationView.isAcknowledgeNotification = true;
+                notificationView.isTutorRequest = isTutorRequest;
+                notificationView.isAcknowledgeNotification = isAcknowledged;
+                notificationView.render();
 
-                this.$notificationsList.append(notificationView.render());
+                if (this.firstNotificationRendered) {
+                    this.$notificationsList.append('<li class="divider"></li>');
+                } else {
+                    this.firstNotificationRendered = true;
+                }
 
+                this.$notificationsList.append(notificationView.$el);
+
+                return notificationView;
+            },
+
+            renderNotAcknowledgedTutorNotification: function(user) {
+                var notificationView = this.renderNotification(user, true, true);
                 this.listenTo(notificationView, 'acknowledge', this.acknowledgeTutorNotification);
+            },
+
+            renderNotAcknowledgedStudentNotification: function(user) {
+                var notificationView = this.renderNotification(user, false, true);
+                this.listenTo(notificationView, 'acknowledge', this.acknowledgeStudentNotification);
+            },
+
+            renderTutorRequestNotification: function(user) {
+                var notificationView = this.renderNotification(user, true, false);
+                this.listenTo(notificationView, 'accept', this.acceptTutorRequest);
+                this.listenTo(notificationView, 'decline', this.declineTutorRequest);
+            },
+
+            renderTutoredStudentRequestNotification: function(user) {
+                var notificationView = this.renderNotification(user, false, false);
+                this.listenTo(notificationView, 'accept', this.acceptTutoredStudentRequest);
+                this.listenTo(notificationView, 'decline', this.declineTutoredStudentRequest);
             },
 
             acknowledgeTutorNotification: function(notification, userId) {
@@ -72,18 +105,7 @@ define(
                         currentUser.set(currentUser.parse(response));
                     }, function(error) {
                         console.log("Error while acknowledging the tutor notification:", error );
-                });
-            },
-
-            renderNotAcknowledgedStudentNotification: function(user) {
-                var notificationView = new NotificationView();
-                notificationView.user = user;
-                notificationView.isTutorRequest = false;
-                notificationView.isAcknowledgeNotification = true;
-
-                this.$notificationsList.append(notificationView.render());
-
-                this.listenTo(notificationView, 'acknowledge', this.acknowledgeStudentNotification);
+                    });
             },
 
             acknowledgeStudentNotification: function(notification, userId) {
@@ -98,18 +120,6 @@ define(
                 }, function (error) {
                     console.log("Error while acknowledging the student notification:", error );
                 });
-            },
-
-            renderTutorRequestNotification: function(user) {
-                var notificationView = new NotificationView();
-                notificationView.user = user;
-                notificationView.isTutorRequest = true;
-                notificationView.isAcknowledgeNotification = false;
-
-                this.$notificationsList.append(notificationView.render());
-
-                this.listenTo(notificationView, 'accept', this.acceptTutorRequest);
-                this.listenTo(notificationView, 'decline', this.declineTutorRequest);
             },
 
             acceptTutorRequest: function(notification, requestingUserId) {
@@ -138,18 +148,6 @@ define(
                 }, function (error) {
                     console.log("Error while accepting the tutor request:", error.responseJSON.data.error_message );
                 });
-            },
-
-            renderTutoredStudentRequestNotification: function(user) {
-                var notificationView = new NotificationView();
-                notificationView.user = user;
-                notificationView.isTutorRequest = false;
-                notificationView.isAcknowledgeNotification = false;
-
-                this.$notificationsList.append(notificationView.render());
-
-                this.listenTo(notificationView, 'accept', this.acceptTutoredStudentRequest);
-                this.listenTo(notificationView, 'decline', this.declineTutoredStudentRequest);
             },
 
             acceptTutoredStudentRequest: function(notification, requestingUserId) {
@@ -187,9 +185,9 @@ define(
             },
 
             resetHeaderButtonFocus: function () {
-                this.$el.find('#navbar-home-btn').removeClass('focus');
-                this.$el.find('#navbar-tracks-btn').removeClass('focus');
-                this.$el.find('#navbar-user-btn').removeClass('focus');
+                this.$('#navbar-home-btn').removeClass('focus');
+                this.$('#navbar-tracks-btn').removeClass('focus');
+                this.$('#navbar-user-btn').removeClass('focus');
             },
 
             updateHeaderButtonFocus: function (element) {
@@ -209,7 +207,7 @@ define(
                 }
                 if (buttonId != null)
                 {
-                    this.$el.find(buttonId).addClass('focus');
+                    this.$(buttonId).addClass('focus');
                 }
             },
 

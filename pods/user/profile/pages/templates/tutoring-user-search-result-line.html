@@ -1,3 +1,16 @@
-<p class="result-user"><%= user.full_name %><!-- <span><%= user.user_name %></span> --></p>
-<button class="btn tutor"><%= config.stringsDict.USER.PROFILE.TUTORING.TUTOR_BUTTON %></button>
-<button class="btn student"><%= config.stringsDict.USER.PROFILE.TUTORING.STUDENT_BUTTON %></button>
+<div class="col-sm-4">
+    <p class="result-user">
+        <%= user.full_name %>
+        <!-- <span><%= user.user_name %></span> -->
+    </p>
+</div>
+<div class="col-sm-3">
+    <button class="btn btn-bordered btn-block btn-tutor-action">
+        <%= config.stringsDict.USER.PROFILE.TUTORING.TUTOR_BUTTON %>
+    </button>
+</div>
+<div class="col-sm-3">
+    <button class="btn btn-bordered btn-block btn-student-action">
+        <%= config.stringsDict.USER.PROFILE.TUTORING.STUDENT_BUTTON %>
+    </button>
+</div>

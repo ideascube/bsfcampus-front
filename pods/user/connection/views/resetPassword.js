@@ -15,8 +15,6 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
-
             template: _.template(resetPasswordTemplate),
 
             events: {
@@ -27,11 +25,15 @@ define(
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
+                this.$resetError = this.$("#register-error");
+
                 return this;
             },
 
             submit: function (e) {
                 e.preventDefault();
+
+                this.$resetError.empty();
 
                 var formData = JSON.stringify(this.$('form').serializeObject());
                 var username = this.$('form #username').val();
@@ -48,22 +50,21 @@ define(
                     alert(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.PASSWORD_SENT);
                     self.trigger('close');
                 }).fail(function (error) {
-                    self.$el.find('form .error').removeClass('error');
-                    var $registerError = self.$el.find('#reset-error');
+                    self.$('form .has-error').removeClass('has-error');
                     switch (error.responseJSON.code){
                         case Config.constants.resetPasswordErrorsCode.LOCAL_SERVER:
                             $registerError.html(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.LOCAL_SERVER);
                             break;
                         case Config.constants.resetPasswordErrorsCode.INVALID_EMAIL_ADDRESS:
-                            self.$el.find('form input#email').addClass('error');
-                            $registerError.html(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.INVALID_EMAIL_ADDRESS);
+                            self.$('form input#email').closest('.form-control').addClass('has-error');
+                            self.$registerError.html(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.INVALID_EMAIL_ADDRESS);
                             break;
                         case Config.constants.resetPasswordErrorsCode.INVALID_USERNAME:
-                            self.$el.find('form input#username').addClass('error');
-                            $registerError.html(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.INVALID_USERNAME);
+                            self.$('form input#username').closest('.form-control').addClass('has-error');
+                            self.$registerError.html(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.INVALID_USERNAME);
                             break;
                         default:
-                            $registerError.html(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.DEFAULT_ERROR);
+                            self.$registerError.html(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.DEFAULT_ERROR);
                             break;
                     }
                 });

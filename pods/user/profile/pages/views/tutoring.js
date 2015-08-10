@@ -26,15 +26,15 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
-
             id: 'user-profile-tutoring-container',
+
+            className: 'panel panel-default',
 
             template: _.template(tutoringTemplate),
 
             events: {
                 'submit form': 'searchUser',
-                'click #tutoring-tutors-list #tutors-list-collapse a': 'removeTutorFromGroup',
+                'click #tutors-list .btn-remove-tutor': 'removeTutorFromGroup',
                 'click #tutoring-student-dashboard .dropdown > ul.dropdown-menu > li > a': 'selectStudent'
             },
 
@@ -43,64 +43,39 @@ define(
                 this.$el.html(html);
 
                 var tutors = currentUser.get('tutors');
-                if (tutors.length == 0)
-                {
-                    this.$('#tutoring-search-user-block').removeClass('border-bottom');
-                    this.$('#tutoring-tutors-list').hide();
-                }
-                else
-                {
-                    this.$('#tutoring-search-user-block').addClass('border-bottom');
-                    this.$('#tutoring-tutors-list').show();
+                if (tutors.length == 0) {
+                    this.$('#tutors-block').hide();
+                } else {
                     _.each(tutors, this.addTutorToGroup, this);
                 }
-                var tutoredStudents = currentUser.get('students');
-                if (tutoredStudents.length == 0)
-                {
-                    if (tutors.length == 0)
-                    {
-                        this.$('#tutoring-search-user-block').removeClass('border-bottom');
-                    }
-                    else
-                    {
-                        this.$('#tutoring-tutors-list').removeClass('border-bottom');
-                    }
-                    this.$('#tutoring-student-dashboard').hide();
-                }
-                else
-                {
-                    if (tutors.length == 0)
-                    {
-                        this.$('#tutoring-search-user-block').addClass('border-bottom');
-                    }
-                    else
-                    {
-                        this.$('#tutoring-tutors-list').addClass('border-bottom');
-                    }
-                    this.$('#tutoring-student-dashboard').show();
-                    _.each(tutoredStudents, this.addStudentToDropdown, this);
+
+                var students = currentUser.get('students');
+                if (students.length == 0) {
+                    this.$('#students-block').hide();
+                } else {
+                    _.each(students, this.addStudentToDropdown, this);
                 }
 
                 return this;
             },
 
-            addTutorToGroup: function(userSON) {
+            addTutorToGroup: function (userSON) {
                 var user = new User({data: userSON}, {parse: true});
                 var tutorLineView = new TutorLineView({model: user});
                 tutorLineView.render();
-                this.$el.find('#tutoring-tutors-list #tutors-list-collapse').append(tutorLineView.$el);
+                this.$('#tutors-list').append(tutorLineView.$el);
             },
 
-            addStudentToDropdown: function(user) {
+            addStudentToDropdown: function (user) {
                 var $studentUserHtml = _.template(tutoringDropdownLineTemplate)({user: user});
-                this.$el.find('#tutoring-student-dashboard .dropdown > ul.dropdown-menu').append($studentUserHtml);
+                this.$('#students-block .dropdown > ul.dropdown-menu').append($studentUserHtml);
             },
 
             searchUser: function (e) {
                 e.preventDefault();
 
                 var $form = $(e.currentTarget);
-                var searchedUsername = $form.find('#user_search').val();
+                var searchedUsername = $form.find('#user-search').val();
 
                 var self = this;
                 var endpointUrl = Config.constants.serverGateway + "/search/user";
@@ -122,13 +97,11 @@ define(
 
             renderSearchResults: function (usersList) {
                 this.$searchResultsList = this.$('#tutoring-user-search-results');
-                if (usersList.length > 0)
-                {
+                if (usersList.length > 0) {
                     this.$searchResultsList.empty();
                     _.each(usersList, this.renderSingleUserResult, this);
                 }
-                else
-                {
+                else {
                     this.$searchResultsList.html(Config.stringsDict.USER.PROFILE.TUTORING.SEARCH_NO_RESULT);
                 }
             },
@@ -150,7 +123,7 @@ define(
                 this.listenTo(userSearchResultLineView, 'removeStudent', this.removeStudent);
             },
 
-            removeTutorFromGroup: function(e) {
+            removeTutorFromGroup: function (e) {
                 e.preventDefault();
 
 
@@ -164,15 +137,13 @@ define(
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
-                })
-                    .done(function (result) {
-                        console.log("add tutor request successful:", result.data);
-                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                        self.$el.find('form').submit();
-                    })
-                    .fail(function (error) {
-                        console.log("add tutor request failed:", error['responseJSON']['error_message']);
-                    });
+                }).done(function (result) {
+                    console.log("add tutor request successful:", result.data);
+                    // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                    self.$('form').submit();
+                }).fail(function (error) {
+                    console.log("add tutor request failed:", error['responseJSON']['error_message']);
+                });
             },
 
             cancelTutorRequest: function (userId) {
@@ -186,15 +157,13 @@ define(
                         type: 'POST',
                         url: endpointUrl,
                         dataType: 'json'
-                    })
-                        .done(function (result) {
-                            console.log("cancel tutor request successful:", result.data);
-                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                            self.$el.find('form').submit();
-                        })
-                        .fail(function (error) {
-                            console.log("cancel tutor request failed:", error['responseJSON']['error_message']);
-                        });
+                    }).done(function (result) {
+                        console.log("cancel tutor request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$('form').submit();
+                    }).fail(function (error) {
+                        console.log("cancel tutor request failed:", error['responseJSON']['error_message']);
+                    });
                 }
             },
 
@@ -209,15 +178,13 @@ define(
                         type: 'POST',
                         url: endpointUrl,
                         dataType: 'json'
-                    })
-                        .done(function (result) {
-                            console.log("remove tutor request successful:", result.data);
-                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                            self.$el.find('form').submit();
-                        })
-                        .fail(function (error) {
-                            console.log("remove tutor request failed:", error['responseJSON']['error_message']);
-                        });
+                    }).done(function (result) {
+                        console.log("remove tutor request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$('form').submit();
+                    }).fail(function (error) {
+                        console.log("remove tutor request failed:", error['responseJSON']['error_message']);
+                    });
                 }
             },
 
@@ -229,15 +196,13 @@ define(
                     type: 'POST',
                     url: endpointUrl,
                     dataType: 'json'
-                })
-                    .done(function (result) {
-                        console.log("add student request successful:", result.data);
-                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                        self.$el.find('form').submit();
-                    })
-                    .fail(function (error) {
-                        console.log("add student request failed:", error['responseJSON']['error_message']);
-                    });
+                }).done(function (result) {
+                    console.log("add student request successful:", result.data);
+                    // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                    self.$('form').submit();
+                }).fail(function (error) {
+                    console.log("add student request failed:", error['responseJSON']['error_message']);
+                });
             },
 
             cancelStudentRequest: function (userId) {
@@ -250,15 +215,13 @@ define(
                         type: 'POST',
                         url: endpointUrl,
                         dataType: 'json'
-                    })
-                        .done(function (result) {
-                            console.log("cancel student request successful:", result.data);
-                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                            self.$el.find('form').submit();
-                        })
-                        .fail(function (error) {
-                            console.log("cancel student request failed:", error['responseJSON']['error_message']);
-                        });
+                    }).done(function (result) {
+                        console.log("cancel student request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$('form').submit();
+                    }).fail(function (error) {
+                        console.log("cancel student request failed:", error['responseJSON']['error_message']);
+                    });
                 }
             },
 
@@ -273,31 +236,32 @@ define(
                         type: 'POST',
                         url: endpointUrl,
                         dataType: 'json'
-                    })
-                        .done(function (result) {
-                            console.log("remove student request successful:", result.data);
-                            // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
-                            self.$el.find('form').submit();
-                        })
-                        .fail(function (error) {
-                            console.log("remove student request failed:", error['responseJSON']['error_message']);
-                        });
+                    }).done(function (result) {
+                        console.log("remove student request successful:", result.data);
+                        // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
+                        self.$('form').submit();
+                    }).fail(function (error) {
+                        console.log("remove student request failed:", error['responseJSON']['error_message']);
+                    });
                 }
             },
 
-            selectStudent: function(e) {
+            selectStudent: function (e) {
                 e.preventDefault();
 
                 var $userLine = $(e.currentTarget);
-                var selectedUserId = $userLine.attr('data-user-id');
-                this.$el.find('#dropdown-student-menu > p').html($userLine.html());
+                var selectedUserId = $userLine.data('user');
+                this.$('#selected-student').html($userLine.html());
 
                 var dashboardUserModel = new DashboardModel({_id: selectedUserId});
-                this.$el.find('.dashboard-details').remove();
+                this.$('#student-dashboard-details').empty();
                 var self = this;
-                dashboardUserModel.fetch().done(function(data){
-                    var dashboardDetailsView = new DashboardDetailsView({model: dashboardUserModel});
-                    self.$el.find('#tutoring-student-dashboard').append(dashboardDetailsView.render());
+                dashboardUserModel.fetch().done(function (data) {
+                    var dashboardDetailsView = new DashboardDetailsView({
+                        model: dashboardUserModel,
+                        el: self.$('#student-dashboard-details')
+                    });
+                    dashboardDetailsView.render();
                 });
 
             }

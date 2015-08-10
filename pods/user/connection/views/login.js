@@ -18,31 +18,27 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
-
             template: _.template(loginTemplate),
 
             events: {
-                'submit #login-modal form': 'submit'
+                'submit form': 'submit'
             },
 
             render: function () {
                 var html = this.template({config: Config});
                 this.$el.html(html);
 
-                return this;
-            },
+                this.$loginError = this.$("#login-error");
 
-            traceUser: function (currentUser) {
-                console.log(currentUser.forTemplate());
+                return this;
             },
 
             submit: function (e) {
                 e.preventDefault();
 
-                var username = this.$('form input#username').val();
-                var password = this.$('form input#password').val();
-                this.$el.find(".login-error").addClass('hide');
+                var username = this.$('form #username').val();
+                var password = this.$('form #password').val();
+                this.$loginError.empty();
 
                 var self = this;
 
@@ -52,8 +48,8 @@ define(
                         self.trigger('close');
                     })
                     .fail(function(error){
+                        self.$loginError.html(Config.stringsDict.USER.LOG_IN_ERROR);
                         console.log("Could not submit login data", error);
-                        self.$el.find(".login-error").removeClass('hide');
                     });
             }
         });

@@ -17,7 +17,7 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
+            className: 'panel panel-default',
 
             id: "user-profile-menu",
 
@@ -37,8 +37,8 @@ define(
             },
 
             changeSelectedPage: function (newSelectionId) {
-                this.$el.find('#'+this.currentSelectionId).removeClass('selected');
-                this.$el.find('#'+newSelectionId).addClass('selected');
+                this.$('#'+this.currentSelectionId).removeClass('active');
+                this.$('#'+newSelectionId).addClass('active');
                 this.currentSelectionId = newSelectionId;
                 this.trigger('onRenderNavContentPage', newSelectionId);
             },

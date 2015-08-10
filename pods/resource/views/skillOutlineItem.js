@@ -9,7 +9,7 @@ define(
 		'pods/resource/views/lessonOutlineItem',
 		'text!pods/resource/templates/skill-outline-item.html',
 		
-		'pods/lesson/model',
+		'pods/lesson/model'
 	],
 	function($, _, Backbone, Config,
 		ResourceModel, LessonOutlineItemView, skillOutlineItemTemplate,
@@ -20,23 +20,24 @@ define(
 
 			model: LessonModel,
 
-			tagName: 'div',
-
 			className: 'panel panel-default',
-
-			id: function() {
-				return 'lesson-' + this.model.id + '-outline';
-			},
 			
 			template: _.template(skillOutlineItemTemplate),
 
 			render: function() {
-				var son = this.model.forTemplate();
-				var lesson = this.currentResource.get('parent');
-                son.active = this.model.id === lesson._id;
-				var html = this.template({lesson: son, config: Config});
+				var currentLesson = this.currentResource.get('parent');
+                var html = this.template({
+					lesson: this.model.forTemplate(),
+					config: Config
+				});
 				this.$el.html(html);
 
+				if (this.model.id === currentLesson._id) {
+					this.$('.collapse').addClass('in');
+					this.$('[data-toggle="collapse"]').attr('aria-expanded', 'true');
+				}
+
+                this.$('.lesson-outline').empty();
 				_.each(this.model.get('resources').models, this.renderResource, this);
 
 				return this;
@@ -49,7 +50,7 @@ define(
 					lessonOutlineItemView.$el.addClass('active');
 				}
 				
-				this.$el.find('.lesson-outline').append(lessonOutlineItemView.$el);
+				this.$('.lesson-outline').append(lessonOutlineItemView.$el);
 
 				return this;
 			}

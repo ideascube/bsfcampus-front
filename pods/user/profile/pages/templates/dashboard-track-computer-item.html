@@ -1,18 +1,17 @@
-<div class="div_theme col-xs-12 col-md-12 col-lg-12">
-    <a href="<%= track.route %>" class="track media <%= track.validatedStatus %>" index="<%= index %>">
-        <div class="media-left media-middle">
-            <img src="<%= track.icon_url %>" class="icon_track custom-media" alt="Icon">
-        </div>
-        <div class="title media-body">
-            <h4 class="media-heading <%= track.validationClass %>"><%= track.title %><img src="<%= config.imagesDict.checkFull %>" class="circle check"></h4>
-            <p><%= analytics.nbVisitsMessage %></p>
-            <% if (analytics.lastAttempt != null) { %>
-            <p><%= analytics.lastAttempt.score %> / <%= analytics.lastAttempt.nb_questions %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_LAST_ATTEMPT_SCORE %></p>
-            <% } %>
-            <% if (analytics.averageTime != null) { %>
-            <p><%= analytics.averageTime %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_TEST_AVERAGE_TIME %></p>
-            <% } %>
-        </div>
-    </a>
-    <div class="link_border_bottom col-lg-10 col-lg-offset-1"></div>
+<div class="media-left media-top track-icon">
+    <div class="track-icon-wrapper">
+        <img src="<%= track.icon_url %>" class="media-object img-responsive block-center" />
+    </div>
+</div>
+<div class="media-body">
+    <h4 class="media-heading <%= track.validationClass %>">
+        <%= track.title %>
+    </h4>
+    <p><%= analytics.nbVisitsMessage %></p>
+    <% if (analytics.lastAttempt != null) { %>
+    <p><%= analytics.lastAttempt.score %> / <%= analytics.lastAttempt.nb_questions %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_LAST_ATTEMPT_SCORE %></p>
+    <% } %>
+    <% if (analytics.averageTime != null) { %>
+    <p><%= analytics.averageTime %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_TEST_AVERAGE_TIME %></p>
+    <% } %>
 </div>
