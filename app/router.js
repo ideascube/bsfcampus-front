@@ -12,7 +12,10 @@ define(
 
         'pods/user/models/current',
         'pods/user/collections/user',
-        'app/misc-analytic-model',
+        'pods/analytics/models/misc',
+        'pods/analytics/models/visited-resource',
+        'pods/analytics/models/visited-skill',
+        'pods/analytics/models/visited-track',
         'pods/track/collection',
         'pods/track/model',
         'pods/skill/collection',
@@ -45,7 +48,9 @@ define(
     ],
     function ($, _, Backbone, VM, DS, Config,
               AbstractCollection, AbstractModel,
-              currentUser, UserCollection, MiscAnalyticsModel, TrackCollection, TrackModel, SkillCollection, SkillModel,
+              currentUser, UserCollection,
+              MiscAnalyticsModel, VisitedResourceAnalyticsModel, VisitedSkillAnalyticsModel, VisitedTrackAnalyticsModel,
+              TrackCollection, TrackModel, SkillCollection, SkillModel,
               LessonCollection, LessonModel, ResourceCollection, ResourceModel, StaticPageCollection, StaticPageModel,
               AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, ResetPasswordView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView, ResourceDetailView,
@@ -376,6 +381,10 @@ define(
                     var trackDetailView = new TrackDetailView({model: model});
                     trackDetailView.render();
                     $('#main').append(trackDetailView.$el);
+
+                    var analytics = new VisitedTrackAnalyticsModel();
+                    analytics.id = id;
+                    analytics.save();
                 });
             },
 
@@ -390,6 +399,10 @@ define(
                     var skillDetailView = new SkillDetailView({model: model});
                     skillDetailView.render();
                     $('#main').append(skillDetailView.$el);
+
+                    var analytics = new VisitedSkillAnalyticsModel();
+                    analytics.id = id;
+                    analytics.save();
                 });
             },
 
@@ -417,6 +430,10 @@ define(
                     var resourceDetailView = new ResourceDetailView({model: model});
                     resourceDetailView.render();
                     $('#main').append(resourceDetailView.$el);
+
+                    var analytics = new VisitedResourceAnalyticsModel();
+                    analytics.id = id;
+                    analytics.save();
                 }, function (error) {
                     // error
                 });

@@ -5,6 +5,8 @@ define(
         'backbone',
         'app/config',
 
+        'pods/analytics/models/visited-dashboard',
+
         'pods/user/models/current',
         'pods/user/models/dashboard',
 
@@ -19,7 +21,7 @@ define(
         'less!pods/user/profile/styles/profile'
     ],
     function($, _, Backbone, Config,
-             currentUser, DashboardModel,
+             VisitedDashboardAnalyticsModel, currentUser, DashboardModel,
              NavMenuView, AccountView, DashboardView, PasswordView, TutoringView,
              profileTemplate
     ) {
@@ -57,6 +59,10 @@ define(
                     case Config.constants.userProfile.DASHBOARD:
                         var dashboardUserModel = new DashboardModel({_id: currentUser.id});
                         profileDetailPageView = new DashboardView({model: dashboardUserModel});
+
+                        var analytics = new VisitedDashboardAnalyticsModel();
+                        analytics.id = currentUser.id;
+                        analytics.save();
                         break;
                     case Config.constants.userProfile.ACCOUNT:
                         profileDetailPageView = new AccountView();

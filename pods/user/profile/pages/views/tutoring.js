@@ -7,6 +7,7 @@ define(
 
         'pods/user/models/current',
         'pods/user/models/user',
+        'pods/analytics/models/visited-dashboard',
         'pods/user/models/dashboard',
 
         'pods/user/profile/pages/views/tutoring-user-search-result-line',
@@ -20,7 +21,7 @@ define(
         'less!pods/user/profile/pages/styles/dashboard'
     ],
     function ($, _, Backbone, Config,
-              currentUser, User, DashboardModel,
+              currentUser, User, VisitedDashboardAnalyticsModel, DashboardModel,
               UserSearchResultLineView, TutorLineView, DashboardDetailsView,
               tutoringTemplate, tutoringDropdownLineTemplate) {
 
@@ -262,6 +263,10 @@ define(
                         el: self.$('#student-dashboard-details')
                     });
                     dashboardDetailsView.render();
+
+                    var analytics = new VisitedDashboardAnalyticsModel();
+                    analytics.id = selectedUserId;
+                    analytics.save();
                 });
 
             }
