@@ -59,13 +59,13 @@ define(
 
                 var self = this;
 
-                var skillsCollection = DS.filter(Config.constants.dsResourceNames.SKILL, function(skillModel) {
+                var skillsCollection = DS.filter(Config.constants.dsResourceNames.SKILLS, function(skillModel) {
                     return _.some(trackModel.skills, function (skill) {
                         return skill._id == skillModel.id;
                     })
                 });
                 var areSkillsIncomplete = _.some(skillsCollection.models, function(skillModel) {
-                    return DS.isIncomplete(Config.constants.dsResourceNames.SKILL, skillModel.id);
+                    return DS.isIncomplete(Config.constants.dsResourceNames.SKILLS, skillModel.id);
                 });
                 if (!areSkillsIncomplete && skillsCollection.length > 0)
                 {
@@ -76,7 +76,10 @@ define(
                     skillsCollection = new SkillTrackCollection();
                     skillsCollection.meta('track_id', this.model.id);
                     skillsCollection.fetch().then(function(){
-                        DS.inject(Config.constants.dsResourceNames.SKILL, skillsCollection.models);
+                        DS.inject(Config.constants.dsResourceNames.SKILLS, skillsCollection.models);
+                        _.each(skillsCollection.models, function(skillModel) {
+                            DS.setComplete(Config.constants.dsResourceNames.SKILLS, skillModel.id, true);
+                        });
                         self.renderSkills(skillsCollection);
                     });
                 }

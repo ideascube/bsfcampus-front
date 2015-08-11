@@ -24,7 +24,7 @@ define(
 
             render: function () {
                 var self = this;
-                DS.find(Config.constants.dsResourceNames.TRACK, this.trackId).then(function (trackModel) {
+                DS.find(Config.constants.dsResourceNames.TRACKS, this.trackId).then(function (trackModel) {
                     var html = self.template({track: trackModel.forTemplate(), config: Config});
                     self.$el.html(html);
                 });

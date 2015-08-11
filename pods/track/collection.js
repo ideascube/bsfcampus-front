@@ -18,7 +18,7 @@ define(
 
 			model: TrackModel,
 
-            dsResourceName: Config.constants.dsResourceNames.TRACK,
+            dsResourceName: Config.constants.dsResourceNames.TRACKS,
 
 			serverPath: '/hierarchy/tracks'
 

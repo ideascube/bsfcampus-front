@@ -15,7 +15,7 @@ define(
 			
 			serverPath: '/resources',
 
-            dsResourceName: Config.constants.dsResourceNames.RESOURCE,
+            dsResourceName: Config.constants.dsResourceNames.RESOURCES,
 
 			hierarchyUrl: function() {
 				return this.url() + '/hierarchy';

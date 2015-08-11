@@ -69,10 +69,10 @@ define(['config'],
 
             dsResourceNames: {
                 STATIC_PAGE: 'static-page',
-                TRACK: 'track',
-                SKILL: 'skill',
-                LESSON: 'lesson',
-                RESOURCE: 'resource',
+                TRACKS: 'tracks',
+                SKILLS: 'skills',
+                LESSONS: 'lessons',
+                RESOURCES: 'resources',
                 USER: 'user'
             }
 

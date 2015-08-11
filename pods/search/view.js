@@ -40,7 +40,7 @@ define(
                 var route = "#/" + result.type + "/" + model.id;
                 var $result = $(this.resultTemplate({route: route, result: result, config: Config}));
                 var document = result['document'];
-                var breadcrumbArray = document['breadcrumb'];
+                var breadcrumbArray = document['hierarchy'];
                 var $breadcrumb = $result.find('ol.breadcrumb');
                 for (var i = 0; i < breadcrumbArray.length-1; i++)
                 {

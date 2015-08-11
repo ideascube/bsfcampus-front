@@ -18,7 +18,7 @@ define(
 
             model: ResourceModel,
 
-            dsResourceName: Config.constants.dsResourceNames.RESOURCE,
+            dsResourceName: Config.constants.dsResourceNames.RESOURCES,
 
             serverPath: '/resources'
 

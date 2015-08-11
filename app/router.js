@@ -55,8 +55,21 @@ define(
         var AppRouter = Backbone.Router.extend({
 
             initialize: function() {
+                console.log('router.initialize');
+
+                var self = this;
+
                 this.$modal = $('#modal');
                 this.resetDataStore();
+                this.getDataStoreSkeletonData().done(function (response) {
+                    console.log("the hierarchy skeleton has been returned");
+                    console.log(JSON.stringify(response.data));
+
+                    self.initDataStoreSkeletonContent(response.data);
+                }).fail(function (error) {
+                    console.log("the hierarchy skeleton could not be gotten:", error);
+                    // TODO: display an error page
+                });
             },
 
             resetDataStore: function() {
@@ -74,28 +87,28 @@ define(
 
                 // Tracks
                 DS.defineResource({
-                    name: Config.constants.dsResourceNames.TRACK,
+                    name: Config.constants.dsResourceNames.TRACKS,
                     idAttribute: '_id',
                     collection: TrackCollection
                 });
 
                 // Skills
                 DS.defineResource({
-                    name: Config.constants.dsResourceNames.SKILL,
+                    name: Config.constants.dsResourceNames.SKILLS,
                     idAttribute: '_id',
                     collection: SkillCollection
                 });
 
                 // Lessons
                 DS.defineResource({
-                    name: Config.constants.dsResourceNames.LESSON,
+                    name: Config.constants.dsResourceNames.LESSONS,
                     idAttribute: '_id',
                     collection: LessonCollection
                 });
 
                 // Resources
                 DS.defineResource({
-                    name: Config.constants.dsResourceNames.RESOURCE,
+                    name: Config.constants.dsResourceNames.RESOURCES,
                     idAttribute: '_id',
                     collection: ResourceCollection
                 });
@@ -110,19 +123,11 @@ define(
 
             getDataStoreSkeletonData: function () {
                 var self = this;
-                $.ajax({
+                return $.ajax({
                     type: 'GET',
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/hierarchy",
                     dataType: 'json'
-                }).done(function (response) {
-                    console.log("the hierarchy skeleton has been returned");
-                    console.log(JSON.stringify(response.data));
-
-                    self.initDataStoreSkeletonContent(response.data);
-                }).fail(function (error) {
-                    console.log("the hierarchy skeleton could not be gotten:", error);
-
                 });
             },
 
@@ -130,27 +135,30 @@ define(
                 var models = [];
                 _.each(data, function (modelData) {
                     var model = new AbstractModel({data: modelData}, {parse: true});
+
                     models.push(model);
                 });
                 return new AbstractCollection(models);
             },
 
             initDataStoreSkeletonContent: function(data) {
+                console.log('router.initDataStoreSkeletonContent');
+
                 // init the values of all
                 var tracksCollectionSON = this.getCollectionFromJSONData(data).toJSON();
-                DS.inject(Config.constants.dsResourceNames.TRACK, tracksCollectionSON, {incomplete: true});
+                DS.inject(Config.constants.dsResourceNames.TRACKS, tracksCollectionSON, {incomplete: true});
 
                 var skillsCollectionSON = _.flatten(_.pluck(tracksCollectionSON, 'skills'));
-                DS.inject(Config.constants.dsResourceNames.SKILL, skillsCollectionSON, {incomplete: true});
+                DS.inject(Config.constants.dsResourceNames.SKILLS, skillsCollectionSON, {incomplete: true});
 
                 var lessonsCollectionSON = _.flatten(_.pluck(skillsCollectionSON, 'lessons'));
-                DS.inject(Config.constants.dsResourceNames.LESSON, lessonsCollectionSON, {incomplete: true});
+                DS.inject(Config.constants.dsResourceNames.LESSONS, lessonsCollectionSON, {incomplete: true});
 
                 var resourcesCollectionSON = _.flatten(_.pluck(lessonsCollectionSON, 'resources'));
-                DS.inject(Config.constants.dsResourceNames.RESOURCE, resourcesCollectionSON, {incomplete: true});
+                DS.inject(Config.constants.dsResourceNames.RESOURCES, resourcesCollectionSON, {incomplete: true});
 
                 var additionalResourcesCollectionSON = _.flatten(_.pluck(resourcesCollectionSON, 'additional_resources'));
-                DS.inject(Config.constants.dsResourceNames.RESOURCE, additionalResourcesCollectionSON, {incomplete: true});
+                DS.inject(Config.constants.dsResourceNames.RESOURCES, additionalResourcesCollectionSON, {incomplete: true});
             },
 
             // Global views
@@ -345,7 +353,7 @@ define(
 
             trackList: function () {
                 var self = this;
-                DS.findAll(Config.constants.dsResourceNames.TRACK).done(function (collection) {
+                DS.findAll(Config.constants.dsResourceNames.TRACKS).done(function (collection) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -360,7 +368,7 @@ define(
 
             trackDetail: function (id) {
                 var self = this;
-                DS.find(Config.constants.dsResourceNames.TRACK, id).then(function (model) {
+                DS.find(Config.constants.dsResourceNames.TRACKS, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
@@ -373,11 +381,11 @@ define(
 
             skillDetail: function (id) {
                 var self = this;
-                DS.find(Config.constants.dsResourceNames.SKILL, id).then(function (model) {
+                DS.find(Config.constants.dsResourceNames.SKILLS, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
-                    self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
+                    self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
 
                     var skillDetailView = new SkillDetailView({model: model});
                     skillDetailView.render();
@@ -387,11 +395,11 @@ define(
 
             lessonDetail: function (id) {
                 var self = this;
-                DS.find(Config.constants.dsResourceNames.LESSON, id).then(function (model) {
+                DS.find(Config.constants.dsResourceNames.LESSONS, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
-                    self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
+                    self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
 
                     var skillId = model.get('skill')._id;
                     Backbone.history.navigate('skill/' + skillId, {trigger: true});
@@ -399,13 +407,12 @@ define(
             },
 
             resourceDetail: function (id) {
-                var model = new ResourceModel({_id: id});
                 var self = this;
-                DS.find(Config.constants.dsResourceNames.RESOURCE, id).then(function (model) {
+                DS.find(Config.constants.dsResourceNames.RESOURCES, id).then(function (model) {
                     self.clearHome();
                     self.clearContainer();
                     self.clearModal();
-                    self.renderResourceHierarchyBreadcrumb(model.get('breadcrumb'));
+                    self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
 
                     var resourceDetailView = new ResourceDetailView({model: model});
                     resourceDetailView.render();
@@ -487,8 +494,6 @@ define(
         return {
             initialize: function () {
 
-                var app_router = new AppRouter();
-
                 currentUser.findSession();
 
                 $(document).ajaxSend(function(event, jqxhr, settings) {
@@ -503,9 +508,7 @@ define(
                         401: function () {
                             // Redirect the to the login page.
                             console.log("error 401 detected");
-                            console.log(Backbone.history.getFragment());
                             currentUser.logOut();
-                            app_router.resetDataStore();
                             if (Backbone.history.getFragment() != '')
                             {
                                 Backbone.history.loadUrl("/login/redirect");
@@ -518,16 +521,18 @@ define(
                     }
                 });
 
+
                 if (currentUser.isLoggedIn()) {
                     currentUser.fetch().then(
                         function(result) {
                             console.log('current user has been fetched');
-                            app_router.getDataStoreSkeletonData();
                         }, function(err) {
                             console.log("current user doesn't exist");
                         }
                     );
                 }
+
+                var app_router = new AppRouter();
 
                 app_router.renderHeader();
                 app_router.renderFooter();

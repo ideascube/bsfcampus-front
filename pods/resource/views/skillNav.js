@@ -12,7 +12,7 @@ define(
 		'text!pods/resource/templates/skill-nav.html',
 
 		'pods/skill/model'
-		
+
 	],
 	function($, _, Backbone, Config,
 		ResourceModel, ResourcesLessonCollection, SkillOutlineItemView, BackToSkillView, skillNavTemplate,
@@ -36,17 +36,21 @@ define(
 				this.$('#resource-skill-title').html(backToSkillView.$el);
 
 				this.$('#resource-hierarchy-accordion').empty();
-				_.each(this.model.get('lessons').models, this.renderSingleLesson, this);
+				_.each(this.model.get('lessons'), this.renderSingleLesson, this);
 
 				return this;
 			},
 
 			renderSingleLesson: function(lesson) {
-				var itemView = new SkillOutlineItemView({model: lesson});
-				itemView.currentResource = this.currentResource;
-				itemView.render();
-				this.$('#resource-hierarchy-accordion').append(itemView.$el);
-			
+                var self = this;
+
+                DS.find(Config.constants.dsResourceNames.LESSONS, lesson._id).then(function(lessonModel) {
+                    var itemView = new SkillOutlineItemView({model: lessonModel});
+                    itemView.currentResource = self.currentResource;
+                    itemView.render();
+                    self.$('#resource-hierarchy-accordion').append(itemView.$el);
+                });
+
 				return this;
 			}
 

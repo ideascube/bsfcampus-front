@@ -15,7 +15,7 @@ define(
 
 			serverPath: '/hierarchy/skills',
 
-            dsResourceName: Config.constants.dsResourceNames.SKILL,
+            dsResourceName: Config.constants.dsResourceNames.SKILLS,
 
 			route: function() {
 				return '#/skill/' + this.id;

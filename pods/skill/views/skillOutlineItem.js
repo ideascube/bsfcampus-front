@@ -33,13 +33,13 @@ define(
 				
 				var self = this;
 
-                var resourcesCollection = DS.filter(Config.constants.dsResourceNames.RESOURCE, function(resourceModel) {
+                var resourcesCollection = DS.filter(Config.constants.dsResourceNames.RESOURCES, function(resourceModel) {
                     return _.some(lessonModel.resources, function (resource) {
                         return resource._id == resourceModel.id;
                     });
                 });
                 var areResourcesIncomplete = _.some(resourcesCollection.models, function(resourceModel) {
-                    return DS.isIncomplete(Config.constants.dsResourceNames.RESOURCE, resourceModel.id);
+                    return DS.isIncomplete(Config.constants.dsResourceNames.RESOURCES, resourceModel.id);
                 });
 
                 if (!areResourcesIncomplete && resourcesCollection.length > 0)
@@ -51,7 +51,10 @@ define(
                     resourcesCollection = new ResourceLessonCollection();
                     resourcesCollection.meta('lesson_id', this.model.id);
                     resourcesCollection.fetch().then(function(){
-                        DS.inject(Config.constants.dsResourceNames.RESOURCE, resourcesCollection.models);
+                        DS.inject(Config.constants.dsResourceNames.RESOURCES, resourcesCollection.models);
+                        _.each(resourcesCollection.models, function(resourceModel) {
+                            DS.setComplete(Config.constants.dsResourceNames.RESOURCES, resourceModel.id, true);
+                        });
                         self.renderResources(resourcesCollection);
                     });
                 }

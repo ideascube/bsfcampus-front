@@ -18,7 +18,7 @@ define(
 
 			model: LessonModel,
 
-            dsResourceName: Config.constants.dsResourceNames.SKILL,
+            dsResourceName: Config.constants.dsResourceNames.SKILLS,
 
 			serverPath: function() {
 				return '/hierarchy/lessons/skill/' + this.meta('skill_id');

@@ -18,7 +18,7 @@ define(
 
             model: SkillModel,
 
-            dsResourceName: Config.constants.dsResourceNames.SKILL,
+            dsResourceName: Config.constants.dsResourceNames.SKILLS,
 
             serverPath: '/hierarchy/skills'
 

@@ -18,7 +18,7 @@ define(
 
 			model: ResourceModel,
 
-            dsResourceName: Config.constants.dsResourceNames.LESSON,
+            dsResourceName: Config.constants.dsResourceNames.LESSONS,
 
 			serverPath: function() {
 				return '/resources/lesson/' + this.meta('lesson_id');

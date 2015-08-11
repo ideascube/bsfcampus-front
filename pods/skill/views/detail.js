@@ -37,9 +37,10 @@ define(
 			},
 
             render: function() {
-				
-				var html = this.template({
-					skill: this.model.forTemplate(),
+
+                var skillModel = this.model.forTemplate();
+                var html = this.template({
+					skill: skillModel,
 					config:Config
 				});
 				this.$el.html(html);
@@ -52,19 +53,19 @@ define(
 
 				var self = this;
 
-                DS.find(Config.constants.dsResourceNames.TRACK, this.model.get('track')['_id']).then(function (trackModel) {
+                DS.find(Config.constants.dsResourceNames.TRACKS, this.model.get('track')['_id']).then(function (trackModel) {
 					var backToTrackView = new BackToTrackView({model: trackModel});
 					backToTrackView.render();
 					self.$('#track-title').html(backToTrackView.$el);
                 });
 
-                var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSON, function(lessonModel) {
+                var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSONS, function(lessonModel) {
                     return _.some(skillModel.lessons, function (lesson) {
                         return lesson._id == lessonModel.id;
                     })
                 });
                 var areLessonsIncomplete = _.some(lessonsCollection.models, function(lessonModel) {
-                    return DS.isIncomplete(Config.constants.dsResourceNames.LESSON, lessonModel.id);
+                    return DS.isIncomplete(Config.constants.dsResourceNames.LESSONS, lessonModel.id);
                 });
                 if (!areLessonsIncomplete && lessonsCollection.length > 0)
                 {
@@ -75,7 +76,10 @@ define(
                     lessonsCollection = new LessonSkillCollection();
                     lessonsCollection.meta('skill_id', this.model.id);
                     lessonsCollection.fetch().then(function(){
-                        DS.inject(Config.constants.dsResourceNames.LESSON, lessonsCollection.models);
+                        DS.inject(Config.constants.dsResourceNames.LESSONS, lessonsCollection.models);
+                        _.each(lessonsCollection.models, function(lessonModel) {
+                            DS.setComplete(Config.constants.dsResourceNames.LESSONS, lessonModel.id, true);
+                        });
                         self.renderLessons(lessonsCollection);
                     });
                 }

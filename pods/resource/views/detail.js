@@ -16,6 +16,7 @@ define(
 		'pods/resource/content/view',
         'pods/resource/views/lessonOutlineItem',
 
+		'pods/track/model',
 		'pods/skill/model',
 
 		'pods/lesson/model',
@@ -26,8 +27,7 @@ define(
 	function($, _, Backbone, Config,
 		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, BackToMainResourceNav, SkillNavView, detailTemplate,
 		ResourceContentModel, ResourceContentView, LessonOutlineItemView,
-		SkillModel,
-		LessonModel, LessonsSkillCollection
+        TrackModel, SkillModel, LessonModel, LessonsSkillCollection
 		) {
 
 		return Backbone.View.extend({
@@ -66,44 +66,95 @@ define(
 
             },
 
-			renderHierarchy: function() {
+            getWholeResourceHierarchyAndRenderSkillNav: function () {
+                var self = this;
 
-				var self = this;
+                $.get(this.model.hierarchyUrl()).done(function (data) {
+                    var trackModel = new TrackModel({data: data.track}, {parse: true});
+                    DS.inject(Config.constants.dsResourceNames.TRACKS, trackModel);
+                    DS.setComplete(Config.constants.dsResourceNames.TRACKS, trackModel.id, true);
 
-                // TODO: optimize with DataStore (DS)
-				$.get(this.model.hierarchyUrl()).done(function(data){
-					var skillModel = new SkillModel({data: data.skill}, {parse: true});
-					
-					var resourcesModels = [];
-					_.each(data.cousins, function(resource) {
-						var resourceModel = new ResourceModel({data: resource}, {parse: true});
-						resourcesModels.push(resourceModel);
-					});
-					var resourcesSkillCollection = new ResourcesSkillCollection(resourcesModels);
+                    var skillModel = new SkillModel({data: data.skill}, {parse: true});
+                    DS.inject(Config.constants.dsResourceNames.SKILLS, skillModel, {incomplete: false});
+                    DS.setComplete(Config.constants.dsResourceNames.SKILLS, skillModel.id, true);
 
-					var lessonsModels = [];
-					_.each(data.aunts, function(lesson) {
-						var lessonModel = new LessonModel({data: lesson}, {parse: true});
-						var resources = resourcesSkillCollection.filter(function(resource) {
-							return resource.get('parent')._id == lessonModel.id;
-						});
-						var resourcesCollection = new ResourcesLessonCollection(resources);
-						lessonModel.set('resources', resourcesCollection);
-						lessonsModels.push(lessonModel);
-					});
-					var lessonsSkillCollection = new LessonsSkillCollection(lessonsModels);
+                    var resourcesModels = [];
+                    _.each(data.cousins, function (resource) {
+                        var resourceModel = new ResourceModel({data: resource}, {parse: true});
+                        DS.inject(Config.constants.dsResourceNames.RESOURCES, resourceModel, {incomplete: false});
+                        DS.setComplete(Config.constants.dsResourceNames.RESOURCES, resourceModel.id, true);
+                        resourcesModels.push(resourceModel);
+                    });
+                    var resourcesSkillCollection = new ResourcesSkillCollection(resourcesModels);
 
-					skillModel.set('lessons', lessonsSkillCollection);
+                    var lessonsModels = [];
+                    _.each(data.aunts, function (lesson) {
+                        var lessonModel = new LessonModel({data: lesson}, {parse: true});
+                        DS.inject(Config.constants.dsResourceNames.LESSONS, lessonModel, {incomplete: false});
+                        DS.setComplete(Config.constants.dsResourceNames.LESSONS, lessonModel.id, true);
+                        var resources = resourcesSkillCollection.filter(function (resource) {
+                            return resource.get('parent')._id == lessonModel.id;
+                        });
+                        var resourcesCollection = new ResourcesLessonCollection(resources);
+                        lessonModel.set('resources', resourcesCollection.toJSON());
+                        lessonsModels.push(lessonModel);
+                    });
+                    var lessonsSkillCollection = new LessonsSkillCollection(lessonsModels);
 
-					var skillNavView = new SkillNavView({model: skillModel});
-					skillNavView.currentResource = self.model;
-					skillNavView.render();
-					self.$('#skill-nav').html(skillNavView.$el);
-				});
+                    skillModel.set('lessons', lessonsSkillCollection.toJSON());
 
+                    self.renderSkillNav(skillModel);
+                });
+            },
+
+            renderHierarchy: function() {
+                console.log("renderHierarchy");
+
+                var self = this;
+
+                // First, get the resource's grand-parent skill
+                var parentSkillId = this.model.get('hierarchy')[1]._id;
+                DS.find(Config.constants.dsResourceNames.SKILLS, parentSkillId).then(function (parentSkillModel) {
+                    // Second, find lessons for the parent skill
+                    var skillModelSON = parentSkillModel.forTemplate();
+                    var lessonsCollection = DS.getMany(Config.constants.dsResourceNames.LESSONS, _.pluck(skillModelSON.lessons, '_id'));
+                    var areLessonsIncomplete = _.some(lessonsCollection.models, function(lessonModel) {
+                        return DS.isIncomplete(Config.constants.dsResourceNames.LESSONS, lessonModel.id);
+                    });
+                    parentSkillModel.set('lessons', lessonsCollection.toJSON());
+
+                    // Finally we get the children resources from all these lessons
+                    var resourcesModels = [];
+                    _.each(lessonsCollection.models, function(lessonModel) {
+                        var lessonModelSON = lessonModel.forTemplate();
+                        var resourcesCollection = DS.getMany(Config.constants.dsResourceNames.RESOURCES, _.pluck(lessonModelSON.resources, '_id'));
+                        lessonModel.set('resources', resourcesCollection.toJSON());
+                        resourcesModels.push.apply(resourcesModels, resourcesCollection.models);
+                    });
+                    var areResourcesIncomplete = _.some(resourcesModels, function(resourceModel) {
+                        return DS.isIncomplete(Config.constants.dsResourceNames.RESOURCES, resourceModel.id);
+                    });
+
+                    // Now, if any of these data are incomplete, we get the whole hierarchy content
+                    if (areLessonsIncomplete || areResourcesIncomplete)
+                    {
+                        self.getWholeResourceHierarchyAndRenderSkillNav();
+                    }
+                    else
+                    {
+                        self.renderSkillNav(parentSkillModel);
+                    }
+                });
 			},
 
-			renderContent: function() {
+            renderSkillNav: function (skillModel) {
+                var skillNavView = new SkillNavView({model: skillModel});
+                skillNavView.currentResource = this.model;
+                skillNavView.render();
+                this.$('#skill-nav').html(skillNavView.$el);
+            },
+
+            renderContent: function() {
 				var contentView = new ResourceContentView({
 					model: this.model,
 					el: this.$('#resource-content')

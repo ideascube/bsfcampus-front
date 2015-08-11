@@ -38,19 +38,23 @@ define(
 				}
 
                 this.$('.lesson-outline').empty();
-				_.each(this.model.get('resources').models, this.renderResource, this);
+				_.each(this.model.get('resources'), this.renderResource, this);
 
 				return this;
 			},
 
 			renderResource: function(resource) {
-				var lessonOutlineItemView = new LessonOutlineItemView({model: resource});
-				lessonOutlineItemView.render();
-				if (this.currentResource.id === resource.id) {
-					lessonOutlineItemView.$el.addClass('active');
-				}
-				
-				this.$('.lesson-outline').append(lessonOutlineItemView.$el);
+                var self = this;
+
+                DS.find(Config.constants.dsResourceNames.RESOURCES, resource._id).then(function(resourceModel) {
+                    var lessonOutlineItemView = new LessonOutlineItemView({model: resourceModel});
+                    lessonOutlineItemView.render();
+                    if (self.currentResource.id === resource.id) {
+                        lessonOutlineItemView.$el.addClass('active');
+                    }
+
+                    self.$('.lesson-outline').append(lessonOutlineItemView.$el);
+                });
 
 				return this;
 			}
