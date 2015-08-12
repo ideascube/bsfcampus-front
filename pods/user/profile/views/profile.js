@@ -5,7 +5,7 @@ define(
         'backbone',
         'app/config',
 
-        'pods/analytics/models/visited-dashboard',
+        'pods/analytics/models/visitedDashboard',
 
         'pods/user/models/current',
         'pods/user/models/dashboard',
@@ -62,7 +62,7 @@ define(
                         profileDetailPageView = new DashboardView({model: dashboardUserModel});
 
                         var analytics = new VisitedDashboardAnalyticsModel();
-                        analytics.id = currentUser.id;
+                        analytics.set('dashboard_user', currentUser.id);
                         analytics.save();
                         break;
                     case Config.constants.userProfile.ACCOUNT:

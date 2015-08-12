@@ -10,7 +10,7 @@ define(
               AbstractModel) {
 
         return AbstractModel.extend({
-            serverPath: '/activity/misc'
+            serverPath: '/activity/visited_track'
         });
 
     }

@@ -25,8 +25,6 @@ define(
 
             template: _.template(dashboardTemplate),
 
-            currentTrackIndex: 0,
-
             render: function() {
                 var html = this.template({config: Config});
                 this.$el.html(html);
@@ -36,7 +34,7 @@ define(
                     var dashboardDetailsView = new DashboardDetailsView({
                         model: self.model
                     });
-                    self.$('#dashboard-details').html(dashboardDetailsView.render());
+                    self.$('#dashboard-details').html(dashboardDetailsView.render().$el);
                 });
 
                 return this;

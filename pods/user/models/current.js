@@ -5,15 +5,18 @@ define(
         'backbone',
         'app/config',
 
-        'model'
+        'model',
+
+        'pods/analytics/models/misc'
     ],
     function($, _, Backbone, Config,
-             AbstractModel
-    ) {
+             AbstractModel,
+             MiscAnalyticsModel) {
 
         var CurrentUserClass = AbstractModel.extend({
 
             jwt: null,
+            username: null,
 
             serverPath: '/users',
 
@@ -40,7 +43,7 @@ define(
                 }).done(
                     function(result){
                         self.jwt = result.token;
-                        //console.log(window);
+                        self.username = username;
                         if ('localStorage' in window && window['localStorage'] !== null) {
                             localStorage = window['localStorage'];
                             localStorage['mookbsf_jwt'] = self.jwt;
@@ -51,7 +54,13 @@ define(
             },
 
             logOut: function() {
+                var logoutAnalytics = new MiscAnalyticsModel();
+                logoutAnalytics.set('type', 'user_logout');
+                logoutAnalytics.set('object_title', this.username);
+                logoutAnalytics.save();
+
                 this.jwt = null;
+                this.username = null;
                 if ('localStorage' in window && window['localStorage'] !== null) {
                     localStorage = window['localStorage'];
                     localStorage.removeItem('mookbsf_jwt');

@@ -7,7 +7,7 @@ define(
 
         'pods/user/models/current',
         'pods/user/models/user',
-        'pods/analytics/models/visited-dashboard',
+        'pods/analytics/models/visitedDashboard',
         'pods/user/models/dashboard',
 
         'pods/user/profile/pages/views/tutoring-user-search-result-line',
@@ -262,7 +262,7 @@ define(
                     self.$('#student-dashboard-details').html(dashboardDetailsView.render());
 
                     var analytics = new VisitedDashboardAnalyticsModel();
-                    analytics.id = selectedUserId;
+                    analytics.set('dashboard_user', selectedUserId);
                     analytics.save();
                 });
 

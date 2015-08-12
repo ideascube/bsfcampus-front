@@ -13,9 +13,9 @@ define(
         'pods/user/models/current',
         'pods/user/collections/user',
         'pods/analytics/models/misc',
-        'pods/analytics/models/visited-resource',
-        'pods/analytics/models/visited-skill',
-        'pods/analytics/models/visited-track',
+        'pods/analytics/models/visitedResource',
+        'pods/analytics/models/visitedSkill',
+        'pods/analytics/models/visitedTrack',
         'pods/track/collection',
         'pods/track/model',
         'pods/skill/collection',
@@ -54,17 +54,19 @@ define(
               LessonCollection, LessonModel, ResourceCollection, ResourceModel, StaticPageCollection, StaticPageModel,
               AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, ResetPasswordView, UserProfileView,
               TrackListView, TrackDetailView, SkillDetailView, ResourceDetailView,
-              ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView
-              ) {
+              ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView) {
 
         var AppRouter = Backbone.Router.extend({
 
-            initialize: function() {
-                console.log('router.initialize');
-
+            initialize: function () {
                 var self = this;
 
                 this.$modal = $('#modal');
+                this.$home = $('#home');
+                this.$main = $('#main');
+                this.$header = $('#header');
+                this.$footer = $('#footer');
+
                 this.resetDataStore();
                 this.getDataStoreSkeletonData().done(function (response) {
                     console.log("the hierarchy skeleton has been returned");
@@ -77,7 +79,7 @@ define(
                 });
             },
 
-            resetDataStore: function() {
+            resetDataStore: function () {
                 DS.reset();
 
                 // Static pages
@@ -86,7 +88,7 @@ define(
                     idAttribute: '_id',
                     collection: StaticPageCollection
                 });
-                DS.findAll(Config.constants.dsResourceNames.STATIC_PAGE).done(function(collection) {
+                DS.findAll(Config.constants.dsResourceNames.STATIC_PAGE).done(function (collection) {
                     console.log('static pages fetched: ', collection.toJSON());
                 });
 
@@ -127,7 +129,6 @@ define(
             },
 
             getDataStoreSkeletonData: function () {
-                var self = this;
                 return $.ajax({
                     type: 'GET',
                     contentType: 'application/json',
@@ -146,7 +147,7 @@ define(
                 return new AbstractCollection(models);
             },
 
-            initDataStoreSkeletonContent: function(data) {
+            initDataStoreSkeletonContent: function (data) {
                 console.log('router.initDataStoreSkeletonContent');
 
                 // init the values of all
@@ -170,26 +171,24 @@ define(
 
             renderHeader: function () {
                 this.appHeaderView = new AppHeaderView();
-                $('#header').append(this.appHeaderView.render().$el);
+                this.$header.html(this.appHeaderView.render().$el);
             },
 
             renderFooter: function () {
                 var appFooterView = new AppFooterView();
-                $('#footer').append(appFooterView.render().$el);
+                this.$footer.html(appFooterView.render().$el);
             },
 
             clearHome: function () {
-                $('#home').empty();
+                this.$home.empty().show();
             },
 
-            clearContainer: function () {
-                var $main = $('#main');
-                $main.show();
-                $main.empty();
+            clearMain: function () {
+                this.$main.empty().show();
             },
 
-            hideContainer: function () {
-                $('#main').hide();
+            hideMain: function () {
+                this.$main.hide();
             },
 
             clearModal: function () {
@@ -224,17 +223,16 @@ define(
 
             home: function () {
                 var visitHomeAnalytics = new MiscAnalyticsModel();
-                visitHomeAnalytics.type = "visit_home_page";
+                visitHomeAnalytics.set('type', 'visit_home_page');
                 visitHomeAnalytics.save();
 
                 this.clearHome();
-                this.clearContainer();
-                this.hideContainer();
+                this.clearMain();
+                this.hideMain();
                 this.clearModal();
                 var homeView = null;
-                if (currentUser.isLoggedIn())
-                {
-                    homeView = VM.createView(Config.constants.VIEWS_ID.CONNECTED_HOME, function() {
+                if (currentUser.isLoggedIn()) {
+                    homeView = VM.createView(Config.constants.VIEWS_ID.CONNECTED_HOME, function () {
                         return new ConnectedHomeView();
                     });
                 }
@@ -243,44 +241,41 @@ define(
                         return new HomeView();
                     });
                 }
-                $('#home').append(homeView.render().$el);
+                this.$home.html(homeView.render().$el);
 
                 this.appHeaderView.updateHeaderButtonFocus('home');
             },
 
             register: function () {
                 this.clearModal();
-                var registerUserView = VM.createView(Config.constants.VIEWS_ID.REGISTER, function() {
+                var registerUserView = VM.createView(Config.constants.VIEWS_ID.REGISTER, function () {
                     return new RegisterUserView();
                 });
                 this.$modal.html(registerUserView.render().$el);
                 var self = this;
-                this.listenTo(registerUserView, 'close', function() {
+                this.listenTo(registerUserView, 'close', function () {
                     var fragment = Backbone.history.getFragment();
                     VM.closeView(Config.constants.VIEWS_ID.REGISTER);
                     self.afterSuccessfulLogin(registerUserView, fragment);
                 });
-                this.$modal.on('shown.bs.modal', function() {
+                this.$modal.on('shown.bs.modal', function () {
                     registerUserView.$('form input#full_name').focus();
                 }).modal({show: true});
             },
 
             login: function () {
-                $('body').on('shown.bs.modal', function() {
-                    console.log('a');
-                });
                 this.clearModal();
-                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function() {
+                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function () {
                     return new LoginUserView();
                 });
                 this.$modal.html(loginUserView.render().$el);
                 var self = this;
-                this.listenTo(loginUserView, 'close', function() {
+                this.listenTo(loginUserView, 'close', function () {
                     var fragment = Backbone.history.getFragment();
                     VM.closeView(Config.constants.VIEWS_ID.LOGIN);
                     self.afterSuccessfulLogin(loginUserView, fragment);
                 });
-                this.$modal.on('shown.bs.modal', function() {
+                this.$modal.on('shown.bs.modal', function () {
                     loginUserView.$('form input#username').focus();
                 }).modal('show');
             },
@@ -288,7 +283,7 @@ define(
             loginRedirect: function () {
                 var self = this;
                 var next = Backbone.history.getFragment();
-                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function() {
+                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function () {
                     return new LoginUserView();
                 });
                 this.$modal.html(loginUserView.render().$el);
@@ -296,56 +291,50 @@ define(
                     VM.closeView(Config.constants.VIEWS_ID.LOGIN);
                     self.afterSuccessfulLogin(loginUserView, next);
                 });
-                this.$modal.on('shown.bs.modal', function() {
+                this.$modal.on('shown.bs.modal', function () {
                     loginUserView.$('form input#username').focus();
                 }).modal('show');
             },
 
             afterSuccessfulLogin: function (authView, nextFragment) {
-                console.log("afterSuccessfulLogin");
                 this.clearModal();
                 authView.undelegateEvents();
 
                 this.getDataStoreSkeletonData();
-                this.navigate(nextFragment, {trigger:true, replace:true});
+                this.navigate(nextFragment, {trigger: true, replace: true});
             },
 
             logout: function () {
-                var logoutAnalytics = new MiscAnalyticsModel();
-                logoutAnalytics.type = "user_logout";
-                logoutAnalytics.title = currentUser.get('username');
-                logoutAnalytics.save();
                 currentUser.logOut();
-                DS.reset();
+                this.resetDataStore();
                 Backbone.history.navigate('', {trigger: true});
             },
 
-            resetPassword: function() {
+            resetPassword: function () {
                 this.clearModal();
                 var self = this;
-                this.$modal.on('hidden.bs.modal', function() {
+                this.$modal.on('hidden.bs.modal', function () {
                     var resetPasswordView = new ResetPasswordView();
                     self.$modal.html(resetPasswordView.render().$el);
-                    self.$modal.on('shown.bs.modal', function() {
+                    self.$modal.on('shown.bs.modal', function () {
                         resetPasswordView.$('form input#email').focus();
                     }).modal('show');
                 });
             },
 
             userProfile: function (page) {
-                if (page == null)
-                {
+                if (page == null) {
                     page = Config.constants.userProfile.DASHBOARD;
                 }
                 var self = this;
-                currentUser.fetch().then(function(result) {
+                currentUser.fetch().then(function (result) {
                     self.clearHome();
-                    self.clearContainer();
+                    self.clearMain();
                     self.clearModal();
 
                     var userProfileView = new UserProfileView({model: currentUser});
                     userProfileView.page = page;
-                    $('#main').append(userProfileView.render().$el);
+                    self.$main.html(userProfileView.render().$el);
 
                     self.appHeaderView.updateHeaderButtonFocus('user');
                 });
@@ -355,11 +344,15 @@ define(
                 var self = this;
                 DS.findAll(Config.constants.dsResourceNames.TRACKS).done(function (collection) {
                     self.clearHome();
-                    self.clearContainer();
+                    self.clearMain();
                     self.clearModal();
 
                     var trackListView = new TrackListView({collection: collection});
-                    $('#main').append(trackListView.render().$el);
+                    self.$main.html(trackListView.render().$el);
+
+                    var analytics = new MiscAnalyticsModel();
+                    analytics.set('type', 'all_tracks');
+                    analytics.save();
                 });
 
                 this.appHeaderView.updateHeaderButtonFocus('hierarchy');
@@ -369,14 +362,14 @@ define(
                 var self = this;
                 DS.find(Config.constants.dsResourceNames.TRACKS, id).then(function (model) {
                     self.clearHome();
-                    self.clearContainer();
+                    self.clearMain();
                     self.clearModal();
 
                     var trackDetailView = new TrackDetailView({model: model});
-                    $('#main').append(trackDetailView.render().$el);
+                    self.$main.html(trackDetailView.render().$el);
 
                     var analytics = new VisitedTrackAnalyticsModel();
-                    analytics.id = id;
+                    analytics.set('track', model.id);
                     analytics.save();
                 });
             },
@@ -385,27 +378,22 @@ define(
                 var self = this;
                 DS.find(Config.constants.dsResourceNames.SKILLS, id).then(function (model) {
                     self.clearHome();
-                    self.clearContainer();
+                    self.clearMain();
                     self.clearModal();
-                    self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
+                    var hierarchyBreadcrumbView = self.getResourceHierarchyBreadcrumbView(model.get('hierarchy'));
+                    self.$main.append(hierarchyBreadcrumbView.render().$el);
 
                     var skillDetailView = new SkillDetailView({model: model});
-                    $('#main').append(skillDetailView.render().$el);
+                    self.$main.append(skillDetailView.render().$el);
 
                     var analytics = new VisitedSkillAnalyticsModel();
-                    analytics.id = id;
+                    analytics.set('skill', model.id);
                     analytics.save();
                 });
             },
 
             lessonDetail: function (id) {
-                var self = this;
                 DS.find(Config.constants.dsResourceNames.LESSONS, id).then(function (model) {
-                    self.clearHome();
-                    self.clearContainer();
-                    self.clearModal();
-                    self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
-
                     var skillId = model.get('skill')._id;
                     Backbone.history.navigate('skill/' + skillId, {trigger: true});
                 });
@@ -415,40 +403,39 @@ define(
                 var self = this;
                 DS.find(Config.constants.dsResourceNames.RESOURCES, id).then(function (model) {
                     self.clearHome();
-                    self.clearContainer();
+                    self.clearMain();
                     self.clearModal();
-                    self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
+                    var hierarchyBreadcrumbView = self.getResourceHierarchyBreadcrumbView(model.get('hierarchy'));
+                    self.$main.append(hierarchyBreadcrumbView.render().$el);
 
                     var resourceDetailView = new ResourceDetailView({model: model});
-                    $('#main').append(resourceDetailView.render().$el);
+                    self.$main.append(resourceDetailView.render().$el);
 
                     var analytics = new VisitedResourceAnalyticsModel();
-                    analytics.id = id;
+                    analytics.set('resource', model.id);
                     analytics.save();
-                }, function (error) {
-                    // error
                 });
             },
 
-            renderResourceHierarchyBreadcrumb: function (breadcrumbModel) {
-                var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
-                $('#main').append(breadcrumbView.render().$el);
+            getResourceHierarchyBreadcrumbView: function (breadcrumbModel) {
+                return new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
             },
 
             promptTrackValidation: function (track_id) {
-                var promptTrackValidationAnalytics = new MiscAnalyticsModel();
-                promptTrackValidationAnalytics.type = "prompt_track_validation_test";
-                promptTrackValidationAnalytics.title = track_id;
-                promptTrackValidationAnalytics.save();
                 this.clearModal();
                 var promptTrackValidationView = new PromptTrackValidationView();
                 promptTrackValidationView.trackId = track_id;
                 this.$modal.html(promptTrackValidationView.render().$el);
                 this.listenTo(promptTrackValidationView, 'close', this.clearModal);
                 this.$modal.modal('show');
+
+                var promptTrackValidationAnalytics = new MiscAnalyticsModel();
+                promptTrackValidationAnalytics.set('type', "prompt_track_validation_test");
+                promptTrackValidationAnalytics.set('object_title', track_id);
+                promptTrackValidationAnalytics.save();
             },
 
-            search: function(params) {
+            search: function (params) {
                 var paramsDict = this.getQueryParameters(params);
                 var searchedString = paramsDict['search_string'];
 
@@ -459,39 +446,37 @@ define(
                     url: Config.constants.serverGateway + "/search",
                     data: {searched_string: searchedString},
                     dataType: 'json'
-                }).done(function(response) {
+                }).done(function (response) {
                     console.log("the search has been proceeded with no error");
                     console.log(JSON.stringify(response.data));
                     self.clearHome();
-                    self.clearContainer();
+                    self.clearMain();
                     self.clearModal();
 
                     var searchResultsView = new SearchResultsView();
                     searchResultsView.searchedString = searchedString;
                     searchResultsView.results = response.data;
-                    $('#main').append(searchResultsView.render().$el);
-                }).then(
-                    function(result) {
-                        // nothing
-                    }, function(err) {
-                        console.log("the search has failed with the following error:\n\t", error );
-                    }
-                );
+                    $('#main').html(searchResultsView.render().$el);
+                }).fail(function (error) {
+                    console.log("the search has failed with the following error:\n\t", error);
+                });
             },
 
-            staticPage: function(page_id) {
+            staticPage: function (page_id) {
                 this.clearHome();
-                this.clearContainer();
+                this.clearMain();
                 this.clearModal();
 
                 var staticPageView = new StaticPageView();
                 staticPageView.pageId = page_id;
 
-                $('#main').append(staticPageView.render().$el);
+                this.$main.html(staticPageView.render().$el);
             },
 
-            getQueryParameters : function(str) {
-                return (str || document.location.search).replace(/(^\?)/,'').split("&").map(function(n){return n = n.split("="),this[n[0]] = n[1],this}.bind({}))[0];
+            getQueryParameters: function (str) {
+                return (str || document.location.search).replace(/(^\?)/, '').split("&").map(function (n) {
+                    return n = n.split("="), this[n[0]] = n[1], this
+                }.bind({}))[0];
             }
 
         });
@@ -501,7 +486,7 @@ define(
 
                 currentUser.findSession();
 
-                $(document).ajaxSend(function(event, jqxhr, settings) {
+                $(document).ajaxSend(function (event, jqxhr, settings) {
                     if (currentUser.jwt !== null) {
                         jqxhr.setRequestHeader('Authorization', 'Bearer ' + currentUser.jwt);
                     }
@@ -514,12 +499,10 @@ define(
                             // Redirect the to the login page.
                             console.log("error 401 detected");
                             currentUser.logOut();
-                            if (Backbone.history.getFragment() != '')
-                            {
+                            if (Backbone.history.getFragment() != '') {
                                 Backbone.history.loadUrl("/login/redirect");
                             }
-                            else
-                            {
+                            else {
                                 Backbone.history.loadUrl('', {trigger: true, replace: true});
                             }
                         }
@@ -529,9 +512,9 @@ define(
 
                 if (currentUser.isLoggedIn()) {
                     currentUser.fetch().then(
-                        function(result) {
+                        function (result) {
                             console.log('current user has been fetched');
-                        }, function(err) {
+                        }, function (err) {
                             console.log("current user doesn't exist");
                         }
                     );
