@@ -21,20 +21,19 @@ define(
 			template: _.template(listItemTemplate),
 
 			render: function() {
-                var trackSon = this.model.forTemplate();
-				var html = this.template({
+                var html = this.template({
 					track: this.model.forTemplate(),
 					config: Config
 				});
 				this.$el.html(html);
 
-				if (this.model.get('is_validated'))
+				if (this.model.isValidated())
 				{
 					this.$('.track-thumbnail').addClass('track-validated panel-info');
 					this.$('.track-thumbnail .panel-heading').addClass('golden-effect');
 					this.$('.track-thumbnail .btn-start').removeClass('btn-bordered').addClass('btn-info golden-effect');
 				}
-				else if (this.model.get('is_started'))
+				else if (this.model.isStarted())
 				{
 					this.$('.track-thumbnail').addClass('track-started panel-primary');
 					this.$('.track-thumbnail .btn-start').removeClass('btn-bordered').addClass('btn-primary');

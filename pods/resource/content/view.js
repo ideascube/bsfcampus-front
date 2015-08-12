@@ -25,6 +25,10 @@ define(
 
 			tagName: 'div',
 
+			initialize: function() {
+				this.listenTo(this.model, 'change', this.render);
+			},
+
 			templateHTML: function() {
 				var content = this.model.get('resource_content');
 				var cls = content._cls.split('.').pop();
@@ -94,7 +98,7 @@ define(
                     });
                 }
 				else if (this.isExercise()) {
-					if (this.model.get('is_validated')) {
+					if (this.model.isValidated()) {
 						this.$('.btn-start-exercise').removeClass('btn-success').addClass('btn-info golden-effect');
 					}
 				}
@@ -131,9 +135,11 @@ define(
 					exerciseAttemptView.continueExercise();
 
                     $modal.on('hidden.bs.modal', function () {
-                        if (!self.model.get('is_validated') && exerciseAttemptView.isExerciseCompleted)
+                        if (!self.model.isValidated() && exerciseAttemptView.isExerciseCompleted)
                         {
-                            self.model.set('is_validated', true);
+                            self.model._isValidated = true;
+							self.model.trigger('change');
+							// FIXME Do this in a cleaner way (the validation ought to come from the server)
                         }
                         $modal.html(self.render().$el);
                         if (exerciseAttemptView.trackValidationId != null) {

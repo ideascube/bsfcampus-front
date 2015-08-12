@@ -59,7 +59,7 @@ define (
                     $exerciseRecap.addClass('track-validation-succeeded');
                     var track = this.resource.forTemplate();
                     var $trackRecapIcons = $exerciseRecap.find('#track-recap-icons');
-                    $trackRecapIcons.append('<img src="' + track.iconUrl + '" class="track-icon">');
+                    $trackRecapIcons.append('<img src="' + track.icon_url + '" class="track-icon">');
                     $trackRecapIcons.css('background', 'url(' + Config.imagesDict.trackValidation.STARS + ') no-repeat center center');
                     console.log($('<div>').append($trackRecapIcons.clone()).html());
                     $exerciseRecap.find('.recap-header h1').html(Config.stringsDict.TRACK_VALIDATION.SUCCESS_MESSAGE_HEADER);

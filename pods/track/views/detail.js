@@ -39,7 +39,7 @@ define(
 
                 this.$validateButton = this.$('.btn-validate-track');
 
-                if (this.model.get('is_validated'))
+                if (this.model.isValidated())
                 {
                     this.$el.addClass('track-validated');
                     this.$validateButton.removeClass('btn-success').addClass('btn-info golden-effect');
@@ -105,6 +105,7 @@ define(
                 var self = this;
 
                 var attempt = new TrackValidationAttemptModel();
+                // FIXME Handle case where there is no validation test
                 var validationTest = this.model.get('validation_test')._id;
                 attempt.set('exercise', validationTest);
                 attempt.save().done(function(result) {
@@ -118,10 +119,11 @@ define(
                     $("#main").hide();
                     $("body").css('background-color', '#36404A');
                     $modal.on('hidden.bs.modal', function () {
-                        var validated = self.model.get('is_validated');
+                        var validated = self.model.isValidated();
                         if (!validated && exerciseAttemptView.isExerciseCompleted)
                         {
-                            self.model.set('is_validated', true);
+                            self.model._isValidated = true;
+                            self.model.trigger('change');
                         }
                         self.render();
                         if (exerciseAttemptView.trackValidationId != null) {

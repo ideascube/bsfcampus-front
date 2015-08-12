@@ -17,6 +17,15 @@ define(
 
             dsResourceName: Config.constants.dsResourceNames.RESOURCES,
 
+            _isValidated: null,
+
+            isValidated: function() {
+                if (this._isValidated == null) {
+                    this._isValidated = this.get('is_validated');
+                }
+                return this._isValidated;
+            },
+
 			hierarchyUrl: function() {
 				return this.url() + '/hierarchy';
 			},
@@ -27,7 +36,9 @@ define(
 
             forTemplate: function() {
 
-                var son = AbstractModel.prototype.forTemplate.call(this); // equivalent to super.forTemplate()
+                var son = AbstractModel.prototype.forTemplate.call(this);
+
+                son.is_validated = this.isValidated();
 
                 if (this.get('resource_content') != null) {
 
@@ -35,39 +46,39 @@ define(
 
                     switch (cls) {
                         case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
-                            if (this.get('is_validated')) {
-                                son.iconUrl = Config.imagesDict.resourceIconOn.RICH_TEXT;
+                            if (this.isValidated()) {
+                                son.icon_url = Config.imagesDict.resourceIconOn.RICH_TEXT;
                             } else {
-                                son.iconUrl = Config.imagesDict.resourceIconOff.RICH_TEXT;
+                                son.icon_url = Config.imagesDict.resourceIconOff.RICH_TEXT;
                             }
                             break;
                         case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
                         case Config.stringsDict.RESOURCE_TYPE.VIDEO:
-                            if (this.get('is_validated')) {
-                                son.iconUrl = Config.imagesDict.resourceIconOn.VIDEO;
+                            if (this.isValidated()) {
+                                son.icon_url = Config.imagesDict.resourceIconOn.VIDEO;
                             } else {
-                                son.iconUrl = Config.imagesDict.resourceIconOff.VIDEO;
+                                son.icon_url = Config.imagesDict.resourceIconOff.VIDEO;
                             }
                             break;
                         case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
-                            if (this.get('is_validated')) {
-                                son.iconUrl = Config.imagesDict.resourceIconOn.EXERCISE;
+                            if (this.isValidated()) {
+                                son.icon_url = Config.imagesDict.resourceIconOn.EXERCISE;
                             } else {
-                                son.iconUrl = Config.imagesDict.resourceIconOff.EXERCISE;
+                                son.icon_url = Config.imagesDict.resourceIconOff.EXERCISE;
                             }
                             break;
                         case Config.stringsDict.RESOURCE_TYPE.AUDIO:
-                            if (this.get('is_validated')) {
-                                son.iconUrl = Config.imagesDict.resourceIconOn.AUDIO;
+                            if (this.isValidated()) {
+                                son.icon_url = Config.imagesDict.resourceIconOn.AUDIO;
                             } else {
-                                son.iconUrl = Config.imagesDict.resourceIconOff.AUDIO;
+                                son.icon_url = Config.imagesDict.resourceIconOff.AUDIO;
                             }
                             break;
                         case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
-                            if (this.get('is_validated')) {
-                                son.iconUrl = Config.imagesDict.resourceIconOn.DOWNLOADABLE_FILE;
+                            if (this.isValidated()) {
+                                son.icon_url = Config.imagesDict.resourceIconOn.DOWNLOADABLE_FILE;
                             } else {
-                                son.iconUrl = Config.imagesDict.resourceIconOff.DOWNLOADABLE_FILE;
+                                son.icon_url = Config.imagesDict.resourceIconOff.DOWNLOADABLE_FILE;
                             }
                             break;
                     }

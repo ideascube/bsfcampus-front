@@ -31,20 +31,20 @@ define(
 				var resourceModelJSON = this.model.forTemplate();
 				switch (this.model.get('resource_content')._cls.split('.').pop()) {
 					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIconWhite.RICH_TEXT;
+						resourceModelJSON.icon_url = Config.imagesDict.resourceIconWhite.RICH_TEXT;
 						break;
 					case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
 					case Config.stringsDict.RESOURCE_TYPE.VIDEO:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIconWhite.VIDEO;
+						resourceModelJSON.icon_url = Config.imagesDict.resourceIconWhite.VIDEO;
 						break;
 					case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIconWhite.EXERCISE;
+						resourceModelJSON.icon_url = Config.imagesDict.resourceIconWhite.EXERCISE;
 						break;
 					case Config.stringsDict.RESOURCE_TYPE.AUDIO:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIconWhite.AUDIO;
+						resourceModelJSON.icon_url = Config.imagesDict.resourceIconWhite.AUDIO;
 						break;
 					case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
-						resourceModelJSON.iconUrl = Config.imagesDict.resourceIconWhite.DOWNLOADABLE_FILE;
+						resourceModelJSON.icon_url = Config.imagesDict.resourceIconWhite.DOWNLOADABLE_FILE;
 						break;
 				}
 				var html = this.template({resource: resourceModelJSON });

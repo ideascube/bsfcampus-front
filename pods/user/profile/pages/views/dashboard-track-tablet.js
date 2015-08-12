@@ -24,26 +24,26 @@ define(
 
             template: _.template(trackItemTemplate),
 
-            generateAnalyticsObject: function (modelSON) {
+            analytics: function () {
+                var analytics = this.model.get('analytics');
                 var averageTime = null;
-                if (modelSON.analytics.average_time_on_exercise > 0)
-                {
-                    averageTime = this.durationToMMSS(modelSON.analytics.average_time_on_exercise);
+                if (analytics.average_time_on_exercise > 0) {
+                    averageTime = this.durationToMMSS(analytics.average_time_on_exercise);
                 }
-                var lastAttempt = (modelSON.analytics.last_attempts_scores.length > 0) ? modelSON.analytics.last_attempts_scores[0] : null;
-                var analytics = {
-                    nbVisitsMessage: Config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.NB_VISITS.replace("[%NB_VISIT%]", modelSON.analytics.nb_visit),
+                var lastAttempt = (analytics.last_attempts_scores.length > 0)
+                    ? analytics.last_attempts_scores[0]
+                    : null;
+                return {
+                    nbVisitsMessage: Config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.NB_VISITS.replace("[%NB_VISIT%]", analytics.nb_visit),
                     lastAttempt: lastAttempt,
                     averageTime: averageTime
-                };
-                return analytics;
+                }
             },
 
             render: function () {
-                var modelSON = this.model.forTemplate();
-                modelSON.validationClass = (modelSON.is_validated) ? "validated" : "";
-                var html = this.template({track: modelSON,
-                    analytics: this.generateAnalyticsObject(modelSON),
+                var html = this.template({
+                    track: this.model.forTemplate(),
+                    analytics: this.analytics(),
                     index: this.index,
                     config: Config
                 });

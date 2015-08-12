@@ -48,7 +48,7 @@ define(
                 });
                 this.$el.html(html);
 
-                if (this.model.get('is_validated')) {
+                if (this.model.isValidated()) {
                     this.$el.addClass('skill-validated');
                     this.$('.skill-title').append(badgeHTML);
                     this.$('.progress-bar')

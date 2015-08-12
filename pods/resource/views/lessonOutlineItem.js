@@ -26,29 +26,38 @@ define(
                 }
             },
 
+            initialize: function() {
+                this.listenTo(this.model, 'change', this.render);
+            },
+
             template: _.template(lessonOutlineItemTemplate),
 
-            generateAnalyticsObject: function (modelSON) {
-                var analytics = null;
-                if (modelSON.analytics != null) {
+            analytics: function () {
+                var analytics = this.model.get('analytics');
+                if (analytics != null) {
                     var averageTime = null;
-                    if (modelSON.analytics.average_time_on_exercise != null && modelSON.analytics.average_time_on_exercise > 0)
+                    if (analytics.average_time_on_exercise != null && analytics.average_time_on_exercise > 0)
                     {
-                        averageTime = this.durationToMMSS(modelSON.analytics.average_time_on_exercise);
+                        averageTime = this.durationToMMSS(analytics.average_time_on_exercise);
                     }
-                    var lastAttempt = (modelSON.analytics.last_attempts_scores != null && modelSON.analytics.last_attempts_scores.length > 0) ? modelSON.analytics.last_attempts_scores[0] : null;
-                    analytics = {
-                        nbVisitsMessage: Config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.NB_VISITS.replace("[%NB_VISIT%]", modelSON.analytics.nb_visit),
+                    var lastAttempt = (analytics.last_attempts_scores != null && analytics.last_attempts_scores.length > 0)
+                        ? analytics.last_attempts_scores[0]
+                        : null;
+                    return {
+                        nbVisitsMessage: Config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.NB_VISITS.replace("[%NB_VISIT%]", analytics.nb_visit),
                         lastAttempt: lastAttempt,
                         averageTime: averageTime
                     };
                 }
-                return analytics;
+                return null;
             },
 
             render: function () {
-                var modelSON = this.model.forTemplate();
-                var html = this.template({resource: modelSON, analytics: this.generateAnalyticsObject(modelSON), config: Config});
+                var html = this.template({
+                    resource: this.model.forTemplate(),
+                    analytics: this.analytics(),
+                    config: Config
+                });
                 this.$el.html(html);
 
                 return this;

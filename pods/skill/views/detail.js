@@ -38,13 +38,12 @@ define(
 
             render: function() {
 
-                var skillModel = this.model.forTemplate();
                 var html = this.template({
-					skill: skillModel,
-					config:Config
+					skill: this.model.forTemplate(),
+					config: Config
 				});
 				this.$el.html(html);
-				if (this.model.get('is_validated')) {
+				if (this.model.isValidated()) {
 					this.$el.addClass('skill-validated');
 					this.$('.skill-title').append(badgeHTML);
 					this.$('.progress-bar').removeClass('progress-bar-success').addClass('progress-bar-info golden-effect');
@@ -59,7 +58,7 @@ define(
                 });
 
                 var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSONS, function(lessonModel) {
-                    return _.some(skillModel.lessons, function (lesson) {
+                    return _.some(self.model.get('lessons'), function (lesson) {
                         return lesson._id == lessonModel.id;
                     })
                 });
@@ -90,7 +89,7 @@ define(
                 this.$('#skill-outline').empty();
 
                 var self =this;
-                lessonsCollection.each(function (lesson, index, list) {
+                lessonsCollection.each(function (lesson) {
                     self.renderSingleLesson(lesson);
                 })
             },
@@ -115,10 +114,11 @@ define(
 					$modal.html(exerciseAttemptView.$el);
 					$modal.modal({show: true});
 					$modal.on('hidden.bs.modal', function () {
-						var validated = self.model.get('is_validated');
+						var validated = self.model.isValidated();
                         if (!validated && exerciseAttemptView.isExerciseCompleted)
                         {
-                            self.model.set('is_validated', true);
+                            self.model._isValidated = true;
+                            self.model.trigger('change');
                         }
                         self.render();
 					});

@@ -17,15 +17,24 @@ define(
 
             dsResourceName: Config.constants.dsResourceNames.SKILLS,
 
+			_isValidated: null,
+
+			isValidated: function() {
+				if (this._isValidated == null) {
+					this._isValidated = this.get('is_validated');
+				}
+				return this._isValidated;
+			},
+
 			route: function() {
 				return '#/skill/' + this.id;
 			},
 
             forTemplate: function() {
 
-                var son = AbstractModel.prototype.forTemplate.call(this); // equivalent to super.forTemplate()
+                var son = AbstractModel.prototype.forTemplate.call(this);
 
-                son.iconUrl = son.icon_url;
+				son.is_completed = this.isValidated();
 
                 return son;
             }

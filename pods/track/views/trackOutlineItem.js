@@ -26,7 +26,7 @@ define(
 				});
 				this.$el.html(html);
 				this.$el.attr('href', this.model.route());
-				if (this.model.get('is_validated')) {
+				if (this.model.isValidated()) {
 					this.$el.addClass('skill-validated');
 					this.$('.progress-bar').removeClass('progress-bar-success').addClass('progress-bar-info golden-effect');
 					this.$('.skill-title').append(badgeHTML);
