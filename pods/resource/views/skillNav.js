@@ -32,8 +32,7 @@ define(
 				this.$el.html(html);
 					
 				var backToSkillView = new BackToSkillView({model: this.model});
-				backToSkillView.render();
-				this.$('#resource-skill-title').html(backToSkillView.$el);
+				this.$('#resource-skill-title').html(backToSkillView.render().$el);
 
 				this.$('#resource-hierarchy-accordion').empty();
 				_.each(this.model.get('lessons'), this.renderSingleLesson, this);
@@ -47,8 +46,7 @@ define(
                 DS.find(Config.constants.dsResourceNames.LESSONS, lesson._id).then(function(lessonModel) {
                     var itemView = new SkillOutlineItemView({model: lessonModel});
                     itemView.currentResource = self.currentResource;
-                    itemView.render();
-                    self.$('#resource-hierarchy-accordion').append(itemView.$el);
+                    self.$('#resource-hierarchy-accordion').append(itemView.render().$el);
                 });
 
 				return this;

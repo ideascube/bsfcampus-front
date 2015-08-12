@@ -20,8 +20,6 @@ define(
 
         return Backbone.View.extend({
 
-            el: $('#header'),
-
             template: _.template(template),
 
             events: {
@@ -51,22 +49,23 @@ define(
                 _.each(awaitingStudentRequests, this.renderTutoredStudentRequestNotification, this);
 
                 this.updateHeaderButtonFocus(this.currentFocusedElement);
+
+                return this;
             },
 
             renderNotification: function(user, isTutorRequest, isAcknowledged) {
-                var notificationView = new NotificationView();
-                notificationView.user = user;
-                notificationView.isTutorRequest = isTutorRequest;
-                notificationView.isAcknowledgeNotification = isAcknowledged;
-                notificationView.render();
-
                 if (this.firstNotificationRendered) {
                     this.$notificationsList.append('<li class="divider"></li>');
                 } else {
                     this.firstNotificationRendered = true;
                 }
 
-                this.$notificationsList.append(notificationView.$el);
+                var notificationView = new NotificationView();
+                notificationView.user = user;
+                notificationView.isTutorRequest = isTutorRequest;
+                notificationView.isAcknowledgeNotification = isAcknowledged;
+
+                this.$notificationsList.append(notificationView.render().$el);
 
                 return notificationView;
             },

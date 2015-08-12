@@ -51,6 +51,8 @@ define(
 					var el = this.$('.multiple-answer-mcq-propositions');
 					el.append(html);
 				}
+
+                return this;
 			},
 
 			serializeForm: function () {

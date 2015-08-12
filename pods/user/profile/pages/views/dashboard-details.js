@@ -51,12 +51,10 @@ define(
                 var trackModel = new TrackModel({data: track}, {parse: true});
 
                 var trackComputerItemView = new DashboardTrackComputerItemView({model: trackModel});
-                trackComputerItemView.render();
-                this.$('#dashboard-tracks-md-lg-list').append(trackComputerItemView.$el);
+                this.$('#dashboard-tracks-md-lg-list').append(trackComputerItemView.render().$el);
 
                 var trackTabletItemView = new DashboardTrackTabletItemView({model: trackModel});
-                trackTabletItemView.render();
-                this.$('#dashboard-tracks-xs-sm-list').append(trackTabletItemView.$el);
+                this.$('#dashboard-tracks-xs-sm-list').append(trackTabletItemView.render().$el);
             },
 
             renderTrackOutline: function (track) {
@@ -74,8 +72,7 @@ define(
                     var skillOutlineItemView = new DashboardSkillItemView({
                         model: new SkillModel({data: skill}, {parse: true})
                     });
-                    skillOutlineItemView.render();
-                    $dashboardTrackSkills.append(skillOutlineItemView.$el);
+                    $dashboardTrackSkills.append(skillOutlineItemView.render().$el);
                 });
             },
 

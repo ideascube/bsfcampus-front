@@ -39,7 +39,7 @@ define(
 
                 this.$("#first-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
 
-                return this.$el;
+                return this;
             },
 
             goToTracks: function(e) {

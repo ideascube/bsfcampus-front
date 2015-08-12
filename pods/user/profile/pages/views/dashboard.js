@@ -34,10 +34,9 @@ define(
                 var self = this;
                 this.model.fetch().done(function(data){
                     var dashboardDetailsView = new DashboardDetailsView({
-                        model: self.model,
-                        el: self.$('#dashboard-details')
+                        model: self.model
                     });
-                    dashboardDetailsView.render();
+                    self.$('#dashboard-details').html(dashboardDetailsView.render());
                 });
 
                 return this;

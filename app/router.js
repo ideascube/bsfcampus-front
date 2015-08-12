@@ -170,12 +170,12 @@ define(
 
             renderHeader: function () {
                 this.appHeaderView = new AppHeaderView();
-                this.appHeaderView.render();
+                $('#header').append(this.appHeaderView.render().$el);
             },
 
             renderFooter: function () {
                 var appFooterView = new AppFooterView();
-                appFooterView.render();
+                $('#footer').append(appFooterView.render().$el);
             },
 
             clearHome: function () {
@@ -243,17 +243,15 @@ define(
                         return new HomeView();
                     });
                 }
-                $('#home').append(homeView.render());
+                $('#home').append(homeView.render().$el);
 
                 this.appHeaderView.updateHeaderButtonFocus('home');
             },
 
             register: function () {
                 this.clearModal();
-                var registerUserView = new RegisterUserView({
-                    el: this.$modal
-                });
-                registerUserView.render();
+                var registerUserView = new RegisterUserView();
+                this.$modal.html(registerUserView.render().$el);
                 var self = this;
                 this.listenTo(registerUserView, 'close', function() {
                     var fragment = Backbone.history.getFragment();
@@ -269,10 +267,8 @@ define(
                     console.log('a');
                 });
                 this.clearModal();
-                var loginUserView = new LoginUserView({
-                    el: this.$modal
-                });
-                loginUserView.render();
+                var loginUserView = new LoginUserView();
+                this.$modal.html(loginUserView.render().$el);
                 var self = this;
                 this.listenTo(loginUserView, 'close', function() {
                     var fragment = Backbone.history.getFragment();
@@ -286,10 +282,8 @@ define(
             loginRedirect: function () {
                 var self = this;
                 var next = Backbone.history.getFragment();
-                var loginUserView = new LoginUserView({
-                    el: this.$modal
-                });
-                loginUserView.render();
+                var loginUserView = new LoginUserView();
+                this.$modal.html(loginUserView.render().$el);
                 this.listenTo(loginUserView, 'close', function () {
                     self.clearModal();
                     self.afterSuccessfulLogin(loginUserView, next);
@@ -322,10 +316,8 @@ define(
                 this.clearModal();
                 var self = this;
                 this.$modal.on('hidden.bs.modal', function() {
-                    var resetPasswordView = new ResetPasswordView({
-                        el: self.$modal
-                    });
-                    resetPasswordView.render();
+                    var resetPasswordView = new ResetPasswordView();
+                    self.$modal.html(resetPasswordView.render().$el);
                     self.$modal.on('shown.bs.modal', function() {
                         resetPasswordView.$('form input#email').focus();
                     }).modal('show');
@@ -345,8 +337,7 @@ define(
 
                     var userProfileView = new UserProfileView({model: currentUser});
                     userProfileView.page = page;
-                    userProfileView.render();
-                    $('#main').append(userProfileView.$el);
+                    $('#main').append(userProfileView.render().$el);
 
                     self.appHeaderView.updateHeaderButtonFocus('user');
                 });
@@ -360,8 +351,7 @@ define(
                     self.clearModal();
 
                     var trackListView = new TrackListView({collection: collection});
-                    trackListView.render();
-                    $('#main').append(trackListView.$el);
+                    $('#main').append(trackListView.render().$el);
                 });
 
                 this.appHeaderView.updateHeaderButtonFocus('hierarchy');
@@ -375,8 +365,7 @@ define(
                     self.clearModal();
 
                     var trackDetailView = new TrackDetailView({model: model});
-                    trackDetailView.render();
-                    $('#main').append(trackDetailView.$el);
+                    $('#main').append(trackDetailView.render().$el);
 
                     var analytics = new VisitedTrackAnalyticsModel();
                     analytics.id = id;
@@ -393,8 +382,7 @@ define(
                     self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
 
                     var skillDetailView = new SkillDetailView({model: model});
-                    skillDetailView.render();
-                    $('#main').append(skillDetailView.$el);
+                    $('#main').append(skillDetailView.render().$el);
 
                     var analytics = new VisitedSkillAnalyticsModel();
                     analytics.id = id;
@@ -424,8 +412,7 @@ define(
                     self.renderResourceHierarchyBreadcrumb(model.get('hierarchy'));
 
                     var resourceDetailView = new ResourceDetailView({model: model});
-                    resourceDetailView.render();
-                    $('#main').append(resourceDetailView.$el);
+                    $('#main').append(resourceDetailView.render().$el);
 
                     var analytics = new VisitedResourceAnalyticsModel();
                     analytics.id = id;
@@ -437,8 +424,7 @@ define(
 
             renderResourceHierarchyBreadcrumb: function (breadcrumbModel) {
                 var breadcrumbView = new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
-                breadcrumbView.render();
-                $('#main').append(breadcrumbView.$el);
+                $('#main').append(breadcrumbView.render().$el);
             },
 
             promptTrackValidation: function (track_id) {
@@ -447,11 +433,9 @@ define(
                 promptTrackValidationAnalytics.title = track_id;
                 promptTrackValidationAnalytics.save();
                 this.clearModal();
-                var promptTrackValidationView = new PromptTrackValidationView({
-                    el: this.$modal
-                });
+                var promptTrackValidationView = new PromptTrackValidationView();
                 promptTrackValidationView.trackId = track_id;
-                promptTrackValidationView.render();
+                this.$modal.html(promptTrackValidationView.render().$el);
                 this.listenTo(promptTrackValidationView, 'close', this.clearModal);
                 this.$modal.modal('show');
             },
@@ -477,7 +461,7 @@ define(
                     var searchResultsView = new SearchResultsView();
                     searchResultsView.searchedString = searchedString;
                     searchResultsView.results = response.data;
-                    $('#main').append(searchResultsView.render());
+                    $('#main').append(searchResultsView.render().$el);
                 }).then(
                     function(result) {
                         // nothing
@@ -495,7 +479,7 @@ define(
                 var staticPageView = new StaticPageView();
                 staticPageView.pageId = page_id;
 
-                $('#main').append(staticPageView.render());
+                $('#main').append(staticPageView.render().$el);
             },
 
             getQueryParameters : function(str) {

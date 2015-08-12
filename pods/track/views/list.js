@@ -32,8 +32,7 @@ define(
 
 			renderTrack: function(track) {
 				var listItemView = new ListItemView({model: track});
-				listItemView.render();
-				this.$('#track-list').append(listItemView.$el);
+				this.$('#track-list').append(listItemView.render().$el);
 				
 				return this;
 			}

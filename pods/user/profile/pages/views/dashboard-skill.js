@@ -67,8 +67,7 @@ define(
                 var skillResourceItemView = new DashboardSkillResourceItemView({
                     model: new ResourceModel({data: resource}, {parse: true})
                 });
-                skillResourceItemView.render();
-                this.$('.dashboard-skill-resources').append(skillResourceItemView.$el);
+                this.$('.dashboard-skill-resources').append(skillResourceItemView.render().$el);
             },
 
             // This is a helper function to help display a duration (in seconds) in string format

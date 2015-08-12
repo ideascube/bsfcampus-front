@@ -94,8 +94,7 @@ define(
 
             renderOne: function(skill) {
 				var trackOutlineItem = new TrackOutlineItem({model: skill});
-				trackOutlineItem.render();
-				this.$('#track-outline').append(trackOutlineItem.$el);
+				this.$('#track-outline').append(trackOutlineItem.render().$el);
 			
 				return this;
 			},
@@ -111,11 +110,10 @@ define(
                 attempt.save().done(function(result) {
                     var $modal = $('#modal');
                     var exerciseAttemptView = new TrackValidationAttemptView({
-                        model: attempt,
-                        el: $modal
+                        model: attempt
                     });
                     exerciseAttemptView.resource = self.model;
-                    exerciseAttemptView.render();
+                    $modal.html(exerciseAttemptView.render().$el);
                     exerciseAttemptView.continueExercise();
                     $("#main").hide();
                     $("body").css('background-color', '#36404A');

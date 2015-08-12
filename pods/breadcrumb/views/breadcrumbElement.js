@@ -50,7 +50,7 @@ define(
 							this.model = new ResourceModel({data: this.model}, {parse: true});
 							break;
 						}
-						return;
+						return null;
 				}
 
 				var html = this.template({model: this.model.forTemplate()});

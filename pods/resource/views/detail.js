@@ -56,13 +56,14 @@ define(
                     this.renderAdditionalResources();
                 }
                 this.renderContent();
+
+                return this;
 			},
 
             renderBackToMainResource: function() {
                 var parentResourceModel = new ResourceModel({data: this.model.get('parent_resource')}, {parse: true});
                 var backToMainResourceNav = new BackToMainResourceNav({model: parentResourceModel});
-                backToMainResourceNav.render();
-                this.$('#skill-nav').html(backToMainResourceNav.$el);
+                this.$('#skill-nav').html(backToMainResourceNav.render().$el);
 
             },
 
@@ -150,16 +151,14 @@ define(
             renderSkillNav: function (skillModel) {
                 var skillNavView = new SkillNavView({model: skillModel});
                 skillNavView.currentResource = this.model;
-                skillNavView.render();
-                this.$('#skill-nav').html(skillNavView.$el);
+                this.$('#skill-nav').html(skillNavView.render().$el);
             },
 
             renderContent: function() {
 				var contentView = new ResourceContentView({
-					model: this.model,
-					el: this.$('#resource-content')
+					model: this.model
 				});
-				contentView.render();
+                this.$('#resource-content').html(contentView.render().$el);
 			},
 
             renderAdditionalResources: function () {
@@ -180,8 +179,7 @@ define(
             renderSingleAdditionalResource: function(additionalResource) {
                 var additionalResourceModel = new ResourceModel({data: additionalResource}, {parse: true});
                 var additionalResourcesView = new LessonOutlineItemView({model: additionalResourceModel});
-                additionalResourcesView.render();
-                this.$('#additional-resources').append(additionalResourcesView.$el);
+                this.$('#additional-resources').append(additionalResourcesView.render().$el);
             }
 
 		});

@@ -73,10 +73,8 @@ define(
 
             openMergeUsersModal: function(e) {
                 var mergeAccountModalView = new MergeAccountModalView({});
-                mergeAccountModalView.render();
-
                 var $modal = $('#modal');
-                $modal.html(mergeAccountModalView.$el);
+                $modal.html(mergeAccountModalView.render().$el);
                 $modal.modal({show: true});
             }
 

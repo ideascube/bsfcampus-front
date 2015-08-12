@@ -69,8 +69,7 @@ define(
 
             renderResource: function(resource) {
 				var lessonOutlineItemView = new LessonOutlineItemView({model: resource});
-				lessonOutlineItemView.render();
-				this.$('.lesson-outline').append(lessonOutlineItemView.$el);
+				this.$('.lesson-outline').append(lessonOutlineItemView.render().$el);
 			
 				return this;
 			},

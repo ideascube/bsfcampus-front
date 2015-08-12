@@ -98,6 +98,8 @@ define(
 						this.$('.btn-start-exercise').removeClass('btn-success').addClass('btn-info golden-effect');
 					}
 				}
+
+                return this;
 			},
 
 			events: {
@@ -114,11 +116,10 @@ define(
 				attempt.save().done(function(result) {
 					var $modal = $('#modal');
 					var exerciseAttemptView = new ExerciseAttemptView({
-						model: attempt,
-						el: $modal
+						model: attempt
 					});
 					exerciseAttemptView.resource = self.model;
-					exerciseAttemptView.render();
+					$modal.html(exerciseAttemptView.render().$el);
 
 					// FIXME Do this when the modal is shown
 					// (The event is not fired for some reason)
@@ -134,7 +135,7 @@ define(
                         {
                             self.model.set('is_validated', true);
                         }
-                        self.render();
+                        $modal.html(self.render().$el);
                         if (exerciseAttemptView.trackValidationId != null) {
                             Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
                         }

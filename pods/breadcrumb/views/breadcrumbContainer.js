@@ -45,9 +45,8 @@ define(
 
 			getRenderedElement: function(breadcrumbInfo) {
 				var breadcrumbElementView = new BreadcrumbElementView({model: breadcrumbInfo});
-				breadcrumbElementView.render();
-			
-				return breadcrumbElementView;
+
+				return breadcrumbElementView.render();
 			}
 
 		});

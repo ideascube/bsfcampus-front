@@ -37,7 +37,7 @@ define(
                     this.$el.html(this.template({content: pageModel.forTemplate()}));
                 }
 
-				return this.$el;
+				return this;
 			}
 
 		});

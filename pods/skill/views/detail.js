@@ -55,8 +55,7 @@ define(
 
                 DS.find(Config.constants.dsResourceNames.TRACKS, this.model.get('track')['_id']).then(function (trackModel) {
 					var backToTrackView = new BackToTrackView({model: trackModel});
-					backToTrackView.render();
-					self.$('#track-title').html(backToTrackView.$el);
+					self.$('#track-title').html(backToTrackView.render().$el);
                 });
 
                 var lessonsCollection = DS.filter(Config.constants.dsResourceNames.LESSONS, function(lessonModel) {
@@ -98,8 +97,7 @@ define(
 
 			renderSingleLesson: function(lesson) {
 				var skillOutlineItemView = new SkillOutlineItemView({model: lesson});
-				skillOutlineItemView.render();
-                this.$('#skill-outline').append(skillOutlineItemView.$el);
+                this.$('#skill-outline').append(skillOutlineItemView.render().$el);
 			},
 
 			startSkillValidation: function(e) {

@@ -42,13 +42,14 @@ define(
 
                 this.renderNavMenu();
                 this.navMenuView.changeSelectedPage(this.page);
+
+                return this;
             },
 
             renderNavMenu: function() {
                 this.navMenuView = new NavMenuView();
-                this.navMenuView.render();
+                this.$('#profile-nav-menu').html(this.navMenuView.render().$el);
                 this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
-                this.$('#profile-nav-menu').html(this.navMenuView.$el);
             },
 
             renderNavContent: function(pageId) {
@@ -76,8 +77,7 @@ define(
                     default:
                         return;
                 }
-                profileDetailPageView.render();
-                this.$('#profile-nav-details').html(profileDetailPageView.$el);
+                this.$('#profile-nav-details').html(profileDetailPageView.render().$el);
             }
 
         });

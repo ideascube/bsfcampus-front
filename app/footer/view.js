@@ -15,8 +15,6 @@ define(
 
 		return Backbone.View.extend({
 
-			el: $('#footer'),
-
 			template: _.template(template),
 			staticPageLinkTemplate: _.template(staticPageLinkTemplate),
 
@@ -35,6 +33,8 @@ define(
                     var pageSON = page.forTemplate();
                     $staticPagesList.append(this.staticPageLinkTemplate({page: pageSON}));
                 }, this);
+
+                return this;
 			}
 
 		});

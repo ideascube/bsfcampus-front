@@ -32,7 +32,7 @@ define(
                 this.$('#search-results').empty();
                 _.each(this.results, this.renderResult, this);
 
-                return this.$el;
+                return this;
             },
 
             renderResult: function(result) {

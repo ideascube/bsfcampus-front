@@ -63,8 +63,7 @@ define(
             addTutorToGroup: function (userSON) {
                 var user = new User({data: userSON}, {parse: true});
                 var tutorLineView = new TutorLineView({model: user});
-                tutorLineView.render();
-                this.$('#tutors-list').append(tutorLineView.$el);
+                this.$('#tutors-list').append(tutorLineView.render().$el);
             },
 
             addStudentToDropdown: function (user) {
@@ -110,9 +109,8 @@ define(
             renderSingleUserResult: function (userSON) {
                 var user = new User({data: userSON}, {parse: true});
                 var userSearchResultLineView = new UserSearchResultLineView({model: user});
-                userSearchResultLineView.render();
+                this.$searchResultsList.append(userSearchResultLineView.render().$el);
                 this.addSearchedUserListeners(userSearchResultLineView);
-                this.$searchResultsList.append(userSearchResultLineView.$el);
             },
 
             addSearchedUserListeners: function (userSearchResultLineView) {
@@ -259,10 +257,9 @@ define(
                 var self = this;
                 dashboardUserModel.fetch().done(function (data) {
                     var dashboardDetailsView = new DashboardDetailsView({
-                        model: dashboardUserModel,
-                        el: self.$('#student-dashboard-details')
+                        model: dashboardUserModel
                     });
-                    dashboardDetailsView.render();
+                    self.$('#student-dashboard-details').html(dashboardDetailsView.render());
 
                     var analytics = new VisitedDashboardAnalyticsModel();
                     analytics.id = selectedUserId;

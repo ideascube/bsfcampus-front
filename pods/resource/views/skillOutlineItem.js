@@ -48,12 +48,11 @@ define(
 
                 DS.find(Config.constants.dsResourceNames.RESOURCES, resource._id).then(function(resourceModel) {
                     var lessonOutlineItemView = new LessonOutlineItemView({model: resourceModel});
-                    lessonOutlineItemView.render();
+                    self.$('.lesson-outline').append(lessonOutlineItemView.render().$el);
                     if (self.currentResource.id === resource.id) {
                         lessonOutlineItemView.$el.addClass('active');
                     }
 
-                    self.$('.lesson-outline').append(lessonOutlineItemView.$el);
                 });
 
 				return this;

@@ -147,10 +147,9 @@ define(
 						this.$('.exercise-attempt-footer button').addClass('disabled');
 					}
 				});
-				formView.render();
 
 				this.$('#current_question_id_input').val(this.currentQuestionAnswer.get('question_id'));
-				this.$('.exercise-attempt-question').html(formView.$el);
+				this.$('.exercise-attempt-question').html(formView.render().$el);
 				if (this.currentQuestionAnswer.questionModel().get('_cls') == 'UniqueAnswerMCQExerciseQuestion'
 					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'DropdownExerciseQuestion'
 					|| this.currentQuestionAnswer.questionModel().get('_cls') == 'OrderingExerciseQuestion'
@@ -173,7 +172,6 @@ define(
 				var currentQuestionAnswer = this.model.getQuestionAnswer(questionId);
 				
 				var feedbackView = ExerciseAttemptQuestionAnswerFeedbackView.initialize(currentQuestionAnswer);
-				feedbackView.render();
 
 				var answerExplanationEl = this.$('.answer-explanation');
 				answerExplanationEl.removeClass('right-answer').removeClass('wrong-answer');
@@ -219,7 +217,7 @@ define(
 
 				this.$('.exercise-attempt-form').hide();
 
-				this.$('.exercise-attempt-question-answer-feedback').html(feedbackView.$el).show();
+				this.$('.exercise-attempt-question-answer-feedback').html(feedbackView.render().$el).show();
 
 				this.$('.exercise-attempt-question-answer-result').html($result);
 			},
@@ -333,10 +331,9 @@ define(
 					{
 						var resourceModel = new ResourceModel(this.model.getFailedLinkedResource());
 						var failLinkedResourceView = new FailLinkedResourceView({model: resourceModel});
-						failLinkedResourceView.render();
-						failLinkedResourceView.$el.bind("click", this.closeModal);
-						$exerciseRecapDetails.append(failLinkedResourceView.$el);
-					}
+						$exerciseRecapDetails.append(failLinkedResourceView.render().$el);
+                        failLinkedResourceView.$el.bind("click", this.closeModal);
+                    }
 					else
 					{
 						$exerciseRecapDetails.append('<img src="' + Config.imagesDict.wrongRed + '">');

@@ -71,19 +71,6 @@ define (
                     $exerciseRecap.addClass('track-validation-failed');
                     $exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE_HEADER);
                     $exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
-
-                    if (this.model.getFailedLinkedResource() != null)
-                    {
-                        var resourceModel = new ResourceModel(this.model.getFailedLinkedResource())
-                        var failLinkedResourceView = new FailLinkedResourceView({model: resourceModel});
-                        var failLinkRendered = failLinkedResourceView.render();
-                        failLinkRendered.$el.bind("click", this.closeModal);
-                        $exerciseRecapDetails.append(failLinkRendered.$el);
-                    }
-                    else
-                    {
-                        $exerciseRecapDetails.append('<img src="' + Config.imagesDict.wrongRed + '">');
-                    }
                 }
                 console.log("renderEndOfExercise", recapModelJSON);
                 this.renderProgression();
