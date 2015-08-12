@@ -33,7 +33,7 @@ define(
                 this.$("#first-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
                 this.$("#third-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage3 + ')');
 
-                return this;
+                return this.$el;
             },
 
             login: function(e) {

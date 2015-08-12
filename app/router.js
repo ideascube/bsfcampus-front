@@ -235,19 +235,15 @@ define(
                 if (currentUser.isLoggedIn())
                 {
                     homeView = VM.createView(Config.constants.VIEWS_ID.CONNECTED_HOME, function() {
-                        return new ConnectedHomeView({
-                            el: $('#home')
-                        });
+                        return new ConnectedHomeView();
                     });
                 }
                 else {
                     homeView = VM.createView(Config.constants.VIEWS_ID.HOME, function () {
-                        return new HomeView({
-                            el: $('#home')
-                        });
+                        return new HomeView();
                     });
                 }
-                homeView.render();
+                $('#home').append(homeView.render());
 
                 this.appHeaderView.updateHeaderButtonFocus('home');
             },
