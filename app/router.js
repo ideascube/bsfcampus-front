@@ -250,11 +250,14 @@ define(
 
             register: function () {
                 this.clearModal();
-                var registerUserView = new RegisterUserView();
+                var registerUserView = VM.createView(Config.constants.VIEWS_ID.REGISTER, function() {
+                    return new RegisterUserView();
+                });
                 this.$modal.html(registerUserView.render().$el);
                 var self = this;
                 this.listenTo(registerUserView, 'close', function() {
                     var fragment = Backbone.history.getFragment();
+                    VM.closeView(Config.constants.VIEWS_ID.REGISTER);
                     self.afterSuccessfulLogin(registerUserView, fragment);
                 });
                 this.$modal.on('shown.bs.modal', function() {
@@ -267,11 +270,14 @@ define(
                     console.log('a');
                 });
                 this.clearModal();
-                var loginUserView = new LoginUserView();
+                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function() {
+                    return new LoginUserView();
+                });
                 this.$modal.html(loginUserView.render().$el);
                 var self = this;
                 this.listenTo(loginUserView, 'close', function() {
                     var fragment = Backbone.history.getFragment();
+                    VM.closeView(Config.constants.VIEWS_ID.LOGIN);
                     self.afterSuccessfulLogin(loginUserView, fragment);
                 });
                 this.$modal.on('shown.bs.modal', function() {
@@ -282,10 +288,12 @@ define(
             loginRedirect: function () {
                 var self = this;
                 var next = Backbone.history.getFragment();
-                var loginUserView = new LoginUserView();
+                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function() {
+                    return new LoginUserView();
+                });
                 this.$modal.html(loginUserView.render().$el);
                 this.listenTo(loginUserView, 'close', function () {
-                    self.clearModal();
+                    VM.closeView(Config.constants.VIEWS_ID.LOGIN);
                     self.afterSuccessfulLogin(loginUserView, next);
                 });
                 this.$modal.on('shown.bs.modal', function() {

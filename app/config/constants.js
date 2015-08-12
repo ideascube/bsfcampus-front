@@ -30,7 +30,9 @@ define(['config'],
 
             VIEWS_ID: {
                 HOME: "HOME_VIEW",
-                CONNECTED_HOME: "CONNECTED_HOME_VIEW"
+                CONNECTED_HOME: "CONNECTED_HOME_VIEW",
+                REGISTER: "REGISTER",
+                LOGIN: "LOGIN"
             },
 
 			server_type: server_type,
