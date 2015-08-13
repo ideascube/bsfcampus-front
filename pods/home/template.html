@@ -1,68 +1,72 @@
 <div id="home-content">
     <div id="first-window" class="container-fluid">
-        <h1 id="greeting" class="text-center">
-            <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
-        </h1>
-        <% if (currentUser.id == null) { %>
-        <div class="row">
-            <div class="col-sm-3 col-center">
-                <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
-                    <%= config.stringsDict.HOME.LOGIN %>
-                </a>
+        <div class="container">
+            <h1 id="greeting" class="text-center">
+                <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
+            </h1>
+            <% if (currentUser.id == null) { %>
+            <div class="row">
+                <div class="col-sm-3 col-center">
+                    <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
+                        <%= config.stringsDict.HOME.LOGIN %>
+                    </a>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3 col-center">
-                <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
-                    <%= config.stringsDict.HOME.REGISTER %>
-                </a>
+            <div class="row">
+                <div class="col-sm-3 col-center">
+                    <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
+                        <%= config.stringsDict.HOME.REGISTER %>
+                    </a>
+                </div>
             </div>
-        </div>
-        <% } else { %>
-        <div class="home-msg-welcome">
-            <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
-        </div>
-        <% } %>
+            <% } else { %>
+            <div class="home-msg-welcome">
+                <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
+            </div>
+            <% } %>
 
-        <div class="text-center">
-            <a class="block-center" id="scroll-arrow" href="#second-window">
-                <span class="glyphicon glyphicon-chevron-down"></span>
-            </a>
+            <div class="text-center">
+                <a class="block-center" id="scroll-arrow" href="#second-window">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                </a>
+            </div>
         </div>
     </div>
     <div id="second-window" class="container-fluid">
-        <h1 id="second-greeting" class="text-center">
-            <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
-        </h1>
+        <div class="container">
+            <h1 id="second-greeting" class="text-center">
+                <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
+            </h1>
 
-        <div class="row">
-            <div class="col-sm-offset-2 col-sm-4 text-justify">
-                <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-5 text-justify">
+                    <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+                </div>
+                <div class="col-sm-5 text-justify">
+                    <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+                </div>
             </div>
-            <div class="col-sm-4 text-justify">
-                <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+            <% if (currentUser.id == null) { %>
+            <div class="row">
+                <div class="col-sm-3 col-center">
+                    <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
+                        <%= config.stringsDict.HOME.LOGIN %>
+                    </a>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-sm-3 col-center">
+                    <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
+                        <%= config.stringsDict.HOME.REGISTER %>
+                    </a>
+                </div>
+            </div>
+            <% } else { %>
+            <h4 class="text-center" id="home-msg-welcome">
+                <%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %>
+            </h4>
+            <% } %>
         </div>
-        <% if (currentUser.id == null) { %>
-        <div class="row">
-            <div class="col-sm-3 col-center">
-                <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
-                    <%= config.stringsDict.HOME.LOGIN %>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3 col-center">
-                <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
-                    <%= config.stringsDict.HOME.REGISTER %>
-                </a>
-            </div>
-        </div>
-        <% } else { %>
-        <h4 class="text-center" id="home-msg-welcome">
-            <%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %>
-        </h4>
-        <% } %>
     </div>
     <div id="third-window" class="container-fluid"></div>
 </div>
