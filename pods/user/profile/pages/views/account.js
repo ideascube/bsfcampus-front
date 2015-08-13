@@ -49,7 +49,7 @@ define(
 
                 var formData = JSON.stringify(this.$('form').serializeObject());
                 var $saveButton = this.$('button.btn-save-modification');
-                $saveButton.addClass('disabled');
+                $saveButton.prop('disabled', true);
                 var $accountSaveResult = this.$('#save-result');
                 $accountSaveResult.removeClass('text-success text-danger');
                 $.ajax({
@@ -63,22 +63,23 @@ define(
                     currentUser.set(currentUser.parse(result));
                     $accountSaveResult.html(Config.stringsDict.USER.PROFILE.ACCOUNT.SAVE_SUCCESS_MESSAGE);
                     $accountSaveResult.addClass('text-success');
-                    $saveButton.removeClass('disabled');
+                    $saveButton.prop('disabled', false);
                 }).fail(function(error){
                     console.log("Could not post user modifications", error);
                     $accountSaveResult.html(Config.stringsDict.USER.PROFILE.ACCOUNT.SAVE_FAIL_MESSAGE);
                     $accountSaveResult.addClass('text-danger');
-                    $saveButton.removeClass('disabled');
+                    $saveButton.prop('disabled', false);
                 });
             },
 
             openMergeUsersModal: function(e) {
                 var mergeAccountModalView = VM.createView(Config.constants.VIEWS_ID.MERGE_ACCOUNT_MODAL, function() {
-                    return new MergeAccountModalView({});
+                    return new MergeAccountModalView();
                 });
-                var $modal = $('#modal');
-                $modal.html(mergeAccountModalView.render().$el);
-                $modal.modal({show: true});
+                $('body').append(mergeAccountModalView.render().$el);
+                mergeAccountModalView.$el.on('hidden.bs.modal', function(){
+                    VM.closeView(Config.constants.VIEWS_ID.MERGE_ACCOUNT_MODAL);
+                }).modal('show');
             }
 
         });

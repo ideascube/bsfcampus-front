@@ -4,17 +4,24 @@ define(
 		'underscore',
 		'backbone',
         'ds',
-		'app/config'
+		'app/config',
+
+		'pods/analytics/processAchievement'
 	],
-	function($, _, Backbone, DS, Config) {
+	function($, _, Backbone, DS, Config,
+			 processAchievement) {
 
 		return Backbone.Model.extend({
 
 			idAttribute: '_id',
 
+			achievements: null,
+
 			parse: function(response, options) {
-				if (!options) {
-					options = {};
+				options || (options = {});
+
+				if (response.hasOwnProperty('achievements')) {
+					this.achievements = new Backbone.Collection(this.recursiveNormalize(response.achievements));
 				}
 
 				if (!options.collection) {

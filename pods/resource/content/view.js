@@ -26,10 +26,6 @@ define(
 
 			tagName: 'div',
 
-			initialize: function() {
-				this.listenTo(this.model, 'change', this.render);
-			},
-
 			templateHTML: function() {
 				var content = this.model.get('resource_content');
 				var cls = content._cls.split('.').pop();
@@ -119,34 +115,20 @@ define(
 				var attempt = new ExerciseAttemptModel();
 				attempt.set('exercise', this.model.id);
 				attempt.save().done(function(result) {
-					var $modal = $('#modal');
                     var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.EXERCISE_ATTEMPT, function() {
                         return new ExerciseAttemptView({model: attempt});
                     });
-					exerciseAttemptView.resource = self.model;
-					$modal.html(exerciseAttemptView.render().$el);
+                    exerciseAttemptView.resource = self.model;
+                    $('body').append(exerciseAttemptView.render().$el);
 
-					// FIXME Do this when the modal is shown
-					// (The event is not fired for some reason)
-					//$modal.on('shown.bs.modal', function () {
-						exerciseAttemptView.continueExercise();
-					//});
-
-					$modal.modal('show');
-					exerciseAttemptView.continueExercise();
-
-                    $modal.on('hidden.bs.modal', function () {
-                        if (!self.model.isValidated() && exerciseAttemptView.isExerciseCompleted)
-                        {
-                            self.model._isValidated = true;
-							self.model.trigger('change');
-							// FIXME Do this in a cleaner way (the validation ought to come from the server)
-                        }
+                    exerciseAttemptView.$el.on('hidden.bs.modal', function () {
+                        VM.closeView(Config.constants.VIEWS_ID.EXERCISE_ATTEMPT);
                         if (exerciseAttemptView.trackValidationId != null) {
                             Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
                         }
-                        $modal.unbind('hidden.bs.modal');
-                    });
+                    }).on('shown.bs.modal', function () {
+                        exerciseAttemptView.continueExercise();
+                    }).modal('show');
 				}).fail(function(error) {
 
 				});

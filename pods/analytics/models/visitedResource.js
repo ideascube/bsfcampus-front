@@ -15,10 +15,13 @@ define(
         return AbstractModel.extend({
 
             parse: function(response, options) {
-                var achievements = new Backbone.Collection(this.recursiveNormalize(response.achievements));
-                achievements.each(processAchievement);
+                response = AbstractModel.prototype.parse.call(this, response, options);
 
-                return AbstractModel.prototype.parse.call(this, response, options);
+                if (this.achievements != null) {
+                    this.achievements.each(processAchievement)
+                }
+
+                return response;
             },
 
             serverPath: '/activity/visited_resource'

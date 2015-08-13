@@ -108,27 +108,17 @@ define(
 				var attempt = new SkillValidationAttemptModel();
 				attempt.set('skill', this.model.id);
 				attempt.save().done(function(result) {
-                    var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.SKILL_VALIDATION_ATTEMPT, function() {
+                    var skillValidationAttemptView = VM.createView(Config.constants.VIEWS_ID.SKILL_VALIDATION_ATTEMPT, function() {
                         return new SkillValidationAttemptView({model: attempt});
                     });
-					exerciseAttemptView.resource = self.model;
-					exerciseAttemptView.render();
-					var $modal = $('#modal');
-					$modal.html(exerciseAttemptView.$el);
-					$modal.modal({show: true});
-					$modal.on('hidden.bs.modal', function () {
-						var validated = self.model.isValidated();
-                        if (!validated && exerciseAttemptView.isExerciseCompleted)
-                        {
-                            self.model._isValidated = true;
-                            self.model.trigger('change');
-                        }
-                        self.render();
-					});
+					skillValidationAttemptView.resource = self.model;
+					$("body").append(skillValidationAttemptView.render().$el);
 
-                    $modal.on('shown.bs.modal', function () {
-                        exerciseAttemptView.continueExercise();
-                    });
+                    skillValidationAttemptView.$el.on('hidden.bs.modal', function () {
+                        VM.closeView(Config.constants.VIEWS_ID.TRACK_VALIDATION_ATTEMPT);
+					}).on('shown.bs.modal', function () {
+                        skillValidationAttemptView.continueExercise();
+                    }).modal('show');
 				}).fail(function(error) {
 
 				});

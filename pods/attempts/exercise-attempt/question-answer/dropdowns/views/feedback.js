@@ -100,7 +100,7 @@ define(
 			renderProposition: function(proposition, index) {
 				var html = this.propositionTemplate({proposition: proposition, index: index, config:Config});
 				var $proposition = $(html);
-				$proposition.addClass('disabled');
+				$proposition.prop('disabled', true);
 				if (_.contains(this.model.get('given_answer').given_propositions, proposition._id)) {
 					$proposition.addClass('proposition_selected');
 				}

@@ -18,6 +18,10 @@ define(
 
         return Backbone.View.extend({
 
+            className: 'modal fade',
+
+            id: 'login-modal',
+
             template: _.template(loginTemplate),
 
             events: {
@@ -45,7 +49,7 @@ define(
                 currentUser
                     .logIn(username, password)
                     .done(function(){
-                        self.trigger('close');
+                        self.$el.modal('hide');
                     })
                     .fail(function(error){
                         self.$loginError.html(Config.stringsDict.USER.LOG_IN_ERROR);

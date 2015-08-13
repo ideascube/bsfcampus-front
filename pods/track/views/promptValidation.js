@@ -18,9 +18,13 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
+            className: 'modal fade',
 
             template: _.template(promptValidationTemplate),
+
+            events: {
+                'click .btn-validate-track': 'closeModal'
+            },
 
             render: function () {
                 var self = this;
@@ -33,7 +37,7 @@ define(
             },
 
             closeModal: function() {
-                $('#modal-container').modal('hide');
+                this.$el.modal('hide');
             }
         });
     }

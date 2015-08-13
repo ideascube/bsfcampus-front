@@ -41,7 +41,7 @@ define(
                 console.log("save user profile modifications");
                 var formData = JSON.stringify(this.$('form').serializeObject());
                 var $saveButton = this.$('button.save_modification');
-                $saveButton.addClass('disabled');
+                $saveButton.prop('disabled', true);
                 var $passwordSaveResult = this.$('#save-result');
                 $passwordSaveResult.empty();
                 $passwordSaveResult.removeClass('text-success text-danger');
@@ -59,7 +59,7 @@ define(
                     $successIcons.attr('src', Config.imagesDict.greenCheck);
                     $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.SAVE_SUCCESS_MESSAGE);
                     $passwordSaveResult.addClass('text-success');
-                    $saveButton.removeClass('disabled');
+                    $saveButton.prop('disabled', false);
                 }).fail(function(error){
                     console.log("Could not change user password", error);
                     var errorCode = error.responseJSON.code;
@@ -81,7 +81,7 @@ define(
                             break;
                     }
                     $passwordSaveResult.addClass('text-danger');
-                    $saveButton.removeClass('disabled');
+                    $saveButton.prop('disabled', false);
                 });
             }
 

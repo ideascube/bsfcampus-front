@@ -22,9 +22,7 @@ define(
 			},
 
 			parse: function(response, options) {
-				if (!options) {
-					options = {};
-				}
+				options || (options = {});
 
 				var jsonKey = options.jsonKey || this.jsonKey || 'data';
 				return response[jsonKey];

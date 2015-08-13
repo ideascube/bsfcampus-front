@@ -61,7 +61,6 @@ define(
             initialize: function () {
                 var self = this;
 
-                this.$modal = $('#modal');
                 this.$home = $('#home');
                 this.$main = $('#main');
                 this.$header = $('#header');
@@ -195,13 +194,6 @@ define(
                 this.$main.hide();
             },
 
-            clearModal: function () {
-                this.$modal.empty();
-                this.$modal.modal('hide');
-                $('body').removeClass('modal-open');
-                $('.modal-backdrop').remove();
-            },
-
             // Routes handling
 
             routes: {
@@ -233,8 +225,7 @@ define(
                 this.clearHome();
                 this.clearMain();
                 this.hideMain();
-                this.clearModal();
-                var homeView = null;
+                var homeView;
                 if (currentUser.isLoggedIn()) {
                     homeView = VM.createView(Config.constants.VIEWS_ID.CONNECTED_HOME, function () {
                         return new ConnectedHomeView();
@@ -251,57 +242,36 @@ define(
             },
 
             register: function () {
-                this.clearModal();
                 var registerUserView = VM.createView(Config.constants.VIEWS_ID.REGISTER, function () {
                     return new RegisterUserView();
                 });
-                this.$modal.html(registerUserView.render().$el);
+                $('body').append(registerUserView.render().$el);
                 var self = this;
-                this.listenTo(registerUserView, 'close', function () {
+                registerUserView.$el.on('hidden.bs.modal', function () {
                     var fragment = Backbone.history.getFragment();
                     VM.closeView(Config.constants.VIEWS_ID.REGISTER);
                     self.afterSuccessfulLogin(registerUserView, fragment);
-                });
-                this.$modal.on('shown.bs.modal', function () {
-                    registerUserView.$('form input#full_name').focus();
-                }).modal({show: true});
-            },
-
-            login: function () {
-                this.clearModal();
-                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function () {
-                    return new LoginUserView();
-                });
-                this.$modal.html(loginUserView.render().$el);
-                var self = this;
-                this.listenTo(loginUserView, 'close', function () {
-                    var fragment = Backbone.history.getFragment();
-                    VM.closeView(Config.constants.VIEWS_ID.LOGIN);
-                    self.afterSuccessfulLogin(loginUserView, fragment);
-                });
-                this.$modal.on('shown.bs.modal', function () {
-                    loginUserView.$('form input#username').focus();
+                }).on('shown.bs.modal', function () {
+                    registerUserView.$('form input:first').focus();
                 }).modal('show');
             },
 
-            loginRedirect: function () {
-                var self = this;
-                var next = Backbone.history.getFragment();
+            login: function () {
                 var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function () {
                     return new LoginUserView();
                 });
-                this.$modal.html(loginUserView.render().$el);
-                this.listenTo(loginUserView, 'close', function () {
+                $('body').append(loginUserView.render().$el);
+                var self = this;
+                loginUserView.$el.on('hidden.bs.modal', function () {
+                    var fragment = Backbone.history.getFragment();
                     VM.closeView(Config.constants.VIEWS_ID.LOGIN);
-                    self.afterSuccessfulLogin(loginUserView, next);
-                });
-                this.$modal.on('shown.bs.modal', function () {
-                    loginUserView.$('form input#username').focus();
+                    self.afterSuccessfulLogin(loginUserView, fragment);
+                }).on('shown.bs.modal', function () {
+                    loginUserView.$('form input:first').focus();
                 }).modal('show');
             },
 
             afterSuccessfulLogin: function (authView, nextFragment) {
-                this.clearModal();
                 authView.undelegateEvents();
 
                 this.getDataStoreSkeletonData();
@@ -315,17 +285,15 @@ define(
             },
 
             resetPassword: function () {
-                this.clearModal();
-                var self = this;
-                this.$modal.on('hidden.bs.modal', function () {
-                    var resetPasswordView = VM.createView(Config.constants.VIEWS_ID.RESET_PASSWORD, function() {
-                        return new ResetPasswordView();
-                    });
-                    self.$modal.html(resetPasswordView.render().$el);
-                    self.$modal.on('shown.bs.modal', function () {
-                        resetPasswordView.$('form input#email').focus();
-                    }).modal('show');
+                var resetPasswordView = VM.createView(Config.constants.VIEWS_ID.RESET_PASSWORD, function() {
+                    return new ResetPasswordView();
                 });
+                $('body').append(resetPasswordView.render().$el);
+                resetPasswordView.$el.on('hidden.bs.modal', function () {
+                    VM.closeView(Config.constants.VIEWS_ID.RESET_PASSWORD);
+                }).on('shown.bs.modal', function () {
+                    resetPasswordView.$('form input:first').focus();
+                }).modal('show');
             },
 
             userProfile: function (page) {
@@ -336,7 +304,6 @@ define(
                 currentUser.fetch().then(function (result) {
                     self.clearHome();
                     self.clearMain();
-                    self.clearModal();
 
                     var userProfileView = VM.createView(Config.constants.VIEWS_ID.USER_PROFILE, function() {
                         return new UserProfileView({model: currentUser});
@@ -353,7 +320,6 @@ define(
                 DS.findAll(Config.constants.dsResourceNames.TRACKS).done(function (collection) {
                     self.clearHome();
                     self.clearMain();
-                    self.clearModal();
 
                     var trackListView = VM.createView(Config.constants.VIEWS_ID.TRACK_LIST, function() {
                         return new TrackListView({collection: collection});
@@ -373,7 +339,6 @@ define(
                 DS.find(Config.constants.dsResourceNames.TRACKS, id).then(function (model) {
                     self.clearHome();
                     self.clearMain();
-                    self.clearModal();
 
                     var trackDetailView = VM.createView(Config.constants.VIEWS_ID.TRACK_DETAIL, function() {
                         return new TrackDetailView({model: model});
@@ -391,7 +356,7 @@ define(
                 DS.find(Config.constants.dsResourceNames.SKILLS, id).then(function (model) {
                     self.clearHome();
                     self.clearMain();
-                    self.clearModal();
+
                     var hierarchyBreadcrumbView = self.getResourceHierarchyBreadcrumbView(model.get('hierarchy'));
                     self.$main.append(hierarchyBreadcrumbView.render().$el);
 
@@ -418,7 +383,7 @@ define(
                 DS.find(Config.constants.dsResourceNames.RESOURCES, id).then(function (model) {
                     self.clearHome();
                     self.clearMain();
-                    self.clearModal();
+
                     var hierarchyBreadcrumbView = self.getResourceHierarchyBreadcrumbView(model.get('hierarchy'));
                     self.$main.append(hierarchyBreadcrumbView.render().$el);
 
@@ -440,18 +405,14 @@ define(
             },
 
             promptTrackValidation: function (track_id) {
-                this.clearModal();
                 var promptTrackValidationView = VM.createView(Config.constants.VIEWS_ID.PROMPT_TRACK_VALIDATION, function() {
                     return new PromptTrackValidationView();
                 });
                 promptTrackValidationView.trackId = track_id;
-                this.$modal.html(promptTrackValidationView.render().$el);
-                var self = this;
-                this.listenTo(promptTrackValidationView, 'close', function() {
+                $('body').append(promptTrackValidationView.render().$el);
+                promptTrackValidationView.$el.on('hidden.bs.modal', function() {
                     VM.closeView(Config.constants.VIEWS_ID.PROMPT_TRACK_VALIDATION);
-                    self.clearModal();
-                });
-                this.$modal.modal('show');
+                }).modal('show');
 
                 var promptTrackValidationAnalytics = new MiscAnalyticsModel();
                 promptTrackValidationAnalytics.set('type', "prompt_track_validation_test");
@@ -475,7 +436,6 @@ define(
                     console.log(JSON.stringify(response.data));
                     self.clearHome();
                     self.clearMain();
-                    self.clearModal();
 
                     var searchResultsView = VM.createView(Config.constants.VIEWS_ID.SEARCH_RESULTS, function() {
                         return new SearchResultsView();
@@ -491,7 +451,6 @@ define(
             staticPage: function (page_id) {
                 this.clearHome();
                 this.clearMain();
-                this.clearModal();
 
                 var staticPageView = VM.createView(Config.constants.VIEWS_ID.STATIC_PAGE, function() {
                     return new StaticPageView();
@@ -528,7 +487,7 @@ define(
                             console.log("error 401 detected");
                             currentUser.logOut();
                             if (Backbone.history.getFragment() != '') {
-                                Backbone.history.loadUrl("/login/redirect");
+                                Backbone.history.loadUrl("/login");
                             }
                             else {
                                 Backbone.history.loadUrl('', {trigger: true, replace: true});

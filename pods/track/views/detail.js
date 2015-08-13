@@ -110,31 +110,20 @@ define(
                 var validationTest = this.model.get('validation_test')._id;
                 attempt.set('exercise', validationTest);
                 attempt.save().done(function(result) {
-                    var $modal = $('#modal');
-                    var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.TRACK_VALIDATION_ATTEMPT, function() {
+                    var trackValidationAttemptView = VM.createView(Config.constants.VIEWS_ID.TRACK_VALIDATION_ATTEMPT, function() {
                         return new TrackValidationAttemptView({model: attempt});
                     });
-                    exerciseAttemptView.resource = self.model;
-                    $modal.html(exerciseAttemptView.render().$el);
-                    exerciseAttemptView.continueExercise();
+                    trackValidationAttemptView.resource = self.model;
+                    $("body").append(trackValidationAttemptView.render().$el);
+                    trackValidationAttemptView.continueExercise();
                     $("#main").hide();
                     $("body").css('background-color', '#36404A');
-                    $modal.on('hidden.bs.modal', function () {
-                        var validated = self.model.isValidated();
-                        if (!validated && exerciseAttemptView.isExerciseCompleted)
-                        {
-                            self.model._isValidated = true;
-                            self.model.trigger('change');
-                        }
-                        self.render();
-                        if (exerciseAttemptView.trackValidationId != null) {
-                            Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
-                        }
-                        $modal.unbind('hidden.bs.modal');
-                        $("#main").show();
+
+                    trackValidationAttemptView.$el.on('hidden.bs.modal', function () {
                         $("body").css('background-color', '');
-                    });
-                    $modal.modal('show');
+                        $("#main").show();
+                        VM.closeView(Config.constants.VIEWS_ID.TRACK_VALIDATION_ATTEMPT);
+                    }).modal('show');
                 }).fail(function(error) {
 
                 });

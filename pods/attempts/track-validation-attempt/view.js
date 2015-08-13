@@ -22,6 +22,8 @@ define (
 
         return ExerciseAttemptView.extend({
 
+            className: 'modal fade',
+
             model: TrackValidationAttemptModel,
 
             template: _.template(modalTemplate),
@@ -39,7 +41,7 @@ define (
                 this.renderObjective();
                 this.renderFeedbackAndResult(questionId);
                 // we enable the continue button until we get the response
-                this.$('.btn-continue').removeClass('disabled');
+                this.$('.btn-continue').prop('disabled', false);
             },
 
             renderEndOfExercise: function() {

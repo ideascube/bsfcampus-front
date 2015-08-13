@@ -21,6 +21,10 @@ define(
 
         return AbstractView.extend({
 
+            className: 'modal fade',
+
+            id: 'register-modal',
+
             template: _.template(registerTemplate),
 
             events: {
@@ -57,7 +61,7 @@ define(
                     currentUser
                         .logIn(username, password)
                         .done(function(){
-                            self.trigger('close');
+                            self.$el.modal('hide');
                         });
                 }).fail(function (error) {
                     self.$('form .has-error').removeClass('has-error');
@@ -90,7 +94,7 @@ define(
             },
 
             redirectToLogin: function () {
-                Backbone.history.loadUrl("/login/redirect");
+                Backbone.history.loadUrl("/login");
             }
         });
     }
