@@ -4,7 +4,7 @@ define(
 		'underscore',
 		'backbone',
         'ds',
-		'app/config',
+		'app/config'
 	],
 	function($, _, Backbone, DS, Config) {
 
@@ -87,13 +87,7 @@ define(
 			serverPath: '',
 
 			urlRoot: function () {
-				var serverPath = '';
-				if (typeof this.serverPath === "function") {
-					serverPath = this.serverPath();
-				} else if (typeof this.serverPath === "string") {
-					serverPath = this.serverPath;
-				}
-				return Config.constants.serverGateway + serverPath;
+				return Config.constants.serverGateway + _.result(this, 'serverPath', '');
 			}
 
 		});

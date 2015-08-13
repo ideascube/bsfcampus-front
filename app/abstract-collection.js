@@ -3,7 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'app/config',
+		'app/config'
 	],
 	function($, _, Backbone, Config) {
 
@@ -33,13 +33,7 @@ define(
 			serverPath: '',
 
 			url: function () {
-				var serverPath = '';
-				if (typeof this.serverPath === "function") {
-					serverPath = this.serverPath();
-				} else if (typeof this.serverPath === "string") {
-					serverPath = this.serverPath;
-				}
-				return Config.constants.serverGateway + serverPath;
+				return Config.constants.serverGateway + _.result(this, 'serverPath', '');
 			}
 
 		});

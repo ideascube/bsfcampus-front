@@ -16,7 +16,7 @@ define(
 
             parse: function(response, options) {
                 var achievements = new Backbone.Collection(this.recursiveNormalize(response.achievements));
-                achievements.each(processAchievement, this);
+                achievements.each(processAchievement);
 
                 return AbstractModel.prototype.parse.call(this, response, options);
             },
