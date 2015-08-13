@@ -142,7 +142,6 @@ define(
 							self.model.trigger('change');
 							// FIXME Do this in a cleaner way (the validation ought to come from the server)
                         }
-                        $modal.html(self.render().$el);
                         if (exerciseAttemptView.trackValidationId != null) {
                             Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
                         }
