@@ -3,6 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+        'viewmanager',
 		'app/config',
 
         'pods/skill/collections/track',
@@ -15,7 +16,7 @@ define(
 
 		'less!pods/track/styles/detail'
 	],
-	function($, _, Backbone, Config,
+	function($, _, Backbone, VM, Config,
             SkillTrackCollection, TrackValidationAttemptModel,
             TrackOutlineItem, TrackValidationAttemptView,
             detailTemplate
@@ -110,8 +111,8 @@ define(
                 attempt.set('exercise', validationTest);
                 attempt.save().done(function(result) {
                     var $modal = $('#modal');
-                    var exerciseAttemptView = new TrackValidationAttemptView({
-                        model: attempt
+                    var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.TRACK_VALIDATION_ATTEMPT, function() {
+                        return new TrackValidationAttemptView({model: attempt});
                     });
                     exerciseAttemptView.resource = self.model;
                     $modal.html(exerciseAttemptView.render().$el);

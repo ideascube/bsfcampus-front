@@ -3,7 +3,8 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'app/config',
+        'viewmanager',
+        'app/config',
 
 		'pods/attempts/exercise-attempt/question-answer/unique-answer-mcq/views/form',
 		'pods/attempts/exercise-attempt/question-answer/multiple-answer-mcq/views/form',
@@ -12,35 +13,47 @@ define(
 		'pods/attempts/exercise-attempt/question-answer/ordering/views/form',
 		'pods/attempts/exercise-attempt/question-answer/categorizer/views/form',
 	],
-	function($, _, Backbone, Config,
+	function($, _, Backbone, VM, Config,
 		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView, DropdownView, OrderingView, CategorizerView
 		) {
 
 		return {
 
-			initialize: function(model, parentView) {
-				var ret = null;
+			initialize: function(model) {
+				var rv = null;
 				switch (model.questionModel().get('_cls')) {
 					case 'UniqueAnswerMCQExerciseQuestion':
-						ret = new UniqueAnswerMCQView({model: model});
+                        rv = VM.reuseView(Config.constants.VIEWS_ID.QUESTIONS.UNIQUE_ANSWER_MCQ, function() {
+                            return new UniqueAnswerMCQView({model: model});
+                        });
 						break;
 					case 'MultipleAnswerMCQExerciseQuestion':
-						ret = new MultipleAnswerMCQView({model: model});
+                        rv = VM.reuseView(Config.constants.VIEWS_ID.QUESTIONS.MULTIPLE_ANSWER_MCQ, function() {
+                            return new MultipleAnswerMCQView({model: model});
+                        });
 						break;
 					case 'RightOrWrongExerciseQuestion':
-						ret = new RightOrWrongView({model: model});
+                        rv = VM.reuseView(Config.constants.VIEWS_ID.QUESTIONS.RIGHT_OR_WRONG, function() {
+                            return new RightOrWrongView({model: model});
+                        });
 						break;
 					case 'DropdownExerciseQuestion':
-						ret = new DropdownView({model: model});
+                        rv = VM.reuseView(Config.constants.VIEWS_ID.QUESTIONS.DROPDOWN, function() {
+                            return new DropdownView({model: model});
+                        });
 						break;
 					case 'OrderingExerciseQuestion':
-						ret = new OrderingView({model: model});
+                        rv = VM.reuseView(Config.constants.VIEWS_ID.QUESTIONS.ORDERING, function() {
+                            return new OrderingView({model: model});
+                        });
 						break;
 					case 'CategorizeExerciseQuestion':
-						ret = new CategorizerView({model: model});
+                        rv = VM.reuseView(Config.constants.VIEWS_ID.QUESTIONS.CATEGORIZER, function() {
+                            return new CategorizerView({model: model});
+                        });
 						break;
 				}
-				return ret;
+				return rv;
 			}
 
 		};

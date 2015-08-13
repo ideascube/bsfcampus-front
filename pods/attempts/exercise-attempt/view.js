@@ -3,7 +3,8 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'app/config',
+        'viewmanager',
+        'app/config',
 
 		'pods/attempts/exercise-attempt/model',
 
@@ -22,7 +23,7 @@ define(
 
 		'less!pods/attempts/exercise-attempt/style.less'
 	],
-	function($, _, Backbone, Config,
+	function($, _, Backbone, VM, Config,
 		ExerciseAttemptModel,
 	 	modalTemplate, progressQuestionIconTemplate, recapTemplate, recapFooterTemplate,
 		ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel, 
@@ -330,7 +331,9 @@ define(
 					if (this.model.getFailedLinkedResource() != null)
 					{
 						var resourceModel = new ResourceModel(this.model.getFailedLinkedResource());
-						var failLinkedResourceView = new FailLinkedResourceView({model: resourceModel});
+                        var failLinkedResourceView = VM.createView(Config.constants.VIEWS_ID.FAIL_LINK_RESOURCE, function() {
+                            return new FailLinkedResourceView({model: resourceModel});
+                        });
 						$exerciseRecapDetails.append(failLinkedResourceView.render().$el);
                         failLinkedResourceView.$el.bind("click", this.closeModal);
                     }
@@ -375,6 +378,7 @@ define(
 			},
 
             closeModal: function() {
+                VM.closeView(Config.constants.VIEWS_ID.FAIL_LINK_RESOURCE);
                 $('#modal-container').modal('hide');
 			}
 

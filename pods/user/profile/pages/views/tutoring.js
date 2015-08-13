@@ -3,6 +3,7 @@ define(
         'jquery',
         'underscore',
         'backbone',
+        'viewmanager',
         'app/config',
 
         'pods/user/models/current',
@@ -20,7 +21,7 @@ define(
         'less!pods/user/profile/pages/styles/tutoring',
         'less!pods/user/profile/pages/styles/dashboard'
     ],
-    function ($, _, Backbone, Config,
+    function ($, _, Backbone, VM, Config,
               currentUser, User, VisitedDashboardAnalyticsModel, DashboardModel,
               UserSearchResultLineView, TutorLineView, DashboardDetailsView,
               tutoringTemplate, tutoringDropdownLineTemplate) {
@@ -256,10 +257,10 @@ define(
                 this.$('#student-dashboard-details').empty();
                 var self = this;
                 dashboardUserModel.fetch().done(function (data) {
-                    var dashboardDetailsView = new DashboardDetailsView({
-                        model: dashboardUserModel
+                    var dashboardDetailsView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD_DETAILS, function() {
+                        return new DashboardDetailsView({model: dashboardUserModel});
                     });
-                    self.$('#student-dashboard-details').html(dashboardDetailsView.render());
+                    self.$('#student-dashboard-details').html(dashboardDetailsView.render().$el);
 
                     var analytics = new VisitedDashboardAnalyticsModel();
                     analytics.set('dashboard_user', selectedUserId);

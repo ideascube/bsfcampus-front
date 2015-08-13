@@ -46,7 +46,7 @@ define(
 				var propositions = this.model.questionModel().get('propositions');
 				for (var i=0; i < propositions.length; i++)
 				{
-					proposition = propositions[i];
+					var proposition = propositions[i];
 					html = this.propositionTemplate({proposition: proposition, index: i});
 					var el = this.$('.multiple-answer-mcq-propositions');
 					el.append(html);

@@ -4,6 +4,7 @@ define(
         'underscore',
         'backbone',
         'jqueryserialize',
+        'viewmanager',
         'app/config',
 
         'pods/user/models/current',
@@ -13,7 +14,7 @@ define(
 
         'less!pods/user/profile/pages/styles/account'
     ],
-    function($, _, Backbone, $serialize, Config,
+    function($, _, Backbone, $serialize, VM, Config,
              currentUser, accountTemplate,
              MergeAccountModalView
     ) {
@@ -72,7 +73,9 @@ define(
             },
 
             openMergeUsersModal: function(e) {
-                var mergeAccountModalView = new MergeAccountModalView({});
+                var mergeAccountModalView = VM.createView(Config.constants.VIEWS_ID.MERGE_ACCOUNT_MODAL, function() {
+                    return new MergeAccountModalView({});
+                });
                 var $modal = $('#modal');
                 $modal.html(mergeAccountModalView.render().$el);
                 $modal.modal({show: true});

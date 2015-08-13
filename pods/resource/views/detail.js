@@ -3,6 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+        'viewmanager',
 		'app/config',
 		
 		'pods/resource/model',
@@ -24,7 +25,7 @@ define(
 		
 		'less!pods/resource/style'
 	],
-	function($, _, Backbone, Config,
+	function($, _, Backbone, VM, Config,
 		ResourceModel, ResourcesSkillCollection, ResourcesLessonCollection, BackToMainResourceNav, SkillNavView, detailTemplate,
 		ResourceContentModel, ResourceContentView, LessonOutlineItemView,
         TrackModel, SkillModel, LessonModel, LessonsSkillCollection
@@ -149,15 +150,18 @@ define(
 			},
 
             renderSkillNav: function (skillModel) {
-                var skillNavView = new SkillNavView({model: skillModel});
+                var skillNavView = VM.createView(Config.constants.VIEWS_ID.SKILL_NAV, function() {
+                    return new SkillNavView({model: skillModel});
+                });
                 skillNavView.currentResource = this.model;
                 this.$('#skill-nav').html(skillNavView.render().$el);
             },
 
             renderContent: function() {
-				var contentView = new ResourceContentView({
-					model: this.model
-				});
+                var self = this;
+                var contentView = VM.createView(Config.constants.VIEWS_ID.RESOURCE_CONTENT, function() {
+                    return new ResourceContentView({model: self.model});
+                });
                 this.$('#resource-content').html(contentView.render().$el);
 			},
 

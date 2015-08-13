@@ -3,6 +3,7 @@ define(
         'jquery',
         'underscore',
         'backbone',
+        'viewmanager',
         'app/config',
 
         'pods/analytics/models/visitedDashboard',
@@ -20,7 +21,7 @@ define(
 
         'less!pods/user/profile/styles/profile'
     ],
-    function($, _, Backbone, Config,
+    function($, _, Backbone, VM, Config,
              VisitedDashboardAnalyticsModel, currentUser, DashboardModel,
              NavMenuView, AccountView, DashboardView, PasswordView, TutoringView,
              profileTemplate
@@ -47,7 +48,9 @@ define(
             },
 
             renderNavMenu: function() {
-                this.navMenuView = new NavMenuView();
+                this.navMenuView = VM.createView(Config.constants.VIEWS_ID.USER_PROFILE_NAV_MENU, function() {
+                    return new NavMenuView();
+                });
                 this.$('#profile-nav-menu').html(this.navMenuView.render().$el);
                 this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
             },
@@ -59,20 +62,28 @@ define(
                 {
                     case Config.constants.userProfile.DASHBOARD:
                         var dashboardUserModel = new DashboardModel({_id: currentUser.id});
-                        profileDetailPageView = new DashboardView({model: dashboardUserModel});
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD, function() {
+                            return new DashboardView({model: dashboardUserModel});
+                        });
 
                         var analytics = new VisitedDashboardAnalyticsModel();
                         analytics.set('dashboard_user', currentUser.id);
                         analytics.save();
                         break;
                     case Config.constants.userProfile.ACCOUNT:
-                        profileDetailPageView = new AccountView();
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.ACCOUNT, function() {
+                            return new AccountView();
+                        });
                         break;
                     case Config.constants.userProfile.PASSWORD:
-                        profileDetailPageView = new PasswordView();
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.PASSWORD, function() {
+                            return new PasswordView();
+                        });
                         break;
                     case Config.constants.userProfile.TUTORING:
-                        profileDetailPageView = new TutoringView();
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.TUTORING, function() {
+                            return new TutoringView();
+                        });
                         break;
                     default:
                         return;

@@ -3,6 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+        'viewmanager',
 		'app/config',
 
 		'pods/track/model',
@@ -20,7 +21,7 @@ define(
 
 		'less!pods/skill/style'
 	],
-	function($, _, Backbone, Config,
+	function($, _, Backbone, VM, Config,
 		TrackModel, LessonSkillCollection, ResourceLessonCollection, SkillValidationAttemptModel,
 		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView, SkillValidationAttemptView,
 	 	detailTemplate, badgeHTML
@@ -107,7 +108,9 @@ define(
 				var attempt = new SkillValidationAttemptModel();
 				attempt.set('skill', this.model.id);
 				attempt.save().done(function(result) {
-					var exerciseAttemptView = new SkillValidationAttemptView({model: attempt});
+                    var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.SKILL_VALIDATION_ATTEMPT, function() {
+                        return new SkillValidationAttemptView({model: attempt});
+                    });
 					exerciseAttemptView.resource = self.model;
 					exerciseAttemptView.render();
 					var $modal = $('#modal');

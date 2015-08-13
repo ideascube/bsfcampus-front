@@ -3,6 +3,7 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
+        'viewmanager',
 		'app/config',
         'projekktor',
 
@@ -16,7 +17,7 @@ define(
 		'pods/attempts/exercise-attempt/model',
 		'pods/attempts/exercise-attempt/view'
 	],
-	function($, _, Backbone, Config, Projekktor,
+	function($, _, Backbone, VM, Config, Projekktor,
 		richTextTemplate, youtubeVideoTemplate, exerciseTemplate, audioTemplate, videoTemplate, downloadableFileTemplate,
 		ExerciseAttemptModel, ExerciseAttemptView
 		) {
@@ -119,9 +120,9 @@ define(
 				attempt.set('exercise', this.model.id);
 				attempt.save().done(function(result) {
 					var $modal = $('#modal');
-					var exerciseAttemptView = new ExerciseAttemptView({
-						model: attempt
-					});
+                    var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.EXERCISE_ATTEMPT, function() {
+                        return new ExerciseAttemptView({model: attempt});
+                    });
 					exerciseAttemptView.resource = self.model;
 					$modal.html(exerciseAttemptView.render().$el);
 

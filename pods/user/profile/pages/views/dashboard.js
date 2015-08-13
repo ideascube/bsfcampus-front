@@ -4,6 +4,7 @@ define(
         'underscore',
         'backbone',
         'jqueryserialize',
+        'viewmanager',
         'app/config',
 
         'pods/user/profile/pages/views/dashboard-details',
@@ -12,7 +13,7 @@ define(
 
         'less!pods/user/profile/pages/styles/dashboard'
     ],
-    function($, _, Backbone, $serialize, Config,
+    function($, _, Backbone, $serialize, VM, Config,
              DashboardDetailsView,
              dashboardTemplate
     ) {
@@ -31,8 +32,8 @@ define(
 
                 var self = this;
                 this.model.fetch().done(function(data){
-                    var dashboardDetailsView = new DashboardDetailsView({
-                        model: self.model
+                    var dashboardDetailsView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD_DETAILS, function() {
+                        return new DashboardDetailsView({model: self.model});
                     });
                     self.$('#dashboard-details').html(dashboardDetailsView.render().$el);
                 });

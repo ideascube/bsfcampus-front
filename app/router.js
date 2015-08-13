@@ -170,12 +170,16 @@ define(
             // Global views
 
             renderHeader: function () {
-                this.appHeaderView = new AppHeaderView();
+                this.appHeaderView = VM.createView(Config.constants.VIEWS_ID.HEADER, function() {
+                    return new AppHeaderView();
+                });
                 this.$header.html(this.appHeaderView.render().$el);
             },
 
             renderFooter: function () {
-                var appFooterView = new AppFooterView();
+                var appFooterView = VM.createView(Config.constants.VIEWS_ID.FOOTER, function() {
+                    return new AppFooterView();
+                });
                 this.$footer.html(appFooterView.render().$el);
             },
 
@@ -314,7 +318,9 @@ define(
                 this.clearModal();
                 var self = this;
                 this.$modal.on('hidden.bs.modal', function () {
-                    var resetPasswordView = new ResetPasswordView();
+                    var resetPasswordView = VM.createView(Config.constants.VIEWS_ID.RESET_PASSWORD, function() {
+                        return new ResetPasswordView();
+                    });
                     self.$modal.html(resetPasswordView.render().$el);
                     self.$modal.on('shown.bs.modal', function () {
                         resetPasswordView.$('form input#email').focus();
@@ -332,7 +338,9 @@ define(
                     self.clearMain();
                     self.clearModal();
 
-                    var userProfileView = new UserProfileView({model: currentUser});
+                    var userProfileView = VM.createView(Config.constants.VIEWS_ID.USER_PROFILE, function() {
+                        return new UserProfileView({model: currentUser});
+                    });
                     userProfileView.page = page;
                     self.$main.html(userProfileView.render().$el);
 
@@ -347,7 +355,9 @@ define(
                     self.clearMain();
                     self.clearModal();
 
-                    var trackListView = new TrackListView({collection: collection});
+                    var trackListView = VM.createView(Config.constants.VIEWS_ID.TRACK_LIST, function() {
+                        return new TrackListView({collection: collection});
+                    });
                     self.$main.html(trackListView.render().$el);
 
                     var analytics = new MiscAnalyticsModel();
@@ -365,7 +375,9 @@ define(
                     self.clearMain();
                     self.clearModal();
 
-                    var trackDetailView = new TrackDetailView({model: model});
+                    var trackDetailView = VM.createView(Config.constants.VIEWS_ID.TRACK_DETAIL, function() {
+                        return new TrackDetailView({model: model});
+                    });
                     self.$main.html(trackDetailView.render().$el);
 
                     var analytics = new VisitedTrackAnalyticsModel();
@@ -383,7 +395,9 @@ define(
                     var hierarchyBreadcrumbView = self.getResourceHierarchyBreadcrumbView(model.get('hierarchy'));
                     self.$main.append(hierarchyBreadcrumbView.render().$el);
 
-                    var skillDetailView = new SkillDetailView({model: model});
+                    var skillDetailView = VM.createView(Config.constants.VIEWS_ID.SKILL_DETAIL, function() {
+                        return new SkillDetailView({model: model});
+                    });
                     self.$main.append(skillDetailView.render().$el);
 
                     var analytics = new VisitedSkillAnalyticsModel();
@@ -408,7 +422,9 @@ define(
                     var hierarchyBreadcrumbView = self.getResourceHierarchyBreadcrumbView(model.get('hierarchy'));
                     self.$main.append(hierarchyBreadcrumbView.render().$el);
 
-                    var resourceDetailView = new ResourceDetailView({model: model});
+                    var resourceDetailView = VM.createView(Config.constants.VIEWS_ID.RESOURCE_DETAIL, function() {
+                        return new ResourceDetailView({model: model});
+                    });
                     self.$main.append(resourceDetailView.render().$el);
 
                     var analytics = new VisitedResourceAnalyticsModel();
@@ -418,15 +434,23 @@ define(
             },
 
             getResourceHierarchyBreadcrumbView: function (breadcrumbModel) {
-                return new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
+                return VM.createView(Config.constants.VIEWS_ID.BREADCRUMB, function() {
+                    return new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
+                });
             },
 
             promptTrackValidation: function (track_id) {
                 this.clearModal();
-                var promptTrackValidationView = new PromptTrackValidationView();
+                var promptTrackValidationView = VM.createView(Config.constants.VIEWS_ID.PROMPT_TRACK_VALIDATION, function() {
+                    return new PromptTrackValidationView();
+                });
                 promptTrackValidationView.trackId = track_id;
                 this.$modal.html(promptTrackValidationView.render().$el);
-                this.listenTo(promptTrackValidationView, 'close', this.clearModal);
+                var self = this;
+                this.listenTo(promptTrackValidationView, 'close', function() {
+                    VM.closeView(Config.constants.VIEWS_ID.PROMPT_TRACK_VALIDATION);
+                    self.clearModal();
+                });
                 this.$modal.modal('show');
 
                 var promptTrackValidationAnalytics = new MiscAnalyticsModel();
@@ -453,7 +477,9 @@ define(
                     self.clearMain();
                     self.clearModal();
 
-                    var searchResultsView = new SearchResultsView();
+                    var searchResultsView = VM.createView(Config.constants.VIEWS_ID.SEARCH_RESULTS, function() {
+                        return new SearchResultsView();
+                    });
                     searchResultsView.searchedString = searchedString;
                     searchResultsView.results = response.data;
                     $('#main').html(searchResultsView.render().$el);
@@ -467,7 +493,9 @@ define(
                 this.clearMain();
                 this.clearModal();
 
-                var staticPageView = new StaticPageView();
+                var staticPageView = VM.createView(Config.constants.VIEWS_ID.STATIC_PAGE, function() {
+                    return new StaticPageView();
+                });
                 staticPageView.pageId = page_id;
 
                 this.$main.html(staticPageView.render().$el);
