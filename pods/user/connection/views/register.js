@@ -8,8 +8,6 @@ define(
 
         'pods/user/models/current',
 
-        'app/abstract-view',
-
         'text!pods/user/connection/templates/register.html',
 
         'less!pods/user/connection/styles/register'
@@ -19,7 +17,7 @@ define(
               AbstractView,
               registerTemplate) {
 
-        return AbstractView.extend({
+        return Backbone.View.extend({
 
             className: 'modal fade',
 
