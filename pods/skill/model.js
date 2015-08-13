@@ -34,7 +34,7 @@ define(
 
                 var son = AbstractModel.prototype.forTemplate.call(this);
 
-				son.is_completed = this.isValidated();
+				son.is_validated = this.isValidated();
 
                 return son;
             }

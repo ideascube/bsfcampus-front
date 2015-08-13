@@ -52,7 +52,7 @@ define(
 
                 var son = AbstractModel.prototype.forTemplate.call(this);
 
-				son.is_completed = this.isValidated();
+				son.is_validated = this.isValidated();
 				son.is_started = this.isStarted();
 				son.test_is_unlocked = this.testIsUnlocked();
 
