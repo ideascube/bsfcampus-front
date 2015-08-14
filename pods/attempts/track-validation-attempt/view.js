@@ -32,21 +32,15 @@ define (
             recapFooterTemplate: _.template(recapFooterTemplate),
 
             answerReceived: function(result){
-                if (result['alert'] != null) {
-                    this.handleAlert(result['alert']);
-                }
-
                 var questionId = this.currentQuestionAnswer.get('question_id');
                 this.model = new TrackValidationAttemptModel(result, {parse: true});
                 if (this.model.achievements != null) {
-                    this.model.achievements.each(function (achievement) {
-                        processAchievement(achievement);
-                    }, this);
+                    this.model.achievements.each(processAchievement);
                 }
                 this.renderProgression();
                 this.renderObjective();
                 this.renderFeedbackAndResult(questionId);
-                // we enable the continue button until we get the response
+                // we enable the continue button once we get the response
                 this.$('.btn-continue').prop('disabled', false);
             },
 
