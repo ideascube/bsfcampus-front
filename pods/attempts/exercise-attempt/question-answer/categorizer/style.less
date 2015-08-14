@@ -103,12 +103,21 @@
         .categorizer-category-items, .categorizer-category-items-feedback {
           @media (max-height: 719px) {
             height: 180px;
+            &.category-small {
+              height: 90px;
+            }
           }
           @media (min-height: 720px) {
             height: 200px;
+            &.category-small {
+              height: 100px;
+            }
           }
           @media (min-height: 900px) {
             height: 230px;
+            &.category-small {
+              height: 115px;
+            }
           }
           text-align: center;
           horiz-align: left;

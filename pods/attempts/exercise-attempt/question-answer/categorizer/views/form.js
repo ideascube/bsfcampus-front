@@ -58,8 +58,9 @@ define(
                 return this;
             },
 
-            renderCategory: function (category) {
-                var html = this.categorizerCategoryTemplate({category: category});
+            renderCategory: function (category, index, categories) {
+                var sizeAttr = (categories.length <= 2) ? '' : 'category-small';
+                var html = this.categorizerCategoryTemplate({category: category, sizeAttr: sizeAttr});
                 this.$("#categorizer-groups").append(html);
             },
 

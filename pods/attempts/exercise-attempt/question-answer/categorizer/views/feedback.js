@@ -46,7 +46,7 @@ define(
 				{
 					var correctAnsweredCategory = correctAnswerCategories[i];
 					var answeredCategoryItems = this.getAnsweredItemsByCategoryId(correctAnsweredCategory._id);
-                    this.renderCategory(correctAnsweredCategory, answeredCategoryItems);
+                    this.renderCategory(correctAnsweredCategory, answeredCategoryItems, correctAnswerCategories);
 				}
 
 				//for (var i = 0; i < correctAnswerItems.length; i++)
@@ -85,8 +85,9 @@ define(
                 }
             },
 
-            renderCategory: function (answeredCategory, answeredCategoryItems) {
-                var $category = $(this.categorizerCategoryTemplate({category: answeredCategory, config:Config}));
+            renderCategory: function (answeredCategory, answeredCategoryItems, categories) {
+                var sizeAttr = (categories.length <= 2) ? '' : 'category-small';
+                var $category = $(this.categorizerCategoryTemplate({category: answeredCategory, sizeAttr: sizeAttr, config:Config}));
 
                 var isCategoryFailed = (answeredCategory.items.length != answeredCategoryItems.length);
                 if (!isCategoryFailed)
