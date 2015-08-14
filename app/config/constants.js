@@ -112,7 +112,7 @@ define(['config'],
             },
 
             exerciseAttemptProgressionMaxWidth: 48,
-            exerciseAttemptProgressionMinWidth: 24
+            exerciseAttemptProgressionMinWidth: 16
 
 		};
 
