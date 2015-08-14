@@ -40,7 +40,7 @@ define(
                 this.$('#'+this.currentSelectionId).removeClass('active');
                 this.$('#'+newSelectionId).addClass('active');
                 this.currentSelectionId = newSelectionId;
-                //this.trigger('onRenderNavContentPage', newSelectionId);
+                this.trigger('onRenderNavContentPage', newSelectionId);
             },
 
             onNavButtonSelected: function(e) {
@@ -49,7 +49,7 @@ define(
                 if (newSelectionId != this.currentSelectionId)
                 {
                     this.changeSelectedPage(newSelectionId);
-                    Backbone.history.navigate('user/profile/' + newSelectionId, {trigger: true});
+                    Backbone.history.navigate('user/profile/' + newSelectionId, {trigger: false});
                 }
             }
 

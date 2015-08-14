@@ -42,18 +42,17 @@ define(
                 this.$el.html(html);
 
                 this.renderNavMenu(this.page);
-                this.renderNavContent(this.page);
+                this.navMenuView.changeSelectedPage(this.page);
 
                 return this;
             },
 
-            renderNavMenu: function(pageId) {
+            renderNavMenu: function() {
                 this.navMenuView = VM.createView(Config.constants.VIEWS_ID.USER_PROFILE_NAV_MENU, function() {
                     return new NavMenuView();
                 });
                 this.$('#profile-nav-menu').html(this.navMenuView.render().$el);
-                this.navMenuView.changeSelectedPage(pageId);
-                //this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
+                this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
             },
 
             renderNavContent: function(pageId) {
