@@ -184,11 +184,14 @@ body {
             padding-top: 0;
         }
     }
+}
 
-    .modal-fluid {
-        width: 100%;
-        padding-left: 15px;
-        padding-right: 15px;
+.modal-xl {
+    @media (min-width: 992px) {
+        width: 900px;
+    }
+    @media (min-width: 1200px) {
+        width: 1100px;
     }
 }
 
@@ -370,11 +373,21 @@ ol.breadcrumb {
         text-align: center;
         color: white;
     }
-    &-primary:before { background-color: #1caff5; }
-    &-success:before { background-color: #bce520; }
-    &-info:before { background-color: #f6d01c; }
-    &-warning:before { background-color: #f0ad4e; }
-    &-danger:before { background-color: #e74c3c; }
+    &-primary:before {
+        background-color: #1caff5;
+    }
+    &-success:before {
+        background-color: #bce520;
+    }
+    &-info:before {
+        background-color: #f6d01c;
+    }
+    &-warning:before {
+        background-color: #f0ad4e;
+    }
+    &-danger:before {
+        background-color: #e74c3c;
+    }
     &-bordered:before {
         background-color: #fff;
         border: 2px solid #1caff5;
