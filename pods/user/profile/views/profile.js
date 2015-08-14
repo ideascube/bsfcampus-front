@@ -41,18 +41,19 @@ define(
                 var html = this.template({resource: this.model.forTemplate()});
                 this.$el.html(html);
 
-                this.renderNavMenu();
-                this.navMenuView.changeSelectedPage(this.page);
+                this.renderNavMenu(this.page);
+                this.renderNavContent(this.page);
 
                 return this;
             },
 
-            renderNavMenu: function() {
+            renderNavMenu: function(pageId) {
                 this.navMenuView = VM.createView(Config.constants.VIEWS_ID.USER_PROFILE_NAV_MENU, function() {
                     return new NavMenuView();
                 });
                 this.$('#profile-nav-menu').html(this.navMenuView.render().$el);
-                this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
+                this.navMenuView.changeSelectedPage(pageId);
+                //this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
             },
 
             renderNavContent: function(pageId) {
