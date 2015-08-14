@@ -1,0 +1,21 @@
+.btn {
+    border-width: 0;
+    &-bordered {
+        border: 3px solid #1caff5;
+        background-color: #fff;
+        color: #1caff5;
+    }
+    &:active, &:focus {
+        outline: none;
+    }
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn,
+.btn.disabled:hover, .btn[disabled]:hover, fieldset[disabled] .btn:hover {
+    background-color: #888;
+    opacity: 1.0;
+}
+
+.input-group-btn .btn {
+    border-width: 1px;
+}

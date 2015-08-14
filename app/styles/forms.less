@@ -1,0 +1,171 @@
+.checkbox-green-tick {
+    /* Base for label styling */
+    [type="checkbox"] {
+        opacity: 0.0;
+        margin-left: 0;
+        width: 20px;
+        height: 20px;
+    }
+    [type="checkbox"] + label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+    }
+
+    /* checkbox aspect */
+    [type="checkbox"] + label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #9bbe16;
+        background: white;
+    }
+    /* checked mark aspect */
+    [type="checkbox"] + label:after {
+        content: '✔';
+        position: absolute;
+        top: -2px;
+        left: 10px;
+        font-size: 14px;
+        color: #9bbe16;
+        transition: all .2s;
+    }
+    /* checked mark aspect changes */
+    [type="checkbox"]:not(:checked) + label:after {
+        opacity: 0;
+        transform: scale(0);
+    }
+    [type="checkbox"]:checked + label:after {
+        opacity: 1;
+        transform: scale(2);
+    }
+    /* disabled checkbox */
+    [type="checkbox"]:disabled + label:before {
+        box-shadow: none;
+        border-color: #bbb;
+        background-color: #ddd;
+    }
+    [type="checkbox"]:disabled:checked + label:after {
+        color: #999;
+    }
+    [type="checkbox"]:disabled + label {
+        color: #aaa;
+    }
+    /* accessibility */
+    [type="checkbox"]:focus + label:before {
+        border-color: #66afe9;
+    }
+    /* error */
+    .has-error & [type="checkbox"]:checked + label:before {
+        border-color: #e74c3c;
+    }
+    .has-error & [type="checkbox"]:checked + label:after {
+        color: #e74c3c;
+    }
+}
+
+.checkbox-blue-square {
+    /* Base for label styling */
+    [type="checkbox"]:not(:checked),
+    [type="checkbox"]:checked {
+        opacity: 0.0;
+        margin-left: 0;
+        width: 20px;
+        height: 20px;
+    }
+    [type="checkbox"]:not(:checked) + label,
+    [type="checkbox"]:checked + label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+    }
+
+    /* checkbox aspect */
+    [type="checkbox"] + label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+        border: none;
+        background: #e6e6e6;
+    }
+    /* when checked */
+    [type="checkbox"]:checked + label:before {
+        background: #39627c;
+    }
+    /* disabled checkbox */
+    [type="checkbox"]:disabled + label:before {
+        border-color: #bbb;
+        background-color: #ddd;
+    }
+    [type="checkbox"]:disabled + label {
+        color: #aaa;
+    }
+    /* accessibility */
+    [type="checkbox"]:focus + label:before {
+        border: 2px solid #39627c;
+    }
+    /* error */
+    .has-error & [type="checkbox"] + label:before{
+        border-color: #e74c3c;
+    }
+}
+
+.radio-blue-circle {
+    /* Base for label styling */
+    [type="radio"]:not(:checked),
+    [type="radio"]:checked {
+        opacity: 0.0;
+        margin-left: 0;
+        width: 20px;
+        height: 20px;
+    }
+    [type="radio"]:not(:checked) + label,
+    [type="radio"]:checked + label {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+    }
+
+    /* radio aspect */
+    [type="radio"] + label:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: none;
+        background: #e6e6e6;
+    }
+    /* when checked */
+    [type="radio"]:checked + label:before {
+        background: #39627c;
+    }
+    /* disabled radio */
+    [type="radio"]:disabled + label:before {
+        border-color: #bbb;
+        background-color: #ddd;
+    }
+    [type="radio"]:disabled + label {
+        color: #aaa;
+    }
+    /* accessibility */
+    [type="radio"]:focus + label:before {
+        border: 2px solid #39627c;
+    }
+    /* error */
+    .has-error & [type="radio"] + label:before{
+        border-color: #e74c3c;
+    }
+}
+
+.form-control {
+    border-width: 2px;
+}

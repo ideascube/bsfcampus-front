@@ -1,0 +1,21 @@
+.panel {
+    border-width: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+
+    .panel-group .panel {
+        border-radius: 0;
+        .panel-heading,
+        .panel-body,
+        .panel-footer,
+        .list-group,
+        .list-group .list-group-item {
+            border-radius: 0;
+        }
+        & + .panel {
+            margin-top: 0;
+        }
+
+    }
+}
