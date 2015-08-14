@@ -25,8 +25,6 @@ define (
 
         return ExerciseAttemptView.extend({
 
-            className: 'modal fade',
-
             model: TrackValidationAttemptModel,
 
             template: _.template(modalTemplate),

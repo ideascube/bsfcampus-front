@@ -41,6 +41,11 @@ define(
 
             className: 'modal fade',
 
+            attributes: {
+                'data-backdrop': 'static',
+                'data-keyboard': false
+            },
+
             model: ExerciseAttemptModel,
 
             isQuestionVerified: false,
@@ -82,7 +87,8 @@ define(
 
                 var progressWidth = $progress.width();
                 console.log("renderProgression : progressWidth =", progressWidth);
-                var singleWidth = Math.floor(progressWidth / (this.model.getNumberOfQuestions() * 2));
+                var singleWidth = Math.max(Math.min(Math.floor(progressWidth / (this.model.getNumberOfQuestions() * 1.25)), Config.constants.exerciseAttemptProgressionMaxWidth), Config.constants.exerciseAttemptProgressionMinWidth);
+                var marginLeftRight = Math.floor(singleWidth / 8);
 
                 for (var i = 0; i < questionsCollection.length; i++) {
                     var questionAnswer = questionsCollection.models[i];
@@ -109,6 +115,7 @@ define(
                     var $questionHtml = $(questionIconHtml);
                     $questionHtml.css("width", singleWidth);
                     $questionHtml.css("height", singleWidth);
+                    $questionHtml.css("margin", "auto " + marginLeftRight + "px");
                     $table.append($questionHtml);
                 }
             },

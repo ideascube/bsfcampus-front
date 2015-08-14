@@ -109,7 +109,10 @@ define(['config'],
                 LESSONS: 'lessons',
                 RESOURCES: 'resources',
                 USER: 'user'
-            }
+            },
+
+            exerciseAttemptProgressionMaxWidth: 48,
+            exerciseAttemptProgressionMinWidth: 24
 
 		};
 
