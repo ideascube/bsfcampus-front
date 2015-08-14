@@ -1,42 +1,42 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700);
 
-html {
+html, body {
     height: 100%;
     width: 100%;
 }
 
-body {
+#layout {
     height: 100%;
     width: 100%;
     display: table;
-}
 
-#header {
-    display: table-row;
-    height: 50px;
-}
-
-#footer {
-    display: table-row;
-    height: 1px;
-}
-
-#main-container {
-    display: table-row;
-    height: auto;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-image: url('../../assets/images/city.png');
-    background-attachment: scroll;
-
-    #home {
-        background-color: #fff;
+    #header {
+        display: table-row;
+        height: 50px;
     }
 
-    #main {
-        padding-top: 20px;
-        padding-bottom: 20px;
+    #footer {
+        display: table-row;
+        height: 1px;
+    }
+
+    #main-container {
+        display: table-row;
+        height: auto;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-image: url('../../assets/images/city.png');
+        background-attachment: scroll;
+
+        #home {
+            background-color: #fff;
+        }
+
+        #main {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
     }
 }
 
