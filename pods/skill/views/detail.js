@@ -37,6 +37,10 @@ define(
 				'click .btn-validate-skill': 'startSkillValidation'
 			},
 
+            initialize: function() {
+                this.listenTo(this.model, 'change', this.render);
+            },
+
             render: function() {
 
                 var html = this.template({

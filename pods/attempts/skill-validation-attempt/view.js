@@ -6,11 +6,14 @@ define (
         'app/config',
 
         'pods/attempts/skill-validation-attempt/model',
-        'pods/attempts/exercise-attempt/view'
+        'pods/attempts/exercise-attempt/view',
+
+        'pods/analytics/processAchievement'
     ],
     function ($, _, Backbone, Config,
               SkillValidationAttemptModel,
-              ExerciseAttemptView
+              ExerciseAttemptView,
+              processAchievement
     ) {
 
         return ExerciseAttemptView.extend({
@@ -24,6 +27,15 @@ define (
 
                 var questionId = this.currentQuestionAnswer.get('question_id');
                 this.model = new SkillValidationAttemptModel(result, {parse: true});
+                if (this.model.achievements != null) {
+                    this.model.achievements.each(function (achievement) {
+                        processAchievement(achievement);
+                        if (achievement.get('_cls').split('.').pop() == 'UnlockedTrackTest') {
+                            this.trackValidationId = achievement.get('track')._id;
+                        }
+                    }, this);
+                }
+
                 this.renderProgression();
                 this.renderObjective();
                 this.renderFeedbackAndResult(questionId);

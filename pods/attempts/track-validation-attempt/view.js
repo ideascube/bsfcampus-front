@@ -12,12 +12,15 @@ define (
         'text!pods/attempts/track-validation-attempt/templates/trackValidationRecap.html',
         'text!pods/attempts/track-validation-attempt/templates/trackValidationRecapFooter.html',
 
+        'pods/analytics/processAchievement',
+
         'less!pods/attempts/track-validation-attempt/style'
     ],
     function ($, _, Backbone, Config,
               TrackValidationAttemptModel,
               ExerciseAttemptView,
-              modalTemplate, recapTemplate,  recapFooterTemplate
+              modalTemplate, recapTemplate,  recapFooterTemplate,
+              processAchievement
     ) {
 
         return ExerciseAttemptView.extend({
@@ -37,6 +40,11 @@ define (
 
                 var questionId = this.currentQuestionAnswer.get('question_id');
                 this.model = new TrackValidationAttemptModel(result, {parse: true});
+                if (this.model.achievements != null) {
+                    this.model.achievements.each(function (achievement) {
+                        processAchievement(achievement);
+                    }, this);
+                }
                 this.renderProgression();
                 this.renderObjective();
                 this.renderFeedbackAndResult(questionId);

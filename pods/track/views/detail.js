@@ -32,6 +32,10 @@ define(
                 'click .btn-validate-track': 'startTrackValidation'
             },
 
+            initialize: function() {
+                this.listenTo(this.model, 'change', this.render);
+            },
+
             render: function() {
 				var trackModel = this.model.forTemplate();
 

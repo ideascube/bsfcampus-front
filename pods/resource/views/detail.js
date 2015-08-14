@@ -39,6 +39,10 @@ define(
 			
 			template: _.template(detailTemplate),
 
+            initialize: function() {
+                this.listenTo(this.model, 'change', this.render);
+            },
+
             render: function() {
 				var html = this.template({
 					resource: this.model.forTemplate(),

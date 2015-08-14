@@ -26,6 +26,10 @@ define(
 
 			tagName: 'div',
 
+            events: {
+                'click .btn-start-exercise': 'startExercise'
+            },
+
 			templateHTML: function() {
 				var content = this.model.get('resource_content');
 				var cls = content._cls.split('.').pop();
@@ -101,10 +105,6 @@ define(
 				}
 
                 return this;
-			},
-
-			events: {
-				'click .btn-start-exercise': 'startExercise'
 			},
 
 			startExercise: function(e) {
