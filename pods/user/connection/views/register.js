@@ -14,7 +14,6 @@ define(
     ],
     function ($, _, Backbone, $serialize, Config,
               currentUser,
-              AbstractView,
               registerTemplate) {
 
         return Backbone.View.extend({
