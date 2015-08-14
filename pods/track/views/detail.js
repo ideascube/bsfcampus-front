@@ -119,11 +119,12 @@ define(
                     });
                     trackValidationAttemptView.resource = self.model;
                     $("body").append(trackValidationAttemptView.render().$el);
-                    trackValidationAttemptView.continueExercise();
-                    $("#main").hide();
-                    $("body").css('background-color', '#36404A');
 
-                    trackValidationAttemptView.$el.on('hidden.bs.modal', function () {
+                    trackValidationAttemptView.$el.on('shown.bs.modal', function () {
+                        trackValidationAttemptView.continueExercise();
+                        $("#main").hide();
+                        $("body").css('background-color', '#36404A');
+                    }).on('hidden.bs.modal', function () {
                         $("body").css('background-color', '');
                         $("#main").show();
                         VM.closeView(Config.constants.VIEWS_ID.TRACK_VALIDATION_ATTEMPT);
