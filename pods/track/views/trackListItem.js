@@ -22,7 +22,7 @@ define(
 
 			render: function() {
                 var html = this.template({
-					track: this.model.forTemplate(),
+					track: this.model.toJSON(true),
 					config: Config
 				});
 				this.$el.html(html);

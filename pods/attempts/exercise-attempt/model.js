@@ -19,7 +19,7 @@ define(
 		return AbstractModel.extend({
 			
 			forRecapTemplate: function() {
-				var son = this.forTemplate();
+				var son = this.toJSON(true);
 				son.number_questions = this.getCollection().length;
 				son.number_mistakes = this.getNumberOfMistakesMade();
 				return son;

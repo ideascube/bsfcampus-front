@@ -31,7 +31,7 @@ define(
             categorizerCategoryTemplate: _.template(formCategorizerCategoryTemplate),
 
             render: function () {
-                var html = this.template({question: this.model.questionModel().forTemplate(), config: Config});
+                var html = this.template({question: this.model.questionModel().toJSON(true), config: Config});
                 this.$el.html(html);
 
                 if (this.model.questionModel().get('question_image_url') != null) {

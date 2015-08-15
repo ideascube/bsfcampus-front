@@ -99,7 +99,7 @@ define(
 
             render: function () {
                 var html = this.template({
-                    user: this.model.forTemplate(),
+                    user: this.model.toJSON(true),
                     config: Config
                 });
                 this.$el.html(html);

@@ -28,7 +28,7 @@ define(
 
             render: function() {
                 var html = this.template({
-                    lesson: this.model.forTemplate()
+                    lesson: this.model.toJSON(true)
                 });
 				this.$el.html(html);
 				

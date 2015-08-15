@@ -29,7 +29,7 @@ define(
             render: function () {
                 var self = this;
                 DS.find(Config.constants.dsResourceNames.TRACKS, this.trackId).then(function (trackModel) {
-                    var html = self.template({track: trackModel.forTemplate(), config: Config});
+                    var html = self.template({track: trackModel.toJSON(true), config: Config});
                     self.$el.html(html);
                 });
 

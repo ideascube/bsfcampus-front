@@ -18,7 +18,7 @@ define(
 			template: _.template(backToTrackTemplate),
 
 			render: function() {
-				var html = this.template({track: this.model.forTemplate(), config: Config});
+				var html = this.template({track: this.model.toJSON(true), config: Config});
 				this.$el.html(html);
 				
 				return this;

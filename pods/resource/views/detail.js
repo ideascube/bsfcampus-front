@@ -45,7 +45,7 @@ define(
 
             render: function() {
 				var html = this.template({
-					resource: this.model.forTemplate(),
+					resource: this.model.toJSON(true),
 					config: Config
 				});
 				this.$el.html(html);
@@ -122,7 +122,7 @@ define(
                 var parentSkillId = this.model.get('hierarchy')[1]._id;
                 DS.find(Config.constants.dsResourceNames.SKILLS, parentSkillId).then(function (parentSkillModel) {
                     // Second, find lessons for the parent skill
-                    var skillModelSON = parentSkillModel.forTemplate();
+                    var skillModelSON = parentSkillModel.toJSON(true);
                     var lessonsCollection = DS.getMany(Config.constants.dsResourceNames.LESSONS, _.pluck(skillModelSON.lessons, '_id'));
                     var areLessonsIncomplete = _.some(lessonsCollection.models, function(lessonModel) {
                         return DS.isIncomplete(Config.constants.dsResourceNames.LESSONS, lessonModel.id);
@@ -132,7 +132,7 @@ define(
                     // Finally we get the children resources from all these lessons
                     var resourcesModels = [];
                     _.each(lessonsCollection.models, function(lessonModel) {
-                        var lessonModelSON = lessonModel.forTemplate();
+                        var lessonModelSON = lessonModel.toJSON(true);
                         var resourcesCollection = DS.getMany(Config.constants.dsResourceNames.RESOURCES, _.pluck(lessonModelSON.resources, '_id'));
                         lessonModel.set('resources', resourcesCollection.toJSON());
                         resourcesModels.push.apply(resourcesModels, resourcesCollection.models);

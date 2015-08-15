@@ -38,7 +38,7 @@ define(
             navMenuView: null,
 
             render: function() {
-                var html = this.template({resource: this.model.forTemplate()});
+                var html = this.template({resource: this.model.toJSON(true)});
                 this.$el.html(html);
 
                 this.renderNavMenu(this.page);

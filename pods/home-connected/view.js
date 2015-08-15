@@ -32,7 +32,7 @@ define(
 
             render: function() {
                 var html = this.template({
-                    currentUser: currentUser.forTemplate(),
+                    currentUser: currentUser.toJSON(true),
                     config: Config
                 });
                 this.$el.html(html);

@@ -34,7 +34,7 @@ define(
                 if (pageModelArray != null && pageModelArray.length > 0)
                 {
                     var pageModel = pageModelArray.models[0];
-                    this.$el.html(this.template({content: pageModel.forTemplate()}));
+                    this.$el.html(this.template({content: pageModel.toJSON(true)}));
                 }
 
 				return this;

@@ -27,7 +27,7 @@ define(
 			render: function() {
 				var currentLesson = this.currentResource.get('parent');
                 var html = this.template({
-					lesson: this.model.forTemplate(),
+					lesson: this.model.toJSON(true),
 					config: Config
 				});
 				this.$el.html(html);

@@ -42,7 +42,7 @@ define(
 
             render: function () {
                 var html = this.template({
-                    track: this.model.forTemplate(),
+                    track: this.model.toJSON(true),
                     analytics: this.analytics(),
                     index: this.index,
                     config: Config

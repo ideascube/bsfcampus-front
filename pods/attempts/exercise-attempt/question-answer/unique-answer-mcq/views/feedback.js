@@ -28,7 +28,7 @@ define(
 			propositionTemplate: _.template(feedbackPropositionTemplate),
 			
 			render: function() {
-				var html = this.template({question: this.model.forTemplate().question, config: Config});
+				var html = this.template({question: this.model.toJSON(true).question, config: Config});
 				this.$el.html(html);
 				
 				if (this.model.questionModel().get('question_image_url') != null)

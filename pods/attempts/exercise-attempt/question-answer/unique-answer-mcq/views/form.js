@@ -37,7 +37,7 @@ define(
 
             render: function () {
                 var html = this.template({
-                    question: this.model.questionModel().forTemplate(),
+                    question: this.model.questionModel().toJSON(true),
                     config: Config
                 });
                 this.$el.html(html);

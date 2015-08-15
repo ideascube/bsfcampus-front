@@ -18,7 +18,7 @@ define(
 
             render: function () {
                 var html = this.template({
-                    resource: this.model.forTemplate(),
+                    resource: this.model.toJSON(true),
                     config: Config
                 });
                 this.$el.html(html);

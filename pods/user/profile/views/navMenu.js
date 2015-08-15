@@ -30,7 +30,7 @@ define(
             currentSelectionId: null,
 
             render: function() {
-                var html = this.template({user: currentUser.forTemplate(), config: Config});
+                var html = this.template({user: currentUser.toJSON(true), config: Config});
                 this.$el.html(html);
 
                 return this;

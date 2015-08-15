@@ -8,8 +8,7 @@ define(
 
 		'pods/analytics/processAchievement'
 	],
-	function($, _, Backbone, DS, Config,
-			 processAchievement) {
+	function($, _, Backbone, DS, Config) {
 
 		return Backbone.Model.extend({
 
@@ -82,13 +81,13 @@ define(
 				}
 			},
 
-			forTemplate: function() {
-				var son = this.toJSON();
-				son.id = son._id;
-				if (typeof this.route === "function") {
-					son.route = this.route();
+			toJSON: function(forTemplate) {
+                var json = Backbone.Model.prototype.toJSON.call(this);
+				if (forTemplate === true) {
+					json.id = json._id;
+					json.route = _.result(this, 'route', null);
 				}
-				return son;
+				return json;
 			},
 
 			serverPath: '',

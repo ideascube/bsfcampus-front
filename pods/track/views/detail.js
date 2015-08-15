@@ -37,7 +37,7 @@ define(
             },
 
             render: function() {
-				var trackModel = this.model.forTemplate();
+				var trackModel = this.model.toJSON(true);
 
                 var html = this.template({track: trackModel, config: Config});
                 this.$el.html(html);

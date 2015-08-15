@@ -34,58 +34,63 @@ define(
 				return '#/resource/' + this.id;
 			},
 
-            forTemplate: function() {
+            toJSON: function(forTemplate) {
 
-                var son = AbstractModel.prototype.forTemplate.call(this);
+                var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
 
-                son.is_validated = this.isValidated();
+                if (forTemplate === true) {
 
-                if (this.get('resource_content') != null) {
+                    json.is_validated = this.isValidated();
 
-                    var cls = this.get('_cls').split('.').pop();
+                    if (this.get('resource_content') != null) {
 
-                    switch (cls) {
-                        case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
-                            if (this.isValidated()) {
-                                son.icon_url = Config.imagesDict.resourceIconOn.RICH_TEXT;
-                            } else {
-                                son.icon_url = Config.imagesDict.resourceIconOff.RICH_TEXT;
-                            }
-                            break;
-                        case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
-                        case Config.stringsDict.RESOURCE_TYPE.VIDEO:
-                            if (this.isValidated()) {
-                                son.icon_url = Config.imagesDict.resourceIconOn.VIDEO;
-                            } else {
-                                son.icon_url = Config.imagesDict.resourceIconOff.VIDEO;
-                            }
-                            break;
-                        case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
-                            if (this.isValidated()) {
-                                son.icon_url = Config.imagesDict.resourceIconOn.EXERCISE;
-                            } else {
-                                son.icon_url = Config.imagesDict.resourceIconOff.EXERCISE;
-                            }
-                            break;
-                        case Config.stringsDict.RESOURCE_TYPE.AUDIO:
-                            if (this.isValidated()) {
-                                son.icon_url = Config.imagesDict.resourceIconOn.AUDIO;
-                            } else {
-                                son.icon_url = Config.imagesDict.resourceIconOff.AUDIO;
-                            }
-                            break;
-                        case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
-                            if (this.isValidated()) {
-                                son.icon_url = Config.imagesDict.resourceIconOn.DOWNLOADABLE_FILE;
-                            } else {
-                                son.icon_url = Config.imagesDict.resourceIconOff.DOWNLOADABLE_FILE;
-                            }
-                            break;
+                        var cls = this.get('_cls').split('.').pop();
+
+                        switch (cls) {
+                            case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
+                                if (this.isValidated()) {
+                                    json.icon_url = Config.imagesDict.resourceIconOn.RICH_TEXT;
+                                } else {
+                                    json.icon_url = Config.imagesDict.resourceIconOff.RICH_TEXT;
+                                }
+                                break;
+                            case Config.stringsDict.RESOURCE_TYPE.EXTERNAL_VIDEO:
+                            case Config.stringsDict.RESOURCE_TYPE.VIDEO:
+                                if (this.isValidated()) {
+                                    json.icon_url = Config.imagesDict.resourceIconOn.VIDEO;
+                                } else {
+                                    json.icon_url = Config.imagesDict.resourceIconOff.VIDEO;
+                                }
+                                break;
+                            case Config.stringsDict.RESOURCE_TYPE.EXERCISE:
+                                if (this.isValidated()) {
+                                    json.icon_url = Config.imagesDict.resourceIconOn.EXERCISE;
+                                } else {
+                                    json.icon_url = Config.imagesDict.resourceIconOff.EXERCISE;
+                                }
+                                break;
+                            case Config.stringsDict.RESOURCE_TYPE.AUDIO:
+                                if (this.isValidated()) {
+                                    json.icon_url = Config.imagesDict.resourceIconOn.AUDIO;
+                                } else {
+                                    json.icon_url = Config.imagesDict.resourceIconOff.AUDIO;
+                                }
+                                break;
+                            case Config.stringsDict.RESOURCE_TYPE.DOWNLOADABLE_FILE:
+                                if (this.isValidated()) {
+                                    json.icon_url = Config.imagesDict.resourceIconOn.DOWNLOADABLE_FILE;
+                                } else {
+                                    json.icon_url = Config.imagesDict.resourceIconOff.DOWNLOADABLE_FILE;
+                                }
+                                break;
+                        }
+
                     }
 
                 }
 
-                return son;
+                return json;
+
             }
 
 		});

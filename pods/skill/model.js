@@ -30,13 +30,12 @@ define(
 				return '#/skill/' + this.id;
 			},
 
-            forTemplate: function() {
-
-                var son = AbstractModel.prototype.forTemplate.call(this);
-
-				son.is_validated = this.isValidated();
-
-                return son;
+            forTemplate: function(forTemplate) {
+                var json = AbstractModel.prototype.forTemplate.call(this, forTemplate);
+				if (forTemplate === true) {
+					json.is_validated = this.isValidated();
+				}
+                return json;
             }
 
 		});

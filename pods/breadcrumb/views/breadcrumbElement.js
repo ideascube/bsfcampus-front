@@ -53,7 +53,7 @@ define(
 						return null;
 				}
 
-				var html = this.template({model: this.model.forTemplate()});
+				var html = this.template({model: this.model.toJSON(true)});
 				this.$el.html(html);
 				
 				return this;

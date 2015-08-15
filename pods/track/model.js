@@ -48,15 +48,14 @@ define(
 				return '#/track/' + this.id;
 			},
 
-            forTemplate: function() {
-
-                var son = AbstractModel.prototype.forTemplate.call(this);
-
-				son.is_validated = this.isValidated();
-				son.is_started = this.isStarted();
-				son.test_is_unlocked = this.testIsUnlocked();
-
-                return son;
+            toJSON: function(forTemplate) {
+                var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
+				if (forTemplate === true) {
+					json.is_validated = this.isValidated();
+					json.is_started = this.isStarted();
+					json.test_is_unlocked = this.testIsUnlocked();
+				}
+                return json;
             }
 
 		});

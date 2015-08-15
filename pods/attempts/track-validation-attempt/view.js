@@ -59,7 +59,7 @@ define (
                 {
                     this.isExerciseCompleted = true;
                     $exerciseRecap.addClass('track-validation-succeeded');
-                    var track = this.resource.forTemplate();
+                    var track = this.resource.toJSON(true);
                     var $trackRecapIcons = $exerciseRecap.find('#track-recap-icons');
                     $trackRecapIcons.append('<img src="' + track.icon_url + '" class="track-icon">');
                     $trackRecapIcons.css('background', 'url(' + Config.imagesDict.trackValidation.STARS + ') no-repeat center center');

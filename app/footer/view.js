@@ -30,8 +30,9 @@ define(
                 var $staticPagesList = this.$('#footer-static-pages-link-list ul');
                 $staticPagesList.empty();
                 _.each(staticPages.models, function(page) {
-                    var pageSON = page.forTemplate();
-                    $staticPagesList.append(this.staticPageLinkTemplate({page: pageSON}));
+                    $staticPagesList.append(this.staticPageLinkTemplate({
+                        page: page.toJSON()
+                    }));
                 }, this);
 
                 return this;

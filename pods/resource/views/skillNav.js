@@ -28,7 +28,7 @@ define(
 			template: _.template(skillNavTemplate),
 
 			render: function() {
-				var html = this.template({skill: this.model.forTemplate()});
+				var html = this.template({skill: this.model.toJSON(true)});
 				this.$el.html(html);
 					
 				var backToSkillView = new BackToSkillView({model: this.model});

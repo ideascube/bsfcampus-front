@@ -28,7 +28,7 @@ define(
 			template: _.template(linkToResourceTemplate),
 
 			render: function() {
-				var resourceModelJSON = this.model.forTemplate();
+				var resourceModelJSON = this.model.toJSON(true);
 				switch (this.model.get('_cls').split('.').pop()) {
 					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
 						resourceModelJSON.icon_url = Config.imagesDict.resourceIconWhite.RICH_TEXT;

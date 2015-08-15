@@ -32,7 +32,7 @@ define(
             },
 
             render: function () {
-                var html = this.template({currentUser: currentUser.forTemplate(), config: Config});
+                var html = this.template({currentUser: currentUser.toJSON(true), config: Config});
                 this.$el.html(html);
 
                 this.$notificationsList = this.$("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");

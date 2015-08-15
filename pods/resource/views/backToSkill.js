@@ -20,7 +20,7 @@ define(
 			template: _.template(backToSkillTemplate),
 
 			render: function() {
-				var html = this.template({skill: this.model.forTemplate(), config: Config});
+				var html = this.template({skill: this.model.toJSON(true), config: Config});
 				this.$el.html(html);
 				this.$el.attr('href', this.model.route());
 				

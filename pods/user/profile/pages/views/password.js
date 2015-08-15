@@ -28,7 +28,7 @@ define(
             },
 
             render: function() {
-                var userModel = currentUser.forTemplate();
+                var userModel = currentUser.toJSON(true);
                 var html = this.template({user: userModel, config: Config});
                 this.$el.html(html);
 

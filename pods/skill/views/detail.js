@@ -44,7 +44,7 @@ define(
             render: function() {
 
                 var html = this.template({
-					skill: this.model.forTemplate(),
+					skill: this.model.toJSON(true),
 					config: Config
 				});
 				this.$el.html(html);

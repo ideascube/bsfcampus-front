@@ -29,7 +29,7 @@ define(
             },
 
             render: function() {
-                this.$el.html(this.template({currentUser: currentUser.forTemplate(), config: Config}));
+                this.$el.html(this.template({currentUser: currentUser.toJSON(true), config: Config}));
                 this.$("#first-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage + ')');
                 this.$("#third-window").css('background-image', 'url(' + Config.imagesDict.home.bsfHomeImage3 + ')');
 

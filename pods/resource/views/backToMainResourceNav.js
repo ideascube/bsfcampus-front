@@ -22,7 +22,7 @@ define(
 			template: _.template(backToResourceNavTemplate),
 
 			render: function() {
-				var html = this.template({resource: this.model.forTemplate()});
+				var html = this.template({resource: this.model.toJSON(true)});
 				this.$el.html(html);
 
 				return this;

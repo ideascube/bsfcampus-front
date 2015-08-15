@@ -58,9 +58,9 @@ define(
             recapFooterTemplate: _.template(recapFooterTemplate),
 
             render: function () {
-                var resourceSON = this.resource.forTemplate();
+                var resourceSON = this.resource.toJSON(true);
                 var html = this.template({
-                    attempt: this.model.forTemplate(),
+                    attempt: this.model.toJSON(true),
                     resource: resourceSON,
                     config: Config
                 });
