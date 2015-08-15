@@ -24,6 +24,11 @@ define(
                 return this.urlRoot() + '/current';
             },
 
+            parse: function(response, options) {
+                this.username = response.username;
+                return AbstractModel.prototype.parse.call(this, response, options);
+            },
+
             dashboardUrl: function() {
                 return this.url() + "/dashboard";
             },
@@ -85,6 +90,14 @@ define(
                 } else {
                     return false;
                 }
+            },
+
+            toJSON: function(forTemplate) {
+                var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
+                if (forTemplate === true) {
+                    json.username = this.username;
+                }
+                return json;
             }
 
         });
