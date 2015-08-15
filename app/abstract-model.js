@@ -46,11 +46,9 @@ define(
 				if (obj.constructor === Array) {
 				// If this is an array, normalize each element
 				
-					var normalizedArray = [];
-					for (var i = 0 ; i < obj.length; i++) {
-						normalizedArray[i] = this.recursiveNormalize(obj[i]);
-					}
-					return normalizedArray;
+					return _.map(obj, function(value) {
+                        return this.recursiveNormalize(value);
+                    }, this);
 
 
 				} else if (obj.constructor === Object) {
@@ -68,11 +66,11 @@ define(
 					}
 
 					// If this was not a special type, proceed with all keys.
-					var normalizedObj = {};
-					for (var key in obj) {
-						normalizedObj[key] = this.recursiveNormalize(obj[key]);
-					}
-					return normalizedObj;
+					return _.object(
+                        _.map(obj, function(value, key) {
+                            return [key, this.recursiveNormalize(value)];
+                        }, this)
+                    );
 
 				} else {
 
