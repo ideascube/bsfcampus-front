@@ -12,7 +12,7 @@ define(
 
 			stringsDict: StringsDictionary,
 
-			imagesDict: ImagesDictionary,
+			imagesDict: ImagesDictionary
 
 		};
 	}

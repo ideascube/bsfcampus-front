@@ -42,7 +42,7 @@ define(
 
                 if (this.get('resource_content') != null) {
 
-                    var cls = this.get('resource_content')._cls.split('.').pop();
+                    var cls = this.get('_cls').split('.').pop();
 
                     switch (cls) {
                         case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:

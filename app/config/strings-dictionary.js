@@ -57,12 +57,12 @@ define([],
 
             // Constants for Resources type
             RESOURCE_TYPE: {
-                RICH_TEXT: 'RichTextResourceContent',
-                VIDEO: 'VideoResourceContent',
-                EXTERNAL_VIDEO: 'ExternalVideoResourceContent',
-                EXERCISE: 'ExerciseResourceContent',
-                AUDIO: 'AudioResourceContent',
-                DOWNLOADABLE_FILE: 'DownloadableFileResourceContent'
+                RICH_TEXT: 'RichTextResource',
+                VIDEO: 'VideoResource',
+                EXTERNAL_VIDEO: 'ExternalVideoResource',
+                EXERCISE: 'ExerciseResource',
+                AUDIO: 'AudioResource',
+                DOWNLOADABLE_FILE: 'DownloadableFileResource'
             },
 
             HEADER: {

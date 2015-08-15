@@ -10,40 +10,34 @@ define(
 		'pods/attempts/exercise-attempt/question-answer/right-or-wrong/views/form',
 		'pods/attempts/exercise-attempt/question-answer/dropdowns/views/form',
 		'pods/attempts/exercise-attempt/question-answer/ordering/views/form',
-		'pods/attempts/exercise-attempt/question-answer/categorizer/views/form',
+		'pods/attempts/exercise-attempt/question-answer/categorizer/views/form'
 	],
 	function($, _, Backbone, Config,
 		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView, DropdownView, OrderingView, CategorizerView
 		) {
 
-		return {
-
-			initialize: function(model) {
-				var ret = null;
-				switch (model.questionModel().get('_cls')) {
+		return function(options) {
+			if (options.hasOwnProperty('model')) {
+				switch (options.model.questionModel().get('_cls').split('.').pop()) {
 					case 'UniqueAnswerMCQExerciseQuestion':
-						ret = new UniqueAnswerMCQView({model: model});
-						break;
+						return new UniqueAnswerMCQView(options);
 					case 'MultipleAnswerMCQExerciseQuestion':
-						ret = new MultipleAnswerMCQView({model: model});
-						break;
+						return new MultipleAnswerMCQView(options);
 					case 'RightOrWrongExerciseQuestion':
-						ret = new RightOrWrongView({model: model});
-						break;
+						return new RightOrWrongView(options);
 					case 'DropdownExerciseQuestion':
-						ret = new DropdownView({model: model});
-						break;
+						return new DropdownView(options);
 					case 'OrderingExerciseQuestion':
-						ret = new OrderingView({model: model});
-						break;
+						return new OrderingView(options);
 					case 'CategorizeExerciseQuestion':
-						ret = new CategorizerView({model: model});
-						break;
+						return new CategorizerView(options);
+					default:
+						return null;
 				}
-				return ret;
+			} else {
+				return null;
 			}
-
-		};
+		}
 		
 	}
 );

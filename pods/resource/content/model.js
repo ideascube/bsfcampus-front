@@ -3,18 +3,12 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'app/config',
+
+		'model'
 	],
-	function($, _, Backbone, Config) {
+	function($, _, Backbone, AbstractModel) {
 
-		return Backbone.Model.extend({
-
-			forTemplate: function() {
-				var son = this.toJSON();
-				return son;
-			}
-
-		});
+		return AbstractModel.extend({});
 
 	}
 );

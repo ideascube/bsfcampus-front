@@ -29,7 +29,7 @@ define(
 
 			render: function() {
 				var resourceModelJSON = this.model.forTemplate();
-				switch (this.model.get('resource_content')._cls.split('.').pop()) {
+				switch (this.model.get('_cls').split('.').pop()) {
 					case Config.stringsDict.RESOURCE_TYPE.RICH_TEXT:
 						resourceModelJSON.icon_url = Config.imagesDict.resourceIconWhite.RICH_TEXT;
 						break;

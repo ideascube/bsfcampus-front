@@ -130,7 +130,7 @@ define(
             renderCurrentQuestionAnswerForm: function () {
                 this.renderProgression();
                 this.renderObjective();
-                var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
+                var formView = new ExerciseAttemptQuestionAnswerFormView({model: this.currentQuestionAnswer});
                 this.listenTo(formView, 'onAnswerRadioSelected', function () {
                     this.$('.exercise-attempt-footer button').prop('disabled', false);
                 });
@@ -179,7 +179,7 @@ define(
             renderFeedbackAndResult: function (questionId) {
                 var currentQuestionAnswer = this.model.getQuestionAnswer(questionId);
 
-                var feedbackView = ExerciseAttemptQuestionAnswerFeedbackView.initialize(currentQuestionAnswer);
+                var feedbackView = new ExerciseAttemptQuestionAnswerFeedbackView({model: currentQuestionAnswer});
 
                 var answerExplanationEl = this.$('.answer-explanation');
                 answerExplanationEl.removeClass('right-answer').removeClass('wrong-answer');
@@ -251,7 +251,7 @@ define(
 
             submitAnswer: function () {
 
-                var formView = ExerciseAttemptQuestionAnswerFormView.initialize(this.currentQuestionAnswer);
+                var formView = new ExerciseAttemptQuestionAnswerFormView({model: this.currentQuestionAnswer});
                 var formData = formView.serializeForm();
                 // we disable the continue button until we get the response
                 this.$('.btn-continue').prop('disabled', true);
