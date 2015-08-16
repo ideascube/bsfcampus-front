@@ -53,13 +53,13 @@ define(
 				}
 
 				var propositions = this.model.questionModel().get('propositions');
-				for (var i=0; i < propositions.length; i++)
-				{
-					proposition = propositions[i];
-					var html = this.propositionTemplate({proposition: proposition, index: i});
-					var el = this.$('.right-or-wrong-propositions');
-					el.append(html);
-				};
+				_.each(propositions, function(proposition, index){
+					var propositionHTML = this.propositionTemplate({
+						proposition: proposition,
+						index: index
+					});
+					this.$('.right-or-wrong-propositions').append(propositionHTML);
+				}, this);
 
 				return this;
 			}

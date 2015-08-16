@@ -90,8 +90,7 @@ define(
                 var singleWidth = Math.max(Math.min(Math.floor(progressWidth / (this.model.getNumberOfQuestions() * 1.25)), Config.constants.exerciseAttemptProgressionMaxWidth), Config.constants.exerciseAttemptProgressionMinWidth);
                 var marginLeftRight = Math.floor(singleWidth / 8);
 
-                for (var i = 0; i < questionsCollection.length; i++) {
-                    var questionAnswer = questionsCollection.models[i];
+                questionsCollection.each(function(questionAnswer){
                     var question = questionAnswer.get('question');
                     var successStatus = "";
                     if (question != null) {
@@ -117,7 +116,7 @@ define(
                     $questionHtml.css("height", singleWidth);
                     $questionHtml.css("margin", "auto " + marginLeftRight + "px");
                     $table.append($questionHtml);
-                }
+                }, this);
             },
 
             renderObjective: function () {

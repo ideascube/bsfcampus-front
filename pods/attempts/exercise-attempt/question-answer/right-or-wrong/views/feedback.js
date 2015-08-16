@@ -43,11 +43,7 @@ define(
 				}
 
 				var propositions = this.model.questionModel().get('propositions');
-				for (var i=0; i < propositions.length; i++)
-				{
-					proposition = propositions[i];
-					this.renderProposition(proposition, i);
-				}
+				_.each(propositions, this.renderProposition, this);
 
 				return this;
 			},
@@ -55,7 +51,7 @@ define(
 			renderProposition: function(proposition, index) {
 				var html = this.propositionTemplate({proposition: proposition, index: index, config:Config});
 				var $proposition = $(html);
-				$proposition.prop('disabled', true);
+				$proposition.find('input').prop('disabled', true);
 				if (this.model.get('given_answer').given_proposition == proposition._id) {
 					$proposition.addClass('proposition_selected');
 				}
@@ -63,7 +59,7 @@ define(
 					$proposition.addClass('proposition_correct');
 				}
 				this.$('.right-or-wrong-propositions').append($proposition);
-			},
+			}
 
 		});
 		

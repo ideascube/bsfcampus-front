@@ -42,11 +42,7 @@ define(
 				}
 
 				var propositions = this.model.questionModel().get('propositions');
-				for (var i=0; i < propositions.length; i++)
-				{
-					proposition = propositions[i];
-					this.renderProposition(proposition, i);
-				}
+				_.each(propositions, this.renderProposition, this);
 
 				var answerExplanationEl = this.$('.answer-explanation');
 				if (this.model.get('is_answered_correctly') === true)
@@ -71,7 +67,11 @@ define(
 			},
 
 			renderProposition: function(proposition, index) {
-				var html = this.propositionTemplate({proposition: proposition, index: index, config:Config});
+				var html = this.propositionTemplate({
+					proposition: proposition,
+					index: index,
+					config:Config
+				});
 				var $proposition = $(html);
 				$proposition.prop('disabled', true);
 				if (_.contains(this.model.get('given_answer').given_propositions, proposition._id)) {

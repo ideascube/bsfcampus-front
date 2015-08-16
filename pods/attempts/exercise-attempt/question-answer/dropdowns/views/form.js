@@ -46,24 +46,24 @@ define(
 				var splittedText = text.split("[%%]");
 
 				var dropdowns = this.model.questionModel().get('dropdowns');
-				dropdownHtmlText = '';
-				for (var i=0; i < splittedText.length; i++)
-				{
-					this.$('.dropdowns-text').append(splittedText[i]);
-					if (i < splittedText.length-1)
+				_.each(splittedText, function(fragment, index, fragments){
+					this.$('.dropdowns-text').append(fragment);
+					if (index < fragments.length - 1)
 					{
 						// We add the dropdown here
-						dropdown = dropdowns[i];
-						console.log('dropdown' + JSON.stringify(dropdown));
-						var html = this.dropdownTemplate({dropdown: dropdown, index: i});
-						this.$('.dropdowns-text').append(html);
+						var dropdown = dropdowns[index];
+						var dropdownHTML = this.dropdownTemplate({
+							dropdown: dropdown,
+							index: index
+						});
+						this.$('.dropdowns-text').append(dropdownHTML);
 						self = this;
 						this.$(".dropdown-menu li a").click(function(e){
-                            e.preventDefault();
+							e.preventDefault();
 							self.onPropositionSelected($(this));
 						});
 					}
-				}
+				}, this);
 
 				return this;
 			},

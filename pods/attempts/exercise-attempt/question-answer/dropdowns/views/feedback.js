@@ -46,23 +46,20 @@ define(
 
 				var dropdowns = this.model.questionModel().get('dropdowns');
 				var given_propositions = this.model.get('given_answer').given_propositions;
-				dropdownHtmlText = '';
-				for (var i=0; i < splittedText.length; i++)
-				{
-					this.$('.dropdowns-feedback').append(splittedText[i]);
-					if (i < splittedText.length-1)
+				_.each(splittedText, function(fragment, index, fragments){
+					this.$('.dropdowns-feedback').append(fragment);
+					if (index < fragments.length - 1)
 					{
 						// We add the dropdown here
-						dropdown = dropdowns[i];
+						dropdown = dropdowns[index];
 						var given_answer = _.find(dropdown.propositions, function (proposition) {
 							return _.contains(given_propositions, proposition._id);
-						})
-						var html = this.dropdownTemplate({dropdown: dropdown, answer: given_answer, index: i});
-						$dropdown = $(html);
+						});
+						var dropdownHTML = this.dropdownTemplate({dropdown: dropdown, answer: given_answer, index: index});
+						$dropdown = $(dropdownHTML);
 						correct_answer = _.find(dropdown.propositions, function (proposition) {
 							return proposition.is_correct_answer;
-						})
-						console.log(correct_answer);
+						});
 						if (_.contains(this.model.get('given_answer').given_propositions, correct_answer._id))
 						{
 							$dropdown.addClass('right-answer');
@@ -73,7 +70,7 @@ define(
 						}
 						this.$('.dropdowns-feedback').append($dropdown);
 					}
-				}
+				}, this);
 
 				var answerExplanationEl = this.$('.answer-explanation');
 				if (this.model.get('is_answered_correctly') === true)

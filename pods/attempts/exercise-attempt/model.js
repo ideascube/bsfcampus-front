@@ -27,15 +27,8 @@ define(
 
 			getCollection: function() {
 				if (this.collection == null) {
-					// Lazy instantiation
-					var questionAnswers = this.get('question_answers');
-					var questionAnswersCollection = new ExerciseAttemptQuestionAnswersCollection();
-					for (var i = 0; i < questionAnswers.length; i++) {
-						questionAnswersCollection.push(new ExerciseAttemptQuestionAnswerModel(questionAnswers[i]));
-					}
-					this.collection = questionAnswersCollection;
+					this.collection = new ExerciseAttemptQuestionAnswersCollection(this.get('question_answers'));
 				}
-
 				return this.collection;
 			},
 			

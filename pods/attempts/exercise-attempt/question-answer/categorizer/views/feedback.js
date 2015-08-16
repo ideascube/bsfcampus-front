@@ -42,18 +42,10 @@ define(
                 }
 
 				var correctAnswerCategories = this.model.questionModel().get('categories');
-				for (var i = 0; i < correctAnswerCategories.length; i++)
-				{
-					var correctAnsweredCategory = correctAnswerCategories[i];
-					var answeredCategoryItems = this.getAnsweredItemsByCategoryId(correctAnsweredCategory._id);
+                _.each(correctAnswerCategories, function(correctAnsweredCategory){
+                    var answeredCategoryItems = this.getAnsweredItemsByCategoryId(correctAnsweredCategory._id);
                     this.renderCategory(correctAnsweredCategory, answeredCategoryItems, correctAnswerCategories);
-				}
-
-				//for (var i = 0; i < correctAnswerItems.length; i++)
-				//{
-				//	item = correctAnswerItems[i];
-				//	this.renderCorrectAnswerItem(item);
-				//}
+                }, this);
 
 				return this;
 			},
@@ -111,15 +103,13 @@ define(
                 _.each(this.model.questionModel().get('categories'), function (category) {
                     allItems = allItems.concat(category.items);
                 }, this);
-                for( i = 0; i < answeredCategoryItems.length; i++)
-                {
-                    var itemId = answeredCategoryItems[i];
+                _.each(answeredCategoryItems, function(itemId){
                     var answeredItem = _.findWhere(allItems, {_id: itemId});
                     var parentCorrectCategoryId = this.getCorrectCategoryIdByItemId(itemId);
                     var isItemFailed = (parentCorrectCategoryId != answeredCategory._id);
                     var $item = this.renderItem(answeredItem, isItemFailed);
                     $category.find(".categorizer-category-items").append($item);
-                }
+                }, this);
 
                 this.$("#categorizer-groups").append($category);
 			},

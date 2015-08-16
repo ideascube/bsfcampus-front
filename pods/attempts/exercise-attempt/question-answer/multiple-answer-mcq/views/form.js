@@ -43,13 +43,13 @@ define(
 				}
 
 				var propositions = this.model.questionModel().get('propositions');
-				for (var i=0; i < propositions.length; i++)
-				{
-					var proposition = propositions[i];
-					html = this.propositionTemplate({proposition: proposition, index: i});
-					var el = this.$('.multiple-answer-mcq-propositions');
-					el.append(html);
-				}
+				_.each(propositions, function(proposition, index){
+					propositionHTML = this.propositionTemplate({
+						proposition: proposition,
+						index: index
+					});
+					this.$('.multiple-answer-mcq-propositions').append(propositionHTML);
+				}, this);
 
                 return this;
 			}

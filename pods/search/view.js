@@ -42,13 +42,14 @@ define(
                 var document = result['document'];
                 var breadcrumbArray = document['hierarchy'];
                 var $breadcrumb = $result.find('ol.breadcrumb');
-                for (var i = 0; i < breadcrumbArray.length-1; i++)
-                {
-                    $breadcrumb.append('<li>' + breadcrumbArray[i].title + '</li>');
-                }
-                $breadcrumb.append('<li class="active">' + breadcrumbArray[i].title + '</li>');
+                _.each(breadcrumbArray, function(item, index, list){
+                    var $html = $('<li>' + item.title + '</li>');
+                    if (index == list.length - 1) {
+                        $html.addClass('active');
+                    }
+                    $breadcrumb.append($html);
+                }, this);
                 this.$('#search-results').append($result);
-                console.log(this.$el.html());
             }
 
         });

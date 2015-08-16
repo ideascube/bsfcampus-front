@@ -46,29 +46,17 @@ define(
 						return (itemId == item._id);
 					}, this);
 				}, this);
-				for (var i = 0; i < userGivenItems.length; i++)
-				{
-					item = userGivenItems[i];
-					isFailed = false;
-					if (item._id != correctAnswerItems[i]._id)
-					{
-						isFailed = true;
-					}
+				_.each(userGivenItems, function(item, index){
+					isFailed = item._id != correctAnswerItems[index]._id;
 					this.renderItem(item, isFailed);
-				}
-				for (var i = 0; i < correctAnswerItems.length; i++)
-				{
-					item = correctAnswerItems[i];
-					this.renderCorrectAnswerItem(item);
-				}
+				}, this);
+				_.each(correctAnswerItems, this.renderCorrectAnswerItem, this);
 
 				return this;
 			},
 
 			renderItem: function(item, isFailed) {
-				console.log("renderItem", item, isFailed);
 				var $html = $(this.orderingTemplate({item: item}));
-				console.log
 				if (isFailed)
 				{
 					$html.addClass('wrong-answer');
