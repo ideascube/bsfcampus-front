@@ -1,12 +1,12 @@
-<div class="dropdown" dropdown-id="<%= dropdown._id %>">
-	<input type="text" name="dropdowns[]" value=""/>
+<div class="dropdown" data-dropdown-id="<%= dropdown._id %>">
+	<input type="hidden" name="dropdown-<%= dropdown._id %>" value="" />
 	<button class="btn btn-default dropdown-toggle unselected" type="button" id="dropdownMenu_<%= index %>" data-toggle="dropdown" aria-expanded="true">
 		      ---      
 	<span class="caret"></span>
 	</button>
 	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu_<%= index %>">
 		<% _.each(dropdown.propositions, function(proposition) { %>
-		    <li role="presentation"><a role="menuitem" proposition-id="<%= proposition._id %>" tabindex="-1" href="#"><%= proposition.text %></a></li>
+		    <li role="presentation"><a role="menuitem" data-proposition-id="<%= proposition._id %>" tabindex="-1" href="#"><%= proposition.text %></a></li>
 		<% }) %>
 	</ul>
 </div>

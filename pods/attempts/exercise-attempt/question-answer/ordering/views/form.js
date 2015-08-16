@@ -3,7 +3,6 @@ define(
         'jquery',
         'underscore',
         'backbone',
-        'form2js',
         'jqueryui',
         'app/config',
 
@@ -15,15 +14,13 @@ define(
 
         'less!pods/attempts/exercise-attempt/question-answer/ordering/style.less'
     ],
-    function ($, _, Backbone, form2js, JQueryUI, Config,
+    function ($, _, Backbone, JQueryUI, Config,
               QuestionAnswerModel, QuestionModel,
               formTemplate, formOrderingTemplate) {
 
         return Backbone.View.extend({
 
             model: QuestionAnswerModel,
-
-            tagName: 'div',
 
             id: 'ordering',
 
@@ -61,11 +58,19 @@ define(
                 this.$("#ordering-items-source").append(html);
             },
 
-            serializeForm: function () {
-                return {form_data: JSON.stringify(form2js('question-form', '.'))};
+            serializeForm: function() {
+                var orderedItems = [];
+                var items = this.$('#ordering-items-target').sortable('toArray');
+                _.each(items, function(item) {
+                    var matches = item.match(/^item_(\w+)$/);
+                    if (matches.length == 2) {
+                        orderedItems.push(matches[1]);
+                    }
+                }, this);
+                return {ordered_items: orderedItems};
             }
 
         })
 
     }
-)
+);

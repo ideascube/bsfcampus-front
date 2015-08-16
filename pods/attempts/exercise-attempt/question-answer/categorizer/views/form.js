@@ -3,7 +3,6 @@ define(
         'jquery',
         'underscore',
         'backbone',
-        'form2js',
         'jqueryui',
         'app/config',
 
@@ -16,7 +15,7 @@ define(
 
         'less!pods/attempts/exercise-attempt/question-answer/categorizer/style.less'
     ],
-    function ($, _, Backbone, form2js, JQueryUI, Config,
+    function ($, _, Backbone, JQueryUI, Config,
               QuestionAnswerModel, QuestionModel,
               formTemplate, formCategorizerItemTemplate, formCategorizerCategoryTemplate) {
 
@@ -69,26 +68,21 @@ define(
                 this.$("#categorizer-items-source").append(html);
             },
 
-            serializeForm: function () {
-                var serializedCategories = [];
+            serializeForm: function() {
+                var categorizedItems = {};
+                var items;
                 var categories = this.model.questionModel().get('categories');
-                for (var i = 0; i < categories.length; i++) {
-                    var category = categories[i];
-                    var serializedCategory = this.serializeCategoryForm(category);
-                    serializedCategories.push(serializedCategory);
-                }
-                console.log(serializedCategories);
-                var result = {"given_categorized_items": serializedCategories};
-                result.question_id = $('#question-form > input[name="question_id"]').attr("value");
-                return {form_data: JSON.stringify(result)};
-            },
-
-            serializeCategoryForm: function(category) {
-                var result = {};
-                var categoryObj = form2js('category_' + category._id, '.')['given_categorized_categories'];
-                result.id = categoryObj[0];
-                result.items = categoryObj[1]['given_categorized_items'];
-                return result;
+                _.each(categories, function(category){
+                    categorizedItems[category._id] = [];
+                    items = this.$('#category_' + category._id + ' .connectedSortable').sortable('toArray');
+                    _.each(items, function(item) {
+                        var matches = item.match(/^item_(\w+)$/);
+                        if (matches.length == 2) {
+                            categorizedItems[category._id].push(matches[1]);
+                        }
+                    }, this);
+                }, this);
+                return {categorized_items: categorizedItems};
             }
 
         })

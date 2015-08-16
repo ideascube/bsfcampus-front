@@ -173,6 +173,8 @@ define(
 
                 this.$('.exercise-attempt-question-answer-result').empty();
 
+                this.currentFormView = formView;
+
                 return this;
             },
 
@@ -251,8 +253,8 @@ define(
 
             submitAnswer: function () {
 
-                var formView = new ExerciseAttemptQuestionAnswerFormView({model: this.currentQuestionAnswer});
-                var formData = formView.serializeForm();
+                var formData = this.$('form').serializeObject();
+                _.extend(formData, _.result(this.currentFormView, 'serializeForm', {}));
                 // we disable the continue button until we get the response
                 this.$('.btn-continue').prop('disabled', true);
 
@@ -260,7 +262,7 @@ define(
                 $.ajax({
                     type: 'POST',
                     url: this.model.postAnswerUrl(),
-                    data: formData,
+                    data: {form_data: JSON.stringify(formData)},
                     dataType: 'json'
                 }).done(function (result) {
                     self.answerReceived(result);

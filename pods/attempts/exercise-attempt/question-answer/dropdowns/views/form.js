@@ -3,7 +3,6 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'form2js',
 		'app/config',
 
 		'pods/attempts/exercise-attempt/question-answer/models/question-answer',
@@ -14,7 +13,7 @@ define(
 
 		'less!pods/attempts/exercise-attempt/question-answer/dropdowns/style.less'
 	],
-	function($, _, Backbone, form2js, Config,
+	function($, _, Backbone, Config,
 		QuestionAnswerModel, QuestionModel,
 		formTemplate, formDropdownTemplate
 		) {
@@ -72,14 +71,10 @@ define(
 			onPropositionSelected: function($proposition) {
 				var selText = $proposition.text();
 				$dropdown = $proposition.parents('.dropdown');
-				$dropdown.find('input').attr('value', $proposition.attr('proposition-id'));
+				$dropdown.find('input').attr('value', $proposition.data('proposition-id'));
 				$dropdown.find('.dropdown-toggle').html(selText+' <span class="caret"></span>').removeClass('unselected').addClass('selected');
 				
-				this.trigger('onDropdownSelected', $dropdown.attr('dropdown-id'), $proposition.attr('proposition-id'));
-			},
-
-			serializeForm: function () {
-				return {form_data: JSON.stringify(form2js('question-form', '.'))};
+				this.trigger('onDropdownSelected', $dropdown.data('dropdown-id'), $proposition.data('proposition-id'));
 			}
 
 		});
