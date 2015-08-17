@@ -114,8 +114,6 @@ define(
             },
 
             renderHierarchy: function() {
-                console.log("renderHierarchy");
-
                 var self = this;
 
                 // First, get the resource's grand-parent skill

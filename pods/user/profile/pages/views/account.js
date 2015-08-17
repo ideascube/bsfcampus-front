@@ -59,7 +59,6 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
-                    console.log(JSON.stringify(result));
                     currentUser.set(currentUser.parse(result));
                     $accountSaveResult.html(Config.stringsDict.USER.PROFILE.ACCOUNT.SAVE_SUCCESS_MESSAGE);
                     $accountSaveResult.addClass('text-success');

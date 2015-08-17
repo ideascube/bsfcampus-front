@@ -68,9 +68,6 @@ define(
 
                 this.resetDataStore();
                 this.getDataStoreSkeletonData().done(function (response) {
-                    console.log("the hierarchy skeleton has been returned");
-                    console.log(JSON.stringify(response.data));
-
                     self.initDataStoreSkeletonContent(response.data);
                 }).fail(function (error) {
                     console.log("the hierarchy skeleton could not be gotten:", error);
@@ -87,9 +84,7 @@ define(
                     idAttribute: '_id',
                     collection: StaticPageCollection
                 });
-                DS.findAll(Config.constants.dsResourceNames.STATIC_PAGE).done(function (collection) {
-                    console.log('static pages fetched: ', collection.toJSON());
-                });
+                DS.findAll(Config.constants.dsResourceNames.STATIC_PAGE);
 
                 // Tracks
                 DS.defineResource({
@@ -147,8 +142,6 @@ define(
             },
 
             initDataStoreSkeletonContent: function (data) {
-                console.log('router.initDataStoreSkeletonContent');
-
                 // init the values of all
                 var tracksCollectionSON = this.getCollectionFromJSONData(data).toJSON();
                 DS.inject(Config.constants.dsResourceNames.TRACKS, tracksCollectionSON, {incomplete: true});
@@ -432,8 +425,6 @@ define(
                     data: {searched_string: searchedString},
                     dataType: 'json'
                 }).done(function (response) {
-                    console.log("the search has been proceeded with no error");
-                    console.log(JSON.stringify(response.data));
                     self.clearHome();
                     self.clearMain();
 

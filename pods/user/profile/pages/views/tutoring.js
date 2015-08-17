@@ -87,7 +87,6 @@ define(
                     dataType: 'json'
                 })
                     .done(function (result) {
-                        console.log("user search is successful:", result.data);
                         self.renderSearchResults(result.data);
                     })
                     .fail(function (error) {
@@ -138,7 +137,6 @@ define(
                     url: endpointUrl,
                     dataType: 'json'
                 }).done(function (result) {
-                    console.log("add tutor request successful:", result.data);
                     // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
                     self.$('form').submit();
                 }).fail(function (error) {
@@ -158,7 +156,6 @@ define(
                         url: endpointUrl,
                         dataType: 'json'
                     }).done(function (result) {
-                        console.log("cancel tutor request successful:", result.data);
                         // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
                         self.$('form').submit();
                     }).fail(function (error) {
@@ -179,7 +176,6 @@ define(
                         url: endpointUrl,
                         dataType: 'json'
                     }).done(function (result) {
-                        console.log("remove tutor request successful:", result.data);
                         // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
                         self.$('form').submit();
                     }).fail(function (error) {
@@ -197,7 +193,6 @@ define(
                     url: endpointUrl,
                     dataType: 'json'
                 }).done(function (result) {
-                    console.log("add student request successful:", result.data);
                     // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
                     self.$('form').submit();
                 }).fail(function (error) {
@@ -216,7 +211,6 @@ define(
                         url: endpointUrl,
                         dataType: 'json'
                     }).done(function (result) {
-                        console.log("cancel student request successful:", result.data);
                         // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
                         self.$('form').submit();
                     }).fail(function (error) {
@@ -237,7 +231,6 @@ define(
                         url: endpointUrl,
                         dataType: 'json'
                     }).done(function (result) {
-                        console.log("remove student request successful:", result.data);
                         // FIXME: this solution isn't optimized at all, we should get the user new data in the result and update the line
                         self.$('form').submit();
                     }).fail(function (error) {

@@ -100,7 +100,6 @@ define(
                     dataType: 'json'
                 }).then(
                     function(response) {
-                        console.log("the notification has been successfully acknowledged");
                         currentUser.set(currentUser.parse(response));
                     }, function(error) {
                         console.log("Error while acknowledging the tutor notification:", error );
@@ -114,7 +113,6 @@ define(
                     url: Config.constants.serverGateway + "/tutoring/acknowledge/student/" + userId,
                     dataType: 'json'
                 }).then(function(response) {
-                    console.log("the notification has been successfully acknowledged");
                     currentUser.set(currentUser.parse(response));
                 }, function (error) {
                     console.log("Error while acknowledging the student notification:", error );
@@ -128,7 +126,6 @@ define(
                     url: Config.constants.serverGateway + "/tutoring/accept/tutor/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    console.log("the tutor request has been successfully accepted");
                     currentUser.set(currentUser.parse(response));
                 }, function (error) {
                     console.log("Error while accepting the tutor request:", error );
@@ -142,7 +139,6 @@ define(
                     url: Config.constants.serverGateway + "/tutoring/decline/tutor/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    console.log("the tutor request has been successfully accepted");
                     currentUser.set(currentUser.parse(response));
                 }, function (error) {
                     console.log("Error while accepting the tutor request:", error.responseJSON.data.error_message );
@@ -156,7 +152,6 @@ define(
                     url: Config.constants.serverGateway + "/tutoring/accept/student/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    console.log("the tutored student request has been successfully accepted");
                     currentUser.set(currentUser.parse(response));
                 }, function (error) {
                     console.log("Error while accepting the tutored student request:", error );
@@ -170,7 +165,6 @@ define(
                     url: Config.constants.serverGateway + "/tutoring/decline/student/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    console.log("the tutored student request has been successfully declined");
                     currentUser.set(currentUser.parse(response));
                 }, function (error) {
                     console.log("Error while declining the tutored student request:", error );
@@ -179,7 +173,6 @@ define(
 
             login: function (e) {
                 e.preventDefault();
-                console.log('header -> login');
                 Backbone.history.loadUrl("/login");
             },
 

@@ -40,7 +40,6 @@ define(
             saveModifications: function(e) {
                 e.preventDefault();
 
-                console.log("save user profile modifications");
                 var formData = JSON.stringify(this.$('form').serializeObject());
                 var $saveButton = this.$('button.save_modification');
                 $saveButton.prop('disabled', true);
@@ -57,7 +56,6 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
-                    console.log(JSON.stringify(result));
                     $successIcons.attr('src', Config.imagesDict.greenCheck);
                     $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.SAVE_SUCCESS_MESSAGE);
                     $passwordSaveResult.addClass('text-success');

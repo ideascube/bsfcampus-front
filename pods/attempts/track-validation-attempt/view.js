@@ -63,7 +63,6 @@ define (
                     var $trackRecapIcons = $exerciseRecap.find('#track-recap-icons');
                     $trackRecapIcons.append('<img src="' + track.icon_url + '" class="track-icon">');
                     $trackRecapIcons.css('background', 'url(' + Config.imagesDict.trackValidation.STARS + ') no-repeat center center');
-                    console.log($('<div>').append($trackRecapIcons.clone()).html());
                     $exerciseRecap.find('.recap-header h1').html(Config.stringsDict.TRACK_VALIDATION.SUCCESS_MESSAGE_HEADER);
                     $exerciseRecapDetails.find('p').html(Config.stringsDict.TRACK_VALIDATION.SUCCESS_MESSAGE);
                 }
@@ -74,7 +73,6 @@ define (
                     $exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE_HEADER);
                     $exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
                 }
-                console.log("renderEndOfExercise", recapModelJSON);
                 this.renderProgression();
                 this.renderObjective();
                 html = this.recapFooterTemplate({
