@@ -23,8 +23,6 @@ define(
         'pods/resource/model',
         'pods/resource/views/linkToResource',
 
-        'pods/analytics/processAchievement',
-
         'less!pods/attempts/exercise-attempt/style.less'
     ],
     function ($, _, Backbone, VM, Config,
@@ -33,8 +31,7 @@ define(
               modalTemplate, progressQuestionIconTemplate, recapTemplate, recapFooterTemplate,
               ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel,
               ExerciseAttemptQuestionAnswerView,
-              ResourceModel, FailLinkedResourceView,
-              processAchievement) {
+              ResourceModel, FailLinkedResourceView) {
 
         return Backbone.View.extend({
 
@@ -91,7 +88,7 @@ define(
                 var singleWidth = Math.max(Math.min(Math.floor(progressWidth / (this.model.getNumberOfQuestions() * 1.25)), Config.constants.exerciseAttemptProgressionMaxWidth), Config.constants.exerciseAttemptProgressionMinWidth);
                 var marginLeftRight = Math.floor(singleWidth / 8);
 
-                questionsCollection.each(function(questionAnswer){
+                questionsCollection.each(function (questionAnswer) {
                     var question = questionAnswer.get('question');
                     var successStatus = "";
                     if (question != null) {
@@ -120,7 +117,7 @@ define(
                 }, this);
             },
 
-            updateValidationButton: function() {
+            updateValidationButton: function () {
                 var validationAllowed = _.result(this.currentQuestionView.contentView, 'validationAllowed', true);
                 this.$btnContinue.prop('disabled', !validationAllowed);
             },
@@ -169,7 +166,6 @@ define(
                 this.model = new ExerciseAttemptModel(result, {parse: true});
                 if (this.model.achievements != null) {
                     this.model.achievements.each(function (achievement) {
-                        processAchievement(achievement);
                         if (achievement.get('_cls').split('.').pop() == 'UnlockedTrackTest') {
                             this.trackValidationId = achievement.get('track')._id;
                         }
@@ -184,7 +180,7 @@ define(
             submitAnswer: function () {
                 var formData = this.$('form').serializeObject();
                 _.extend(formData, _.result(this.currentQuestionView.contentView, 'serializeForm', {}));
-                this.$('.btn-continue').prop('disabled', true);
+                this.$btnContinue.prop('disabled', true);
 
                 var self = this;
                 $.ajax({
@@ -196,7 +192,7 @@ define(
                     self.answerReceived(result);
                 }).fail(function (error) {
                     alert(error);
-                }).always(function(){
+                }).always(function () {
                     self.$btnContinue.prop('disabled', false);
                 });
             },
@@ -242,7 +238,7 @@ define(
                         var resourceModel = new ResourceModel(this.model.getFailedLinkedResource());
                         var failLinkedResourceView = new FailLinkedResourceView({model: resourceModel});
                         $exerciseRecapDetails.append(failLinkedResourceView.render().$el);
-                        failLinkedResourceView.$el.bind("click", function(){
+                        failLinkedResourceView.$el.bind("click", function () {
                             self.trigger('close');
                         });
                     }
@@ -250,10 +246,8 @@ define(
                         $exerciseRecapDetails.append('<img src="' + Config.imagesDict.wrongRed + '">');
                     }
                 }
-                this.renderProgression();
-                html = this.recapFooterTemplate({
-                    config: Config
-                });
+
+                html = this.recapFooterTemplate({config: Config});
                 this.$('#exercise-attempt-footer').html(html);
 
             },

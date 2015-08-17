@@ -1,100 +1,113 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
         'ds',
-		'app/config',
+        'app/config',
 
-		'pods/analytics/processAchievement'
-	],
-	function($, _, Backbone, DS, Config) {
+        'pods/analytics/models/achievement'
+    ],
+    function ($, _, Backbone, DS, Config,
+              AchievementModel) {
 
-		return Backbone.Model.extend({
+        return Backbone.Model.extend({
 
-			idAttribute: '_id',
+            idAttribute: '_id',
 
-			achievements: null,
+            achievements: null,
 
-			parse: function(response, options) {
-				options || (options = {});
+            processAchievements: function (response) {
+                if (response.hasOwnProperty('achievements')) {
+                    this.achievements = new Backbone.Collection(
+                        this.recursiveNormalize(response.achievements),
+                        {model: AchievementModel}
+                    );
+                    this.achievements.each(function (achievement) {
+                        achievement.process()
+                    });
+                } else {
+                    this.achievements = null;
+                }
+            },
 
-				if (response.hasOwnProperty('achievements')) {
-					this.achievements = new Backbone.Collection(this.recursiveNormalize(response.achievements));
-				}
+            parse: function (response, options) {
+                options || (options = {});
 
-				if (!options.collection) {
-					var jsonKey = options.jsonKey || this.jsonKey || 'data';
-					response = response[jsonKey];
-				}
+                this.processAchievements(response);
 
-				response = this.recursiveNormalize(response);
+                if (!options.collection) {
+                    var jsonKey = options.jsonKey || this.jsonKey || 'data';
+                    response = response[jsonKey];
+                }
 
-				return response;
-			},
+                response = this.recursiveNormalize(response);
 
-			recursiveNormalize: function(obj) {
+                return response;
+            },
 
-				// Normalize the payload to convert BSON to JSON.
-				// Go through the entire object recursively, 
-				// and transform special types (ObjectId, Date) to strings.
+            recursiveNormalize: function (obj) {
 
-				if (obj === null) {
-					return null;
-				}
+                // Normalize the payload to convert BSON to JSON.
+                // Go through the entire object recursively,
+                // and transform special types (ObjectId, Date) to strings.
 
-				if (obj.constructor === Array) {
-				// If this is an array, normalize each element
-				
-					return _.map(obj, function(value) {
+                if (obj === null) {
+                    return null;
+                }
+
+                if (obj.constructor === Array) {
+                    // If this is an array, normalize each element
+
+                    return _.map(obj, function (value) {
                         return this.recursiveNormalize(value);
                     }, this);
 
 
-				} else if (obj.constructor === Object) {
-				// If this is an object, normalize each element
+                } else if (obj.constructor === Object) {
+                    // If this is an object, normalize each element
 
-					var keys = Object.keys(obj);
+                    var keys = Object.keys(obj);
 
-					// Detect ObjectIds and Dates, then extract the relevant value.
-					if (keys.length === 1) {
-						if (keys[0] === "$oid") {
-							return obj[keys[0]];
-						} else if (keys[0] === "$date") {
-							return obj[keys[0]];
-						}
-					}
+                    // Detect ObjectIds and Dates, then extract the relevant value.
+                    if (keys.length === 1) {
+                        if (keys[0] === "$oid") {
+                            return obj[keys[0]];
+                        } else if (keys[0] === "$date") {
+                            return obj[keys[0]];
+                        }
+                    }
 
-					// If this was not a special type, proceed with all keys.
-					return _.object(
-                        _.map(obj, function(value, key) {
+                    // If this was not a special type, proceed with all keys.
+                    return _.object(
+                        _.map(obj, function (value, key) {
                             return [key, this.recursiveNormalize(value)];
                         }, this)
                     );
 
-				} else {
+                } else {
 
-					return obj;
+                    return obj;
 
-				}
-			},
+                }
+            },
 
-			toJSON: function(forTemplate) {
+            toJSON: function (forTemplate) {
                 var json = Backbone.Model.prototype.toJSON.call(this);
-				if (forTemplate === true) {
-					json.id = json._id;
-					json.route = _.result(this, 'route', null);
-				}
-				return json;
-			},
+                if (forTemplate === true) {
+                    json.id = json._id;
+                    json.route = _.result(this, 'route', null);
+                }
+                return json;
+            },
 
-			serverPath: '',
+            serverPath: '',
 
-			urlRoot: function () {
-				return Config.constants.serverGateway + _.result(this, 'serverPath', '');
-			}
+            urlRoot: function () {
+                return Config.constants.serverGateway + _.result(this, 'serverPath', '');
+            }
 
-		});
+        });
 
-	}
+    }
 );
