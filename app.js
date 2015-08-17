@@ -5,7 +5,7 @@ require.config({
 		underscore: 'vendor/underscore/underscore',
 		backbone: 'vendor/backbone/backbone',
 		jqueryui: 'vendor/jquery-ui/jquery-ui',
-        jqueryserialize: 'vendor/jQuery.serializeObject/jquery.serializeObject',
+        jqueryserialize: 'vendor/jquery-serialize-object/jquery.serialize-object',
 		text: 'vendor/requirejs-text/text',
 		less: 'vendor/require-less/less',
 		lessc: 'vendor/require-less/lessc',
