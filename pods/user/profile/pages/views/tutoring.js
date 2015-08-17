@@ -16,7 +16,6 @@ define(
         'pods/user/profile/pages/views/dashboard-details',
 
         'text!pods/user/profile/pages/templates/tutoring.html',
-        'text!pods/user/profile/pages/templates/tutoring-student-dropdown-line.html',
 
         'less!pods/user/profile/pages/styles/tutoring',
         'less!pods/user/profile/pages/styles/dashboard'
@@ -24,7 +23,7 @@ define(
     function ($, _, Backbone, VM, Config,
               currentUser, User, VisitedDashboardAnalyticsModel, DashboardModel,
               UserSearchResultLineView, TutorLineView, DashboardDetailsView,
-              tutoringTemplate, tutoringDropdownLineTemplate) {
+              tutoringTemplate) {
 
         return Backbone.View.extend({
 
@@ -37,7 +36,7 @@ define(
             events: {
                 'submit form': 'searchUser',
                 'click #tutors-list .btn-remove-tutor': 'removeTutorFromGroup',
-                'click #tutoring-student-dashboard .dropdown > ul.dropdown-menu > li > a': 'selectStudent'
+                'change select#student-dashboard-selector': 'selectStudent'
             },
 
             render: function () {
@@ -68,8 +67,8 @@ define(
             },
 
             addStudentToDropdown: function (user) {
-                var $studentUserHtml = _.template(tutoringDropdownLineTemplate)({user: user});
-                this.$('#students-block .dropdown > ul.dropdown-menu').append($studentUserHtml);
+                var $studentOption = $('<option/>').val(user._id).html(user.full_name);
+                this.$('#student-dashboard-selector').append($studentOption);
             },
 
             searchUser: function (e) {
@@ -242,23 +241,24 @@ define(
             selectStudent: function (e) {
                 e.preventDefault();
 
-                var $userLine = $(e.currentTarget);
-                var selectedUserId = $userLine.data('user');
-                this.$('#selected-student').html($userLine.html());
-
-                var dashboardUserModel = new DashboardModel({_id: selectedUserId});
                 this.$('#student-dashboard-details').empty();
-                var self = this;
-                dashboardUserModel.fetch().done(function (data) {
-                    var dashboardDetailsView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD_DETAILS, function() {
-                        return new DashboardDetailsView({model: dashboardUserModel});
-                    });
-                    self.$('#student-dashboard-details').html(dashboardDetailsView.render().$el);
 
-                    var analytics = new VisitedDashboardAnalyticsModel();
-                    analytics.set('dashboard_user', selectedUserId);
-                    analytics.save();
-                });
+                var selectedUserId = $(e.currentTarget).val();
+
+                if (selectedUserId != null) {
+                    var dashboardUserModel = new DashboardModel({_id: selectedUserId});
+                    var self = this;
+                    dashboardUserModel.fetch().done(function (data) {
+                        var dashboardDetailsView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD_DETAILS, function() {
+                            return new DashboardDetailsView({model: dashboardUserModel});
+                        });
+                        self.$('#student-dashboard-details').html(dashboardDetailsView.render().$el);
+
+                        var analytics = new VisitedDashboardAnalyticsModel();
+                        analytics.set('dashboard_user', selectedUserId);
+                        analytics.save();
+                    });
+                }
 
             }
 

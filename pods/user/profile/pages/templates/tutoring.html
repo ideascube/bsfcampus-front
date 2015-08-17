@@ -51,21 +51,10 @@
 
     <div id="students-block">
         <h3><%= config.stringsDict.USER.PROFILE.TUTORING.STUDENT_ANALYTICS_TITLE %></h3>
-        <div class="container-fluid" id="tutoring-student-dashboard">
-            <div class="dropdown">
-                <button class="btn btn-default"
-                        type="button"
-                        id="dropdown-student-menu"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="true">
-                    <span id="selected-student">
-                        <%= config.stringsDict.USER.PROFILE.TUTORING.DROPDOWN_STUDENT_DEFAULT %>
-                    </span>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdown-student-menu"></ul>
-            </div>
+        <div class="blue-select">
+            <select id="student-dashboard-selector">
+                <option value=""><%= config.stringsDict.USER.PROFILE.TUTORING.DROPDOWN_STUDENT_DEFAULT %></option>
+            </select>
         </div>
         <div id="student-dashboard-details"></div>
     </div>
