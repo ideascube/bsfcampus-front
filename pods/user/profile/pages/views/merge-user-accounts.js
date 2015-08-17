@@ -16,7 +16,7 @@ define(
 
         return Backbone.View.extend({
 
-            tagName: 'div',
+            className: 'modal',
 
             template: _.template(mergeTemplate),
 
