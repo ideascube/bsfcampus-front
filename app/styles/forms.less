@@ -1,10 +1,12 @@
-.checkbox-green-tick {
+.checkbox.checkbox-green-tick {
     /* Base for label styling */
     [type="checkbox"] {
         opacity: 0.0;
-        margin-left: 0;
         width: 20px;
         height: 20px;
+        position: absolute;
+        top: 2px; left: 0;
+        margin: 0;
     }
     [type="checkbox"] + label {
         position: relative;
@@ -16,12 +18,11 @@
     [type="checkbox"] + label:before {
         content: '';
         position: absolute;
-        left: 0;
-        top: 2px;
+        top: 2px; left: 0;
         width: 20px;
         height: 20px;
         border: 2px solid #9bbe16;
-        background: white;
+        background-color: #fff;
     }
     /* checked mark aspect */
     [type="checkbox"] + label:after {
@@ -53,6 +54,7 @@
     }
     [type="checkbox"]:disabled + label {
         color: #aaa;
+        cursor: not-allowed;
     }
     /* accessibility */
     [type="checkbox"]:focus + label:before {
@@ -67,17 +69,17 @@
     }
 }
 
-.checkbox-blue-square {
+.checkbox.checkbox-blue-square {
     /* Base for label styling */
-    [type="checkbox"]:not(:checked),
-    [type="checkbox"]:checked {
+    [type="checkbox"] {
         opacity: 0.0;
-        margin-left: 0;
         width: 20px;
         height: 20px;
+        position: absolute;
+        top: 2px; left: 0;
+        margin: 0;
     }
-    [type="checkbox"]:not(:checked) + label,
-    [type="checkbox"]:checked + label {
+    [type="checkbox"] + label {
         position: relative;
         padding-left: 30px;
         cursor: pointer;
@@ -92,41 +94,60 @@
         width: 20px;
         height: 20px;
         border: none;
-        background: #e6e6e6;
+        background-color: #e6e6e6;
+        .has-error & { background-color: #e74c3c; }
+        .has-success & { background-color: #9bbe16; }
+    }
+    /* feedback symbol container */
+    [type="checkbox"] + label:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+        border: none;
+        background-color: transparent;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+        line-height: 20px;
+        font-style: normal;
+        .has-success & { content: '✔'; }
+        .has-error & { content: '✖'; }
     }
     /* when checked */
     [type="checkbox"]:checked + label:before {
-        background: #39627c;
+        background-color: #39627c;
     }
     /* disabled checkbox */
     [type="checkbox"]:disabled + label:before {
         border-color: #bbb;
         background-color: #ddd;
+        .has-error & { background-color: #e74c3c; }
+        .has-success & { background-color: #9bbe16; }
     }
     [type="checkbox"]:disabled + label {
         color: #aaa;
+        cursor: not-allowed;
     }
     /* accessibility */
     [type="checkbox"]:focus + label:before {
         border: 2px solid #39627c;
     }
-    /* error */
-    .has-error & [type="checkbox"] + label:before{
-        border-color: #e74c3c;
-    }
 }
 
-.radio-blue-circle {
+.radio.radio-blue-circle {
     /* Base for label styling */
-    [type="radio"]:not(:checked),
-    [type="radio"]:checked {
+    [type="radio"] {
         opacity: 0.0;
-        margin-left: 0;
         width: 20px;
         height: 20px;
+        position: absolute;
+        top: 2px; left: 0;
+        margin: 0;
     }
-    [type="radio"]:not(:checked) + label,
-    [type="radio"]:checked + label {
+    [type="radio"] + label {
         position: relative;
         padding-left: 30px;
         cursor: pointer;
@@ -142,27 +163,77 @@
         height: 20px;
         border-radius: 50%;
         border: none;
-        background: #e6e6e6;
+        background-color: #e6e6e6;
+        .has-error & { background-color: #e74c3c; }
+        .has-success & { background-color: #9bbe16; }
+    }
+    /* feedback symbol container */
+    [type="radio"] + label:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 20px;
+        height: 20px;
+        border: none;
+        background-color: transparent;
+        color: #fff;
+        text-align: center;
+        font-size: 16px;
+        line-height: 20px;
+        font-style: normal;
+        .has-success & { content: '✔'; }
+        .has-error & { content: '✖'; }
     }
     /* when checked */
     [type="radio"]:checked + label:before {
-        background: #39627c;
+        background-color: #39627c;
     }
     /* disabled radio */
     [type="radio"]:disabled + label:before {
         border-color: #bbb;
         background-color: #ddd;
+        .has-error & { background-color: #e74c3c; }
+        .has-success & { background-color: #9bbe16; }
     }
     [type="radio"]:disabled + label {
         color: #aaa;
+        cursor: not-allowed;
     }
     /* accessibility */
     [type="radio"]:focus + label:before {
         border: 2px solid #39627c;
     }
-    /* error */
-    .has-error & [type="radio"] + label:before{
+}
+
+.blue-select {
+    display: inline-block;
+    overflow: hidden;
+    border: 2px solid #39627c;
+    border-radius: 5px;
+    background-color: #fff;
+    margin: 0 5px -2px;
+    select {
+        background-color: transparent;
+        padding: 2px;
+        line-height: 1;
+        border: 0;
+        width: 100%;
+        color: #39627c;
+        &:focus {
+            outline: none;
+        }
+    }
+    &:hover {
+        background-color: #e6e6e6;
+    }
+    &.has-error {
         border-color: #e74c3c;
+        select { color: #e74c3c; }
+    }
+    &.has-success {
+        border-color: #9bbe16;
+        select { color: #9bbe16; }
     }
 }
 

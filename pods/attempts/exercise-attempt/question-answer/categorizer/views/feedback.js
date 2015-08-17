@@ -115,16 +115,8 @@ define(
 			},
 
 			renderItem: function(item, isFailed) {
-				console.log("renderItem", item, isFailed);
 				var $html = $(this.categorizerItemTemplate({item: item}));
-				if (isFailed)
-				{
-					$html.addClass('wrong-answer');
-				}
-				else
-				{
-					$html.addClass('right-answer');
-				}
+				$html.addClass(isFailed ? 'wrong-answer' : 'right-answer');
 
                 return $html;
 			},

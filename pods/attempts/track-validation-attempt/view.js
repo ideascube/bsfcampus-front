@@ -6,7 +6,7 @@ define (
         'app/config',
 
         'pods/attempts/track-validation-attempt/model',
-        'pods/attempts/exercise-attempt/view',
+        'pods/attempts/exercise-attempt/views/modal',
 
         'text!pods/attempts/track-validation-attempt/templates/modal.html',
         'text!pods/attempts/track-validation-attempt/templates/trackValidationRecap.html',
@@ -18,12 +18,12 @@ define (
     ],
     function ($, _, Backbone, Config,
               TrackValidationAttemptModel,
-              ExerciseAttemptView,
+              ExerciseAttemptModalView,
               modalTemplate, recapTemplate,  recapFooterTemplate,
               processAchievement
     ) {
 
-        return ExerciseAttemptView.extend({
+        return ExerciseAttemptModalView.extend({
 
             model: TrackValidationAttemptModel,
 

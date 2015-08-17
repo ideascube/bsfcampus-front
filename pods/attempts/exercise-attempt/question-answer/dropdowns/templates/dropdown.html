@@ -1,0 +1,8 @@
+<div class="dropdown blue-select" data-dropdown="<%= dropdown._id %>">
+	<select name="dropdown_<%= dropdown._id %>">
+		<option value="">---</option>
+		<% _.each(dropdown.propositions, function(proposition) { %>
+		<option value="<%= proposition._id %>"><%= proposition.text %></option>
+		<% }) %>
+	</select>
+</div>

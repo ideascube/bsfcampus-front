@@ -9,11 +9,11 @@ define(
         'text!pods/resource/content/exercise/template.html',
 
         'pods/attempts/exercise-attempt/model',
-        'pods/attempts/exercise-attempt/view'
+        'pods/attempts/exercise-attempt/views/modal'
     ],
     function ($, _, Backbone, VM, Config,
               template,
-              ExerciseAttemptModel, ExerciseAttemptView) {
+              ExerciseAttemptModel, ExerciseAttemptModalView) {
 
         return Backbone.View.extend({
 
@@ -44,7 +44,7 @@ define(
                 attempt.set('exercise', this.model.id);
                 attempt.save().done(function (result) {
                     var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.EXERCISE_ATTEMPT, function () {
-                        return new ExerciseAttemptView({model: attempt});
+                        return new ExerciseAttemptModalView({model: attempt});
                     });
                     exerciseAttemptView.resource = self.model;
                     $('body').append(exerciseAttemptView.render().$el);

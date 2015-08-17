@@ -1,0 +1,9 @@
+<div class="proposition-container" data-proposition="<%= proposition._id %>">
+    <div class="checkbox checkbox-blue-square">
+        <input type="checkbox"
+               id="proposition_<%= proposition._id %>"
+               name="propositions[]"
+               value="<%= proposition._id %>" />
+        <label for="proposition_<%= proposition._id %>"><%= proposition.text %></label>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+<div class="proposition-container" data-proposition="<%= proposition._id %>">
+	<div class="radio radio-blue-circle">
+		<input type="radio"
+			   id="proposition_<%= proposition._id %>"
+			   name="proposition"
+			   value="<%= proposition._id %>" />
+		<label for="proposition_<%= proposition._id %>"><%= proposition.text %></label>
+	</div>
+</div>

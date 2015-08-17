@@ -6,17 +6,17 @@ define (
         'app/config',
 
         'pods/attempts/skill-validation-attempt/model',
-        'pods/attempts/exercise-attempt/view',
+        'pods/attempts/exercise-attempt/views/modal',
 
         'pods/analytics/processAchievement'
     ],
     function ($, _, Backbone, Config,
               SkillValidationAttemptModel,
-              ExerciseAttemptView,
+              ExerciseAttemptModalView,
               processAchievement
     ) {
 
-        return ExerciseAttemptView.extend({
+        return ExerciseAttemptModalView.extend({
 
             model: SkillValidationAttemptModel,
 
@@ -37,14 +37,13 @@ define (
                 }
 
                 this.renderProgression();
-                this.renderObjective();
                 this.renderFeedbackAndResult(questionId);
                 // we enable the continue button until we get the response
                 this.$('.btn-continue').prop('disabled', false);
             },
 
             renderEndOfExercise: function() {
-                ExerciseAttemptView.prototype.renderEndOfExercise.call(this);
+                ExerciseAttemptModalView.prototype.renderEndOfExercise.call(this);
 
                 var recapModelJSON = this.model.forRecapTemplate();
 

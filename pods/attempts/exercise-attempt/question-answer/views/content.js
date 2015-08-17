@@ -5,12 +5,12 @@ define(
 		'backbone',
 		'app/config',
 
-		'pods/attempts/exercise-attempt/question-answer/unique-answer-mcq/views/form',
-		'pods/attempts/exercise-attempt/question-answer/multiple-answer-mcq/views/form',
-		'pods/attempts/exercise-attempt/question-answer/right-or-wrong/views/form',
-		'pods/attempts/exercise-attempt/question-answer/dropdowns/views/form',
-		'pods/attempts/exercise-attempt/question-answer/ordering/views/form',
-		'pods/attempts/exercise-attempt/question-answer/categorizer/views/form'
+		'pods/attempts/exercise-attempt/question-answer/unique-answer-mcq/views/content',
+		'pods/attempts/exercise-attempt/question-answer/multiple-answer-mcq/views/content',
+		'pods/attempts/exercise-attempt/question-answer/right-or-wrong/views/content',
+		'pods/attempts/exercise-attempt/question-answer/dropdowns/views/content',
+		'pods/attempts/exercise-attempt/question-answer/ordering/views/content',
+		'pods/attempts/exercise-attempt/question-answer/categorizer/views/content'
 	],
 	function($, _, Backbone, Config,
 		UniqueAnswerMCQView, MultipleAnswerMCQView, RightOrWrongView, DropdownView, OrderingView, CategorizerView

@@ -1,0 +1,12 @@
+<input type="hidden" name="question_id" id="current-question-id" value="<%= question._id %>"/>
+<div id="question-instructions"></div>
+<h3 id="question-heading"><%= question.question_heading %></h3>
+<div id="question-content-container" class="clearfix">
+    <div id="question-image">
+        <a href="<%= question.question_image_url %>" target="_blank">
+            <img class="img-responsive" src="<%= question.question_image_url %>" />
+        </a>
+    </div>
+    <div id="question-content"></div>
+</div>
+<div id="answer-explanation" class="text-center"></div>

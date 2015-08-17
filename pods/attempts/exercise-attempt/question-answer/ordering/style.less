@@ -1,55 +1,61 @@
 #ordering {
-  #ordering-items-source, #ordering-items-target, #ordering-items-target-feedback, #ordering-items-answer-feedback {
-    min-height: 100px;
-    padding: 5px 0 0 0;
-    margin: auto 60px;
+    #ordering-items-source, #ordering-items-target {
+        min-height: 100px;
+        padding: 0;
+        margin: 5px 60px;
 
-    > div {
-      display: inline-block;
-      text-align: center;
-      vertical-align: top;
-      background-color: white;
-      border-radius: 5px;
-      border: solid 1px #cccccc;
-      margin: 0 5px 5px 5px;
-      height: 40px;
-      line-height: 20px;
-      padding: 10px;
-      font-size: 1.0em;
-      min-width: 100px;
-      &:not(.item-draggable-placeholder) {
-        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
-        -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
-        -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
-      }
-      input[type="text"] {
-        display:none;
-      }
-      &.right-answer {
-        border: solid 2px #94c500;
-      }
-      &.wrong-answer {
-        border: solid 2px #e71f2e;
-      }
+        .ordering-item, .item-draggable-placeholder {
+            display: inline-block;
+            text-align: center;
+            vertical-align: top;
+            border-radius: 5px;
+            border: solid 1px #ccc;
+            margin: 0 5px 5px;
+            height: 40px;
+            line-height: 20px;
+            padding: 10px;
+            min-width: 100px;
+        }
+
+        .ordering-item {
+            background-color: #fff;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            cursor: grab;
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+            &:active {
+                cursor: grabbing;
+                cursor: -moz-grabbing;
+                cursor: -webkit-grabbing;
+            }
+            &.has-error { border: 2px solid #e74c3c; }
+            &.has-success { border: 2px solid #9bbe16; }
+        }
+
+        .item-draggable-placeholder {
+            background-color: #ddd;
+            border: none;
+            border-radius: 3px;
+        }
+
+        &.ui-sortable-disabled {
+            .ordering-item {
+                cursor: not-allowed;
+            }
+        }
     }
 
-    .item-draggable-placeholder {
-      background-color: #dddddd;
-      border: none;
-      border-radius: 3px;
+    #ordering-items-target {
+        min-height: 140px; /* three rows + 4*5px margin*/
+        margin-bottom: 40px;
+        background-image: url('../../../../../assets/images/carre_ligne.png');
+        background-repeat: repeat;
+        background-position: top left;
     }
-  }
 
-  #ordering-items-target, #ordering-items-target-feedback {
-    min-height: 140px; /* three lines + 4*5px margin*/
-    margin-bottom: 40px;
-    background-image: url('../../../../../assets/images/carre_ligne.png');
-    background-repeat: repeat-x;
-    background-position: 0px 3px;
-  }
-
-  #ordering-items-source {
-    text-align: center;
-  }
+    #ordering-items-source {
+        text-align: center;
+    }
 }
-

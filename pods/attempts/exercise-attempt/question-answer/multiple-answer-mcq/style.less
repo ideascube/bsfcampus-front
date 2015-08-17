@@ -1,132 +1,41 @@
 #multiple-answer-mcq {
-  .multiple-answer-mcq-propositions {
-
-    @media (max-height: 719px) {
-      .checkbox label {
-        padding: 12px 60px;
-        span {
-          width: 24px;
-          height: 24px;
-          margin-right: 24px;
+    margin-left: -15px;
+    margin-right: -15px;
+    .proposition-container {
+        .checkbox { margin: 0; }
+        input[type="checkbox"], input[type="checkbox"] + label:before, input[type="checkbox"] + label:after {
+            top: 22px;
+            left: 20px;
+            height: 30px;
+            width: 30px;
+            line-height: 30px;
+            font-size: 18px;
         }
-      }
+        input[type="checkbox"] + label {
+            display: block;
+            padding: 20px 20px 20px 70px;
+            line-height: 30px;
+        }
+        input[type="checkbox"]:not(:disabled) + label {
+            &:hover {
+                background-color: #e6e6e6;
+                &:before {
+                    background-color: #fff;
+                }
+            }
+        }
+        input[type="checkbox"]:not(:disabled):checked + label:hover:before {
+            background-color: #39627c;
+        }
+        &.has-success {
+            background-color: #eaf4cc;
+        }
+        &.has-warning {
+            background-color: #eaf4cc;
+            input[type="checkbox"] + label:before {
+                background-color: #fff;
+                border: 2px solid #9bbe16;
+            }
+        }
     }
-    @media (min-height: 720px) {
-      .checkbox label {
-        padding: 16px 60px;
-        span {
-          width: 27px;
-          height: 27px;
-          margin-right: 27px;
-        }
-      }
-    }
-    @media (min-height: 900px) {
-      .checkbox label {
-        padding: 20px 60px;
-        span {
-          width: 30px;
-          height: 30px;
-          margin-right: 30px;
-        }
-      }
-    }
-
-    hr {
-      width: 82%;
-      border-color: #CCCCCC;
-      margin: 0px auto;
-    }
-    .checkbox {
-      margin: 0px auto;
-      padding: 0px;
-      input[type="checkbox"] {
-        display: none;
-      }
-      label {
-        display: block;
-        margin: 0;
-        color: #292321;
-        span {
-          display: inline-block;
-          vertical-align: middle;
-          background-color: #E6E6E6;
-          cursor: pointer;
-        }
-      }
-      label input[type="checkbox"]:checked + span {
-        background-color: #39627c;
-      }
-
-      &:not(.disabled) {
-
-        label {
-          cursor: pointer;
-        }
-        &:hover {
-          background-color: #E6E6E6;
-          label input[type="checkbox"] + span {
-            background-color: white;
-          }
-        }
-        label input[type="checkbox"]:checked + span {
-          background-color: #39627c;
-        }
-      }
-      &.disabled {
-        label {
-          cursor: default;
-          span {
-            cursor: default;
-          }
-        }
-      }
-    }
-  }
-}
-
-.exercise-attempt-question-answer-feedback {
-  #multiple-answer-mcq {
-    .multiple-answer-mcq-propositions {
-
-      .checkbox {
-
-        &.proposition_selected {
-          input[type="checkbox"] + label {
-            color: #e71f2e;
-          }
-        }
-
-        &.proposition_correct {
-          background-color: rgba(148, 197, 0, 0.2);
-          input[type="checkbox"] + label {
-            color: #94c500;
-          }
-        }
-
-        &.proposition_selected.proposition_correct img.right-answer {
-          display: inline;
-        }
-
-        &.proposition_selected:not(.proposition_correct) img.wrong-answer {
-          display: inline;
-        }
-
-        img {
-          vertical-align: initial;
-          padding: 4px;
-          display: none;
-          width:100%;
-          height:100%;
-          &.right-answer {
-            background-color: #94c500;
-          }
-          &.wrong-answer {
-            background-color: #e71f2e;
-          }
-        }
-      }
-
-    }
-  }
 }
