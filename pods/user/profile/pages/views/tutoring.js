@@ -15,6 +15,8 @@ define(
         'pods/user/profile/pages/views/tutoring-tutor-group-line',
         'pods/user/profile/pages/views/dashboard-details',
 
+        'app/views/loadingBar',
+
         'text!pods/user/profile/pages/templates/tutoring.html',
 
         'less!pods/user/profile/pages/styles/tutoring',
@@ -23,6 +25,7 @@ define(
     function ($, _, Backbone, VM, Config,
               currentUser, User, VisitedDashboardAnalyticsModel, DashboardModel,
               UserSearchResultLineView, TutorLineView, DashboardDetailsView,
+              LoadingBarView,
               tutoringTemplate) {
 
         return Backbone.View.extend({
@@ -42,6 +45,9 @@ define(
             render: function () {
                 var html = this.template({config: Config});
                 this.$el.html(html);
+
+                this.$searchResultsList = this.$('#tutoring-user-search-results');
+                this.$studentDashboardDetails = this.$('#student-dashboard-details');
 
                 var tutors = currentUser.get('tutors');
                 if (tutors.length == 0) {
@@ -74,6 +80,10 @@ define(
             searchUser: function (e) {
                 e.preventDefault();
 
+                var loadingBarView = new LoadingBarView();
+                loadingBarView.containerClassName = 'col-sm-6 col-center';
+                this.$searchResultsList.html(loadingBarView.render().$el);
+
                 var $form = $(e.currentTarget);
                 var searchedUsername = $form.find('#user-search').val();
 
@@ -84,18 +94,15 @@ define(
                     url: endpointUrl,
                     data: {username: searchedUsername},
                     dataType: 'json'
-                })
-                    .done(function (result) {
-                        self.renderSearchResults(result.data);
-                    })
-                    .fail(function (error) {
-                        console.log("user search has failed:", error['responseJSON']['error_message']);
-                    });
+                }).done(function (result) {
+                    self.renderSearchResults(result.data);
+                }).fail(function (error) {
+                    console.log("user search has failed:", error['responseJSON']['error_message']);
+                });
 
             },
 
             renderSearchResults: function (usersList) {
-                this.$searchResultsList = this.$('#tutoring-user-search-results');
                 if (usersList.length > 0) {
                     this.$searchResultsList.empty();
                     _.each(usersList, this.renderSingleUserResult, this);
@@ -123,8 +130,6 @@ define(
 
             removeTutorFromGroup: function (e) {
                 e.preventDefault();
-
-
             },
 
             addTutor: function (userId) {
@@ -241,7 +246,9 @@ define(
             selectStudent: function (e) {
                 e.preventDefault();
 
-                this.$('#student-dashboard-details').empty();
+                var loadingBarView = new LoadingBarView();
+                loadingBarView.containerClassName = 'col-sm-6 col-center';
+                this.$studentDashboardDetails.html(loadingBarView.render().$el);
 
                 var selectedUserId = $(e.currentTarget).val();
 
@@ -252,7 +259,7 @@ define(
                         var dashboardDetailsView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD_DETAILS, function() {
                             return new DashboardDetailsView({model: dashboardUserModel});
                         });
-                        self.$('#student-dashboard-details').html(dashboardDetailsView.render().$el);
+                        self.$studentDashboardDetails.html(dashboardDetailsView.render().$el);
 
                         var analytics = new VisitedDashboardAnalyticsModel();
                         analytics.set('dashboard_user', selectedUserId);
