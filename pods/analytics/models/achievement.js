@@ -20,6 +20,7 @@ define(
                             resource.trigger('change', resource);
                             // For some reason we need to pass the model as an argument to the callback
                             // Otherwise a bug occurs in the collection's change event
+                            // See: https://github.com/jashkenas/backbone/issues/3717
                         }
                         break;
                     case 'CompletedSkill':
