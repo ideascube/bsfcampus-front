@@ -10,7 +10,7 @@ define(
         'pods/attempts/track-validation-attempt/model',
 
         'pods/track/views/trackOutlineItem',
-        'pods/attempts/track-validation-attempt/view',
+        'pods/attempts/track-validation-attempt/views/modal',
 
         'text!pods/track/templates/detail.html',
 
@@ -49,7 +49,7 @@ define(
                     this.$el.addClass('track-validated');
                     this.$validateButton.removeClass('btn-success').addClass('btn-info golden-effect');
                 }
-                else if (this.model.get('progress').current >= this.model.get('progress').max)
+                else if (this.model.testIsUnlocked())
                 {
 
                 }
@@ -59,7 +59,7 @@ define(
                 }
 
                 if (this.model.get('validation_test') == null) {
-                    //this.$validateButton.hide();
+                    this.$validateButton.hide();
                 }
 
                 var self = this;

@@ -3,6 +3,7 @@ define(
         'jquery',
         'underscore',
         'backbone',
+        'ds',
         'app/config',
 
         'model',
@@ -11,17 +12,14 @@ define(
         'pods/attempts/exercise-attempt/question-answer/models/question-answer',
         'pods/attempts/exercise-attempt/question-answer/collections/attempt'
     ],
-    function ($, _, Backbone, Config,
+    function ($, _, Backbone, DS, Config,
               AbstractModel, ResourceModel,
               ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionAnswersCollection) {
 
         return AbstractModel.extend({
 
-            forRecapTemplate: function () {
-                var son = this.toJSON(true);
-                son.number_questions = this.getCollection().length;
-                son.number_mistakes = this.getNumberOfMistakesMade();
-                return son;
+            resource: function() {
+
             },
 
             getCollection: function () {

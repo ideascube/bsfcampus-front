@@ -40,7 +40,10 @@ define(
                 'data-keyboard': 'false'
             },
 
+            Model: ExerciseAttemptModel,
             model: ExerciseAttemptModel,
+
+            RecapView: ExerciseAttemptRecapView,
 
             isQuestionVerified: false,
             attemptCompleted: false,
@@ -131,8 +134,6 @@ define(
                 this.listenTo(this.currentQuestionView.contentView, 'givenAnswerChanged', this.updateValidationButton);
                 this.updateValidationButton();
 
-                this.$result.removeClass('text-success text-danger').empty();
-
                 return this;
             },
 
@@ -160,7 +161,7 @@ define(
             },
 
             answerReceived: function (result) {
-                this.model = new ExerciseAttemptModel(result, {parse: true});
+                this.model = new this.Model(result, {parse: true});
                 if (this.model.achievements != null) {
                     this.model.achievements.each(function (achievement) {
                         if (achievement.get('_cls').split('.').pop() == 'UnlockedTrackTest') {
@@ -206,7 +207,8 @@ define(
             },
 
             renderEndOfExercise: function () {
-                var recapView = new ExerciseAttemptRecapView({model: this.model});
+                var recapView = new this.RecapView({model: this.model});
+                recapView.resource = this.resource;
                 this.$recap.html(recapView.render().$el);
                 this.listenTo(recapView, 'close', this.close);
 
@@ -235,6 +237,7 @@ define(
                 else {
                     if (this.isQuestionVerified) {
                         this.$btnContinue.html(Config.stringsDict.EXERCISES.VALIDATE);
+                        this.$result.removeClass('text-success text-danger').empty();
                         this.continueExercise();
                     }
                     else {

@@ -1,101 +1,12 @@
-.modal-content-exercise-attempt.track-validation {
-
-  border: solid 2px #f7d63b;
-  //-moz-box-shadow: 0 0 5px #44f6d01c;
-  //-webkit-box-shadow: 0 0 5px #44f6d01c;
-  //box-shadow: 0 0 5px #44f6d01c;
-
-  .modal-header {
-    .modal-title.track-validation {
-      color: #888888;
+.track-validation {
+    .modal-content-exercise-attempt {
+        border: solid 2px #f6d01c;
+        .track-icon-stars {
+            padding: 0 30%;
+            background-image: url('../../../assets/images/stars_tracks.png');
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
     }
-  }
-
-  .exercise-attempt-progress.track-validation {
-    .progress-bar {
-      background-color: #F7D01D;
-    }
-  }
-
-  .exercise-recap.track-validation {
-    .recap-header {
-      margin: 40px auto;
-      text-align: center;
-    }
-
-    .recap-details {
-      margin: auto 60px;
-    }
-  }
-
-  .exercise-attempt-footer {
-    button.track-validation {
-      &, &:hover {
-        background-color: #BCE421;
-      }
-    }
-  }
-
-  @media (max-height: 719px) {
-    h1 {
-      font-size: 1.2em;
-      font-weight: 600;
-    }
-
-    .recap-details {
-      p {
-        font-size: 0.9em;
-        line-height: 1.60em;
-      }
-    }
-
-    #track-recap-icons {
-      img {
-        margin: 10px auto;
-        height: 80px;
-      }
-    }
-  }
-
-  @media (min-height: 720px) {
-    h1 {
-      font-size: 1.4em;
-      font-weight: 600;
-    }
-
-    .recap-details {
-      p {
-        font-size: 1.0em;
-        line-height: 1.8em;
-      }
-    }
-
-    #track-recap-icons {
-      img {
-        margin: 15px auto;
-        height: 100px;
-      }
-    }
-  }
-
-  @media (min-height: 900px) {
-    h1 {
-      font-size: 1.6em;
-      font-weight: 600;
-    }
-
-    .recap-details {
-      p {
-        font-size: 1.2em;
-        line-height: 2.0em;
-      }
-    }
-
-    #track-recap-icons {
-      img {
-        margin: 20px auto;
-        height: 120px;
-      }
-    }
-  }
 }

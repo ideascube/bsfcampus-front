@@ -27,33 +27,37 @@ define(
             render: function () {
                 var success = this.model.get('is_validated');
 
-                var html;
                 var templateData = {
                     attempt: this.model.toJSON(),
+                    resource: this.resource.toJSON(),
                     config: Config
                 };
 
-                html = success
+                var html = success
                     ? this.successTemplate(templateData)
                     : this.failTemplate(templateData);
                 this.$el.html(html);
 
                 if (!success) {
-                    var linkedResource = this.model.getFailedLinkedResource();
-                    if (linkedResource != null) {
-                        var failLinkedResourceView = new LinkToResourceView({model: linkedResource});
-                        this.$('#fail-linked-resource').html(failLinkedResourceView.render().$el);
-                        var self = this;
-                        failLinkedResourceView.$el.on('click', function () {
-                            self.trigger('close');
-                        });
-                        this.$('#attempt-result-icon').hide();
-                    } else {
-                        this.$('#fail-linked-resource').hide();
-                    }
+                    this.handleFailure();
                 }
 
                 return this;
+            },
+
+            handleFailure: function () {
+                var linkedResource = this.model.getFailedLinkedResource();
+                if (linkedResource != null) {
+                    var failLinkedResourceView = new LinkToResourceView({model: linkedResource});
+                    this.$('#fail-linked-resource').html(failLinkedResourceView.render().$el);
+                    var self = this;
+                    failLinkedResourceView.$el.on('click', function () {
+                        self.trigger('close');
+                    });
+                    this.$('#attempt-result-icon').hide();
+                } else {
+                    this.$('#fail-linked-resource').hide();
+                }
             }
 
         });

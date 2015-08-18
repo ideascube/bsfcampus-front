@@ -14,7 +14,7 @@ define(
 		'pods/skill/views/skillOutlineItem',
 		'pods/skill/views/lessonOutlineItem',
 		'pods/skill/views/backToTrack',
-		'pods/attempts/skill-validation-attempt/view',
+		'pods/attempts/skill-validation-attempt/views/modal',
 
 		'text!pods/skill/templates/detail.html',
 		'text!pods/skill/templates/validation-badge.html',
@@ -23,7 +23,7 @@ define(
 	],
 	function($, _, Backbone, VM, Config,
 		TrackModel, LessonSkillCollection, ResourceLessonCollection, SkillValidationAttemptModel,
-		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView, SkillValidationAttemptView,
+		SkillOutlineItemView, LessonOutlineItemView, BackToTrackView, SkillValidationAttemptModalView,
 	 	detailTemplate, badgeHTML
 		) {
 
@@ -113,7 +113,7 @@ define(
 				attempt.set('skill', this.model.id);
 				attempt.save().done(function(result) {
                     var skillValidationAttemptView = VM.createView(Config.constants.VIEWS_ID.SKILL_VALIDATION_ATTEMPT, function() {
-                        return new SkillValidationAttemptView({model: attempt});
+                        return new SkillValidationAttemptModalView({model: attempt});
                     });
 					skillValidationAttemptView.resource = self.model;
 					$("body").append(skillValidationAttemptView.render().$el);
