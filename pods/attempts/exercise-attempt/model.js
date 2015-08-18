@@ -72,7 +72,11 @@ define(
             },
 
             getFailedLinkedResource: function () {
-                return this.get('fail_linked_resource');
+                var ref = this.get('fail_linked_resource');
+                if (ref == null) {
+                    return null;
+                }
+                return new ResourceModel(ref);
             }
 
         });

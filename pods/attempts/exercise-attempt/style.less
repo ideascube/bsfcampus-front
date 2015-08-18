@@ -15,26 +15,15 @@
     .modal-body {
         min-height: 400px;
 
-        .exercise-recap {
+        #exercise-attempt-recap {
             margin: 60px auto auto;
 
-            .recap-header {
-                font-size: 1.5em;
-                font-weight: 700;
-            }
-            hr {
-                width: 60%;
-                border-color: #CCCCCC;
-                margin: 0 auto 40px auto;
-            }
-            .recap-details {
+            h2 { font-size: 1.5em; }
+
+            #recap-details {
                 font-size: 1.2em;
-                font-weight: 400;
                 line-height: 2.5em;
 
-                img {
-                    height: 20px; width: 20px;
-                }
                 .btn-fail-linked-exercise {
                     margin: 40px auto;
                     padding: 10px 40px;
@@ -52,15 +41,9 @@
                     }
                 }
             }
-            &.exercise-succeeded {
-                .recap-header h1 {
-                    color: #96bd1f;
-                }
-            }
-            &.exercise-failed {
-                .recap-header h1 {
-                    color: #888888;
-                }
+
+            #attempt-result-icon {
+                font-size: 20px;
             }
         }
 

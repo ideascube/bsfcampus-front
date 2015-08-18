@@ -13,25 +13,23 @@ define(
 
         'text!pods/attempts/exercise-attempt/templates/modal.html',
         'text!pods/attempts/exercise-attempt/templates/progress-question-icon.html',
-        'text!pods/attempts/exercise-attempt/templates/exerciseRecap.html',
-        'text!pods/attempts/exercise-attempt/templates/exerciseRecapFooter.html',
 
-        'pods/attempts/exercise-attempt/question-answer/models/question',
         'pods/attempts/exercise-attempt/question-answer/models/question-answer',
+        'pods/attempts/exercise-attempt/question-answer/models/question',
+
         'pods/attempts/exercise-attempt/question-answer/views/question',
 
-        'pods/resource/model',
-        'pods/resource/views/linkToResource',
+        'pods/attempts/exercise-attempt/views/recap',
 
         'less!pods/attempts/exercise-attempt/style.less'
     ],
     function ($, _, Backbone, VM, Config,
               AbstractCollection, AbstractModel,
               ExerciseAttemptModel,
-              modalTemplate, progressQuestionIconTemplate, recapTemplate, recapFooterTemplate,
+              modalTemplate, progressQuestionIconTemplate,
               ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionModel,
               ExerciseAttemptQuestionAnswerView,
-              ResourceModel, FailLinkedResourceView) {
+              ExerciseAttemptRecapView) {
 
         return Backbone.View.extend({
 
@@ -45,13 +43,10 @@ define(
             model: ExerciseAttemptModel,
 
             isQuestionVerified: false,
-
-            isExerciseCompleted: false,
+            attemptCompleted: false,
 
             template: _.template(modalTemplate),
             progressQuestionIconTemplate: _.template(progressQuestionIconTemplate),
-            recapTemplate: _.template(recapTemplate),
-            recapFooterTemplate: _.template(recapFooterTemplate),
 
             render: function () {
                 var objectiveMessage = Config.stringsDict.EXERCISES.OBJECTIVE_MESSAGE;
@@ -66,12 +61,14 @@ define(
                 });
                 this.$el.html(html);
 
-                this.$modalBody = this.$('.modal-body');
                 this.$result = this.$('#exercise-attempt-question-answer-result');
                 this.$progress = this.$('#exercise-attempt-progress');
                 this.$questionIconsTable = this.$progress.find('#question-icons-table');
                 this.$question = this.$('#exercise-attempt-question');
+                this.$recap = this.$('#exercise-attempt-recap');
                 this.$btnContinue = this.$('.btn-continue');
+
+                this.$recap.hide();
 
                 return this;
             },
@@ -209,47 +206,15 @@ define(
             },
 
             renderEndOfExercise: function () {
-                var recapModelJSON = this.model.forRecapTemplate();
-                var html = this.recapTemplate({
-                    attempt: recapModelJSON,
-                    config: Config
-                });
+                var recapView = new ExerciseAttemptRecapView({model: this.model});
+                this.$recap.html(recapView.render().$el);
+                this.listenTo(recapView, 'close', this.close);
 
-                var self = this;
+                this.$question.empty().hide();
+                this.$recap.show();
 
-                this.$modalBody.html(html);
-
-                var $exerciseRecap = this.$('.modal-body .exercise-recap');
-                var $exerciseRecapDetails = $exerciseRecap.find('.recap-details');
-                if (recapModelJSON.number_mistakes <= recapModelJSON.max_mistakes) {
-                    this.isExerciseCompleted = true;
-                    $exerciseRecap.addClass('exercise-succeeded');
-                    $exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE_HEADER);
-                    $exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.SUCCESS_MESSAGE);
-                    $exerciseRecapDetails.append('<img src="' + Config.imagesDict.greenCheck + '">');
-                }
-                else {
-                    this.isExerciseCompleted = false;
-                    $exerciseRecap.addClass('exercise-failed');
-                    $exerciseRecap.find('.recap-header h1').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE_HEADER);
-                    $exerciseRecapDetails.find('p').html(Config.stringsDict.EXERCISES.FAILURE_MESSAGE);
-
-                    if (this.model.getFailedLinkedResource() != null) {
-                        var resourceModel = new ResourceModel(this.model.getFailedLinkedResource());
-                        var failLinkedResourceView = new FailLinkedResourceView({model: resourceModel});
-                        $exerciseRecapDetails.append(failLinkedResourceView.render().$el);
-                        failLinkedResourceView.$el.bind("click", function () {
-                            self.trigger('close');
-                        });
-                    }
-                    else {
-                        $exerciseRecapDetails.append('<img src="' + Config.imagesDict.wrongRed + '">');
-                    }
-                }
-
-                html = this.recapFooterTemplate({config: Config});
-                this.$('#exercise-attempt-footer').html(html);
-
+                this.attemptCompleted = true;
+                this.$btnContinue.html(Config.stringsDict.EXERCISES.CLOSE);
             },
 
             continueExercise: function () {
@@ -264,16 +229,25 @@ define(
 
             nextStep: function (e) {
                 e.preventDefault();
-                if (this.isQuestionVerified) {
-                    this.$('#exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.VALIDATE);
-                    this.continueExercise();
+                if (this.attemptCompleted) {
+                    this.close();
                 }
                 else {
-                    this.$('#exercise-attempt-footer button').html(Config.stringsDict.EXERCISES.CONTINUE);
-                    this.submitAnswer();
+                    if (this.isQuestionVerified) {
+                        this.$btnContinue.html(Config.stringsDict.EXERCISES.VALIDATE);
+                        this.continueExercise();
+                    }
+                    else {
+                        this.$btnContinue.html(Config.stringsDict.EXERCISES.CONTINUE);
+                        this.submitAnswer();
+                    }
+                    this.isQuestionVerified = !this.isQuestionVerified;
                 }
-                this.isQuestionVerified = !this.isQuestionVerified;
                 return false;
+            },
+
+            close: function() {
+                this.$el.modal('hide');
             }
 
         });

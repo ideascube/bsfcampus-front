@@ -18,6 +18,7 @@ define(
 			model: ResourceModel,
 
 			tagName: 'a',
+			className: 'btn btn-primary',
 
 			attributes: function() {
 				return {
