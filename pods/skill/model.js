@@ -30,8 +30,8 @@ define(
 				return '#/skill/' + this.id;
 			},
 
-            forTemplate: function(forTemplate) {
-                var json = AbstractModel.prototype.forTemplate.call(this, forTemplate);
+            toJSON: function(forTemplate) {
+                var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
 				if (forTemplate === true) {
 					json.is_validated = this.isValidated();
 				}
