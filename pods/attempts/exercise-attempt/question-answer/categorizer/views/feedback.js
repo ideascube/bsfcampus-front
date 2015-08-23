@@ -30,18 +30,18 @@ define(
 			categorizerCategoryTemplate: _.template(feedbackCategorizerCategoryTemplate),
 
             render: function() {
-				var html = this.template({question: this.model.questionModel().toJSON(true), config: Config});
+				var html = this.template({question: this.model.get('question').toJSON(true), config: Config});
 				this.$el.html(html);
 
-				if (this.model.questionModel().get('question_image_url') != null) {
-					this.$('.question-image-media').html('<a href="' + this.model.questionModel().get('question_image_url') + '" target="_blank"><img src="' + this.model.questionModel().get('question_image_url') + '"></a>');
+				if (this.model.get('question').get('question_image_url') != null) {
+					this.$('.question-image-media').html('<a href="' + this.model.get('question').get('question_image_url') + '" target="_blank"><img src="' + this.model.get('question').get('question_image_url') + '"></a>');
                 }
                 else
                 {
                     this.$('.question-image-media').hide();
                 }
 
-				var correctAnswerCategories = this.model.questionModel().get('categories');
+				var correctAnswerCategories = this.model.get('question').get('categories');
                 _.each(correctAnswerCategories, function(correctAnsweredCategory){
                     var answeredCategoryItems = this.getAnsweredItemsByCategoryId(correctAnsweredCategory._id);
                     this.renderCategory(correctAnsweredCategory, answeredCategoryItems, correctAnswerCategories);
@@ -65,7 +65,7 @@ define(
             },
 
             getCorrectCategoryIdByItemId: function (itemId) {
-                var correctCategories = this.model.questionModel().get('categories');
+                var correctCategories = this.model.get('question').get('categories');
                 for (var i = 0; i < correctCategories.length; i++)
                 {
                     if (_.some(correctCategories[i].items, function(item) {
@@ -100,7 +100,7 @@ define(
                 }
 
                 var allItems = [];
-                _.each(this.model.questionModel().get('categories'), function (category) {
+                _.each(this.model.get('question').get('categories'), function (category) {
                     allItems = allItems.concat(category.items);
                 }, this);
                 _.each(answeredCategoryItems, function(itemId){

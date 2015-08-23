@@ -15,15 +15,17 @@ define(
             className: 'container-fluid',
 
             template: _.template(template),
+            templateData: {},
+
+            initialize: function(options) {
+                options || (options = {});
+
+                this.templateData['loading_text'] = options.loadingText || Config.stringsDict.LOADING;
+                this.templateData['container_class'] = options.containerClassName || 'col-xs-12';
+            },
 
             render: function () {
-                var loadingText = _.result(this, 'loadingText', Config.stringsDict.LOADING);
-                var containerClassName = _.result(this, 'containerClassName', 'col-xs-12');
-
-                var html = this.template({
-                    loading_text: loadingText,
-                    container_class: containerClassName
-                });
+                var html = this.template(this.templateData);
 
                 this.$el.html(html);
                 return this;

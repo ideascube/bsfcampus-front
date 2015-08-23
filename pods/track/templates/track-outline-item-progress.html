@@ -1,0 +1,12 @@
+<div class="progress">
+    <div class="progress-bar progress-bar-success"
+         role="progressbar"
+         aria-valuenow="<%= skill.progress.current %>"
+         aria-valuemin="0"
+         aria-valuemax="<%= skill.progress.max %>"
+         style="width: <%= progress_percents %>%;">
+        <span class="sr-only">
+            <%= progress_percents %>% <%= config.stringsDict.COMPLETED %>
+        </span>
+    </div>
+</div>

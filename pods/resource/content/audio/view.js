@@ -3,27 +3,19 @@ define(
         'jquery',
         'underscore',
         'backbone',
-        'viewmanager',
         'app/config',
+
+        'pods/resource/content/baseView',
 
         'text!pods/resource/content/audio/template.html'
     ],
-    function ($, _, Backbone, VM, Config,
+    function ($, _, Backbone, Config,
+              ResourceContentBaseView,
               template) {
 
-        return Backbone.View.extend({
+        return ResourceContentBaseView.extend({
 
-            template: _.template(template),
-
-            render: function () {
-                var html = this.template({
-                    resource: this.model.toJSON(true),
-                    config: Config
-                });
-                this.$el.html(html);
-
-                return this;
-            }
+            template: _.template(template)
 
         });
 

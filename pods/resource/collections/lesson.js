@@ -1,30 +1,42 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
-		
-		'collection',
-		
-		'pods/resource/model',
-	],
-	function($, _, Backbone, Config,
-		AbstractCollection,
-		ResourceModel
-		) {
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		return AbstractCollection.extend({
+        'collection',
 
-			model: ResourceModel,
+        'resourcesCollection',
 
-            dsResourceName: Config.constants.dsResourceNames.LESSONS,
+        'pods/resource/model'
+    ],
+    function ($, _, Backbone, Config,
+              AbstractCollection,
+              resourcesCollection,
+              ResourceModel) {
 
-			serverPath: function() {
-				return '/resources/lesson/' + this.meta('lesson_id');
-			}
+        return AbstractCollection.extend({
 
-		});
+            model: ResourceModel,
 
-	}
+            lesson: null,
+
+            initialize: function (models, options) {
+                options || (options = {});
+                this.lesson = options.lesson;
+            },
+
+            add: function(models, options) {
+                var addedModels = resourcesCollection.add(models, options);
+                return AbstractCollection.prototype.add.call(this, addedModels, options);
+            },
+
+            serverPath: function () {
+                return '/resources/lesson/' + this.lesson.id;
+            }
+
+        });
+
+    }
 );

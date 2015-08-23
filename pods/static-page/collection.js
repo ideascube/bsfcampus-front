@@ -1,28 +1,27 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
-		
-		'collection',
-		
-		'pods/static-page/model'
-	],
-	function($, _, Backbone, Config,
-		AbstractCollection,
-		StaticPageModel
-		) {
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		return AbstractCollection.extend({
+        'collection',
 
-			model: StaticPageModel,
+        'pods/static-page/model'
+    ],
+    function ($, _, Backbone, Config,
+              AbstractCollection,
+              StaticPageModel) {
 
-            dsResourceName: Config.constants.dsResourceNames.STATIC_PAGE,
+        var StaticPagesCollection = AbstractCollection.extend({
 
-			serverPath: '/static_page'
+            model: StaticPageModel,
 
-		});
+            serverPath: '/static_page'
 
-	}
+        });
+
+        return new StaticPagesCollection();
+
+    }
 );

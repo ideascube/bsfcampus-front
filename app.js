@@ -14,9 +14,14 @@ require.config({
 		projekktor: 'vendor/projekktor/src/controller/projekktor',
 
 		viewmanager: 'scripts/vm',
-		ds: 'scripts/backbone-ds',
 		collection: 'app/abstract-collection',
-		model: 'app/abstract-model'
+		model: 'app/abstract-model',
+		view: 'app/abstract-view',
+
+		resourcesCollection: 'pods/resource/collections/all',
+		lessonsCollection: 'pods/lesson/collections/all',
+		skillsCollection: 'pods/skill/collections/all',
+		tracksCollection: 'pods/track/collection'
 	},
 
 	shim: {
@@ -49,9 +54,4 @@ require.config({
 
 });
 
-require(
-	['app/main', 'bootstrap'],
-	function(App, BS) {
-		App.initialize();
-	}
-);
+require(['app/main', 'bootstrap']);

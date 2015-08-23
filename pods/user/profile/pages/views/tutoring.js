@@ -9,7 +9,6 @@ define(
         'pods/user/models/current',
         'pods/user/models/user',
         'pods/analytics/models/visitedDashboard',
-        'pods/user/models/dashboard',
 
         'pods/user/profile/pages/views/tutoring-user-search-result-line',
         'pods/user/profile/pages/views/tutoring-tutor-group-line',
@@ -23,7 +22,7 @@ define(
         'less!pods/user/profile/pages/styles/dashboard'
     ],
     function ($, _, Backbone, VM, Config,
-              currentUser, User, VisitedDashboardAnalyticsModel, DashboardModel,
+              currentUser, UserModel, VisitedDashboardAnalyticsModel,
               UserSearchResultLineView, TutorLineView, DashboardDetailsView,
               LoadingBarView,
               tutoringTemplate) {
@@ -53,27 +52,26 @@ define(
                 if (tutors.length == 0) {
                     this.$('#tutors-block').hide();
                 } else {
-                    _.each(tutors, this.addTutorToGroup, this);
+                    tutors.each(this.addTutorToGroup, this);
                 }
 
                 var students = currentUser.get('students');
                 if (students.length == 0) {
                     this.$('#students-block').hide();
                 } else {
-                    _.each(students, this.addStudentToDropdown, this);
+                    students.each(this.addStudentToDropdown, this);
                 }
 
                 return this;
             },
 
-            addTutorToGroup: function (userSON) {
-                var user = new User({data: userSON}, {parse: true});
+            addTutorToGroup: function (user) {
                 var tutorLineView = new TutorLineView({model: user});
                 this.$('#tutors-list').append(tutorLineView.render().$el);
             },
 
             addStudentToDropdown: function (user) {
-                var $studentOption = $('<option/>').val(user._id).html(user.full_name);
+                var $studentOption = $('<option/>').val(user.id).html(user.get('full_name'));
                 this.$('#student-dashboard-selector').append($studentOption);
             },
 
@@ -113,7 +111,7 @@ define(
             },
 
             renderSingleUserResult: function (userSON) {
-                var user = new User({data: userSON}, {parse: true});
+                var user = new UserModel({data: userSON}, {parse: true});
                 var userSearchResultLineView = new UserSearchResultLineView({model: user});
                 this.$searchResultsList.append(userSearchResultLineView.render().$el);
                 this.addSearchedUserListeners(userSearchResultLineView);
@@ -253,18 +251,16 @@ define(
                 var selectedUserId = $(e.currentTarget).val();
 
                 if (selectedUserId != null) {
-                    var dashboardUserModel = new DashboardModel({_id: selectedUserId});
-                    var self = this;
-                    dashboardUserModel.fetch().done(function (data) {
-                        var dashboardDetailsView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD_DETAILS, function() {
-                            return new DashboardDetailsView({model: dashboardUserModel});
-                        });
-                        self.$studentDashboardDetails.html(dashboardDetailsView.render().$el);
-
-                        var analytics = new VisitedDashboardAnalyticsModel();
-                        analytics.set('dashboard_user', selectedUserId);
-                        analytics.save();
+                    var userModel = new UserModel();
+                    userModel.set(userModel.idAttribute, selectedUserId);
+                    var dashboardDetailsView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD_DETAILS, function() {
+                        return new DashboardDetailsView({model: userModel});
                     });
+                    this.$studentDashboardDetails.html(dashboardDetailsView.render().$el);
+
+                    var analytics = new VisitedDashboardAnalyticsModel();
+                    analytics.set('dashboard_user', userModel.id);
+                    analytics.save();
                 }
 
             }

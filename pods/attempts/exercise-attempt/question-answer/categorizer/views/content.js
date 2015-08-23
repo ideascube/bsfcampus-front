@@ -33,16 +33,16 @@ define(
 
             render: function () {
                 var html = this.template({
-                    question: this.model.questionModel().toJSON(true),
+                    question: this.model.get('question').toJSON(true),
                     config: Config
                 });
                 this.$el.html(html);
                 this.$source = this.$("#categorizer-items-source");
                 this.$targets = this.$("#categorizer-groups");
 
-                _.each(this.model.questionModel().get('categories'), this.renderCategory, this);
+                _.each(this.model.get('question').get('categories'), this.renderCategory, this);
 
-                _.each(this.model.questionModel().get('items'), this.appendItemToSource, this);
+                _.each(this.model.get('question').get('items'), this.appendItemToSource, this);
 
                 var self = this;
                 this.$(".connected-sortable").sortable({
@@ -72,7 +72,7 @@ define(
             },
 
             renderFeedback: function () {
-                var categories = this.model.questionModel().get('categories');
+                var categories = this.model.get('question').get('categories');
                 _.each(categories, this.renderCorrectCategory, this);
 
                 this.$source.empty().hide();
@@ -106,7 +106,7 @@ define(
             serializeForm: function () {
                 var categorizedItems = {};
                 var items;
-                var categories = this.model.questionModel().get('categories');
+                var categories = this.model.get('question').get('categories');
                 _.each(categories, function (category) {
                     categorizedItems[category._id] = [];
                     items = this.$('#category_' + category._id + ' .connected-sortable').sortable('toArray');

@@ -3,14 +3,17 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-        'ds',
-		'app/config',
+        'app/config',
+
+		'pods/static-page/collection',
+
         'text!app/footer/template.html',
         'text!app/footer/static-page-link-template.html',
 
         'less!app/footer/style'
     ],
-	function($, _, Backbone, DS, Config,
+	function($, _, Backbone, Config,
+			 staticPagesCollection,
              template, staticPageLinkTemplate) {
 
 		return Backbone.View.extend({
@@ -19,23 +22,27 @@ define(
 			staticPageLinkTemplate: _.template(staticPageLinkTemplate),
 
             initialize: function () {
-                var staticPages = DS.getAll(Config.constants.dsResourceNames.STATIC_PAGE);
-                this.listenTo(staticPages, "change", this.render);
-                this.listenTo(staticPages, "add", this.render);
+				this.listenTo(staticPagesCollection, 'update', this.renderStaticPages);
             },
 
 			render: function() {
-                var staticPages = DS.getAll(Config.constants.dsResourceNames.STATIC_PAGE);
-                this.$el.html(this.template({config: Config}));
-                var $staticPagesList = this.$('#footer-static-pages-link-list ul');
-                $staticPagesList.empty();
-                _.each(staticPages.models, function(page) {
-                    $staticPagesList.append(this.staticPageLinkTemplate({
-                        page: page.toJSON()
-                    }));
-                }, this);
+				var html = this.template({config: Config});
+				this.$el.html(html);
+				this.$staticPagesList = this.$('#footer-static-pages-link-list ul');
 
-                return this;
+                staticPagesCollection.fetchIfNeeded().done($.proxy(this.renderStaticPages, this));
+
+				return this;
+			},
+
+			renderStaticPages: function(){
+				this.$staticPagesList.empty();
+				staticPagesCollection.each(function(page) {
+					var html = this.staticPageLinkTemplate({
+						page: page.toJSON(true)
+					});
+                    this.$staticPagesList.append(html);
+				}, this);
 			}
 
 		});

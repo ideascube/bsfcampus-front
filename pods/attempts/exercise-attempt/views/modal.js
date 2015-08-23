@@ -51,6 +51,16 @@ define(
             template: _.template(modalTemplate),
             progressQuestionIconTemplate: _.template(progressQuestionIconTemplate),
 
+            initialize: function(){
+                var self = this;
+                var track = this.model.track();
+                if (track) {
+                    this.listenTo(track, 'unlockedTest', function(){
+                        self.promptTrackValidation = true;
+                    });
+                }
+            },
+
             render: function () {
                 var objectiveMessage = Config.stringsDict.EXERCISES.OBJECTIVE_MESSAGE;
                 var maxMistakes = this.model.get('max_mistakes');
@@ -58,7 +68,7 @@ define(
 
                 var html = this.template({
                     attempt: this.model.toJSON(true),
-                    resource: this.resource.toJSON(true),
+                    resource: this.model.get('exercise').toJSON(true),
                     objectiveMessage: objectiveMessage,
                     config: Config
                 });
@@ -81,14 +91,14 @@ define(
             },
 
             renderProgression: function () {
-                var questionsCollection = this.model.getCollection();
+                var questionAnswers = this.model.get('question_answers');
                 this.$questionIconsTable.empty();
 
                 var progressWidth = this.$progress.width();
                 var singleWidth = Math.max(Math.min(Math.floor(progressWidth / (this.model.getNumberOfQuestions() * 1.25)), Config.constants.exerciseAttemptProgressionMaxWidth), Config.constants.exerciseAttemptProgressionMinWidth);
                 var marginLeftRight = Math.floor(singleWidth / 8);
 
-                questionsCollection.each(function (questionAnswer) {
+                questionAnswers.each(function (questionAnswer) {
                     var question = questionAnswer.get('question');
                     var successStatus = "";
                     if (question != null) {
@@ -162,13 +172,6 @@ define(
 
             answerReceived: function (result) {
                 this.model = new this.Model(result, {parse: true});
-                if (this.model.achievements != null) {
-                    this.model.achievements.each(function (achievement) {
-                        if (achievement.get('_cls').split('.').pop() == 'UnlockedTrackTest') {
-                            this.trackValidationId = achievement.get('track')._id;
-                        }
-                    }, this);
-                }
                 this.currentQuestionAnswer = this.model.getQuestionAnswer(this.currentQuestionAnswer.get('question_id'));
 
                 this.renderProgression();
@@ -208,7 +211,6 @@ define(
 
             renderEndOfExercise: function () {
                 var recapView = new this.RecapView({model: this.model});
-                recapView.resource = this.resource;
                 this.$recap.html(recapView.render().$el);
                 this.listenTo(recapView, 'close', this.close);
 

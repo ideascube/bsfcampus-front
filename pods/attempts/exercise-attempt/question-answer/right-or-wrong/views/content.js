@@ -28,13 +28,13 @@ define(
 
             render: function () {
                 var html = this.template({
-                    question: this.model.questionModel().toJSON(true),
+                    question: this.model.get('question').toJSON(true),
                     config: Config
                 });
                 this.$el.html(html);
                 this.$propositionsContainer = this.$('.propositions-container');
 
-                var propositions = this.model.questionModel().get('propositions');
+                var propositions = this.model.get('question').get('propositions');
                 _.each(propositions, this.renderProposition, this);
 
                 return this;
@@ -48,7 +48,7 @@ define(
             },
 
             renderFeedback: function () {
-                var propositions = this.model.questionModel().get('propositions');
+                var propositions = this.model.get('question').get('propositions');
                 _.each(propositions, this.addPropositionFeedback, this);
             },
 

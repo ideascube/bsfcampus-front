@@ -29,14 +29,14 @@ define(
 			
 			render: function() {
 				var html = this.template({
-                    question: this.model.questionModel().toJSON(true),
+                    question: this.model.get('question').toJSON(true),
                     config: Config
                 });
 				this.$el.html(html);
 
-				var splittedText = this.model.questionModel().get('text').split("[%%]");
+				var splittedText = this.model.get('question').get('text').split("[%%]");
 
-				var dropdowns = this.model.questionModel().get('dropdowns');
+				var dropdowns = this.model.get('question').get('dropdowns');
                 this.$('.dropdowns-text').empty();
 				_.each(splittedText, function(fragment, index, fragments){
 					this.$('.dropdowns-text').append(fragment);
@@ -53,7 +53,7 @@ define(
 			},
 
             renderFeedback: function(){
-				var dropdowns = this.model.questionModel().get('dropdowns');
+				var dropdowns = this.model.get('question').get('dropdowns');
 				_.each(dropdowns, this.addDropdownFeedback, this);
             },
 

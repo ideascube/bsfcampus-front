@@ -1,0 +1,36 @@
+<div class="col-sm-5" id="skill-info">
+
+	<div class="panel">
+
+		<div class="panel-heading" id="track-title"></div>
+		
+		<div class="panel-body">
+			
+			<h2 id="skill-title" class="text-center"><%= skill.title %></h2>
+
+			<div class="skill-icon-wrapper">
+				<img src="<%= skill.icon_url %>" class="img-responsive center-block" />
+			</div>
+
+			<div id="skill-description">
+				<%= skill.description %>
+			</div>
+
+			<div id="skill-progress"></div>
+
+		</div>
+
+	</div>
+
+</div>
+
+<div class="col-sm-7">
+
+	<button class="btn btn-block btn-success btn-lg btn-validate-skill">
+		<img src="<%= config.imagesDict.studentHat %>" class="validate-icon max-48" />
+		<span class="validate-text"><%= config.stringsDict.SKILL_TEST_VALIDATION_ALLOWED %></span>
+	</button>
+
+	<div id="skill-outline"></div>
+
+</div>

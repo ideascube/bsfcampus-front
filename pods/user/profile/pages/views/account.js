@@ -37,8 +37,10 @@ define(
             },
 
             render: function() {
-                var userModel = currentUser.toJSON(true);
-                var html = this.template({user: userModel, config: Config});
+                var html = this.template({
+                    user: currentUser.toJSON(true),
+                    config: Config
+                });
                 this.$el.html(html);
 
                 return this;

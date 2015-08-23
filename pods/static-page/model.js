@@ -1,33 +1,24 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		'model'
-	],
-	function($, _, Backbone, Config, 
-		AbstractModel
-		) {
+        'model'
+    ],
+    function ($, _, Backbone, Config,
+              AbstractModel) {
 
-		return AbstractModel.extend({
+        return AbstractModel.extend({
 
-			serverPath: '/static_page',
+            serverPath: '/static_page',
 
-            dsResourceName: Config.constants.dsResourceNames.STATIC_PAGE,
+            route: function () {
+                return this.get('external_link') || '#static_page/' + this.get('page_id');
+            }
 
-			route: function() {
-                var externalLink = this.get('external_link');
-                if (externalLink != null && externalLink != "")
-                {
-                    return externalLink;
-                }
+        });
 
-				return '#/static_page/' + this.get('page_id');
-			}
-
-		});
-
-	}
+    }
 );

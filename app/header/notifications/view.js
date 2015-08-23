@@ -27,7 +27,7 @@ define(
 
             render: function () {
                 var html = this.template({
-                    user: this.user,
+                    user: this.user.toJSON(true),
                     config: Config,
                     isTutorRequest: this.isTutorRequest,
                     isAcknowledgeNotification: this.isAcknowledgeNotification
@@ -38,15 +38,15 @@ define(
             },
 
             accept: function (e) {
-                this.trigger('accept', this, this.user["_id"]);
+                this.trigger('accept', this, this.user.id);
             },
 
             decline: function (e) {
-                this.trigger('decline', this, this.user["_id"]);
+                this.trigger('decline', this, this.user.id);
             },
 
             acknowledge: function (e) {
-                this.trigger('acknowledge', this, this.user["_id"]);
+                this.trigger('acknowledge', this, this.user.id);
             }
 
         });

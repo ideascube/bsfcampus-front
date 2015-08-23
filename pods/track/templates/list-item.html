@@ -10,19 +10,11 @@
 			    </div>
 			</div>
 			<div class="media-body media-middle container-fluid">
-				<p class="text-center"><%= track.progress.current %>/<%= track.progress.max %> <%= config.stringsDict.SKILLS_ACQUIRED %></p>
+				<p class="track-progress text-center"></p>
                 <div class="row">
                     <div class="col-sm-offset-1 col-sm-10">
                         <a href="<%= track.route %>" class="btn btn-block btn-bordered btn-lg border-radius-lg btn-start">
-                            <%
-                            if (track.is_validated) {
-                                print(config.stringsDict.TRACK_VALIDATED);
-                            } else if (track.is_started) {
-                                print(config.stringsDict.RESUME_TRACK);
-                            } else {
-                                print(config.stringsDict.START_TRACK);
-                            }
-                            %>
+                            <%= config.stringsDict.START_TRACK %>
                         </a>
                     </div>
                 </div>

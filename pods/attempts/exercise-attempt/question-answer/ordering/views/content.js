@@ -29,7 +29,7 @@ define(
 
             render: function () {
                 var html = this.template({
-                    question: this.model.questionModel().toJSON(true),
+                    question: this.model.get('question').toJSON(true),
                     config: Config
                 });
                 this.$el.html(html);
@@ -38,7 +38,7 @@ define(
 
                 this.$target.empty();
                 this.$source.empty();
-                _.each(this.model.questionModel().get('items'), this.appendItemToSource, this);
+                _.each(this.model.get('question').get('items'), this.appendItemToSource, this);
 
                 var self = this;
                 this.$(".connected-sortable").sortable({
@@ -57,7 +57,7 @@ define(
 
             renderFeedback: function() {
                 this.$source.empty();
-                var correctAnswerItems = this.model.questionModel().get('items');
+                var correctAnswerItems = this.model.get('question').get('items');
                 _.each(correctAnswerItems, this.appendItemToSource, this);
 
                 this.$source.sortable({disabled: true});

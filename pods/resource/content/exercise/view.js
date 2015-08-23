@@ -6,16 +6,19 @@ define(
         'viewmanager',
         'app/config',
 
+        'pods/resource/content/baseView',
+
         'text!pods/resource/content/exercise/template.html',
 
         'pods/attempts/exercise-attempt/model',
         'pods/attempts/exercise-attempt/views/modal'
     ],
     function ($, _, Backbone, VM, Config,
+              ResourceContentBaseView,
               template,
               ExerciseAttemptModel, ExerciseAttemptModalView) {
 
-        return Backbone.View.extend({
+        return ResourceContentBaseView.extend({
 
             events: {
                 'click .btn-start-exercise': 'startExercise'
@@ -23,12 +26,8 @@ define(
 
             template: _.template(template),
 
-            render: function () {
-                var html = this.template({
-                    resource: this.model.toJSON(true),
-                    config: Config
-                });
-                this.$el.html(html);
+            renderFetched: function () {
+                ResourceContentBaseView.prototype.renderFetched.apply(this, arguments);
 
                 if (this.model.isValidated()) {
                     this.$('.btn-start-exercise').removeClass('btn-success').addClass('btn-info golden-effect');
@@ -38,21 +37,18 @@ define(
             },
 
             startExercise: function () {
-                var self = this;
-
                 var attempt = new ExerciseAttemptModel();
                 attempt.set('exercise', this.model.id);
-                attempt.save().done(function (result) {
+                attempt.save().done(function () {
                     var exerciseAttemptView = VM.createView(Config.constants.VIEWS_ID.EXERCISE_ATTEMPT, function () {
                         return new ExerciseAttemptModalView({model: attempt});
                     });
-                    exerciseAttemptView.resource = self.model;
                     $('body').append(exerciseAttemptView.render().$el);
 
                     exerciseAttemptView.$el.on('hidden.bs.modal', function () {
                         VM.closeView(Config.constants.VIEWS_ID.EXERCISE_ATTEMPT);
-                        if (exerciseAttemptView.trackValidationId != null) {
-                            Backbone.history.loadUrl("/prompt_track_validation/" + exerciseAttemptView.trackValidationId);
+                        if (exerciseAttemptView.promptTrackValidation) {
+                            Backbone.history.loadUrl("/prompt_track_validation/" + attempt.track().id);
                         }
                     }).on('shown.bs.modal', function () {
                         exerciseAttemptView.continueExercise();

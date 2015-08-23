@@ -1,21 +1,23 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
-		
-		'pods/attempts/exercise-attempt/question-answer/models/question-answer',
-	],
-	function($, _, Backbone, Config,
-		ExerciseAttemptQuestionAnswerModel
-		) {
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		return Backbone.Collection.extend({
+        'collection',
 
-			model: ExerciseAttemptQuestionAnswerModel
+        'pods/attempts/exercise-attempt/question-answer/models/question-answer'
+    ],
+    function ($, _, Backbone, Config,
+              AbstractCollection,
+              ExerciseAttemptQuestionAnswerModel) {
 
-		});
+        return AbstractCollection.extend({
 
-	}
+            model: ExerciseAttemptQuestionAnswerModel
+
+        });
+
+    }
 );

@@ -1,31 +1,33 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		'model',
+        'model',
 
-		'pods/attempts/exercise-attempt/question-answer/models/question',
-	],
-	function($, _, Backbone, Config,
-		AbstractModel,
-		ExerciseAttemptQuestionModel
-		) {
+        'pods/attempts/exercise-attempt/question-answer/models/question',
+    ],
+    function ($, _, Backbone, Config,
+              AbstractModel,
+              ExerciseAttemptQuestionModel) {
 
-		return AbstractModel.extend({
-			
-			currentQuestionModel: null,
+        return AbstractModel.extend({
 
-			questionModel: function() {
-				if (this.currentQuestionModel == null && this.get('question')) {
-					this.currentQuestionModel = new ExerciseAttemptQuestionModel(this.get('question'));
-				}
-				return this.currentQuestionModel;
-			}
+            parse: function (response) {
+                response = AbstractModel.prototype.parse.apply(this, arguments);
 
-		});
+                if (response.question) {
+                    response.question = new ExerciseAttemptQuestionModel(response.question);
+                }
 
-	}
+                return response;
+            },
+
+            currentQuestionModel: null,
+
+        });
+
+    }
 );

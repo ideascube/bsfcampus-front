@@ -1,0 +1,19 @@
+<a class="resource list-group-item media" href="<%= resource.route %>">
+    <div class="media-left media-top">
+        <img src="<%= resource.icon_url %>" class="img-circle media-object"/>
+    </div>
+    <div class="media-body">
+        <h4 class="media-heading"><%= resource.title %></h4>
+        <% if (typeof analytics !== "undefined") { %>
+        <p><%= analytics.nbVisitsMessage %></p>
+        <% if (analytics.lastAttempt != null) { %>
+        <p><%= analytics.lastAttempt.score %> / <%= analytics.lastAttempt.nb_questions %> <%=
+            config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_LAST_ATTEMPT_SCORE %></p>
+        <% } %>
+        <% if (analytics.averageTime != null) { %>
+        <p><%= analytics.averageTime %> <%= config.stringsDict.USER.PROFILE.DASHBOARD.ANALYTICS.SKILL_TEST_AVERAGE_TIME
+            %></p>
+        <% } %>
+        <% } %>
+    </div>
+</a>

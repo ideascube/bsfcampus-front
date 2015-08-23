@@ -3,7 +3,6 @@ define(
         'jquery',
         'underscore',
         'backbone',
-        'ds',
         'app/config',
 
         'model',
@@ -12,21 +11,36 @@ define(
         'pods/attempts/exercise-attempt/question-answer/models/question-answer',
         'pods/attempts/exercise-attempt/question-answer/collections/attempt'
     ],
-    function ($, _, Backbone, DS, Config,
+    function ($, _, Backbone, Config,
               AbstractModel, ResourceModel,
               ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionAnswersCollection) {
 
         return AbstractModel.extend({
 
-            resource: function() {
+            parse: function (response) {
+                response = AbstractModel.prototype.parse.apply(this, arguments);
 
+                if (response.exercise) {
+                    var resourcesCollection = require('resourcesCollection');
+                    var exercise = resourcesCollection.getOrInstantiate(response.exercise);
+                    if (exercise.empty) { exercise.set(response.exercise); }
+                    response.exercise = exercise;
+                }
+
+                if (response.question_answers) {
+                    var collection = new ExerciseAttemptQuestionAnswersCollection();
+                    _.each(response.question_answers, function(questionAnswer){
+                        var model = new ExerciseAttemptQuestionAnswerModel({data: questionAnswer}, {parse: true});
+                        collection.add(model);
+                    }, this);
+                    response.question_answers = collection;
+                }
+
+                return response;
             },
 
-            getCollection: function () {
-                if (this.collection == null) {
-                    this.collection = new ExerciseAttemptQuestionAnswersCollection(this.get('question_answers'));
-                }
-                return this.collection;
+            track: function() {
+                return this.get('exercise').track();
             },
 
             serverPath: '/activity/exercise_attempts',
@@ -40,31 +54,31 @@ define(
             },
 
             getCurrentQuestionAnswer: function () {
-                return this.getCollection().find(function (questionAnswer) {
+                return this.get('question_answers').find(function (questionAnswer) {
                     return questionAnswer.get('given_answer') == null;
                 });
             },
 
             getQuestionAnswer: function (questionId) {
-                return this.getCollection().findWhere({'question_id': questionId});
+                return this.get('question_answers').findWhere({'question_id': questionId});
             },
 
             getProgress: function () {
-                return this.getNumberOfQuestionsAnswered() / this.getCollection().length;
+                return this.getNumberOfQuestionsAnswered() / this.get('question_answers').length;
             },
 
             getNumberOfQuestionsAnswered: function () {
-                return this.getCollection().filter(function (questionAnswer) {
+                return this.get('question_answers').filter(function (questionAnswer) {
                     return questionAnswer.get('given_answer') != null;
                 }).length;
             },
 
             getNumberOfQuestions: function () {
-                return this.getCollection().length;
+                return this.get('question_answers').length;
             },
 
             getNumberOfMistakesMade: function () {
-                return this.getCollection().filter(function (questionAnswer) {
+                return this.get('question_answers').filter(function (questionAnswer) {
                     return questionAnswer.get('is_answered_correctly') === false;
                 }).length;
             },

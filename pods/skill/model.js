@@ -1,44 +1,72 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		'model'
-	],
-	function($, _, Backbone, Config,
-		AbstractModel
-		) {
+        'model',
 
-		return AbstractModel.extend({
+        'pods/lesson/model',
+        'pods/lesson/collections/skill'
+    ],
+    function ($, _, Backbone, Config,
+              AbstractModel,
+              LessonModel, SkillLessonsCollection) {
 
-			serverPath: '/hierarchy/skills',
+        return AbstractModel.extend({
 
-            dsResourceName: Config.constants.dsResourceNames.SKILLS,
+            serverPath: '/hierarchy/skills',
 
-			_isValidated: null,
+            parse: function (response) {
+                response = AbstractModel.prototype.parse.apply(this, arguments);
 
-			isValidated: function() {
-				if (this._isValidated == null) {
-					this._isValidated = this.get('is_validated');
-				}
-				return this._isValidated;
-			},
+                if (response.track) {
+                    var tracksCollection = require('tracksCollection');
+                    var track = tracksCollection.get(response.track);
+                    if (!track) {
+                        var TrackModel = require('pods/track/model');
+                        track = new TrackModel({data: response.track}, {parse:true});
+                        tracksCollection.add(track);
+                    }
+                    response.track = track;
+                }
 
-			route: function() {
-				return '#/skill/' + this.id;
-			},
+                var collection = this.get('lessons') || new SkillLessonsCollection([], {skill: this});
+                if (response.lessons) {
+                    _.each(response.lessons, function(lesson){
+                        var model = new LessonModel({data: lesson}, {parse: true});
+                        collection.add(model);
+                    }, this);
+                    collection.minimumFilled = true;
+                }
+                response.lessons = collection;
 
-            toJSON: function(forTemplate) {
+                return response;
+            },
+
+            _isValidated: null,
+
+            isValidated: function () {
+                if (this._isValidated == null) {
+                    this._isValidated = this.get('is_validated');
+                }
+                return this._isValidated;
+            },
+
+            route: function () {
+                return '#skill/' + this.id;
+            },
+
+            toJSON: function (forTemplate) {
                 var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
-				if (forTemplate === true) {
-					json.is_validated = this.isValidated();
-				}
+                if (forTemplate === true) {
+                    json.is_validated = this.isValidated();
+                }
                 return json;
             }
 
-		});
+        });
 
-	}
+    }
 );

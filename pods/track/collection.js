@@ -1,28 +1,27 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
-		
-		'collection',
-		
-		'pods/track/model'
-	],
-	function($, _, Backbone, Config,
-		AbstractCollection,
-		TrackModel
-		) {
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		return AbstractCollection.extend({
+        'collection',
 
-			model: TrackModel,
+        'pods/track/model'
+    ],
+    function ($, _, Backbone, Config,
+              AbstractCollection,
+              TrackModel) {
 
-            dsResourceName: Config.constants.dsResourceNames.TRACKS,
+        var TracksCollection = AbstractCollection.extend({
 
-			serverPath: '/hierarchy/tracks'
+            model: TrackModel,
 
-		});
+            serverPath: '/hierarchy/tracks'
 
-	}
+        });
+
+        return new TracksCollection();
+
+    }
 );

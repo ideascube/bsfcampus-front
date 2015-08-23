@@ -25,29 +25,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#/" id="navbar-home-btn"><%= config.stringsDict.HEADER.HOME_PAGE %></a></li>
 				<li><a href="#/track" id="navbar-tracks-btn"><%= config.stringsDict.HEADER.ALL_TRACKS %></a></li>
-				<% if (currentUser.id == null) { %>
                 <li><a href="#/login" id="navbar-login-btn"><%= config.stringsDict.HEADER.LOGIN %></a></li>
-				<% } else { %>
-                <li class="dropdown" id="dropdown-user">
-                    <a href="#"  id="navbar-user-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= currentUser.full_name %> <span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="navbar-user-btn">
-                        <li><a href="#/user/profile"><%= config.stringsDict.HEADER.USER %></a></li>
-                        <li class="divider"></li>
-                        <li><a href="#/logout"><%= config.stringsDict.HEADER.LOG_OUT %></a></li>
-                    </ul>
-                </li>
-                <% if (currentUser.awaiting_tutor_requests.length > 0 || currentUser.awaiting_student_requests.length > 0 || currentUser.not_acknowledged_tutors.length > 0 || currentUser.not_acknowledged_students.length > 0) { %>
-                <li class="dropdown" id="dropdown-notifications">
-                    <a href="" id="navbar-notifications-btn" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <span class="glyphicon glyphicon-bell" id="bell-icon"></span>
-                        <span class="badge badge-notifications-count"><%= (currentUser.awaiting_tutor_requests.length + currentUser.awaiting_student_requests.length + currentUser.not_acknowledged_tutors.length + currentUser.not_acknowledged_students.length) %></span>
-                    </a>
-                    <ul id="notifications-list" class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="navbar-notifications-btn">
-                        Loading notifications...
-                    </ul>
-                </li>
-                <% } %>
-				<% } %>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->

@@ -9,7 +9,6 @@ define(
         'pods/analytics/models/visitedDashboard',
 
         'pods/user/models/current',
-        'pods/user/models/dashboard',
 
         'pods/user/profile/views/navMenu',
         'pods/user/profile/pages/views/account',
@@ -21,11 +20,11 @@ define(
 
         'less!pods/user/profile/styles/profile'
     ],
-    function($, _, Backbone, VM, Config,
-             VisitedDashboardAnalyticsModel, currentUser, DashboardModel,
-             NavMenuView, AccountView, DashboardView, PasswordView, TutoringView,
-             profileTemplate
-    ) {
+    function ($, _, Backbone, VM, Config,
+              VisitedDashboardAnalyticsModel,
+              currentUser,
+              NavMenuView, AccountView, DashboardView, PasswordView, TutoringView,
+              profileTemplate) {
 
         return Backbone.View.extend({
 
@@ -37,7 +36,7 @@ define(
 
             navMenuView: null,
 
-            render: function() {
+            render: function () {
                 var html = this.template({resource: this.model.toJSON(true)});
                 this.$el.html(html);
 
@@ -47,23 +46,21 @@ define(
                 return this;
             },
 
-            renderNavMenu: function() {
-                this.navMenuView = VM.createView(Config.constants.VIEWS_ID.USER_PROFILE_NAV_MENU, function() {
+            renderNavMenu: function () {
+                this.navMenuView = VM.createView(Config.constants.VIEWS_ID.USER_PROFILE_NAV_MENU, function () {
                     return new NavMenuView();
                 });
                 this.$('#profile-nav-menu').html(this.navMenuView.render().$el);
                 this.listenTo(this.navMenuView, 'onRenderNavContentPage', this.renderNavContent);
             },
 
-            renderNavContent: function(pageId) {
+            renderNavContent: function (pageId) {
 
                 var profileDetailPageView;
-                switch (pageId)
-                {
+                switch (pageId) {
                     case Config.constants.userProfile.DASHBOARD:
-                        var dashboardUserModel = new DashboardModel({_id: currentUser.id});
-                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD, function() {
-                            return new DashboardView({model: dashboardUserModel});
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.DASHBOARD, function () {
+                            return new DashboardView({model: currentUser});
                         });
 
                         var analytics = new VisitedDashboardAnalyticsModel();
@@ -71,17 +68,17 @@ define(
                         analytics.save();
                         break;
                     case Config.constants.userProfile.ACCOUNT:
-                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.ACCOUNT, function() {
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.ACCOUNT, function () {
                             return new AccountView();
                         });
                         break;
                     case Config.constants.userProfile.PASSWORD:
-                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.PASSWORD, function() {
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.PASSWORD, function () {
                             return new PasswordView();
                         });
                         break;
                     case Config.constants.userProfile.TUTORING:
-                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.TUTORING, function() {
+                        profileDetailPageView = VM.createView(Config.constants.VIEWS_ID.TUTORING, function () {
                             return new TutoringView();
                         });
                         break;

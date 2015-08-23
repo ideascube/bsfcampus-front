@@ -1,25 +1,35 @@
 <div class="modal-dialog modal-lg">
-    <div class="modal-content prompt-track-validation">
+    <div class="prompt-track-validation modal-content">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <!--<h4 class="modal-title track-validation"><img src="<%= config.imagesDict.trackValidation.CERTIFICATE %>"><%= resource.title %></h4>-->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <h4 class="modal-title track-validation">
+                <img src="<%= config.imagesDict.trackValidation.CERTIFICATE %>" class="max-64">
+                <%= track.title %>
+            </h4>
         </div>
         <div class="modal-body">
-            <div class="prompt-details-header">
-                <div class="track-icon">
-                    <img src="<%= track.icon_url %>" class="track-icon">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="track-icon col-xs-6 col-sm-4 col-md-3 col-center">
+                        <img src="<%= track.icon_url %>" class="center-block track-icon img-responsive"/>
+                    </div>
                 </div>
-                <h1><%= track.title %></h1>
+                <h3 class="text-center"><%= track.title %></h3>
+                <hr class="prompt-track-validation-separator" />
+                <h2 class="text-center"><%= config.stringsDict.TRACK_VALIDATION.PROMPT_HEADER_TEXT %></h2>
+                <p class="text-center lead"><%= config.stringsDict.TRACK_VALIDATION.PROMPT_SUB_HEADER_TEXT %></p>
+                <p class="text-center"><%= config.stringsDict.TRACK_VALIDATION.PROMPT_TEXT %></p>
+                <div class="row">
+                    <div class="col-sm-6 col-center">
+                        <a href="<%= track.route %>" class="btn btn-success btn-lg btn-block btn-goto-track">
+                            <img src="<%= config.imagesDict.certificateValidated %>" class="max-48"/>
+                            <%= config.stringsDict.TRACK_VALIDATION.GO_TO_TRACK_BUTTON %>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="prompt-details-text">
-                <h1><%= config.stringsDict.TRACK_VALIDATION.PROMPT_HEADER_TEXT %></h1>
-                <h2><%= config.stringsDict.TRACK_VALIDATION.PROMPT_SUB_HEADER_TEXT %></h2>
-                <p><%= config.stringsDict.TRACK_VALIDATION.PROMPT_TEXT %></p>
-            </div>
-            <a href="<%= track.route %>" class="btn btn-block btn-validate-track">
-                <img src="<%= config.imagesDict.certificateValidated %>" class="certificate-validated" />
-                <%= config.stringsDict.TRACK_VALIDATION.GO_TO_TRACK_BUTTON %>
-            </a>
         </div>
     </div>
 </div>

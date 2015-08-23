@@ -6,7 +6,7 @@ define(
 		'app/config',
 		
 		'pods/resource/model',
-		'text!pods/resource/templates/link-to-resource.html',
+		'text!pods/resource/templates/link-to-resource.html'
 
 	],
 	function($, _, Backbone, Config,
@@ -14,8 +14,6 @@ define(
 		) {
 
 		return Backbone.View.extend({
-
-			model: ResourceModel,
 
 			tagName: 'a',
 			className: 'btn btn-primary',

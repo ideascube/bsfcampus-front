@@ -18,20 +18,20 @@ define(
 
         return Backbone.View.extend({
 
-            className: 'modal fade',
+            className: 'modal modal-info fade',
 
             template: _.template(promptValidationTemplate),
 
             events: {
-                'click .btn-validate-track': 'closeModal'
+                'click .btn-goto-track': 'closeModal'
             },
 
             render: function () {
-                var self = this;
-                DS.find(Config.constants.dsResourceNames.TRACKS, this.trackId).then(function (trackModel) {
-                    var html = self.template({track: trackModel.toJSON(true), config: Config});
-                    self.$el.html(html);
+                var html = this.template({
+                    track: this.model.toJSON(true),
+                    config: Config
                 });
+                this.$el.html(html);
 
                 return this;
             },

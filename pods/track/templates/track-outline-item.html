@@ -7,10 +7,6 @@
 	<h4 class="media-heading skill-title">
 		<%= skill.title %>
 	</h4>
-	<div class="progress">
-	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= skill.progress.current*100/skill.progress.max %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= skill.progress.current*100/skill.progress.max %>%;">
-		<span class="sr-only"><%= skill.progress.current*100/skill.progress.max %>% <%= config.stringsDict.COMPLETED %></span>
-	  </div>
-	</div>
+	<div class="skill-progress"></div>
 	<div class="media-text"><%= skill.short_description %></div>
 </div>

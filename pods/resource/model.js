@@ -1,40 +1,110 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		'model'
-	],
-	function($, _, Backbone, Config,
-		AbstractModel
-		) {
+        'collection',
+        'model'
+    ],
+    function ($, _, Backbone, Config,
+              AbstractCollection, AbstractModel) {
 
-		return AbstractModel.extend({
-			
-			serverPath: '/resources',
+        var ResourceModel = AbstractModel.extend({
 
-            dsResourceName: Config.constants.dsResourceNames.RESOURCES,
+            serverPath: '/resources',
+
+            initialize: function(){
+                var self = this;
+                this.listenTo(this, 'completed', function(){
+                    var skill = self.skill();
+                    if (skill) { skill.fetch(); }
+                });
+            },
+
+            parse: function (response) {
+                response = AbstractModel.prototype.parse.apply(this, arguments);
+
+                if (response.parent) {
+                    switch (response.parent._cls.split('.').pop()) {
+                        case 'Lesson':
+                            var lessonsCollection = require('lessonsCollection');
+                            var lesson = lessonsCollection.get(response.parent);
+                            if (!lesson) {
+                                var LessonModel = require('pods/lesson/model');
+                                lesson = new LessonModel({data: response.parent}, {parse: true});
+                                lessonsCollection.add(lesson);
+                            }
+                            response.lesson = response.parent = lesson;
+                            break;
+                        case 'Track':
+                            var tracksCollection = require('tracksCollection');
+                            var track = tracksCollection.get(response.parent);
+                            if (!track) {
+                                var TrackModel = require('pods/track/model');
+                                track = new TrackModel({data: response.parent}, {parse: true});
+                                tracksCollection.add(track);
+                            }
+                            response.track = response.parent = track;
+                            break;
+                    }
+                }
+
+                if (response.is_additional === false) {
+                    var collection = this.get('additional_resources') || new AdditionalResourcesCollection([], {mainResource: this});
+                    if (response.additional_resources) {
+                        _.each(response.additional_resources, function (additionalResource) {
+                            var model = new AdditionalResourceModel({data: additionalResource}, {parse: true});
+                            collection.add(model);
+                        }, this);
+                        collection.minimumFilled = true;
+                    }
+                    response.additional_resources = collection;
+                }
+
+                return response;
+            },
 
             _isValidated: null,
 
-            isValidated: function() {
+            isValidated: function () {
                 if (this._isValidated == null) {
                     this._isValidated = this.get('is_validated');
                 }
                 return this._isValidated;
             },
 
-			hierarchyUrl: function() {
-				return this.url() + '/hierarchy';
-			},
+            hierarchyUrl: function () {
+                return this.url() + '/hierarchy';
+            },
 
-			route: function() {
-				return '#/resource/' + this.id;
-			},
+            skill: function () {
+                var lesson = this.get('lesson');
+                var LessonModel = require('pods/lesson/model');
+                if (lesson instanceof LessonModel && lesson.fetched) {
+                    return lesson.get('skill');
+                }
+                return null;
+            },
 
-            toJSON: function(forTemplate) {
+            track: function() {
+                var skill = this.skill();
+                if (skill) {
+                    return skill.get('track');
+                }
+                return null;
+            },
+
+            route: function () {
+                var skill;
+                if (skill = this.skill()) {
+                    return skill.route() + '/resource/' + this.id;
+                }
+                return '#resource/' + this.id;
+            },
+
+            toJSON: function (forTemplate) {
 
                 var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
 
@@ -93,7 +163,30 @@ define(
 
             }
 
-		});
+        });
 
-	}
+        var AdditionalResourceModel = ResourceModel.extend({});
+
+        var AdditionalResourcesCollection = AbstractCollection.extend({
+
+            model: AdditionalResourceModel,
+
+            mainResource: null,
+
+            initialize: function (models, options) {
+                options || (options = {});
+                this.mainResource = options.mainResource;
+            },
+
+            add: function(models, options) {
+                var resourcesCollection = require('resourcesCollection');
+                var addedModels = resourcesCollection.add(models, options);
+                return AbstractCollection.prototype.add.call(this, addedModels, options);
+            }
+
+        });
+
+        return ResourceModel;
+
+    }
 );

@@ -1,0 +1,16 @@
+<div class="panel-heading" role="tab" id="heading-lesson-<%= lesson._id %>">
+    <a href="#collapse-lesson-<%= lesson._id %>"
+       role="button"
+       data-toggle="collapse"
+       data-parent="#hierarchy-accordion"
+       aria-controls="collapse-lesson-<%= lesson._id %>"
+       aria-expanded="false">
+        <h4 class="panel-title"><span class="lesson-title text-center"><%= lesson.title %></span></h4>
+    </a>
+</div>
+
+<div id="collapse-lesson-<%= lesson._id %>"
+     class="panel-collapse collapse lesson-outline"
+     role="tabpanel"
+     aria-labelledby="heading-lesson-<%= lesson._id %>">
+</div>

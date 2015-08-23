@@ -3,15 +3,17 @@ define(
 		'jquery',
 		'underscore',
 		'backbone',
-		'viewmanager',
 		'app/config',
+
+		'pods/resource/content/baseView',
 
 		'text!pods/resource/content/external-video/templates/youtube.html'
 	],
-	function ($, _, Backbone, VM, Config,
+	function ($, _, Backbone, Config,
+			  ResourceContentBaseView,
 			  youtubeTemplate) {
 
-		return Backbone.View.extend({
+		return ResourceContentBaseView.extend({
 
 			template: function(args) {
 				switch(this.model.get('resource_content').source) {
@@ -19,16 +21,6 @@ define(
 						return _.template(youtubeTemplate)(args);
 				}
 				return "Unrecognized source";
-			},
-
-			render: function () {
-				var html = this.template({
-					resource: this.model.toJSON(true),
-					config: Config
-				});
-				this.$el.html(html);
-
-				return this;
 			}
 
 		});

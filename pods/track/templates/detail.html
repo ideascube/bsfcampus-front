@@ -13,23 +13,11 @@
 
 <div class="col-sm-6">
 
-    <button class="btn btn-block btn-lg btn-success btn-validate-track">
-        <span id="track-certificate-icon" class="icon-certificate"></span>
-        <% if (track.is_validated) { %>
-        <%= config.stringsDict.TRACK_TEST_VALIDATED %>
-        <span id="track-status-icon" class="glyphicon glyphicon-ok-circle"></span>
-        <% } else if (track.progress.current >= track.progress.max) { %>
-        <%= config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED %>
-        <% } else { %>
-        <%= config.stringsDict.TRACK_TEST_VALIDATION_ALLOWED %>
-        <span id="track-status-icon" class="glyphicon glyphicon-lock"></span>
-        <% } %>
+    <button class="btn btn-block btn-lg btn-success btn-validate-track" disabled>
+        <img src="<%= config.imagesDict.certificate %>" class="validate-icon max-48" />
+        <span class="validate-text"><%= config.stringsDict.TRACK_TEST_VALIDATION_LOCKED %></span>
     </button>
 
-    <div id="track-outline" class="media-list">
-        <div class="skill media">
-            Loading skills...
-        </div>
-    </div>
+    <div id="track-outline"></div>
 
 </div>

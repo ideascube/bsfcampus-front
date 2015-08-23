@@ -12,9 +12,9 @@
             <div class="progress">
                 <div class="progress-bar progress-bar-success"
                      role="progressbar"
-                     aria-valuenow="<%= skill.progress.current*100/skill.progress.max %>"
+                     aria-valuenow="<%= skill.progress.current %>"
                      aria-valuemin="0"
-                     aria-valuemax="100"
+                     aria-valuemax="<%= skill.progress.max %>"
                      style="width: <%= skill.progress.current*100/skill.progress.max %>%;">
                     <span class="sr-only">
                         <%= skill.progress.current*100/skill.progress.max %>% <%= config.stringsDict.COMPLETED %>

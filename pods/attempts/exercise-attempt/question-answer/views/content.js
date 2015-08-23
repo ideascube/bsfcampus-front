@@ -18,7 +18,7 @@ define(
 
 		return function(options) {
 			if (options.hasOwnProperty('model')) {
-				switch (options.model.questionModel().get('_cls').split('.').pop()) {
+				switch (options.model.get('question').get('_cls').split('.').pop()) {
 					case 'UniqueAnswerMCQExerciseQuestion':
 						return new UniqueAnswerMCQView(options);
 					case 'MultipleAnswerMCQExerciseQuestion':

@@ -5,32 +5,30 @@ define(
         'backbone',
         'app/config',
 
-        'model',
+        'pods/user/models/user',
 
         'pods/analytics/models/misc'
     ],
     function($, _, Backbone, Config,
-             AbstractModel,
+             UserModel,
              MiscAnalyticsModel) {
 
-        var CurrentUserClass = AbstractModel.extend({
+        var CurrentUserModel = UserModel.extend({
 
             jwt: null,
-            username: null,
 
-            serverPath: '/users',
+            clear: function(){
+                this.jwt = null;
+                UserModel.prototype.clear.apply(this, arguments);
+            },
 
             url: function() {
                 return this.urlRoot() + '/current';
             },
 
             parse: function(response, options) {
-                this.username = response.username;
-                return AbstractModel.prototype.parse.call(this, response, options);
-            },
-
-            dashboardUrl: function() {
-                return this.url() + "/dashboard";
+                this.set('username', response.username);
+                return UserModel.prototype.parse.call(this, response, options);
             },
 
             logIn: function(username, password) {
@@ -48,7 +46,7 @@ define(
                 }).done(
                     function(result){
                         self.jwt = result.token;
-                        self.username = username;
+                        self.set('username', username);
                         if ('localStorage' in window && window['localStorage'] !== null) {
                             localStorage = window['localStorage'];
                             localStorage['mookbsf_jwt'] = self.jwt;
@@ -64,8 +62,6 @@ define(
                 logoutAnalytics.set('object_title', this.username);
                 logoutAnalytics.save();
 
-                this.jwt = null;
-                this.username = null;
                 if ('localStorage' in window && window['localStorage'] !== null) {
                     localStorage = window['localStorage'];
                     localStorage.removeItem('mookbsf_jwt');
@@ -90,19 +86,11 @@ define(
                 } else {
                     return false;
                 }
-            },
-
-            toJSON: function(forTemplate) {
-                var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
-                if (forTemplate === true) {
-                    json.username = this.username;
-                }
-                return json;
             }
 
         });
 
-        return new CurrentUserClass;
+        return new CurrentUserModel();
 
     }
 );

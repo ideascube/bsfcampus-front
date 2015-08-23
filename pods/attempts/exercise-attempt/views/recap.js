@@ -29,7 +29,7 @@ define(
 
                 var templateData = {
                     attempt: this.model.toJSON(),
-                    resource: this.resource.toJSON(),
+                    resource: this.model.get('exercise').toJSON(),
                     config: Config
                 };
 

@@ -19,12 +19,10 @@ define(
 
         return Backbone.View.extend({
 
-            model: QuestionAnswerModel,
-
             template: _.template(template),
 
             render: function () {
-                this.questionModel = this.model.questionModel();
+                this.questionModel = this.model.get('question');
 
                 var html = this.template({
                     question: this.questionModel.toJSON(true)

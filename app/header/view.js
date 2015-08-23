@@ -5,52 +5,68 @@ define(
         'backbone',
         'app/config',
 
-        'pods/user/models/current',
-
         'app/header/notifications/view',
 
         'text!app/header/template.html',
+        'text!app/header/user-menu.html',
 
         'less!app/header/style'
     ],
     function ($, _, Backbone, Config,
-              currentUser,
               NotificationView,
-              template) {
+              template, userMenuTemplate) {
 
         return Backbone.View.extend({
 
             template: _.template(template),
+            userMenuTemplate: _.template(userMenuTemplate),
 
             events: {
                 'click #navbar-login-btn': 'login',
                 'submit form.navbar-form': 'search'
             },
 
-            initialize: function () {
-                this.listenTo(currentUser, "change", this.render);
+            initialize: function(){
+                this.listenTo(this.model, 'change', this.render);
             },
 
             render: function () {
-                var html = this.template({currentUser: currentUser.toJSON(true), config: Config});
+                var html = this.template({
+                    user: this.model.toJSON(true),
+                    config: Config
+                });
                 this.$el.html(html);
+                this.$loginButton = this.$('#navbar-login-btn');
 
-                this.$notificationsList = this.$("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");
-                this.$notificationsList.empty();
-
-                this.firstNotificationRendered = false;
-                var notAcknowledgedTutorRequests = currentUser.get('not_acknowledged_tutors');
-                _.each(notAcknowledgedTutorRequests, this.renderNotAcknowledgedTutorNotification, this);
-                var notAcknowledgedStudentRequests = currentUser.get('not_acknowledged_students');
-                _.each(notAcknowledgedStudentRequests, this.renderNotAcknowledgedStudentNotification, this);
-                var awaitingTutorRequests = currentUser.get('awaiting_tutor_requests');
-                _.each(awaitingTutorRequests, this.renderTutorRequestNotification, this);
-                var awaitingStudentRequests = currentUser.get('awaiting_student_requests');
-                _.each(awaitingStudentRequests, this.renderTutoredStudentRequestNotification, this);
+                if (!this.model.isNew()) {
+                    this.renderUserMenu();
+                }
 
                 this.updateHeaderButtonFocus(this.currentFocusedElement);
 
                 return this;
+            },
+
+            renderUserMenu: function() {
+                var html = this.userMenuTemplate({
+                    config: Config,
+                    user: this.model.toJSON(true)
+                });
+                this.$loginButton.closest('li').replaceWith(html);
+                this.renderNotifications();
+            },
+
+            renderNotifications: function(){
+                this.$notificationsList = this.$("#bs-example-navbar-collapse-1 li.dropdown ul#notifications-list");
+                this.$notificationsList.empty();
+                this.firstNotificationRendered = false;
+
+                if (!this.model.isNew()) {
+                    this.model.get('not_acknowledged_tutors').each(this.renderNotAcknowledgedTutorNotification, this);
+                    this.model.get('not_acknowledged_students').each(this.renderNotAcknowledgedStudentNotification, this);
+                    this.model.get('awaiting_tutor_requests').each(this.renderTutorRequestNotification, this);
+                    this.model.get('awaiting_student_requests').each(this.renderTutoredStudentRequestNotification, this);
+                }
             },
 
             renderNotification: function(user, isTutorRequest, isAcknowledged) {
@@ -93,6 +109,7 @@ define(
             },
 
             acknowledgeTutorNotification: function(notification, userId) {
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
@@ -100,72 +117,77 @@ define(
                     dataType: 'json'
                 }).then(
                     function(response) {
-                        currentUser.set(currentUser.parse(response));
+                        self.model.set(self.model.parse(response));
                     }, function(error) {
                         console.log("Error while acknowledging the tutor notification:", error );
                     });
             },
 
             acknowledgeStudentNotification: function(notification, userId) {
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/acknowledge/student/" + userId,
                     dataType: 'json'
                 }).then(function(response) {
-                    currentUser.set(currentUser.parse(response));
+                    self.model.set(self.model.parse(response));
                 }, function (error) {
                     console.log("Error while acknowledging the student notification:", error );
                 });
             },
 
             acceptTutorRequest: function(notification, requestingUserId) {
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/accept/tutor/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    currentUser.set(currentUser.parse(response));
+                    self.model.set(self.model.parse(response));
                 }, function (error) {
                     console.log("Error while accepting the tutor request:", error );
                 });
             },
 
             declineTutorRequest: function(notification, requestingUserId) {
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/decline/tutor/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    currentUser.set(currentUser.parse(response));
+                    self.model.set(self.model.parse(response));
                 }, function (error) {
                     console.log("Error while accepting the tutor request:", error.responseJSON.data.error_message );
                 });
             },
 
             acceptTutoredStudentRequest: function(notification, requestingUserId) {
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/accept/student/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    currentUser.set(currentUser.parse(response));
+                    self.model.set(self.model.parse(response));
                 }, function (error) {
                     console.log("Error while accepting the tutored student request:", error );
                 });
             },
 
             declineTutoredStudentRequest: function(notification, requestingUserId) {
+                var self = this;
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
                     url: Config.constants.serverGateway + "/tutoring/decline/student/" + requestingUserId,
                     dataType: 'json'
                 }).then(function(response) {
-                    currentUser.set(currentUser.parse(response));
+                    self.model.set(self.model.parse(response));
                 }, function (error) {
                     console.log("Error while declining the tutored student request:", error );
                 });
