@@ -19,6 +19,11 @@ define(
 
             clear: function(){
                 this.jwt = null;
+                if ('localStorage' in window && window['localStorage'] != null) {
+                    localStorage = window['localStorage'];
+                    localStorage.removeItem('mookbsf_jwt');
+                }
+                this.trigger("clear");
                 UserModel.prototype.clear.apply(this, arguments);
             },
 
@@ -62,15 +67,11 @@ define(
                 logoutAnalytics.set('object_title', this.username);
                 logoutAnalytics.save();
 
-                if ('localStorage' in window && window['localStorage'] !== null) {
-                    localStorage = window['localStorage'];
-                    localStorage.removeItem('mookbsf_jwt');
-                }
                 this.clear();
             },
 
             isLoggedIn: function() {
-                return (this.jwt !== null);
+                return !!this.jwt;
             },
 
             findSession: function() {

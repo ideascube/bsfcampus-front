@@ -57,6 +57,14 @@ define(
                 this.$header = $('#header');
                 this.$footer = $('#footer');
 
+                var self = this;
+                this.listenTo(currentUser, "clear", function(){
+                    // Backbone won't trigger the route if we're already if we're already on the home page
+                    // To bypass this problem we unset the fragment temporarily
+                    Backbone.history.fragment = null;
+                    Backbone.history.navigate("", {trigger: true});
+                });
+
                 this.renderHeader();
                 this.renderFooter();
             },

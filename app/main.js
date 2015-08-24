@@ -18,7 +18,7 @@ define(
             currentUser.findSession();
 
             $(document).ajaxSend(function (event, jqxhr, settings) {
-                if (currentUser.jwt !== null) {
+                if (currentUser.jwt) {
                     jqxhr.setRequestHeader('Authorization', 'Bearer ' + currentUser.jwt);
                 }
             });
@@ -46,6 +46,7 @@ define(
                     function (result) {
                         console.log('current user has been fetched');
                     }, function (err) {
+                        currentUser.clear();
                         console.log("current user doesn't exist");
                     }
                 );
