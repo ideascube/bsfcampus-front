@@ -265,8 +265,8 @@ define(
             },
 
             lessonDetail: function (lesson) {
-                lessonsCollection
-                    .getOrInstantiate(lesson)
+                lesson = lessonsCollection.getOrInstantiate(lesson);
+                lesson
                     .fetchIfNeeded()
                     .done(function(){
                         Backbone.history.navigate('skill/' + lesson.get('skill').id, {trigger:true});
