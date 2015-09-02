@@ -161,6 +161,7 @@ define(
             },
 
             login: function () {
+                console.log("login");
                 var loginUserView = VM.reuseView(Config.constants.VIEWS_ID.LOGIN, function () {
                     return new LoginUserView();
                 });
@@ -183,7 +184,6 @@ define(
 
             logout: function () {
                 currentUser.logOut();
-                this.resetDataStore();
                 Backbone.history.navigate('', {trigger: true});
             },
 

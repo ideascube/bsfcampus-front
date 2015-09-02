@@ -138,6 +138,7 @@ define([],
                 GOT_AN_ACCOUNT: "Déjà un compte ?",
                 PWD_FORGOTTEN: "Mot de passe oublié ?",
                 LOG_IN_ERROR: "L'identifiant et/ou le mot de passe n'existe pas",
+                ERROR_FETCHING_USER: "Les données de l'utilisateur n'ont pu être récupérées",
                 REGISTER_ERROR: {
                     INVALID_EMAIL_ADDRESS: "L'adresse e-mail est incorrecte",
                     USERNAME_ALREADY_EXISTS: "L'identifiant est déjà utilisé",

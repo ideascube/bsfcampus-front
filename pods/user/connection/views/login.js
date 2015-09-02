@@ -37,6 +37,20 @@ define(
                 return this;
             },
 
+            fetchCurrentUser: function () {
+                var self = this;
+                currentUser.fetch().then(
+                    function (result) {
+                        console.log('current user has been fetched');
+                        self.$el.modal('hide');
+                    }, function (err) {
+                        currentUser.clear();
+                        self.$loginError.html(Config.stringsDict.USER.ERROR_FETCHING_USER);
+                        console.log("current user doesn't exist");
+                    }
+                );
+            },
+
             submit: function (e) {
                 e.preventDefault();
 
@@ -49,7 +63,7 @@ define(
                 currentUser
                     .logIn(username, password)
                     .done(function(){
-                        self.$el.modal('hide');
+                        self.fetchCurrentUser();
                     })
                     .fail(function(error){
                         self.$loginError.html(Config.stringsDict.USER.LOG_IN_ERROR);
