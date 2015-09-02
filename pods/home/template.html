@@ -4,7 +4,6 @@
             <h1 id="greeting" class="text-center">
                 <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
             </h1>
-            <% if (currentUser.id == null) { %>
             <div class="row">
                 <div class="col-sm-3 col-center">
                     <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
@@ -19,11 +18,6 @@
                     </a>
                 </div>
             </div>
-            <% } else { %>
-            <div class="home-msg-welcome">
-                <h4><%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %></h4>
-            </div>
-            <% } %>
 
             <div class="text-center">
                 <a class="block-center" id="scroll-arrow" href="#second-window">
@@ -46,7 +40,6 @@
                     <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
                 </div>
             </div>
-            <% if (currentUser.id == null) { %>
             <div class="row">
                 <div class="col-sm-3 col-center">
                     <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
@@ -61,11 +54,6 @@
                     </a>
                 </div>
             </div>
-            <% } else { %>
-            <h4 class="text-center" id="home-msg-welcome">
-                <%= config.stringsDict.HOME.WELCOME %><%= currentUser.full_name %>
-            </h4>
-            <% } %>
         </div>
     </div>
     <div id="third-window" class="container-fluid"></div>

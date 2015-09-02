@@ -25,6 +25,8 @@ define(
                 }
                 this.trigger("clear");
                 UserModel.prototype.clear.apply(this, arguments);
+
+                // TODO: delete data from previous current user
             },
 
             url: function() {
