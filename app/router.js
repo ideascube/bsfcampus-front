@@ -163,7 +163,7 @@ define(
 
             login: function () {
                 console.log("login");
-                var loginUserView = VM.reuseView(Config.constants.VIEWS_ID.LOGIN, function () {
+                var loginUserView = VM.createView(Config.constants.VIEWS_ID.LOGIN, function () {
                     return new LoginUserView();
                 });
                 $('body').append(loginUserView.render().$el);
