@@ -1,107 +1,109 @@
 .track-detail {
 
-    #track-info {
-        background: #ebebeb;
+  #track-info {
+    background: #ebebeb;
 
-        #track-title {
-            color: #39627c;
-            text-transform: uppercase;
-            font-weight: bold;
-            margin-top: 40px;
-            margin-bottom: 30px;
+    #track-title {
+      color: #39627c;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-top: 40px;
+      margin-bottom: 30px;
+    }
+
+    #track-description {
+      color: #464646;
+      margin: 20px 50px;
+      white-space: pre-line;
+      text-align: justify;
+    }
+
+    .track-icon-wrapper {
+      margin: 0 auto;
+      padding: 0;
+      width: 180px;
+      img {
+        padding: 0 36px;
+      }
+    }
+
+  }
+
+  &.track-validated {
+
+    .track-icon-wrapper {
+      background: url('../../../assets/images/laurel.png') no-repeat center center !important;
+      background-size: contain !important;
+    }
+  }
+
+  .btn-validate-track {
+
+    padding: 20px;
+    margin-bottom: 5px;
+
+    .validate-icon {
+      margin-right: 20px;
+    }
+
+  }
+
+  #track-outline {
+
+    .media-list {
+
+      background-color: white;
+      border-radius: 5px;
+      overflow: hidden;
+
+      .media {
+
+        margin: 0;
+        padding: 25px 30px;
+        display: block;
+        position: relative;
+        border: 1px #ececec solid;
+        border-left-width: 0;
+        border-right-width: 0;
+
+        .skill-icon {
+          padding: 0;
+          .skill-icon-wrapper {
+            width: 100px;
+            max-height: 100px;
+          }
+        }
+        .media-body {
+          padding: 10px;
+          vertical-align: middle;
+          .media-heading {
+            margin-bottom: 15px;
+            font-size: 1.0em;
+            color: #252525;
+          }
+          .media-text {
+            font-size: .85em;
+            color: #737373;
+          }
         }
 
-        #track-description {
-            color: #464646;
-            margin: 20px 50px;
+        &:hover {
+
+          background-color: #39637c;
+          color: white;
+          .media-heading {
+            color: #EEEEEE;
+          }
+          .media-text {
+            color: #DDDDDD;
+          }
+
         }
 
-        .track-icon-wrapper {
-            margin: 0 auto;
-            padding: 0;
-            width: 180px;
-            img {
-                padding: 0 36px;
-            }
-        }
+      }
 
     }
 
-    &.track-validated {
-
-        .track-icon-wrapper {
-            background: url('../../../assets/images/laurel.png') no-repeat center center !important;
-            background-size: contain !important;
-        }
-    }
-
-    .btn-validate-track {
-
-        padding: 20px;
-        margin-bottom: 5px;
-
-        .validate-icon {
-            margin-right: 20px;
-        }
-
-    }
-
-    #track-outline {
-
-        .media-list {
-
-            background-color: white;
-            border-radius: 5px;
-            overflow: hidden;
-
-            .media {
-
-                margin: 0;
-                padding: 25px 30px;
-                display: block;
-                position: relative;
-                border: 1px #ececec solid;
-                border-left-width: 0;
-                border-right-width: 0;
-
-                .skill-icon {
-                    padding: 0;
-                    .skill-icon-wrapper {
-                        width: 100px;
-                        max-height: 100px;
-                    }
-                }
-                .media-body {
-                    padding: 10px;
-                    vertical-align: middle;
-                    .media-heading {
-                        margin-bottom: 15px;
-                        font-size: 1.0em;
-                        color: #252525;
-                    }
-                    .media-text {
-                        font-size: .85em;
-                        color: #737373;
-                    }
-                }
-
-                &:hover {
-
-                    background-color: #39637c;
-                    color: white;
-                    .media-heading {
-                        color: #EEEEEE;
-                    }
-                    .media-text {
-                        color: #DDDDDD;
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
+  }
 
 }

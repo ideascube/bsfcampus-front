@@ -1,64 +1,66 @@
 #resource-panel {
 
-    .panel-heading, .panel-body, .panel-footer {
-        padding-left: 80px;
-        padding-right: 80px;
+  .panel-heading, .panel-body, .panel-footer {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .panel-heading {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .panel-title {
+      font-size: 1.25em;
+      font-weight: bold;
+      color: #1caff6;
+    }
+  }
+
+  .panel-body {
+    p {
+      font-size: 0.85em;
+      white-space: pre-line;
+      text-align: justify;
+    }
+    padding-bottom: 80px;
+  }
+
+  .panel-footer {
+    background-color: #fff;
+    h2 {
+      font-size: 1.2em;
+    }
+  }
+
+  .resource-audio-player {
+    audio {
+      display: block;
+      width: 100%;
+    }
+  }
+  .btn-resource-download-link {
+
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+    font-size: 1.25em;
+
+    img.download-arrow {
+      height: 30px;
+      margin-right: 20px;
     }
 
-    .panel-heading {
-        padding-top: 20px;
-        padding-bottom: 20px;
-        .panel-title {
-            font-size: 1.25em;
-            font-weight: bold;
-            color: #1caff6;
-        }
+  }
+
+  .btn-start-exercise {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 20px;
+    font-size: 1.25em;
+
+    img.quill {
+      height: 40px;
+      margin-right: 20px;
     }
-
-    .panel-body {
-        p {
-            font-size: 0.85em;
-        }
-        padding-bottom: 80px;
-    }
-
-    .panel-footer {
-        background-color: #fff;
-        h2 {
-            font-size: 1.2em;
-        }
-    }
-
-    .resource-audio-player {
-        audio {
-            display: block;
-            width: 100%;
-        }
-    }
-    .btn-resource-download-link {
-
-        margin-top: 50px;
-        margin-bottom: 50px;
-        padding: 20px;
-        font-size: 1.25em;
-
-        img.download-arrow {
-            height: 30px;
-            margin-right: 20px;
-        }
-
-    }
-
-    .btn-start-exercise {
-        margin-top: 50px;
-        margin-bottom: 50px;
-        padding: 20px;
-        font-size: 1.25em;
-
-        img.quill {
-            height: 40px;
-            margin-right: 20px;
-        }
-    }
+  }
 
 }
