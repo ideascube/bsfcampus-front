@@ -35,6 +35,9 @@ define(
                 this.$loginError = this.$("#login-error");
                 this.$loginBtn = this.$("#login-btn");
 
+                // forces listening to events
+                this.delegateEvents();
+
                 return this;
             },
 
