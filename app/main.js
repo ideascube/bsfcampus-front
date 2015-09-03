@@ -29,7 +29,7 @@ define(
                     401: function () {
                         // Redirect the to the login page.
                         console.log("error 401 detected");
-                        currentUser.logOut();
+                        //currentUser.logOut();
                         if (Backbone.history.getFragment() != '') {
                             Backbone.history.loadUrl("/login");
                         }

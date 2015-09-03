@@ -40,9 +40,14 @@ define(
                 this.fetching = true;
                 options || (options = {});
                 var success = options.success;
-                options.success = function (model, response, xhrOptions) {
-                    model.markFetched(null, xhrOptions);
-                    if (success) success.call(this, model, response, xhrOptions);
+                options.success = function (collection, response, xhrOptions) {
+                    collection.markFetched(null, xhrOptions);
+                    if (success) success.call(this, collection, response, xhrOptions);
+                };
+                var error = options.error;
+                options.error = function(collection, response, xhrOptions) {
+                    collection.fetching = false;
+                    if (error) error.call(this, collection, response, xhrOptions);
                 };
                 options || (options = {});
                 return Backbone.Collection.prototype.fetch.call(this, options);
