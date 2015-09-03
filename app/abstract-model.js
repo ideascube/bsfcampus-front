@@ -65,6 +65,11 @@ define(
                     model.markFetched(null, xhrOptions);
                     if (success) success.call(this, model, response, xhrOptions);
                 };
+                var error = options.error;
+                options.error = function(model, response, xhrOptions) {
+                    model.fetching = false;
+                    if (error) error.call(this, model, response, xhrOptions);
+                };
                 return Backbone.Model.prototype.fetch.call(this, options);
             },
 

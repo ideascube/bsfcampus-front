@@ -33,22 +33,9 @@ define(
                 this.$el.html(html);
 
                 this.$loginError = this.$("#login-error");
+                this.$loginBtn = this.$("#login-btn");
 
                 return this;
-            },
-
-            fetchCurrentUser: function () {
-                var self = this;
-                currentUser.fetch().then(
-                    function (result) {
-                        console.log('current user has been fetched');
-                        self.$el.modal('hide');
-                    }, function (err) {
-                        currentUser.clear();
-                        self.$loginError.html(Config.stringsDict.USER.ERROR_FETCHING_USER);
-                        console.log("current user doesn't exist");
-                    }
-                );
             },
 
             submit: function (e) {
@@ -57,17 +44,25 @@ define(
                 var username = this.$('form #username').val();
                 var password = this.$('form #password').val();
                 this.$loginError.empty();
+                this.$loginBtn.html(Config.stringsDict.USER.LOGGING_IN);
+                this.$loginBtn.addClass('disabled');
+                this.$loginBtn.attr('disabled', true);
 
                 var self = this;
 
                 currentUser
                     .logIn(username, password)
                     .done(function(){
-                        self.fetchCurrentUser();
+                        self.listenTo(currentUser, "fetch", function() {
+                            self.$el.modal('hide');
+                        });
                     })
                     .fail(function(error){
                         self.$loginError.html(Config.stringsDict.USER.LOG_IN_ERROR);
                         console.log("Could not submit login data", error);
+                        self.$loginBtn.html(Config.stringsDict.USER.LOG_IN);
+                        self.$loginBtn.removeClass('disabled');
+                        self.$loginBtn.attr('disabled', false);
                     });
             }
         });

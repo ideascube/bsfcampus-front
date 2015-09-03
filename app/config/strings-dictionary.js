@@ -128,6 +128,7 @@ define([],
             USER: {
                 REGISTER: "S'inscrire",
                 LOG_IN: "Se connecter",
+                LOGGING_IN: "Connexion en cours...",
                 FULL_NAME: "Nom complet",
                 USERNAME: "Identifiant",
                 EMAIL: "E-mail",

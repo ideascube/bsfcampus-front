@@ -59,6 +59,7 @@ define(
 
                 var self = this;
                 this.listenTo(currentUser, "clear", function(){
+                    console.log("router: currentUser cleared");
                     // Backbone won't trigger the route if we're already if we're already on the home page
                     // To bypass this problem we unset the fragment temporarily
                     Backbone.history.fragment = null;
@@ -184,7 +185,6 @@ define(
 
             logout: function () {
                 currentUser.logOut();
-                Backbone.history.navigate('', {trigger: true});
             },
 
             resetPassword: function () {

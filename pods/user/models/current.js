@@ -23,10 +23,8 @@ define(
                     localStorage = window['localStorage'];
                     localStorage.removeItem('mookbsf_jwt');
                 }
-                this.trigger("clear");
                 UserModel.prototype.clear.apply(this, arguments);
-
-                // TODO: delete data from previous current user
+                this.trigger("clear");
             },
 
             url: function() {
