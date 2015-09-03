@@ -51,7 +51,7 @@ define(
                     }
                 );
             } else {
-                currentUser.clear();
+                currentUser.clear({silent: true});
             }
 
             this.router = new AppRouter();

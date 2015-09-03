@@ -17,14 +17,17 @@ define(
 
             jwt: null,
 
-            clear: function(){
+            clear: function(options){
                 this.jwt = null;
                 if ('localStorage' in window && window['localStorage'] != null) {
                     localStorage = window['localStorage'];
                     localStorage.removeItem('mookbsf_jwt');
                 }
                 UserModel.prototype.clear.apply(this, arguments);
-                this.trigger("clear");
+                if (!options || !options.silent)
+                {
+                    this.trigger("clear");
+                }
             },
 
             url: function() {
