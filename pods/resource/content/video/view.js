@@ -8,13 +8,13 @@ define(
 
         'pods/resource/content/baseView',
 
-        'pods/analytics/models/completedResource',
+        //'pods/analytics/models/completedResource',
 
         'text!pods/resource/content/video/template.html'
     ],
     function ($, _, Backbone, Config, videojs,
               ResourceContentBaseView,
-              CompletedResourceAnalyticsModel,
+              //CompletedResourceAnalyticsModel,
               template) {
 
         return ResourceContentBaseView.extend({
@@ -33,23 +33,16 @@ define(
                 videojs(this.$("video#resource-video-player")[0], {width: "auto", height: "auto"}, function(){
                     // Player (this) is initialized and ready.
                 });
-            },
+            }//,
 
-            completeResource: function () {
-                if (!this.model.get("is_validated"))
-                {
-                    var analytics = new CompletedResourceAnalyticsModel();
-                    analytics.set('resource', this.model.id);
-                    analytics.save();
-                }
-            },
-
-            onPlayerStateChanged: function(data) {
-                if (data == "COMPLETED")
-                {
-                    this.completeResource();
-                }
-            }
+            //completeResource: function () {
+            //    if (!this.model.get("is_validated"))
+            //    {
+            //        var analytics = new CompletedResourceAnalyticsModel();
+            //        analytics.set('resource', this.model.id);
+            //        analytics.save();
+            //    }
+            //}
 
 
         });
