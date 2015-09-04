@@ -57,11 +57,13 @@ define(
             },
 
             renderContent: function () {
+                console.log("renderContent");
                 var self = this;
                 var contentView = VM.createView(Config.constants.VIEWS_ID.RESOURCE_CONTENT, function () {
                     return new ResourceContentView({model: self.model});
                 });
                 this.$resourceContent.html(contentView.render().$el);
+                contentView.activateAfterRendered();
             },
 
             renderAdditionalResources: function () {

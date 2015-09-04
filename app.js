@@ -11,7 +11,7 @@ require.config({
 		lessc: 'vendor/require-less/lessc',
 		normalize: 'vendor/require-less/normalize',
 		bootstrap: 'vendor/bootstrap/dist/js/bootstrap',
-		projekktor: 'vendor/projekktor/src/controller/projekktor',
+		videojs: 'vendor/video.js/dist/video-js/video',
 
 		viewmanager: 'scripts/vm',
 		collection: 'app/abstract-collection',
@@ -41,7 +41,7 @@ require.config({
 		'bootstrap': {
 			deps: ['jquery']
 		},
-        'projekktor': {
+        'videojs': {
             deps: ['jquery']
         }
 	},

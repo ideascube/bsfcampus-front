@@ -79,6 +79,13 @@ define(
                     return this.renderFetched();
                 }
                 return this;
+            },
+
+            activateAfterRendered: function() {
+                // Override it to add code that should be executed once the $el element
+                // has been rendered in the DOM
+
+                return this;
             }
 
         });

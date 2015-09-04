@@ -4,15 +4,17 @@ define(
         'underscore',
         'backbone',
         'app/config',
+        'videojs',
 
         'pods/resource/content/baseView',
 
-        'text!pods/resource/content/video/template.html',
+        'pods/analytics/models/completedResource',
 
-        'projekktor'
+        'text!pods/resource/content/video/template.html'
     ],
-    function ($, _, Backbone, Config,
+    function ($, _, Backbone, Config, videojs,
               ResourceContentBaseView,
+              CompletedResourceAnalyticsModel,
               template) {
 
         return ResourceContentBaseView.extend({
@@ -22,13 +24,33 @@ define(
             renderFetched: function() {
                 ResourceContentBaseView.prototype.renderFetched.apply(this, arguments);
 
-                projekktor('video#resource-video-player', {
-                    playerFlashMP4: '../../../lib/StrobeMediaPlayback.swf',
-                    playerFlashMP3: '../../../lib/StrobeMediaPlayback.swf'
-                });
-
                 return this;
+            },
+
+            activateAfterRendered: function() {
+                ResourceContentBaseView.prototype.activateAfterRendered.apply(this, arguments);
+
+                videojs(this.$("video#resource-video-player")[0], {width: "auto", height: "auto"}, function(){
+                    // Player (this) is initialized and ready.
+                });
+            },
+
+            completeResource: function () {
+                if (!this.model.get("is_validated"))
+                {
+                    var analytics = new CompletedResourceAnalyticsModel();
+                    analytics.set('resource', this.model.id);
+                    analytics.save();
+                }
+            },
+
+            onPlayerStateChanged: function(data) {
+                if (data == "COMPLETED")
+                {
+                    this.completeResource();
+                }
             }
+
 
         });
 

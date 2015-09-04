@@ -1,10 +1,10 @@
 <div class="embed-responsive embed-responsive-16by9">
     <video id="resource-video-player"
-           class="projekktor"
-           src="<%= resource.resource_content.content_file_url %>"
-           title="<%= resource.title %>"
-           controls>
-        Your browser does not support the HTML5 Video element.
+           class="video-js vjs-default-skin vjs-big-play-centered"
+           controls preload="auto"
+           width="640" height="264">
+        <source src="<%= resource.resource_content.content_file_url %>"/>
+        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
     </video>
 </div>
 
