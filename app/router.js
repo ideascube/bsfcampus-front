@@ -286,6 +286,17 @@ define(
                 skillBrowserView.selectResource(resource);
             },
 
+            resourceDetail: function(resource) {
+                var self =this;
+                var resource = resourcesCollection.getOrInstantiate(resource)
+                resource.fetchIfNeeded().done(
+                    function() {
+                        var newRoute = resource.route();
+                        self.navigate(newRoute, {trigger: true});
+                    }
+                );
+            },
+
             getResourceHierarchyBreadcrumbView: function (breadcrumbModel) {
                 //return VM.createView(Config.constants.VIEWS_ID.BREADCRUMB, function() {
                 //    return new ResourceHierarchyBreadcrumbView({model: breadcrumbModel});
