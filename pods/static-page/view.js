@@ -7,7 +7,7 @@ define(
 
         'text!pods/static-page/template.html',
 
-        'less!pods/track/styles/list'
+        'less!pods/static-page/style'
     ],
     function ($, _, Backbone, Config,
               staticPageTemplate) {
