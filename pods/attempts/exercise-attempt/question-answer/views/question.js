@@ -21,6 +21,25 @@ define(
 
             template: _.template(template),
 
+            questionIntructions: function(){
+                switch (this.model.get('question').get('_cls').split('.').pop()) {
+                    case 'UniqueAnswerMCQExerciseQuestion':
+                        return Config.stringsDict.EXERCISES.INSTRUCTIONS.UNIQUE_ANSWER_MCQ;
+                    case 'MultipleAnswerMCQExerciseQuestion':
+                        return Config.stringsDict.EXERCISES.INSTRUCTIONS.MULTIPLE_ANSWER_MCQ;
+                    case 'RightOrWrongExerciseQuestion':
+                        return Config.stringsDict.EXERCISES.INSTRUCTIONS.RIGHT_OR_WRONG;
+                    case 'DropdownExerciseQuestion':
+                        return Config.stringsDict.EXERCISES.INSTRUCTIONS.DROPDOWNS;
+                    case 'OrderingExerciseQuestion':
+                        return Config.stringsDict.EXERCISES.INSTRUCTIONS.ORDERING;
+                    case 'CategorizeExerciseQuestion':
+                        return Config.stringsDict.EXERCISES.INSTRUCTIONS.CATEGORIZER;
+                    default:
+                        return "";
+                }
+            },
+
             render: function () {
                 this.questionModel = this.model.get('question');
 
@@ -32,7 +51,7 @@ define(
                 this.contentView = new ContentView({model: this.model});
 
                 this.$('#current-question-id').val(this.model.get('question_id'));
-                this.$('#question-instructions').html(); // TODO get instructions
+                this.$('#question-instructions').html(this.questionIntructions());
                 this.$('#question-heading').html(this.questionModel.get('question_heading'));
                 this.$('#question-content').html(this.contentView.render().$el);
                 this.$('#answer-explanation')

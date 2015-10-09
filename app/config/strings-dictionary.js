@@ -36,7 +36,15 @@ define([],
                 SUCCESS_MESSAGE: 'Vous pouvez désormais passer à un nouveau contenu et parfaire votre apprentissage.<br>Bonne continuation !',
                 FAILURE_MESSAGE_HEADER: 'Dommage !',
                 FAILURE_MESSAGE: 'Aïe, certaines notions n\'ont peut-­être pas été bien assimilées ? Renforcez vos connaissances en consultant la ressource suivante.',
-                OBJECTIVE_MESSAGE: '<em><strong>Objectif : </strong>Réussir au moins [%NB_SUCCESS_MIN%] questions</em>'
+                OBJECTIVE_MESSAGE: '<em><strong>Objectif : </strong>Réussir au moins [%NB_SUCCESS_MIN%] questions</em>',
+                INSTRUCTIONS: { // TODO Fill instructions
+                    CATEGORIZER: "",
+                    DROPDOWNS: "",
+                    MULTIPLE_ANSWER_MCQ: "",
+                    ORDERING: "",
+                    RIGHT_OR_WRONG: "",
+                    UNIQUE_ANSWER_MCQ: ""
+                }
             },
 
             SKILL_VALIDATION: {
