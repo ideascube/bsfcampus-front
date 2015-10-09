@@ -1,0 +1,28 @@
+<div class="modal-dialog modal-xl">
+	<form class="modal-content modal-content-exercise-attempt">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+			<h3 class="modal-title">
+				<%= skill.title %>
+			</h3>
+		</div>
+		<div class="modal-body">
+			<div id="exercise-attempt-progress">
+				<div id="question-icons-table"></div>
+			</div>
+			<div id="exercise-objective"><%= objectiveMessage %></div>
+			<div id="exercise-attempt-question"></div>
+			<div id="exercise-attempt-recap"></div>
+		</div>
+		<div id="exercise-attempt-footer" class="modal-footer">
+			<div class="pull-left">
+				<p id="exercise-attempt-question-answer-result"></p>
+			</div>
+			<button type="submit" class="btn btn-primary border-radius-lg btn-continue">
+				<%= config.stringsDict.EXERCISES.VALIDATE %>
+			</button>
+		</div>
+	</form>
+</div>

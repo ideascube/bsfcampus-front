@@ -29,9 +29,15 @@ define(
 
                 var templateData = {
                     attempt: this.model.toJSON(),
-                    resource: this.model.get('exercise').toJSON(),
                     config: Config
                 };
+
+                // FIXME This is not so clean, we should do this in a separate, view-specific method.
+                if (this.model.get('exercise')) {
+                    templateData.resource = this.model.get('exercise').toJSON(true)
+                } else if (this.model.get('skill')) {
+                    templateData.skill = this.model.get('skill').toJSON(true)
+                }
 
                 var html = success
                     ? this.successTemplate(templateData)

@@ -66,12 +66,20 @@ define(
                 var maxMistakes = this.model.get('max_mistakes');
                 objectiveMessage = objectiveMessage.replace("[%NB_SUCCESS_MIN%]", (this.model.getNumberOfQuestions() - maxMistakes).toString());
 
-                var html = this.template({
+                var templateData = {
                     attempt: this.model.toJSON(true),
-                    resource: this.model.get('exercise').toJSON(true),
                     objectiveMessage: objectiveMessage,
                     config: Config
-                });
+                };
+
+                // FIXME This is not so clean, we should do this in a separate, view-specific method.
+                if (this.model.get('exercise')) {
+                    templateData.resource = this.model.get('exercise').toJSON(true)
+                } else if (this.model.get('skill')) {
+                    templateData.skill = this.model.get('skill').toJSON(true)
+                }
+
+                var html = this.template(templateData);
                 this.$el.html(html);
 
                 this.$result = this.$('#exercise-attempt-question-answer-result');
