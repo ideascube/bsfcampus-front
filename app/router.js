@@ -67,8 +67,14 @@ define(
                     Backbone.history.navigate("", {trigger: true});
                 });
 
+                this.listenTo(this, 'route', this.changedRoute);
+
                 this.renderHeader();
                 this.renderFooter();
+            },
+
+            changedRoute: function() {
+                $('body').scrollTop();
             },
 
             // Global views
