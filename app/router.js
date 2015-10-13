@@ -171,7 +171,11 @@ define(
                 loginUserView.$el.on('hidden.bs.modal', function () {
                     var fragment = Backbone.history.getFragment();
                     VM.closeView(Config.constants.VIEWS_ID.LOGIN);
-                    self.afterSuccessfulLogin(loginUserView, fragment);
+                    if (currentUser.isLoggedIn()) {
+                        self.afterSuccessfulLogin(loginUserView, fragment);
+                    } else {
+                        self.navigate("/", {trigger: true, replace: true});
+                    }
                 }).on('shown.bs.modal', function () {
                     loginUserView.$('form input:first').focus();
                 }).modal('show');
