@@ -33,6 +33,7 @@ define(
         'pods/track/views/detail/index',
         'pods/skill/views/detail/index',
         'pods/skill/views/browser/index',
+        'pods/resource/views/additional/index',
         'pods/breadcrumb/views/breadcrumbContainer',
         'pods/track/views/promptValidation',
         'pods/search/view',
@@ -46,7 +47,7 @@ define(
               currentUser,
               MiscAnalyticsModel, VisitedResourceAnalyticsModel, VisitedSkillAnalyticsModel, VisitedTrackAnalyticsModel,
               AppHeaderView, AppFooterView, HomeView, ConnectedHomeView, RegisterUserView, LoginUserView, ResetPasswordView, UserProfileView,
-              TrackListView, TrackDetailView, SkillDetailView, SkillBrowserView,
+              TrackListView, TrackDetailView, SkillDetailView, SkillBrowserView, AdditionalResourceDetailView,
               ResourceHierarchyBreadcrumbView, PromptTrackValidationView, SearchResultsView, StaticPageView) {
 
         return Backbone.Router.extend({
@@ -115,7 +116,7 @@ define(
                 'skill/:skill': 'skillDetail',
                 'lesson/:lesson': 'lessonDetail',
                 'skill/:skill/resource/:resource': 'browseSkillResources',
-                'resource/:resource': 'resourceDetail',
+                'additional_resource/:resource': 'additionalResourceDetail',
                 'prompt_track_validation/:track': 'promptTrackValidation',
 
                 'search': 'search',
@@ -290,15 +291,15 @@ define(
                 skillBrowserView.selectResource(resource);
             },
 
-            resourceDetail: function(resource) {
-                var self =this;
-                var resource = resourcesCollection.getOrInstantiate(resource)
-                resource.fetchIfNeeded().done(
-                    function() {
-                        var newRoute = resource.route();
-                        self.navigate(newRoute, {trigger: true});
-                    }
-                );
+            additionalResourceDetail: function(resource) {
+                this.clearHome();
+                this.clearMain();
+                resource = resourcesCollection.getOrInstantiate(resource);
+
+                var additionalResourceDetailView = VM.createView(Config.constants.VIEWS_ID.ADDITIONAL_RESOURCE_DETAIL, function() {
+                    return new AdditionalResourceDetailView({model: resource});
+                });
+                this.$main.append(additionalResourceDetailView.render().$el);
             },
 
             getResourceHierarchyBreadcrumbView: function (breadcrumbModel) {

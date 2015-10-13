@@ -52,8 +52,12 @@ define(
                 return this;
             },
 
-            renderFetched: function(){
-                this.renderAdditionalResources();
+            renderFetched: function () {
+                if (this.model.get('is_additional')) {
+                    this.$additionalResources.remove();
+                } else {
+                    this.renderAdditionalResources();
+                }
             },
 
             renderContent: function () {

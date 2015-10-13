@@ -1,32 +1,35 @@
 define(
-	[
-		'jquery',
-		'underscore',
-		'backbone',
-		'app/config',
+    [
+        'jquery',
+        'underscore',
+        'backbone',
+        'app/config',
 
-		'pods/resource/model',
-		'text!pods/resource/templates/back-to-main-resource-nav.html'
+        'view',
 
-	],
-	function($, _, Backbone, Config,
-		ResourceModel, backToResourceNavTemplate
-		) {
+        'pods/resource/model',
+        'text!pods/resource/templates/back-to-main-resource-nav.html'
 
-		return Backbone.View.extend({
+    ],
+    function ($, _, Backbone, Config,
+              AbstractView,
+              ResourceModel, backToResourceNavTemplate) {
 
-			className: 'panel',
+        return AbstractView.extend({
 
-			template: _.template(backToResourceNavTemplate),
+            className: 'panel',
 
-			render: function() {
-				var html = this.template({resource: this.model.toJSON(true)});
-				this.$el.html(html);
+            template: _.template(backToResourceNavTemplate),
 
-				return this;
-			}
+            renderFetched: function () {
+                var html = this.template({resource: this.model.toJSON(true)});
+                this.$el.html(html);
 
-		});
+                return this;
+            }
 
-	}
-);
+        });
+
+    }
+)
+;
