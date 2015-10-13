@@ -62,6 +62,7 @@ define(
                 var json = AbstractModel.prototype.toJSON.call(this, forTemplate);
                 if (forTemplate === true) {
                     json.is_validated = this.isValidated();
+                    if (!json.short_description) { json.short_description = json.description; }
                 }
                 return json;
             }
