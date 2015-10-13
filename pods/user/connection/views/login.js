@@ -24,8 +24,11 @@ define(
 
             template: _.template(loginTemplate),
 
+            needsResetPassword: null,
+
             events: {
-                'submit form': 'submit'
+                'submit form': 'submit',
+                'click #reset-password': 'goToResetPassword'
             },
 
             render: function () {
@@ -55,19 +58,24 @@ define(
 
                 currentUser
                     .logIn(username, password)
-                    .done(function(){
-                        self.listenTo(currentUser, "fetch", function() {
+                    .done(function () {
+                        self.listenTo(currentUser, "fetch", function () {
                             self.$el.modal('hide');
                         });
                     })
-                    .fail(function(error){
+                    .fail(function (error) {
                         self.$loginError.html(Config.stringsDict.USER.LOG_IN_ERROR);
                         console.log("Could not submit login data", error);
                         self.$loginBtn.html(Config.stringsDict.USER.LOG_IN);
                         self.$loginBtn.removeClass('disabled');
                         self.$loginBtn.attr('disabled', false);
                     });
+            },
+
+            goToResetPassword: function (e) {
+                this.needsResetPassword = true;
             }
+
         });
     }
 );

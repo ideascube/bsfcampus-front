@@ -170,13 +170,15 @@ define(
                 $('body').append(loginUserView.render().$el);
                 var self = this;
                 loginUserView.$el.on('hidden.bs.modal', function () {
-                    var fragment = Backbone.history.getFragment();
-                    VM.closeView(Config.constants.VIEWS_ID.LOGIN);
-                    if (currentUser.isLoggedIn()) {
+                    if (loginUserView.needsResetPassword) {
+                        Backbone.history.navigate("/reset_password", {trigger: true});
+                    } else if (currentUser.isLoggedIn()) {
+                        var fragment = Backbone.history.getFragment();
                         self.afterSuccessfulLogin(loginUserView, fragment);
                     } else {
                         self.navigate("/", {trigger: true, replace: true});
                     }
+                    VM.closeView(Config.constants.VIEWS_ID.LOGIN);
                 }).on('shown.bs.modal', function () {
                     loginUserView.$('form input:first').focus();
                 }).modal('show');

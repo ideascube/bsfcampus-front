@@ -17,6 +17,8 @@ define(
 
             template: _.template(resetPasswordTemplate),
 
+            className: 'modal',
+
             events: {
                 'submit form': 'submit'
             },
