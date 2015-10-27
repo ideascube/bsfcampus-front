@@ -34,6 +34,9 @@ define(
                 });
                 this.$el.html(html);
                 this.$form = this.$("form");
+                this.$saveButton = this.$('button.save_modification');
+                this.$passwordSaveResult = this.$('#save-result');
+                this.$successIcons = this.$('form img.success-icon');
 
                 return this;
             },
@@ -42,13 +45,9 @@ define(
                 e.preventDefault();
 
                 var formData = JSON.stringify(this.$('form').serializeObject());
-                var $saveButton = this.$('button.save_modification');
-                $saveButton.prop('disabled', true);
-                var $passwordSaveResult = this.$('#save-result');
-                $passwordSaveResult.empty();
-                $passwordSaveResult.removeClass('text-success text-danger');
-                var $successIcons = this.$('form img.success-icon');
-                $successIcons.removeAttr('src');
+                this.$saveButton.prop('disabled', true);
+                this.$passwordSaveResult.empty().removeClass('text-success text-danger');
+                this.$successIcons.removeAttr('src');
                 var self = this;
                 $.ajax({
                     type: 'PATCH',
@@ -57,33 +56,33 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
-                    $successIcons.attr('src', Config.imagesDict.greenCheck);
-                    $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.SAVE_SUCCESS_MESSAGE);
-                    $passwordSaveResult.addClass('text-success');
-                    $saveButton.prop('disabled', false);
+                    self.$successIcons.attr('src', Config.imagesDict.greenCheck);
+                    self.$passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.SAVE_SUCCESS_MESSAGE);
+                    self.$passwordSaveResult.addClass('text-success');
+                    self.$saveButton.prop('disabled', false);
                     self.$form.find(":input:not([readonly])").val("");
                 }).fail(function(error){
                     console.log("Could not change user password", error);
                     var errorCode = error.responseJSON.code;
                     switch (errorCode) {
                         case Config.constants.changePasswordErrorsCode.INVALID_CURRENT_PASSWORD:
-                            $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.CURRENT_PASSWORD_ERROR);
+                            self.$passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.CURRENT_PASSWORD_ERROR);
                             self.$("form input#current_password+img.success-icon").attr('src', Config.imagesDict.wrongRed);
                             break;
                         case Config.constants.changePasswordErrorsCode.INVALID_NEW_PASSWORD:
-                            $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.ERROR_NEW_PASSWORD);
+                            self.$passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.ERROR_NEW_PASSWORD);
                             self.$("form input#current_password+img.success-icon").attr('src', Config.imagesDict.greenCheck);
                             self.$("form input#new_password+img.success-icon").attr('src', Config.imagesDict.wrongRed);
                             break;
                         case Config.constants.changePasswordErrorsCode.INVALID_CONFIRM_PASSWORD:
-                            $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.ERROR_CONFIRM_NEW_PASSWORD);
+                            self.$passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.ERROR_CONFIRM_NEW_PASSWORD);
                             self.$("form input#current_password+img.success-icon").attr('src', Config.imagesDict.greenCheck);
                             self.$("form input#new_password+img.success-icon").attr('src', Config.imagesDict.greenCheck);
                             self.$("form input#confirm_new_password+img.success-icon").attr('src', Config.imagesDict.wrongRed);
                             break;
                     }
-                    $passwordSaveResult.addClass('text-danger');
-                    $saveButton.prop('disabled', false);
+                    self.$passwordSaveResult.addClass('text-danger');
+                    self.$saveButton.prop('disabled', false);
                 });
             }
 
