@@ -8,8 +8,9 @@ define(
 
 			default_background_image: Constants.imagesPath + 'city.png',
 			logo_gates_foundation: Constants.imagesPath + 'gatesfound.png',
-			logo_bsf_campus: Constants.imagesPath + 'BSF_logo_header.png',
+			logo_bsf_campus: Constants.imagesPath + 'bsfcampus_brand_image.png',
 			logo_bsf: Constants.imagesPath + 'Logo-BSF_small.png',
+			logo_bsf_header: Constants.imagesPath + 'BSF_logo_header.png',
 
 			arrow: Constants.imagesPath + 'arrow.png',
 			studentHat: Constants.imagesPath + 'student-hat.png',
