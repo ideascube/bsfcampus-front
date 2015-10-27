@@ -33,6 +33,7 @@ define(
                     config: Config
                 });
                 this.$el.html(html);
+                this.$form = this.$("form");
 
                 return this;
             },
@@ -60,6 +61,7 @@ define(
                     $passwordSaveResult.html(Config.stringsDict.USER.PROFILE.PASSWORD.SAVE_SUCCESS_MESSAGE);
                     $passwordSaveResult.addClass('text-success');
                     $saveButton.prop('disabled', false);
+                    self.$form.find(":input:not([readonly])").val("");
                 }).fail(function(error){
                     console.log("Could not change user password", error);
                     var errorCode = error.responseJSON.code;
