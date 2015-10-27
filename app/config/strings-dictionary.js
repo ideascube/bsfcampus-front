@@ -179,6 +179,12 @@ define([],
                         SAVE_SUCCESS_MESSAGE: 'Vos modifications ont été enregistrées',
                         SAVE_FAIL_MESSAGE: "Erreur lors de l'enregistrement : Merci de vérifier les données"
                     },
+                    MERGE: {
+                        SUCCESS: "Le compte a bien été fusionné avec le compte existant !",
+                        UNKNOWN_ERROR: "Une erreur inconnue est survenue.",
+                        INVALID_CREDENTIALS: "Pas de compte trouvé sur ce serveur avec ce nom d'utilisateur et ce mot de passe.",
+                        COULD_NOT_PERFORM_MERGE: "La fusion des comptes n'a pas pu être effectuée."
+                    },
                     PASSWORD: {
                         TITLE: "Mon mot de passe",
                         CURRENT_PASSWORD: "Mot de passe actuel",

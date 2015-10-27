@@ -6,11 +6,14 @@ define(
         'jqueryserialize',
         'app/config',
 
+        'model',
+
         'pods/user/models/current',
 
         'text!pods/user/profile/pages/templates/merge-user-accounts.html'
     ],
     function ($, _, Backbone, $serialize, Config,
+              AbstractModel,
               currentUser,
               mergeTemplate) {
 
@@ -29,7 +32,8 @@ define(
                 this.$el.html(html);
 
                 this.$localServerSelect = this.$('select#local_server');
-                this.$('form button[type="submit"]').prop('disabled', true);
+                this.$submitButton = this.$('form button[type="submit"]');
+                this.$feedback = this.$("#merge-feedback").hide();
 
                 this.loadLocalServers();
 
@@ -41,6 +45,7 @@ define(
 
                 var formData = JSON.stringify(this.$('form').serializeObject());
                 var self = this;
+                this.$feedback.removeClass("text-success text-danger").empty().hide();
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json',
@@ -48,10 +53,19 @@ define(
                     data: formData,
                     dataType: 'json'
                 }).done(function(result){
-                    alert("Successfuly absorbed user account :)");
-                }).fail(function(error){
-                    alert("Could not absorb user account :(");
-                    console.log(error);
+                    alert(Config.stringsDict.USER.PROFILE.MERGE.SUCCESS);
+                    self.$el.modal('hide');
+                }).fail(function(jqXHR, textStatus, errorThrown){
+                    var message = Config.stringsDict.USER.PROFILE.MERGE.UNKNOWN_ERROR;
+                    switch(jqXHR.responseJSON.code) {
+                        case 1:
+                            message = Config.stringsDict.USER.PROFILE.MERGE.INVALID_CREDENTIALS;
+                            break;
+                        case 3:
+                            message = Config.stringsDict.USER.PROFILE.MERGE.COULD_NOT_PERFORM_MERGE;
+                            break;
+                    }
+                    self.$feedback.addClass("text-danger").html(message).show();
                 });
             },
 
@@ -62,13 +76,13 @@ define(
                         _.each(result.data, function(localServer){
                             // FIXME This way of getting the id is not clean.
                             // Use a Backbone Model instead, in order to use the parse method.
-                            var html = "<option value=\"" + localServer['_id']['$oid'] + "\">"
-                                + localServer['name']
-                                + " [" + localServer['key'] + "]"
-                                + "</option>\n";
-                            self.$localServerSelect.append(html);
+                            var localServerModel = new AbstractModel({data: localServer}, {parse: true});
+                            var $option = $('<option></option>');
+                            $option.attr("value", localServerModel.id);
+                            $option.html(localServerModel.get("name") + " [" + localServerModel.get("key") + "]");
+                            self.$localServerSelect.append($option);
                         });
-                        self.$('form button[type="submit"]').prop('disabled', false);
+                        self.$submitButton.prop('disabled', false);
                     }
                 )
             }

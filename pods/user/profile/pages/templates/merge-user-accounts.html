@@ -20,10 +20,10 @@
                     <input type="password" class="form-control" name="password" id="password"
                            placeholder="<%= config.stringsDict.USER.PASSWORD %>"/>
                 </div>
-                <p class="login-error hide"><%= config.stringsDict.USER.LOG_IN_ERROR %></p>
-                <button id="connection" type="submit" class="btn btn-primary btn-block btn-submit">
+                <button id="connection" type="submit" class="btn btn-primary btn-block btn-submit" disabled>
                     Fusionner
                 </button>
+                <p id="merge-feedback"></p>
             </form>
         </div>
     </div>
