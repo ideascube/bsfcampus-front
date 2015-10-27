@@ -1,18 +1,22 @@
 <div id="home-content">
-    <div id="first-window" class="container-fluid">
+    <div id="home-slide-1" class="home-slide container-fluid">
         <div class="container">
-            <h1 id="greeting" class="text-center">
-                <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
-            </h1>
             <div class="row">
-                <div class="col-sm-3 col-center">
+                <div class="col-lg-8 col-center">
+                    <h1 class="text-center">
+                        <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-md-3 col-center">
                     <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
                         <%= config.stringsDict.HOME.LOGIN %>
                     </a>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3 col-center">
+                <div class="col-sm-6 col-md-3 col-center">
                     <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
                         <%= config.stringsDict.HOME.REGISTER %>
                     </a>
@@ -20,41 +24,74 @@
             </div>
 
             <div class="text-center">
-                <a class="block-center" id="scroll-arrow" href="#second-window">
+                <a class="block-center slider-arrow" id="scroll-to-slide-2" href="#home-slide-2">
                     <span class="glyphicon glyphicon-chevron-down"></span>
                 </a>
             </div>
         </div>
     </div>
-    <div id="second-window" class="container-fluid">
+    <div id="home-slide-2" class="home-slide container-fluid">
         <div class="container">
-            <h1 id="second-greeting" class="text-center">
-                <%= config.stringsDict.HOME.BSF_HOME_PUNCHLINE %>
-            </h1>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>
+                        Contenu
+                        <small>6 parcours pédagogiques accessibles en ligne &amp; hors-ligne</small>
+                    </h2>
+                </div>
+                <div class="col-sm-6">
+                    <img class="img-responsive" src="assets/images/picto-slide2.png" />
+                </div>
+            </div>
+        </div>
 
+        <div class="text-center">
+            <a class="block-center slider-arrow" id="scroll-to-slide-3" href="#home-slide-3">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </div>
+    </div>
+    <div id="home-slide-3" class="home-slide container-fluid">
+        <div class="container">
             <div class="row">
-                <div class="col-sm-offset-1 col-sm-5 text-justify">
-                    <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+                <div class="col-sm-6">
+                    <img class="img-responsive" src="assets/images/picto-slide3.png" />
                 </div>
-                <div class="col-sm-5 text-justify">
-                    <%= config.stringsDict.HOME.BSF_HOME_TEXT %>
+                <div class="col-sm-6">
+                    <h2>
+                        Personnalisation
+                        <small>Plus de 100 leçons et exercices pour progresser à son rythme</small>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a class="block-center slider-arrow" id="scroll-to-slide-4" href="#home-slide-4">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+        </div>
+    </div>
+    <div id="home-slide-4" class="home-slide container-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-center">
+                    <h3 class="text-center">
+                        BSF Campus est une plateforme <em>gratuite</em> et <em>sans publicité</em>.
+                        <small>Lancée par l'ONG Bibliothèques Sans Frontières avec le soutien de la fondation
+                            Bill &amp; Melinda Gates.</small>
+                    </h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3 col-center">
-                    <a class="btn btn-primary btn-block border-radius-lg btn-user-action btn-login" href="#/login">
-                        <%= config.stringsDict.HOME.LOGIN %>
-                    </a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-3 col-center">
+                <div class="col-sm-10 col-md-6 col-lg-3 col-center">
                     <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
-                        <%= config.stringsDict.HOME.REGISTER %>
+                        Commencez à apprendre
                     </a>
                 </div>
             </div>
         </div>
     </div>
-    <div id="third-window" class="container-fluid"></div>
+    <div id="home-slide-5" class="home-slide container-fluid"></div>
+
 </div>

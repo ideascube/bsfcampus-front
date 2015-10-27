@@ -1,92 +1,148 @@
 #home-content {
 
-  .btn-user-action {
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  #first-window {
-    min-height:720px;
-
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-image: url('../../assets/images/bsf_home_image.jpg');
-    background-attachment: scroll;
-
-    #greeting {
-      margin: 150px auto;
-      font-weight: bold;
+    .btn-user-action {
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
-    .home-msg-welcome {
-      h4 {
-        font-weight: 600;
-        text-align: center;
-        font-size: 1.5em;
-        font-style: italic;
-      }
+    .home-slide {
+
+        min-height: 600px;
+        padding-top: 100px;
+        padding-bottom: 100px;
+        position: relative;
+
+        .slider-arrow {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -32px;
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-color: #eee;
+            background-color: rgba(255, 255, 255, 0.2);
+
+            .glyphicon {
+                color: white;
+                font-size: 32px;
+                line-height: 64px;
+            }
+        }
+
+        h2 {
+            font-size: 48px;
+            font-weight: normal;
+            word-break: break-all;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+            -ms-hyphens: auto;
+            hyphens: manual;
+            hyphenate-character: "\2112";
+            small {
+                word-break: normal;
+                display: block;
+                margin-top: 30px;
+                font-size: 30px;
+            }
+        }
+
+        h3 {
+            font-size: 30px;
+            small {
+                display: block;
+                margin-top: 30px;
+                font-size: 20px;
+            }
+        }
+
+        &#home-slide-1 {
+
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-image: url('../../assets/images/bsf_home_image.jpg');
+            background-attachment: scroll;
+
+            h1 {
+                margin-bottom: 50px;
+                color: white;
+                font-size: 60px;
+                font-weight: normal;
+                text-shadow: 1px 1px #c1c1c1;
+                small {
+                    display: block;
+                    font-size: 30px;
+                    margin-top: 30px;
+                    color: white;
+                    font-weight: lighter;
+                }
+            }
+
+            .btn-login {
+                background-color: #16bbc7;
+                color: white;
+            }
+
+            .btn-register {
+                background-color: #c1c1c1;
+                color: white;
+            }
+
+        }
+
+        &#home-slide-2 {
+            background-color: #1ea0b0;
+            h2 {
+                color: #16bbc7;
+                small {
+                    color: white;
+                }
+            }
+        }
+
+        &#home-slide-3 {
+            background-color: #17bbc7;
+            h2 {
+                color: #0ecbd9;
+                small {
+                    color: white;
+                    margin-left: 80px;
+                }
+            }
+        }
+
+        &#home-slide-4 {
+            background-color: #bcd6d7;
+            h3 {
+                color: white;
+                small {
+                    color: white;
+                }
+            }
+
+            .btn-register {
+                background-color: #16bbc7;
+                color: white;
+            }
+        }
+
+        &#home-slide-5 {
+            background-color: #e7f0ef;
+            min-height: 300px;
+            -webkit-background-size: 100%;
+            -moz-background-size: 100%;
+            -o-background-size: 100%;
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            background-image: url('../../assets/images/city.png');
+            background-attachment: scroll;
+        }
+
     }
-
-    .btn-register {
-      background-color: rgba(255,255,255,0.2);
-      border: 1px solid white;
-      color: white;
-      &:hover {
-        background-color: #42befa;
-        border-color: #42befa;
-      }
-    }
-
-    #scroll-arrow {
-      display: block;
-      margin: 20px auto;
-      width: 64px; height: 64px;
-      border-radius: 32px;
-      background-color: #eee;
-      background-color: rgba(255, 255, 255, 0.2);
-
-      .glyphicon {
-        color: white;
-        font-size: 32px;
-        line-height: 64px;
-      }
-    }
-
-  }
-
-  #second-window {
-    min-height: 720px;
-
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-image: url('../../assets/images/city.png');
-    background-attachment: scroll;
-
-    #second-greeting {
-      margin: 100px auto 50px;
-      font-weight: bold;
-    }
-  }
-
-  #third-window{
-    min-height: 720px;
-
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-image: url('../../assets/images/bsf_home_image_3.jpg');
-    background-attachment: scroll;
-  }
 
 }

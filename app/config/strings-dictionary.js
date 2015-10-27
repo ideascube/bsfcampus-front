@@ -105,14 +105,8 @@ define([],
             },
 
             HOME: {
-                BSF_HOME_PUNCHLINE: 'Bienvenue sur BSF Campus !',
-                BSF_HOME_TEXT: '<p>En 2015, l\'ONG Bibliothèques Sans Frontières lance, avec le soutien de la '
-                    + 'Bill & Melinda Gates Foundation, le programme BSF Campus, qui vise à renforcer les '
-                    + 'bibliothèques publiques et communautaires d\'Afrique francophone dans leur rôle de '
-                    + 'conduite de l\'innovation et de transformation sociale.</p>'
-                    + '<p>BSF Campus, c\'est une plateforme d\'e-learning, gratuit et certifiant, pour les '
-                    + 'professionnels en poste dans la région. La plateforme sera également accessible sans '
-                    + 'internet (offline), pour les bibliothèques qui n\'ont pas accès au réseau.</p>',
+                BSF_HOME_PUNCHLINE: "Bienvenue sur BSF Campus"
+                    + "<small>La 1<sup>ère</sup> plateforme d'apprentissage personnalisée et gratuite pour les professionnels des bibliothèques</small>",
                 LOGIN: 'Connexion',
                 REGISTER: 'Inscription'
             },

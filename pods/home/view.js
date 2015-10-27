@@ -25,7 +25,7 @@ define(
             events: {
                 'click .btn-login': 'login',
                 'click .btn-register': 'register',
-                'click #scroll-arrow': 'scrollTo'
+                'click .slider-arrow': 'scrollTo'
             },
 
             render: function() {
