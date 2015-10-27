@@ -8,13 +8,13 @@ define(
 
         'pods/resource/content/baseView',
 
-        'pods/analytics/models/completedResource',
+        'pods/analytics/models/watchedVideoResource',
 
         'text!pods/resource/content/video/template.html'
     ],
     function ($, _, Backbone, Config, videojs,
               ResourceContentBaseView,
-              CompletedResourceAnalyticsModel,
+              WatchedVideoResourceAnalyticsModel,
               template) {
 
         return ResourceContentBaseView.extend({
@@ -30,20 +30,23 @@ define(
             activateAfterRendered: function() {
                 ResourceContentBaseView.prototype.activateAfterRendered.apply(this, arguments);
 
-                var videoPlayer = videojs(this.$("video#resource-video-player")[0], {width: "auto", height: "auto"}, function(){
-                    // Player (this) is initialized and ready.
-                });
-
                 var self = this;
-                this.listenTo(videoPlayer, "loadedmetadata", function() {
-                    self.listenTo(videoPlayer, "ended", self.completeResource)
-                });
+
+                this.videoPlayer = videojs(
+                    this.$("video#resource-video-player")[0],
+                    {width: "auto", height: "auto"},
+                    function(){
+                        this.on("ended", function(){
+                            self.completeResource();
+                        });
+                    }
+                );
             },
 
             completeResource: function () {
                 if (!this.model.get("is_validated"))
                 {
-                    var analytics = new CompletedResourceAnalyticsModel();
+                    var analytics = new WatchedVideoResourceAnalyticsModel();
                     analytics.set('resource', this.model.id);
                     analytics.save();
                 }

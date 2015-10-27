@@ -10,7 +10,7 @@ define(
               AbstractModel) {
 
         return AbstractModel.extend({
-            serverPath: '/activity/completed_resource'
+            serverPath: '/activity/watched_video'
         });
 
     }
