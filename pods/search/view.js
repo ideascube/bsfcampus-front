@@ -5,7 +5,10 @@ define(
         'backbone',
         'app/config',
 
-        'model',
+        'tracksCollection',
+        'skillsCollection',
+        'lessonsCollection',
+        'resourcesCollection',
 
         'text!pods/search/templates/search.html',
         'text!pods/search/templates/search-result.html',
@@ -13,7 +16,7 @@ define(
         'less!pods/search/style'
     ],
     function($, _, Backbone, Config,
-             AbstractModel,
+             tracksCollection, skillsCollection, lessonsCollection, resourcesCollection,
              searchTemplate, searchResultTemplate
     ) {
 
@@ -36,9 +39,22 @@ define(
             },
 
             renderResult: function(result) {
-                var model = new AbstractModel({data: result.document}, {parse: true});
-                var route = "#/" + result.type + "/" + model.id;
-                var $result = $(this.resultTemplate({route: route, result: result, config: Config}));
+                var model;
+                switch (result.type) {
+                    case "resource":
+                        model = resourcesCollection.getOrInstantiate(result.document);
+                        break;
+                    case "lesson":
+                        model = lessonsCollection.getOrInstantiate(result.document);
+                        break;
+                    case "skill":
+                        model = skillsCollection.getOrInstantiate(result.document);
+                        break;
+                    case "track":
+                        model = tracksCollection.getOrInstantiate(result.document);
+                        break;
+                }
+                var $result = $(this.resultTemplate({model: model.toJSON(true), config: Config}));
                 var document = result['document'];
                 var breadcrumbArray = document['hierarchy'];
                 var $breadcrumb = $result.find('ol.breadcrumb');

@@ -81,17 +81,19 @@ define(
             },
 
             getOrInstantiate: function (obj) {
-                var savedModel = Backbone.Collection.prototype.get.apply(this, arguments);
-                if (savedModel) {
-                    return savedModel;
-                }
                 var attr;
                 if (typeof obj === "string") {
                     (attr = {})[this.model.prototype.idAttribute] = obj;
                 } else {
-                    attr = this._isModel(obj) ? obj.attributes : obj;
+                    attr = this._isModel(obj) ? obj.attributes : this.recursiveNormalize(obj);
                 }
-                var model = new this.model(attr);
+
+                var savedModel = Backbone.Collection.prototype.get.call(this, attr);
+                if (savedModel) {
+                    return savedModel;
+                }
+
+                var model = new this.model({data: attr}, {parse: true});
                 this.add(model);
                 return model;
             },
