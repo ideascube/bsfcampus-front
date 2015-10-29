@@ -33,6 +33,18 @@
     </form>
 
     <% if(config.constants.server_type == 'central') { %>
+    <h3>Identifiants</h3>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Serveur</th>
+                <th>Identifiant</th>
+            </tr>
+        </thead>
+        <tbody id="user-credentials"></tbody>
+    </table>
+
     <p class="text-center">
         <button class="btn btn-primary btn-lg border-radius-lg btn-merge-user-account">
             Fusionner des comptes utilisateur

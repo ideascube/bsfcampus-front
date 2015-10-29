@@ -42,8 +42,22 @@ define(
                     config: Config
                 });
                 this.$el.html(html);
+                this.$credentials = this.$("#user-credentials");
+
+                console.log('YO!');
+                this.renderCredentials();
 
                 return this;
+            },
+
+            renderCredentials: function() {
+                console.log('yo!');
+                _.each(currentUser.get("all_credentials"), function(creds){
+                    var $tr = $("<tr></tr>");
+                    var $server = $("<td></td>").html(creds.local_server_name || "Serveur central");
+                    var $username = $("<td></td>").html(creds.username);
+                    this.$credentials.append($tr.append($server).append($username));
+                }, this);
             },
 
             saveModifications: function(e) {
