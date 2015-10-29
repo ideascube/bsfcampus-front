@@ -7,12 +7,13 @@ define(
 
         'model',
         'pods/resource/model',
+        'resourcesCollection',
 
         'pods/attempts/exercise-attempt/question-answer/models/question-answer',
         'pods/attempts/exercise-attempt/question-answer/collections/attempt'
     ],
     function ($, _, Backbone, Config,
-              AbstractModel, ResourceModel,
+              AbstractModel, ResourceModel, resourcesCollection,
               ExerciseAttemptQuestionAnswerModel, ExerciseAttemptQuestionAnswersCollection) {
 
         return AbstractModel.extend({
@@ -21,7 +22,6 @@ define(
                 response = AbstractModel.prototype.parse.apply(this, arguments);
 
                 if (response.exercise) {
-                    var resourcesCollection = require('resourcesCollection');
                     var exercise = resourcesCollection.getOrInstantiate(response.exercise);
                     if (exercise.empty) { exercise.set(response.exercise); }
                     response.exercise = exercise;
@@ -34,6 +34,12 @@ define(
                         collection.add(model);
                     }, this);
                     response.question_answers = collection;
+                }
+
+                if (response.fail_linked_resource) {
+                    var fail_linked_resource = resourcesCollection.getOrInstantiate(response.fail_linked_resource);
+                    if (fail_linked_resource.empty) { fail_linked_resource.set(response.fail_linked_resource); }
+                    response.fail_linked_resource = fail_linked_resource;
                 }
 
                 return response;
@@ -81,14 +87,6 @@ define(
                 return this.get('question_answers').filter(function (questionAnswer) {
                     return questionAnswer.get('is_answered_correctly') === false;
                 }).length;
-            },
-
-            getFailedLinkedResource: function () {
-                var ref = this.get('fail_linked_resource');
-                if (ref == null) {
-                    return null;
-                }
-                return new ResourceModel(ref);
             }
 
         });

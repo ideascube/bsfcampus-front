@@ -52,7 +52,7 @@ define(
             },
 
             handleFailure: function () {
-                var linkedResource = this.model.getFailedLinkedResource();
+                var linkedResource = this.model.get('fail_linked_resource');
                 if (linkedResource != null) {
                     var failLinkedResourceView = new LinkToResourceView({model: linkedResource});
                     this.$('#fail-linked-resource').html(failLinkedResourceView.render().$el);
