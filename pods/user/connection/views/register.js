@@ -34,6 +34,7 @@ define(
                 this.$el.html(html);
 
                 this.$registerError = this.$("#register-error");
+                this.$registerBtn = this.$("#register-btn");
 
                 return this;
             },
@@ -41,7 +42,11 @@ define(
             submit: function (e) {
                 e.preventDefault();
 
+                this.$('form .has-error').removeClass('has-error');
                 this.$registerError.empty();
+                this.$registerBtn.html(Config.stringsDict.USER.REGISTERING);
+                this.$registerBtn.addClass('disabled');
+                this.$registerBtn.attr('disabled', true);
 
                 var formData = JSON.stringify(this.$('form').serializeObject());
                 var username = this.$('form #username').val();
@@ -61,7 +66,9 @@ define(
                             self.$el.modal('hide');
                         });
                 }).fail(function (error) {
-                    self.$('form .has-error').removeClass('has-error');
+                    self.$registerBtn.html(Config.stringsDict.USER.REGISTER);
+                    self.$registerBtn.removeClass('disabled');
+                    self.$registerBtn.attr('disabled', false);
                     switch (error.responseJSON.code){
                         case Config.constants.registerErrorsCode.USERNAME_ALREADY_EXISTS:
                             self.$('form #username').closest('.form-group').addClass('has-error');

@@ -177,7 +177,7 @@ define(
                 var self = this;
                 loginUserView.$el.on('hidden.bs.modal', function () {
                     if (loginUserView.needsResetPassword) {
-                        Backbone.history.navigate("/reset_password", {trigger: true});
+                        Backbone.history.loadUrl("/reset_password");
                     } else if (currentUser.isLoggedIn()) {
                         var fragment = Backbone.history.getFragment();
                         self.afterSuccessfulLogin(loginUserView, fragment);

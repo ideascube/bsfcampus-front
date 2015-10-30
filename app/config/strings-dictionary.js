@@ -129,6 +129,7 @@ define([],
 
             USER: {
                 REGISTER: "S'inscrire",
+                REGISTERING: "Inscription en cours...",
                 LOG_IN: "Se connecter",
                 LOGGING_IN: "Connexion en cours...",
                 FULL_NAME: "Nom complet",
@@ -151,6 +152,7 @@ define([],
                     DEFAULT_ERROR: "Une erreur est survenue lors de l'inscription"
                 },
                 RESET_PASSWORD: 'Réinitialiser le mot de passe',
+                RESETTING: "Réinitialisation en cours...",
                 RESET_PASSWORD_MESSAGE: {
                     PASSWORD_SENT: "Un nouveau mot de passe a été envoyé par email",
                     LOCAL_SERVER: "Il faut se connecter à la plateforme centrale pour réinitialiser le mot de passe",
