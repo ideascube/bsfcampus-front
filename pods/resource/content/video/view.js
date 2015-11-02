@@ -10,21 +10,25 @@ define(
 
         'pods/analytics/models/watchedVideoResource',
 
-        'text!pods/resource/content/video/template.html'
+        'text!pods/resource/content/video/template.html',
+
+        'text!pods/resource/content/external-video/templates/youtube.html'
     ],
     function ($, _, Backbone, Config, videojs,
               ResourceContentBaseView,
               WatchedVideoResourceAnalyticsModel,
-              template) {
+              template,
+              youtubeTemplate) {
 
         return ResourceContentBaseView.extend({
 
-            template: _.template(template),
-
-            renderFetched: function() {
-                ResourceContentBaseView.prototype.renderFetched.apply(this, arguments);
-
-                return this;
+            template: function(args) {
+                switch(this.model.get('resource_content').source) {
+                    case 'youtube':
+                        return _.template(youtubeTemplate)(args);
+                    default:
+                        return _.template(template)(args);
+                }
             },
 
             activateAfterRendered: function() {
@@ -32,15 +36,21 @@ define(
 
                 var self = this;
 
-                this.videoPlayer = videojs(
-                    this.$("video#resource-video-player")[0],
-                    {width: "auto", height: "auto"},
-                    function(){
-                        this.on("ended", function(){
-                            self.completeResource();
-                        });
-                    }
-                );
+                switch(this.model.get('resource_content').source) {
+                    case 'youtube':
+                        break;
+                    default:
+                        this.videoPlayer = videojs(
+                            this.$("video#resource-video-player")[0],
+                            {width: "auto", height: "auto"},
+                            function(){
+                                this.on("ended", function(){
+                                    self.completeResource();
+                                });
+                            }
+                        );
+                        break;
+                }
             },
 
             completeResource: function () {
