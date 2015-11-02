@@ -10,24 +10,23 @@ define(
 
         'pods/analytics/models/watchedVideoResource',
 
-        'text!pods/resource/content/video/template.html',
-
-        'text!pods/resource/content/external-video/templates/youtube.html'
+        'text!pods/resource/content/video/templates/local.html',
+        'text!pods/resource/content/video/templates/youtube.html'
     ],
     function ($, _, Backbone, Config, videojs,
               ResourceContentBaseView,
               WatchedVideoResourceAnalyticsModel,
-              template,
-              youtubeTemplate) {
+              localTemplate, youtubeTemplate) {
 
         return ResourceContentBaseView.extend({
 
             template: function(args) {
-                switch(this.model.get('resource_content').source) {
+                var source = (Config.constants.server_type == "local") ? "local" : this.model.get('resource_content').source;
+                switch(source) {
                     case 'youtube':
                         return _.template(youtubeTemplate)(args);
                     default:
-                        return _.template(template)(args);
+                        return _.template(localTemplate)(args);
                 }
             },
 
@@ -35,9 +34,23 @@ define(
                 ResourceContentBaseView.prototype.activateAfterRendered.apply(this, arguments);
 
                 var self = this;
+                var source = (Config.constants.server_type == "local") ? "local" : this.model.get('resource_content').source;
 
-                switch(this.model.get('resource_content').source) {
+                switch(source) {
                     case 'youtube':
+                        var player;
+                        window.onYouTubeIframeAPIReady = function() {
+                            player = new YT.Player('youtube-video', {
+                                height: '100%',
+                                width: '100%',
+                                videoId: self.model.get('resource_content').video_id,
+                                events: {
+                                    'onStateChange': function(e) {
+                                        self.youtubePlayerStateChanged(e);
+                                    }
+                                }
+                            });
+                        };
                         break;
                     default:
                         this.videoPlayer = videojs(
@@ -59,6 +72,12 @@ define(
                     var analytics = new WatchedVideoResourceAnalyticsModel();
                     analytics.set('resource', this.model.id);
                     analytics.save();
+                }
+            },
+
+            youtubePlayerStateChanged: function(e) {
+                if (e.data === 0) {
+                    this.completeResource();
                 }
             }
 
