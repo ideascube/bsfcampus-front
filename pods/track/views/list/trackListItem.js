@@ -32,7 +32,7 @@ define(
                 this.$progress = this.$('.track-progress');
                 this.$btnStart = this.$('.btn-start');
 
-                if (this.model.get('active') != true) {
+                if (this.model.get('is_active') != true) {
                     this.$btnStart.addClass('disabled');
                 }
 
