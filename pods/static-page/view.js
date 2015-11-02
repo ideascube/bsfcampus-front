@@ -18,6 +18,10 @@ define(
 
             template: _.template(staticPageTemplate),
 
+            events: {
+                'click .internal-link': 'scrollTo'
+            },
+
             initialize: function () {
                 this.listenTo(this.model, "change", this.render);
             },
@@ -29,6 +33,17 @@ define(
                 this.$el.html(html);
 
                 return this;
+            },
+
+            scrollTo: function (e) {
+                e.preventDefault();
+
+                var the_id = $(e.currentTarget).attr("href");
+                var $target = this.$(the_id);
+
+                $('html, body').stop().animate({
+                    'scrollTop': $target.offset().top
+                }, 'slow');
             }
 
         });
