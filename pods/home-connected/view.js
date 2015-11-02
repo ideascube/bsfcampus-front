@@ -59,9 +59,10 @@ define(
 
                 var the_id = $(e.currentTarget).attr("href");
                 var $target = this.$(the_id);
+                var navbarHeight = $('#navbar').height();
 
                 $('html, body').stop().animate({
-                    'scrollTop': $target.offset().top
+                    'scrollTop': $target.offset().top - navbarHeight
                 }, 'slow');
             }
         });
