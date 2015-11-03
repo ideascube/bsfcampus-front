@@ -27,7 +27,37 @@
     .panel-footer {
         background-color: #fff;
         h2 {
-            font-size: 1.2em;
+            font-size: 1.5em;
+        }
+
+        a.media {
+
+            border: none;
+            border-radius: 0;
+            margin: 0;
+            padding-left: 50px;
+
+            img {
+                width: 42px;
+                height: 42px;
+                margin-right: 5px;
+            }
+
+            .media-body {
+                padding: 10px;
+                vertical-align: middle;
+
+                .media-heading {
+                    font-size: 1.0em;
+                    font-weight: lighter;
+                    color: #252525;
+                }
+            }
+
+            &.active {
+                background-color: #e0e0e0;
+            }
+
         }
     }
 
