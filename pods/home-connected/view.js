@@ -23,7 +23,7 @@ define(
             events: {
                 'click #button_formations': 'goToTracks',
                 'click #button_tutorat': 'goToProfile',
-                'click #scroll-arrow': 'scrollTo'
+                'click .slider-arrow': 'scrollTo'
             },
 
             initialize: function () {
