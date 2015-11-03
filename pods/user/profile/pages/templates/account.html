@@ -23,6 +23,30 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="country" id="label_country" class="col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-1 control-label">
+                Pays
+            </label>
+            <div class="col-sm-6 col-md-7">
+                <input type="text" name="country" id="country" maxlength="50" class="form-control" value="<%= user.country || '' %>" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="occupation" id="label_occupation" class="col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-1 control-label">
+                Poste (facultatif)
+            </label>
+            <div class="col-sm-6 col-md-7">
+                <input type="text" name="occupation" id="occupation" maxlength="50" class="form-control" value="<%= user.occupation || '' %>" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="organization" id="label_organization" class="col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-1 control-label">
+                Organisation (facultatif)
+            </label>
+            <div class="col-sm-6 col-md-7">
+                <input type="text" name="organization" id="organization" maxlength="50" class="form-control" value="<%= user.organization || '' %>" required />
+            </div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-6 col-sm-offset-5 col-md-7 col-md-offset-4">
                 <button type="submit" class="btn btn-success btn-block btn-save-modification">
                     <%= config.stringsDict.USER.PROFILE.SAVE_MODIFICATIONS %>
