@@ -74,7 +74,7 @@ define(
             },
 
             changedRoute: function() {
-                $('body').scrollTop();
+                $('body').scrollTop(0);
             },
 
             // Global views
