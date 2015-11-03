@@ -1,182 +1,191 @@
 #home-connected-content {
 
-  #first-window {
+    #first-window {
 
-    padding-bottom: 150px;
+        padding-bottom: 150px;
 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center top;
-    background-image: url('../../assets/images/bsf_home_image.jpg');
-    background-attachment: scroll;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-image: url('../../assets/images/bsf_home_image.jpg');
+        background-attachment: scroll;
+        position: relative;
 
-    #greeting {
-      margin: 60px auto;
-      color: white;
-      font-size: 3.5em;
-      font-weight: bold;
+        h1 {
+            margin: 60px auto;
+            color: white;
+            font-size: 40px;
+            font-weight: normal;
+            text-shadow: 0 0 70px #c1c1c1;
+            letter-spacing: -.03em;
+            small {
+                display: block;
+                font-size: 20px;
+                margin-top: 60px;
+                color: white;
+                letter-spacing: .1em;
+                line-height: 1.5;
+            }
+        }
+
+        .slider-arrow {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            margin-left: -32px;
+            width: 64px;
+            height: 64px;
+            border-radius: 32px;
+            background-color: #eee;
+            background-color: rgba(255, 255, 255, 0.2);
+
+            .glyphicon {
+                color: white;
+                font-size: 32px;
+                line-height: 64px;
+            }
+        }
     }
 
-    #bsf-information {
-      color: white;
-      font-weight: bold;
+    #second-window {
+
+        padding-bottom: 80px;
+
+        -webkit-background-size: 100%;
+        -moz-background-size: 100%;
+        -o-background-size: 100%;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-image: url('../../assets/images/city.png');
+        background-attachment: scroll;
+
+        .second-window-block {
+
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+            h2 {
+                margin: 30px auto;
+                font-weight: lighter;
+                text-transform: uppercase;
+            }
+
+            .black_line {
+                border-bottom: solid 1px #b0b0b0;
+                width: 80%;
+                margin: 30px auto;
+            }
+
+            .text_block {
+                margin: 30px auto;
+            }
+
+            .btn-social {
+                display: inline-block;
+                margin: 0 25px;
+                height: 78px;
+                width: 78px;
+            }
+        }
     }
 
-    #scroll-arrow {
-      display: block;
-      margin: 20px auto;
-      width: 64px; height: 64px;
-      border-radius: 32px;
-      background-color: #eee;
-      background-color: rgba(255, 255, 255, 0.2);
+    @media (max-width: 1199px) {
 
-      .glyphicon {
-        color: white;
-        font-size: 32px;
-        line-height: 64px;
-      }
-    }
-  }
+        #title_1 {
+            font-size: 2.5em;
+            margin-top: 80px;
+        }
 
+        #bsf_information {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+        }
 
-  #second-window {
+        .title_second_window {
+            font-size: 1.4em;
+        }
 
-    padding-bottom: 80px;
+        #button_formations, #button_formations:hover {
+            margin-top: 20px;
+        }
 
-    -webkit-background-size: 100%;
-    -moz-background-size: 100%;
-    -o-background-size: 100%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center bottom;
-    background-image: url('../../assets/images/city.png');
-    background-attachment: scroll;
-
-    .second-window-block {
-
-      margin-top: 30px;
-      margin-bottom: 30px;
-
-      h2 {
-        margin: 30px auto;
-        font-weight: bold;
-      }
-
-      .black_line {
-        border-bottom: solid 1px #b0b0b0;
-        width: 80%;
-        margin: 30px auto;
-      }
-
-      .text_block {
-        margin: 30px auto;
-      }
-
-      .btn-social {
-        display: inline-block;
-        margin: 0 25px;
-        height: 78px; width: 78px;
-      }
-    }
-  }
-
-
-  @media (max-width: 1199px) {
-
-    #title_1 {
-      font-size: 2.5em;
-      margin-top: 80px;
+        #button_tutorat, #button_tutorat:hover {
+            margin-top: 0;
+        }
     }
 
-    #bsf_information{
-      font-size: 1.4em;
-      margin-bottom: 30px;
+    @media (max-width: 991px) {
+        #title_1 {
+            font-size: 1.8em;
+        }
+
+        #bsf_information {
+            font-size: 1.4em;
+        }
+
+        .title_second_window {
+            font-size: 1.3em;
+        }
+
+        .text_block {
+            width: 345px;
+            font-size: 0.85em;
+        }
+
+        .bold_text {
+            font-size: 0.9em;
+        }
+
+        #button_formations, #button_formations:hover {
+            width: 300px;
+            font-size: 0.9em;
+        }
+
+        #button_tutorat, #button_tutorat:hover {
+            width: 300px;
+            font-size: 0.9em;
+        }
     }
 
-    .title_second_window{
-      font-size: 1.4em;
-    }
+    @media (max-width: 767px) {
 
-    #button_formations, #button_formations:hover{
-      margin-top: 20px;
-    }
+        .title_second_window {
+            font-size: 1.4em;
+        }
 
-    #button_tutorat, #button_tutorat:hover{
-      margin-top: 0;
-    }
-  }
+        #title_1 {
+            font-size: 1.4em;
+        }
 
-  @media (max-width: 991px){
-    #title_1 {
-      font-size: 1.8em;
-    }
+        #bsf_information {
+            font-size: 1.14em;
+        }
 
-    #bsf_information{
-      font-size: 1.4em;
-    }
+        .text_block {
+            width: 90%;
+            font-size: 1.05em;
+            margin: 0 auto 0;
+        }
 
-    .title_second_window {
-      font-size: 1.3em;
-    }
+        .bold_text {
+            font-size: 1.14em;
+        }
 
-    .text_block{
-      width: 345px;
-      font-size: 0.85em;
-    }
+        #button_formations, #button_formations:hover {
+            width: 330px;
+            font-size: 1.05em;
+        }
 
-    .bold_text {
-      font-size: 0.9em;
-    }
+        #button_tutorat, #button_tutorat:hover {
+            margin-top: 20px;
+        }
 
-    #button_formations, #button_formations:hover{
-      width: 300px;
-      font-size: 0.9em;
+        .social_center {
+            margin-top: 20px;
+        }
     }
-
-    #button_tutorat, #button_tutorat:hover{
-      width: 300px;
-      font-size: 0.9em;
-    }
-  }
-
-  @media (max-width: 767px){
-
-    .title_second_window {
-      font-size: 1.4em;
-    }
-
-    #title_1 {
-      font-size: 1.4em;
-    }
-
-    #bsf_information{
-      font-size: 1.14em;
-    }
-
-    .text_block {
-      width: 90%;
-      font-size: 1.05em;
-      margin: 0 auto 0;
-    }
-
-    .bold_text {
-      font-size: 1.14em;
-    }
-
-    #button_formations, #button_formations:hover {
-      width: 330px;
-      font-size: 1.05em;
-    }
-
-    #button_tutorat, #button_tutorat:hover {
-      margin-top: 20px;
-    }
-
-    .social_center {
-      margin-top: 20px;
-    }
-  }
 }

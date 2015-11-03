@@ -3,17 +3,14 @@
         <div class="container">
             <h1 id="greeting" class="text-center">
                 <%= config.stringsDict.CONNECTED_HOME.WELCOME_MESSAGE %><%= currentUser.full_name %>
+                <small><%= config.stringsDict.CONNECTED_HOME.INFORMATION_MESSAGE %></small>
             </h1>
+        </div>
 
-            <h3 id="bsf-information" class="text-center">
-                <%= config.stringsDict.CONNECTED_HOME.INFORMATION_MESSAGE %>
-            </h3>
-
-            <div class="text-center">
-                <a class="block-center" id="scroll-arrow" href="#second-window">
-                    <span class="glyphicon glyphicon-chevron-down"></span>
-                </a>
-            </div>
+        <div class="text-center">
+            <a class="block-center slider-arrow" id="scroll-to-slide-5" href="#home-slide-5">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
         </div>
     </div>
     <div id="second-window" class="container-fluid">
@@ -67,7 +64,27 @@
                 </div>
             </div>
             <div class="row">
-                <div id="community" class="second-window-block col-sm-offset-3 col-sm-6">
+                <div id="howto" class="second-window-block col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <h2 class="text-center">
+                                BSF Campus, mode d'emploi
+                            </h2>
+
+                            <hr class="black_line"/>
+                            <div class="text_block">
+                                <p class="text-center"><strong>
+                                    Pour tout comprendre sur la plateforme et sur les modalités de certification, retrouvez ici la <a target="_blank" href="#static_page/howto">vidéo "mode d'emploi"</a>
+                                </strong></p>
+
+                                <p class="text-center">
+                                    Nous vous invitons également à consulter la <a href="#static_page/FAQ">FAQ</a> pour répondre à toutes vos questions !
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="community" class="second-window-block col-sm-6">
                     <div class="row">
                         <div class="col-sm-offset-1 col-sm-10">
                             <h2 class="text-center">

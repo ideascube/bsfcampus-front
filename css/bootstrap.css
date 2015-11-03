@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=c783a8735c7ee283e04e)
- * Config saved to config.json and https://gist.github.com/c783a8735c7ee283e04e
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=3d3db8ab0c38408e268f)
+ * Config saved to config.json and https://gist.github.com/3d3db8ab0c38408e268f
  */
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
@@ -1191,7 +1191,7 @@ h6,
 .h5,
 .h6 {
   font-family: inherit;
-  font-weight: 600;
+  font-weight: normal;
   line-height: 1.1;
   color: inherit;
 }
@@ -3007,7 +3007,7 @@ select[multiple].input-lg {
 .btn {
   display: inline-block;
   margin-bottom: 0;
-  font-weight: 600;
+  font-weight: normal;
   text-align: center;
   vertical-align: middle;
   -ms-touch-action: manipulation;
@@ -4968,7 +4968,7 @@ a.label:focus {
   min-width: 10px;
   padding: 3px 7px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: normal;
   color: #ffffff;
   line-height: 1;
   vertical-align: middle;
@@ -5087,7 +5087,7 @@ a.thumbnail.active {
   color: inherit;
 }
 .alert .alert-link {
-  font-weight: bold;
+  font-weight: normal;
 }
 .alert > p,
 .alert > ul {
@@ -5893,7 +5893,7 @@ button.list-group-item-danger.active:focus {
 .close {
   float: right;
   font-size: 21px;
-  font-weight: bold;
+  font-weight: normal;
   line-height: 1;
   color: #000000;
   text-shadow: 0 1px 0 #ffffff;

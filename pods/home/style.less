@@ -1,15 +1,15 @@
 #home-content {
 
     .btn-user-action {
-        margin-top: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
+        font-size: 18px;
+        font-weight: normal;
+        padding: 8px 16px;
     }
 
     .home-slide {
 
-        min-height: 600px;
-        padding-top: 100px;
-        padding-bottom: 100px;
+        height: 600px;
         position: relative;
 
         .slider-arrow {
@@ -30,9 +30,15 @@
             }
         }
 
+        .container {
+            height: 100%;
+            padding-top: 60px;
+            padding-bottom: 100px;
+        }
+
         h2 {
             font-size: 72px;
-            font-weight: normal;
+            font-weight: lighter;
             word-break: break-all;
             -webkit-hyphens: auto;
             -moz-hyphens: auto;
@@ -41,6 +47,7 @@
             hyphenate-character: "\2112";
             letter-spacing: -.025em;
             small {
+                font-weight: normal;
                 word-break: normal;
                 display: block;
                 margin-top: 30px;
@@ -75,7 +82,8 @@
             background-attachment: scroll;
 
             h1 {
-                margin-bottom: 50px;
+                margin-top: 0;
+                margin-bottom: 30px;
                 color: white;
                 font-size: 60px;
                 font-weight: normal;
@@ -92,29 +100,69 @@
             }
 
             .btn-login {
-                background-color: #16bbc7;
+                background-color: #00dae6;
                 color: white;
             }
 
             .btn-register {
-                background-color: #c1c1c1;
+                background-color: #a7cdc8;
                 color: white;
             }
 
         }
 
         &#home-slide-2 {
+            background-color: #00959c;
+            h2 {
+                color: #0ab6c3;
+            }
+            .lead {
+                color: white;
+                font-size: 27px;
+                font-weight: lighter;
+                margin-top: 40px;
+                a {
+                    color: white;
+                    font-size: 24px;
+                    font-weight: normal;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        &#home-slide-3 {
             background-color: #1ea0b0;
+
+            .container {
+                background-image: url("../../assets/images/picto-slide3.png");
+                background-position: right top 100px;
+                background-repeat: no-repeat;
+                background-size: 50%;
+            }
             h2 {
                 color: #16bbc7;
                 small {
                     color: white;
                 }
             }
+
+            #track-list-home {
+                margin-top: 40px;
+                color: white;
+                font-size: 23px;
+                font-weight: lighter;
+            }
         }
 
-        &#home-slide-3 {
+        &#home-slide-4 {
             background-color: #17bbc7;
+
+            .container {
+                background-image: url("../../assets/images/picto-slide4.png");
+                background-position: left top 100px;
+                background-repeat: no-repeat;
+                background-size: 40%;
+            }
             h2 {
                 color: #0ecbd9;
                 small {
@@ -124,24 +172,9 @@
             }
         }
 
-        &#home-slide-4 {
-            background-color: #bcd6d7;
-            h3 {
-                color: white;
-                small {
-                    color: white;
-                }
-            }
-
-            .btn-register {
-                background-color: #16bbc7;
-                color: white;
-            }
-        }
-
         &#home-slide-5 {
             background-color: #e7f0ef;
-            min-height: 300px;
+            min-height: 800px;
             -webkit-background-size: 100%;
             -moz-background-size: 100%;
             -o-background-size: 100%;
@@ -150,6 +183,20 @@
             background-position: center bottom;
             background-image: url('../../assets/images/city.png');
             background-attachment: scroll;
+            h3 {
+                color: #82afb1;
+                font-size: 48px;
+            }
+            .lead {
+                color: #82afb1;
+                font-size: 28px;
+            }
+
+            .btn-register {
+                margin-top: 40px;
+                background-color: #00dae6;
+                color: white;
+            }
         }
 
     }
