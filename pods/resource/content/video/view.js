@@ -38,9 +38,8 @@ define(
 
                 switch(source) {
                     case 'youtube':
-                        var player;
                         window.onYouTubeIframeAPIReady = function() {
-                            player = new YT.Player('youtube-video', {
+                            self.youtubePlayer = new YT.Player('youtube-video', {
                                 height: '100%',
                                 width: '100%',
                                 videoId: self.model.get('resource_content').video_id,
@@ -51,6 +50,7 @@ define(
                                 }
                             });
                         };
+                        setTimeout(window.onYouTubeIframeAPIReady, 500);
                         break;
                     default:
                         this.videoPlayer = videojs(
@@ -79,6 +79,11 @@ define(
                 if (e.data === 0) {
                     this.completeResource();
                 }
+            },
+
+            close: function() {
+                delete window.onYouTubeIframeAPIReady;
+                delete self.youtubePlayer;
             }
 
 
