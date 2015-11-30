@@ -98,16 +98,16 @@ define([],
 
             FOOTER: {
                 A_PROGRAM_BY: "Un programme de",
-                SUPPORTED_BY: "Soutenu par",
+                SUPPORTED_BY: "",
                 QUICK_ACCESS: "Accès rapide",
-                JOIN_THE_COMMUNITY: "Rejoignez la communauté",
-                FACEBOOK_LINK: "https://www.facebook.com/bsfcampus",
-                TWITTER_LINK: "https://twitter.com/BSFontheweb"
+                JOIN_THE_COMMUNITY: "",
+                FACEBOOK_LINK: "",
+                TWITTER_LINK: ""
             },
 
             HOME: {
                 BSF_HOME_PUNCHLINE: "Bienvenue sur BSF Campus"
-                    + "<small>La 1<sup>ère</sup> plateforme d'apprentissage personnalisée et gratuite pour les professionnels des bibliothèques</small>",
+                    + "<small>Une plateforme d\'apprentissage personnalisée de niveau universitaire pour les étudiants et les professeurs</small>",
                 LOGIN: 'Connexion',
                 REGISTER: 'Inscription'
             },
