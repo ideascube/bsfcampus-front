@@ -3,7 +3,7 @@ define([],
 
         return {
 
-            SITE_TITLE: 'BSF Campus',
+            SITE_TITLE: 'KoomBook EDU',
             QUIT: 'Quitter',
             START_EXERCISE: 'Commencer l\'exercice',
             EXERCISE_VALIDATED: 'Exercice validé',
@@ -98,33 +98,33 @@ define([],
 
             FOOTER: {
                 A_PROGRAM_BY: "Un programme de",
-                SUPPORTED_BY: "",
+                SUPPORTED_BY: "Soutenu par",
                 QUICK_ACCESS: "Accès rapide",
-                JOIN_THE_COMMUNITY: "",
-                FACEBOOK_LINK: "",
-                TWITTER_LINK: ""
+                JOIN_THE_COMMUNITY: "Rejoignez la communauté",
+                FACEBOOK_LINK: "https://www.facebook.com/bsfcampus",
+                TWITTER_LINK: "https://twitter.com/BSFontheweb"
             },
 
             HOME: {
-                BSF_HOME_PUNCHLINE: "Bienvenue sur BSF Campus"
-                    + "<small>Une plateforme d\'apprentissage personnalisée de niveau universitaire pour les étudiants et les professeurs</small>",
+                BSF_HOME_PUNCHLINE: "Bienvenue sur KoomBook EDU"
+                    + "<small>Une plateforme d'apprentissage personnalisée de niveau universitaire pour les étudiants et les professeurs</small>",
                 LOGIN: 'Connexion',
                 REGISTER: 'Inscription'
             },
 
             CONNECTED_HOME: {
-                WELCOME_MESSAGE: 'Bienvenue sur BSF Campus Online, ',
-                INFORMATION_MESSAGE: 'BSF Campus, c\'est une plateforme d\'e-learning ouverte aux étudiants et aux professeurs.',
+                WELCOME_MESSAGE: 'Bienvenue sur KoomBook EDU Online, ',
+                INFORMATION_MESSAGE: 'KoomBook EDU, c\'est une plateforme d\'e-learning ouverte aux étudiants et aux professeurs.',
                 TRACKS_HEADER: 'PARCOURS DE FORMATION',
                 TRACKS_MESSAGE_MAIN: 'Retrouvez dès à présent des contenus pédagogiques destinés aux étudiants et professeurs.',
                 TRACKS_MESSAGE_TEXT: 'La plateforme est entièrement accessible sans internet (en offline).',
                 TRACKS_BUTTON_LABEL: 'Découvrez les parcours de formation',
                 TUTORING_HEADER: 'TUTORAT',
-                TUTORING_MESSAGE_MAIN: 'BSF Campus, c\'est aussi une plateforme d\'apprentissage personnalisé.',
+                TUTORING_MESSAGE_MAIN: 'KoomBook EDU, c\'est aussi une plateforme d\'apprentissage personnalisé.',
                 TUTORING_MESSAGE_TEXT: "Mesurez vos progrès pour chaque parcours de formation, et accompagnez d'autres apprenants grâce au suivi personnalisée.",
                 TUTORING_BUTTON_LABEL: 'Accédez à votre profil',
                 NETWORK_HEADER: 'COMMUNAUTÉ',
-                NETWORK_MESSAGE_MAIN: 'BSF Campus, c\'est aussi une communauté.',
+                NETWORK_MESSAGE_MAIN: 'KoomBook EDU, c\'est aussi une communauté.',
                 NETWORK_MESSAGE_TEXT: 'N\'hésitez pas à nous rejoindre sur nos réseaux sociaux.'
             },
 
