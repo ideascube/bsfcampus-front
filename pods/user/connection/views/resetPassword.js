@@ -55,7 +55,7 @@ define(
                     dataType: 'json'
                 }).done(function (result) {
                     alert(Config.stringsDict.USER.RESET_PASSWORD_MESSAGE.PASSWORD_SENT);
-                    self.trigger('close');
+                    self.$el.modal('hide');
                 }).fail(function (error) {
                     self.$resetBtn.html(Config.stringsDict.USER.RESET_PASSWORD);
                     self.$resetBtn.removeClass('disabled');
