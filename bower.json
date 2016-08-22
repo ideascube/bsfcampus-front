@@ -4,6 +4,7 @@
   "dependencies": {
     "jquery": "1.11.3",
     "jquery-ui": "1.11.4",
+    "jquery-ui-touch-punch-amd": "0.2.2",
     "jquery-serialize-object": "2.5.0",
     "backbone": "1.2.1",
     "underscore": "1.8.3",
