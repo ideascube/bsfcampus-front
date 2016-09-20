@@ -3,7 +3,7 @@ define(
         'jquery',
         'underscore',
         'backbone',
-        'jqueryui',
+        'jqueryuitouch',
         'app/config',
 
         'pods/attempts/exercise-attempt/question-answer/models/question-answer',

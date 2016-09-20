@@ -5,8 +5,8 @@ require.config({
 		underscore: 'vendor/underscore/underscore',
 		backbone: 'vendor/backbone/backbone',
 		jqueryui: 'vendor/jquery-ui/jquery-ui',
-	       'jqueryui-touch-punch': 'vendor/jquery-ui-touch-punch-amd/jquery.ui.touch-punch',
-        jqueryserialize: 'vendor/jquery-serialize-object/jquery.serialize-object',
+		jqueryuitouch: 'vendor/jqueryui-touch-punch/jquery.ui.touch-punch',
+                jqueryserialize: 'vendor/jquery-serialize-object/jquery.serialize-object',
 		text: 'vendor/requirejs-text/text',
 		less: 'vendor/require-less/less',
 		lessc: 'vendor/require-less/lessc',
@@ -36,12 +36,11 @@ require.config({
 		'jqueryui': {
 			deps: ['jquery']
 		},
-                'jqueryui-touch-punch': {
-                        deps: ['jquery', 'jqueryui'],
-                        exports: "$" 
-                },
-	        'jqueryserialize': {
-  	 		deps: ['jquery']
+		'jqueryuitouch': {
+		        deps: ['jqueryui']
+		},
+        	'jqueryserialize': {
+            		deps: ['jquery']
         	},
 		'bootstrap': {
 			deps: ['jquery']
