@@ -82,6 +82,7 @@ define(
 
                 var progress = this.model.get('progress');
                 var progressPercents = Math.round(100 * progress.current / progress.max);
+                var testUnlocked = (progress.current == progress.max); 
 
                 var html = this.progressTemplate({
                     skill: this.model.toJSON(true),
@@ -97,6 +98,11 @@ define(
                     this.$progressBar.removeClass('progress-bar-success').addClass('progress-bar-info golden-effect');
                     this.$btnValidate.removeClass('btn-success').addClass('btn-info golden-effect');
                     this.$btnValidate.find('.validate-text').html(Config.stringsDict.SKILL_TEST_VALIDATED);
+                    this.$btnValidate.prop('disabled', false);
+                }
+                else if (testUnlocked) {
+                    this.$btnValidate.find('.validate-text').html(Config.stringsDict.SKILL_TEST_VALIDATION_ALLOWED);
+                    this.$btnValidate.prop('disabled', false);
                 }
             },
 
