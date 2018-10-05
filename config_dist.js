@@ -14,6 +14,9 @@ define(function(){
 	// config.server_port = 5000;
 	config.api_path = '';
 
+	// Set the locale: available locales are defined by the names of the files in the app/config/strings directory
+	config.locale = 'fr';
+
 	return config;
 
 });
