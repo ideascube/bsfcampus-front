@@ -32,12 +32,10 @@
     </div>
     <div id="home-slide-2" class="home-slide container-fluid">
         <div class="container">
-            <h2>Présentation</h2>
+            <h2><%= config.stringsDict.HOME.PRESENTATION_TITLE %></h2>
             <p class="lead">
-                Les bibliothèques ont aujourd’hui bien plus à offrir qu’une simple collection de livres.
-                Elles peuvent donner à chacun libre accès aux nouveaux instruments de l’éducation et de l'entrepreneuriat, de la culture et de l’information, mais aussi aux technologies et à l’Internet.
-                Elles sont plus que jamais des outils de lutte contre les inégalités et des leviers de transformation sociale.
-                <a href="#static_page/presentation">Lire la suite</a>
+                <%= config.stringsDict.HOME.PRESENTATION_TEXT %>
+                <a href="#static_page/presentation"><%= config.stringsDict.HOME.READ_MORE %></a>
             </p>
         </div>
 
@@ -52,18 +50,13 @@
             <div class="row">
                 <div class="col-sm-5">
                     <h2>
-                        Contenus
-                        <small>6 parcours pédagogiques accessibles en ligne &amp; hors-ligne</small>
+                        <%= config.stringsDict.HOME.CONTENTS_TITLE %>
+                        <small><%= config.stringsDict.HOME.CONTENTS_SUBTITLE %></small>
                     </h2>
                 </div>
             </div>
             <p id="track-list-home">
-                La bibliothèque, savoirs fondamentaux |
-                Médiation culturelle et animation <br />
-                Oser l'innovation ! |
-                La conduite de projet |
-                L'évaluation d'impact |
-                Le plaidoyer
+                <%= config.stringsDict.HOME.CONTENTS_TEXT %>
             </p>
         </div>
 
@@ -78,8 +71,8 @@
             <div class="row">
                 <div class="col-sm-7 col-sm-offset-5">
                     <h2>
-                        Personnalisation
-                        <small>Plus de 100 leçons et exercices pour progresser à son rythme</small>
+                        <%= config.stringsDict.HOME.PERSONNALISATION_TITLE %>
+                        <small><%= config.stringsDict.HOME.PERSONNALISATION_SUBTITLE %></small>
                     </h2>
                 </div>
             </div>
@@ -96,17 +89,17 @@
             <div class="row">
                 <div class="col-sm-8 col-center">
                     <h3 class="text-center">
-                        BSF Campus est une plateforme <em>gratuite</em> et <em>sans publicité</em>.
+                        <%= config.stringsDict.HOME.FREE_NO_ADS %>
                     </h3>
                     <p class="lead text-center">
-                        Créée par l'ONG Bibliothèques Sans Frontières avec le soutien de la Bill &amp; Melinda Gates Foundation.
+                        <%= config.stringsDict.HOME.CREATED_BY_WITH %>
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-8 col-md-4 col-center">
                     <a class="btn btn-default btn-block border-radius-lg btn-user-action btn-register" href="#/register">
-                        Commencez la formation
+                        <%= config.stringsDict.HOME.START_LEARNING %>
                     </a>
                 </div>
             </div>
