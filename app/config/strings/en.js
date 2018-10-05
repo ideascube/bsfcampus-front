@@ -107,7 +107,7 @@ define([],
 
           HOME: {
               BSF_HOME_PUNCHLINE: "Welcome to BSF Campus"
-                  + "<small>The first free personnalized learning platformplateforme for professional librarians</small>",
+                  + "<small>The first free personnalized learning platform for professional librarians</small>",
               LOGIN: 'Log in',
               REGISTER: 'Register',
               PRESENTATION_TITLE: 'Presentation',
