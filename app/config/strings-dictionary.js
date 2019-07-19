@@ -61,7 +61,7 @@ define([],
                 PROMPT_TEXT: 'Nam blandit velit quis sodales pharetra. Praesent erat nisl, hendrerit ut tortor ac, dictum ullamcorper metus. Etiam felis ex, maximus id volutpat eget, dictum sed ipsum. Quisque vehicula urna et magna posuere vulputate. Nullam facilisis tincidunt molestie. Etiam accumsan mollis erat, sodales aliquam magna maximus sed. Donec semper commodo lacus et consequat. Etiam vel massa urna. Aenean auctor odio ac velit sodales consectetur. Integer facilisis nunc a mauris consectetur, id dignissim lorem scelerisque.',
                 GO_TO_TRACK_BUTTON: 'Aller au parcours',
                 SUCCESS_MESSAGE_HEADER: 'Félicitations !',
-                SUCCESS_MESSAGE: 'Suspendisse potenti. Nulla a luctus dolor, nec gravida ligula. Maecenas feugiat sapien at purus maximus, at accumsan nisl dignissim. Integer nisi magna, commodo ac augue in, eleifend tincidunt elit. In egestas tellus ac est finibus pulvinar. Sed vitae sem non odio feugiat feugiat sit amet ut nunc. Morbi quis euismod ligula. Fusce egestas arcu et porta aliquet. Nulla ac hendrerit dui. Suspendisse nisl ante, pharetra pharetra libero ac, hendrerit volutpat sapien.',
+                SUCCESS_MESSAGE: 'BSFCampus vous félicite pour la validation de ce parcours ! Vous pouvez obtenir votre certificat de validation BSFCampus en contactant l\'équipe à l\'adresse <a href="mailto:bsfcampus@bibliosansfrontieres.org">bsfcampus@bibliosansfrontieres.org</a>.',
                 FAILURE_MESSAGE_HEADER: 'On ne réussit pas toujours du premier coup !',
                 FAILURE_MESSAGE: 'Prenez le temps de reprendre les leçons et les exercices afin valider ce parcours'
             },
